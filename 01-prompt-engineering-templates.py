@@ -78,4 +78,5 @@ def llm_model(prompt_txt, params=None):
     return llm.invoke(prompt_txt)
 
 # Imprime la respuesta del modelo.
+# python 01-prompt-engineering-templates.py
 print(llm_model("Hola, ¿cómo estás?", params=None))
