@@ -6,7 +6,7 @@
 # --- INSTALACIÓN ---
 # 1.           Ollama: irm https://ollama.com/install.ps1 | iex
 # 2.  LLM llama3.2:3b: ollama pull llama3.2:3b
-# 3.        LangChain: pip install -U langchain langchain-core langchain-ollama
+# 3.       LangChain*: pip install -U langchain langchain-core langchain-ollama
 # 4. LangChain Ollama: pip install -U langchain-ollama
 
 # --- VERIFICACIÓN ---
@@ -57,14 +57,22 @@ def llm_model(prompt_txt, params=None):
         "top_k": 1,            
     }
 
+    # Actualiza los parámetros por defecto con los parámetros proporcionados.
+    # None no es un diccionario, por lo que no se puede actualizar.
     if params:
         default_params.update(params)
 
+    # Inicializa el modelo Ollama.
     llm = OllamaLLM(
+        # Modelo a utilizar.
         model="llama3.2:3b",
+        # Temperatura del modelo.
         temperature=default_params["temperature"],
+        # Top-p del modelo.
         top_p=default_params["top_p"],
+        # Top-k del modelo.
         top_k=default_params["top_k"],
+        # Máximo de tokens a generar en la respuesta.
         num_predict=default_params["max_new_tokens"],
     )
     return llm.invoke(prompt_txt)
