@@ -19,6 +19,7 @@
 # 1.        OllamaLLM: Importar desde langchain_ollama.
 from langchain_ollama import OllamaLLM
 
+# --- EJERCICIO 1: PROMPT ENGINEERING ---
 # Función para cargar el modelo:
 # @params: prompt_txt: Texto del prompt.
 # @params: params: Diccionario de parámetros.
@@ -80,3 +81,41 @@ def llm_model(prompt_txt, params=None):
 # Imprime la respuesta del modelo.
 # python 01-prompt-engineering-templates.py
 print(llm_model("Hola, ¿cómo estás?", params=None))
+
+# --- EJERCICIO 2: ESCALADO DEL EJERCICIO 1 ---
+# 2.1. Ajustar parámetros para controlar el comportamiento de la respuesta.
+def run_baseline():
+    params = {"max_new_tokens": 128, "temperature": 0.5, "top_p": 0.2, "top_k": 1}
+    print(llm_model("El viento está ", params))
+
+# 2.2. Diseñar prompts para tareas específicas.
+def run_task_prompts():
+    # Modificar los parámetros para mejorar la respuesta.
+    params = {"max_new_tokens": 120, "temperature": 0.3, "top_p": 0.9, "top_k": 40}
+    # Definir los prompts.
+    prompts = {
+        "sentiment": "Clasifica como Positivo o Negativo: 'La película fue increíble.'",
+        "summary": "Resume en una frase: El cambio climático...",
+        "translation": "Traduce al español: 'Artificial intelligence is changing healthcare.'",
+    }
+    # Iterar sobre los prompts y generar las respuestas.
+    for name, prompt in prompts.items():
+        print(f"\n--- {name.upper()} ---")
+        print(llm_model(prompt, params))
+
+# 2.3. Few-Shot Prompting: Guiar la salida con pocos ejemplos.
+def run_few_shot():
+    params = {"max_new_tokens": 60, "temperature": 0.1, "top_p": 0.9, "top_k": 40}
+    prompt = """
+        Inglés: "How are you?"
+        Francés: "Comment ça va?"
+        Inglés: "Where is the train station?"
+        Francés:"""
+    print("\n--- FEW SHOT ---")
+    print(llm_model(prompt, params))
+
+# 2.4. Convención que asegura la ejecución de las funciones si se llama al propio archivo.
+if __name__ == "__main__":
+    run_baseline()
+    run_task_prompts()
+    run_few_shot()
