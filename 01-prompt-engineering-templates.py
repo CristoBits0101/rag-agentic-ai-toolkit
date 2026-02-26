@@ -88,34 +88,61 @@ def run_baseline():
     params = {"max_new_tokens": 128, "temperature": 0.5, "top_p": 0.2, "top_k": 1}
     print(llm_model("El viento está ", params))
 
-# 2.2. Diseñar prompts para tareas específicas.
+# 2.2. Diseñar prompts para tareas específicas con diccionario.
 def run_task_prompts():
     # Modificar los parámetros para mejorar la respuesta.
     params = {"max_new_tokens": 120, "temperature": 0.3, "top_p": 0.9, "top_k": 40}
+
     # Definir los prompts.
     prompts = {
         "sentiment": "Clasifica como Positivo o Negativo: 'La película fue increíble.'",
         "summary": "Resume en una frase: El cambio climático...",
         "translation": "Traduce al español: 'Artificial intelligence is changing healthcare.'",
     }
+
     # Iterar sobre los prompts y generar las respuestas.
     for name, prompt in prompts.items():
         print(f"\n--- {name.upper()} ---")
         print(llm_model(prompt, params))
 
-# 2.3. Few-Shot Prompting: Guiar la salida con pocos ejemplos.
+# 2.3. One-Shot Prompting: Guiar la salida con un solo ejemplo mediante un diccionario.
+def run_one_shot_prompts():
+    params = {"max_new_tokens": 140, "temperature": 0.3, "top_p": 0.9, "top_k": 40}
+
+    prompts = {
+        "formal_email": (
+            "Escribe un correo formal para solicitar una reunion con un cliente la proxima semana.\n\nCorreo:"
+        ),
+        "technical_concept": (
+            "Explica el concepto de aprendizaje automatico en terminos sencillos para un principiante.\n\nExplicacion:"
+        ),
+        "keyword_extraction": (
+            "Extrae las palabras clave principales del siguiente texto:\n"
+            "Artificial intelligence and machine learning are rapidly transforming industries worldwide.\n\n"
+            "Palabras clave:"
+        ),
+    }
+
+    for name, prompt in prompts.items():
+        print(f"\n--- ONE SHOT {name.upper()} ---")
+        print(llm_model(prompt, params))
+
+# 2.4. Few-Shot Prompting: Guiar la salida con pocos ejemplos.
 def run_few_shot():
     params = {"max_new_tokens": 60, "temperature": 0.1, "top_p": 0.9, "top_k": 40}
+
     prompt = """
         Inglés: "How are you?"
         Francés: "Comment ça va?"
         Inglés: "Where is the train station?"
         Francés:"""
+
     print("\n--- FEW SHOT ---")
     print(llm_model(prompt, params))
 
-# 2.4. Convención que asegura la ejecución de las funciones si se llama al propio archivo.
+# 2.5. Convención que asegura la ejecución de las funciones si se llama al propio archivo.
 if __name__ == "__main__":
     run_baseline()
     run_task_prompts()
+    run_one_shot_prompts()
     run_few_shot()
