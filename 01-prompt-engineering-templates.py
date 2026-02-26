@@ -109,7 +109,10 @@ def run_task_prompts():
 def run_one_shot_prompts(formal_email_prompt, technical_concept_prompt, keyword_extraction_prompt):
     params = {"max_new_tokens": 140, "temperature": 0.3, "top_p": 0.9, "top_k": 40}
     
-    # (): Sirve para agrupar expresiones o para escribir literales largos en varias líneas.
+    # (): 
+    # Permite partir expresiones largas en varias líneas sin \.
+    # Deja claro el orden de evaluación en operaciones ((a + b) * c).
+    # En literales ayuda a formatear código limpio.
     prompts = {
         "formal_email_prompt": (formal_email_prompt),
         "technical_concept_prompt": (technical_concept_prompt),
