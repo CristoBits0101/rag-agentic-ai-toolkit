@@ -106,21 +106,14 @@ def run_task_prompts():
         print(llm_model(prompt, params))
 
 # 2.3. One-Shot Prompting: Guiar la salida con un solo ejemplo mediante un diccionario.
-def run_one_shot_prompts():
+def run_one_shot_prompts(formal_email_prompt, technical_concept_prompt, keyword_extraction_prompt):
     params = {"max_new_tokens": 140, "temperature": 0.3, "top_p": 0.9, "top_k": 40}
-
+    
+    # (): Sirve para agrupar expresiones o para escribir literales largos en varias líneas.
     prompts = {
-        "formal_email": (
-            "Escribe un correo formal para solicitar una reunion con un cliente la proxima semana.\n\nCorreo:"
-        ),
-        "technical_concept": (
-            "Explica el concepto de aprendizaje automatico en terminos sencillos para un principiante.\n\nExplicacion:"
-        ),
-        "keyword_extraction": (
-            "Extrae las palabras clave principales del siguiente texto:\n"
-            "Artificial intelligence and machine learning are rapidly transforming industries worldwide.\n\n"
-            "Palabras clave:"
-        ),
+        "formal_email_prompt": (formal_email_prompt),
+        "technical_concept_prompt": (technical_concept_prompt),
+        "keyword_extraction_prompt": (keyword_extraction_prompt),
     }
 
     for name, prompt in prompts.items():
@@ -144,5 +137,8 @@ def run_few_shot():
 if __name__ == "__main__":
     run_baseline()
     run_task_prompts()
-    run_one_shot_prompts()
+    run_one_shot_prompts(
+        "Escribe un correo formal para solicitar una reunion con un cliente la proxima semana.\n\nCorreo:", 
+        "Explica el concepto de aprendizaje automatico en terminos sencillos para un principiante.\n\nExplicacion:", 
+        "Extrae las palabras clave principales del siguiente texto:\nArtificial intelligence and machine learning are rapidly transforming industries worldwide.\n\nPalabras clave:")
     run_few_shot()
