@@ -16,10 +16,15 @@
 # 4.   Ollama Modelos: ollama list
 
 # --- DEPENDENCIAS ---
-# 1.        OllamaLLM: Importar desde langchain_ollama.
+# 1.        OllamaLLM: Para interactuar con modelos Ollama desde LangChain.
+# 2.   PromptTemplate: Para crear plantillas de prompts con variables dinámicas.
 from langchain_ollama import OllamaLLM
+from langchain_core.prompts import PromptTemplate
+
 
 # --- EJERCICIO 1: PROMPT ENGINEERING ---
+
+
 # Función para cargar el modelo:
 # @params: prompt_txt: Texto del prompt.
 # @params: params: Diccionario de parámetros.
@@ -32,7 +37,6 @@ def llm_model(prompt_txt, params=None):
         # 256 tokens ≈ 180–200 palabras aproximadamente.
         # Solo afecta a los tokens generados (no al prompt).
         "max_new_tokens": 256,
-
         # Temperatura del modelo (0.0 a 2.0).
         # Controla la aleatoriedad / creatividad.
         #       0.0 → Muy determinista, respuestas casi idénticas.
@@ -40,22 +44,20 @@ def llm_model(prompt_txt, params=None):
         #      1.0+ → Más creativo y variado.
         #      >1.5 → Puede generar respuestas incoherentes.
         "temperature": 0.5,
-
         # Top-p (Nucleus Sampling) (0.0 a 1.0).
         # Limita el conjunto de palabras candidatas según probabilidad acumulada.
         # Valores bajos → Más conservador y repetitivo.
         # Valores altos → Más variedad y naturalidad.
         #    0.8 - 0.95 → Suele ser un rango equilibrado.
         #           0.2 → Es bastante restrictivo.
-        "top_p": 0.2,          
-
+        "top_p": 0.2,
         # Top-k (1 a 100+ según modelo).
         # Limita el número máximo de palabras candidatas consideradas.
         #            1  → Solo la palabra más probable (muy determinista).
         #         20-50 → Buen equilibrio entre precisión y variedad.
         # Valores altos → Más diversidad.
         #   Con top_k=1 → El modelo será muy rígido.
-        "top_k": 1,            
+        "top_k": 1,
     }
 
     # Actualiza los parámetros por defecto con los parámetros proporcionados.
@@ -76,19 +78,45 @@ def llm_model(prompt_txt, params=None):
         # Máximo de tokens a generar en la respuesta.
         num_predict=default_params["max_new_tokens"],
     )
+    
     return llm.invoke(prompt_txt)
+
+# Función para construir un chain LCEL con PromptTemplate y OllamaLLM:
+# @params: prompt_template: Texto del template con variables entre llaves {variable}.
+# @return: Chain de LCEL que puede ser invocado con invoke().
+def build_lcel_chain(prompt_template):
+    # Inicializa el modelo Ollama con parámetros por defecto.
+    llm = OllamaLLM(
+        model="llama3.2:3b",
+        temperature=0.3,
+        top_p=0.9,
+        top_k=40,
+        num_predict=256,
+    )
+
+    # Crea un PromptTemplate a partir del texto con variables.
+    prompt = PromptTemplate.from_template(prompt_template)
+
+    # Construye el chain usando LCEL (Runnable chains).
+    # | es el operador pipe para encadenar componentes.
+    chain = prompt | llm
+
+    return chain
 
 # Imprime la respuesta del modelo.
 # python 01-prompt-engineering-templates.py
 print(llm_model("Hola, ¿cómo estás?", params=None))
 
-# --- EJERCICIO 2: ESCALADO DEL EJERCICIO 1 ---
-# 2.1. Ajustar parámetros para controlar el comportamiento de la respuesta.
+
+# --- EJERCICIO 2: CREACION DE PROMPTS PARA TAREAS ESPECIFICAS ---
+
+
+# 2.1) Ajustar parámetros para controlar el comportamiento de la respuesta.
 def run_baseline():
     params = {"max_new_tokens": 128, "temperature": 0.5, "top_p": 0.2, "top_k": 1}
     print(llm_model("El viento está ", params))
 
-# 2.2. Diseñar prompts para tareas específicas con diccionario.
+# 2.2) Diseñar prompts para tareas específicas con diccionario.
 def run_task_prompts():
     # Modificar los parámetros para mejorar la respuesta.
     params = {"max_new_tokens": 120, "temperature": 0.3, "top_p": 0.9, "top_k": 40}
@@ -105,11 +133,15 @@ def run_task_prompts():
         print(f"\n--- {name.upper()} ---")
         print(llm_model(prompt, params))
 
-# 2.3. One-Shot Prompting: Guiar la salida con un solo ejemplo mediante un diccionario.
-def run_one_shot_prompts(formal_email_prompt, technical_concept_prompt, keyword_extraction_prompt):
+# 2.3) One-Shot Prompting: Guiar la salida con un solo ejemplo mediante un diccionario.
+def run_one_shot_prompts(
+    formal_email_prompt, 
+    technical_concept_prompt, 
+    keyword_extraction_prompt
+):
     params = {"max_new_tokens": 140, "temperature": 0.3, "top_p": 0.9, "top_k": 40}
-    
-    # (): 
+
+    # ():
     # Permite partir expresiones largas en varias líneas sin \.
     # Deja claro el orden de evaluación en operaciones ((a + b) * c).
     # En literales ayuda a formatear código limpio.
@@ -123,7 +155,7 @@ def run_one_shot_prompts(formal_email_prompt, technical_concept_prompt, keyword_
         print(f"\n--- ONE SHOT {name.upper()} ---")
         print(llm_model(prompt, params))
 
-# 2.4. Few-Shot Prompting: Guiar la salida con pocos ejemplos.
+# 2.4) Few-Shot Prompting: Guiar la salida con pocos ejemplos.
 def run_few_shot():
     params = {"max_new_tokens": 60, "temperature": 0.1, "top_p": 0.9, "top_k": 40}
 
@@ -136,12 +168,148 @@ def run_few_shot():
     print("\n--- FEW SHOT ---")
     print(llm_model(prompt, params))
 
-# 2.5. Convención que asegura la ejecución de las funciones si se llama al propio archivo.
+
+# --- EJERCICIO 3: CREACION DE PROMPTS PARA EXPLICAR PROCESOS PASO A PASO ---
+
+
+def run_exercise_3_step_by_step():
+    params = {"max_new_tokens": 220, "temperature": 0.3, "top_p": 0.9, "top_k": 40}
+
+    # 3.1) Explicar un proceso.
+    decision_making_prompt = """Explica el proceso de toma de decisiones paso a paso para elegir el mejor portatil para comprar.
+
+Respuesta:
+"""
+
+    # 3.2) Solicitar instrucciones.
+    sandwich_making_prompt = """Explica paso a paso como hacer un sandwich simple.
+
+Instrucciones:
+"""
+
+    # 3.3) Generar las respuestas para ambos prompts.
+    responses = {
+        "decision_making": llm_model(decision_making_prompt, params),
+        "sandwich_making": llm_model(sandwich_making_prompt, params),
+    }
+
+    for prompt_type, response in responses.items():
+        print(f"=== RESPUESTA {prompt_type.upper()} ===")
+        print(response)
+        print()
+
+    params_reasoning = {
+        "max_new_tokens": 512,
+        "temperature": 0.2,
+        "top_p": 0.9,
+        "top_k": 40,
+    }
+
+    # 3.3) Razonamiento guiado (pedir multiples caminos).
+    reasoning_prompt = """Cuando tenia 6 anos, mi hermana tenia la mitad de mi edad. Ahora tengo 70, que edad tiene mi hermana?
+
+Proporciona tres calculos y explicaciones independientes y, a continuacion, determina el resultado mas coherente.
+"""
+
+    response = llm_model(reasoning_prompt, params_reasoning)
+    print(f"entrada: {reasoning_prompt}\n")
+    print(f"respuesta: {response}\n")
+
+
+# --- EJERCICIO 4: LOGICA LCEL ---
+
+
+def run_exercise_4_lcel():
+    # 1) Chiste por plantilla
+    joke_chain = build_lcel_chain("""Cuentame un chiste {adjective} sobre {content}.""")
+    joke = joke_chain.invoke({"adjective": "gracioso", "content": "gallinas"})
+    print("=== LCEL JOKE ===")
+    print(joke)
+    print()
+
+    # 2) Resumen
+    summarize_chain = build_lcel_chain(
+        """Resume el siguiente contenido en una frase:\n{content}"""
+    )
+    content = (
+        "El rapido avance de la tecnologia en el siglo XXI ha transformado salud, educacion y transporte. "
+        "IA y machine learning mejoran diagnosticos, eficiencia y acceso al conocimiento."
+    )
+    summary = summarize_chain.invoke({"content": content})
+    print("=== LCEL SUMMARY ===")
+    print(summary)
+    print()
+
+    # 3) QA con contexto
+    qa_chain = build_lcel_chain(
+        """
+Responde la pregunta usando solo el contexto.
+Si no estas seguro, responde: No estoy seguro de la respuesta.
+
+Pregunta: {question}
+Contexto: {content}
+
+Respuesta:
+"""
+    )
+    qa_content = (
+        "Los planetas interiores del sistema solar son Mercurio, Venus, Tierra y Marte, y son rocosos. "
+        "Los exteriores son gigantes gaseosos."
+    )
+    qa_answer = qa_chain.invoke(
+        {
+            "question": "Que planetas del sistema solar son rocosos?",
+            "content": qa_content,
+        }
+    )
+    print("=== LCEL QA ===")
+    print(qa_answer)
+    print()
+
+    # 4) Clasificacion
+    classification_chain = build_lcel_chain(
+        """
+Clasifica el texto en una categoria de esta lista: {categories}
+Texto: {text}
+Categoria:
+"""
+    )
+    category = classification_chain.invoke(
+        {
+            "text": "El concierto de anoche fue una experiencia emocionante con actuaciones excelentes.",
+            "categories": "Entretenimiento, Comida y Restaurantes, Tecnologia, Literatura, Musica",
+        }
+    )
+    print("=== LCEL CLASSIFICATION ===")
+    print(category)
+    print()
+
+    # 5) Generacion SQL
+    sql_chain = build_lcel_chain(
+        """
+Genera una consulta SQL basada en la descripcion.
+Descripcion: {description}
+SQL:
+"""
+    )
+    sql_query = sql_chain.invoke(
+        {
+            "description": "Obtener nombre y email de clientes que compraron en los ultimos 30 dias usando tablas customers y purchases.",
+        }
+    )
+    print("=== LCEL SQL ===")
+    print(sql_query)
+    print()
+
+
 if __name__ == "__main__":
     run_baseline()
     run_task_prompts()
     run_one_shot_prompts(
-        "Escribe un correo formal para solicitar una reunion con un cliente la proxima semana.\n\nCorreo:", 
-        "Explica el concepto de aprendizaje automatico en terminos sencillos para un principiante.\n\nExplicacion:", 
-        "Extrae las palabras clave principales del siguiente texto:\nArtificial intelligence and machine learning are rapidly transforming industries worldwide.\n\nPalabras clave:")
+        "Escribe un correo formal para solicitar una reunion con un cliente la proxima semana.\n\nCorreo:",
+        "Explica el concepto de aprendizaje automatico en terminos sencillos para un principiante.\n\nExplicacion:",
+        "Extrae las palabras clave principales del siguiente texto:\nArtificial intelligence and machine learning are rapidly transforming industries worldwide.\n\nPalabras clave:",
+    )
     run_few_shot()
+    run_exercise_3_step_by_step()
+    run_exercise_4_lcel()
