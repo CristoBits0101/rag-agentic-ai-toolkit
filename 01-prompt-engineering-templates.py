@@ -78,8 +78,9 @@ def llm_model(prompt_txt, params=None):
         # Máximo de tokens a generar en la respuesta.
         num_predict=default_params["max_new_tokens"],
     )
-    
+
     return llm.invoke(prompt_txt)
+
 
 # 1.2) Imprime la respuesta del modelo.
 # python 01-prompt-engineering-templates.py
@@ -93,6 +94,7 @@ print(llm_model("Hola, ¿cómo estás?", params=None))
 def run_baseline():
     params = {"max_new_tokens": 128, "temperature": 0.5, "top_p": 0.2, "top_k": 1}
     print(llm_model("El viento está ", params))
+
 
 # 2.2) Diseñar prompts para tareas específicas con diccionario.
 def run_task_prompts():
@@ -111,11 +113,10 @@ def run_task_prompts():
         print(f"\n--- {name.upper()} ---")
         print(llm_model(prompt, params))
 
+
 # 2.3) One-Shot Prompting: Guiar la salida con un solo ejemplo mediante un diccionario.
 def run_one_shot_prompts(
-    formal_email_prompt, 
-    technical_concept_prompt, 
-    keyword_extraction_prompt
+    formal_email_prompt, technical_concept_prompt, keyword_extraction_prompt
 ):
     params = {"max_new_tokens": 140, "temperature": 0.3, "top_p": 0.9, "top_k": 40}
 
@@ -132,6 +133,7 @@ def run_one_shot_prompts(
     for name, prompt in prompts.items():
         print(f"\n--- ONE SHOT {name.upper()} ---")
         print(llm_model(prompt, params))
+
 
 # 2.4) Few-Shot Prompting: Guiar la salida con pocos ejemplos.
 def run_few_shot():
@@ -226,6 +228,7 @@ def build_lcel_chain(prompt_template):
     # Se puede invocar el chain con invoke() pasando un diccionario con los valores de las variables.
     return chain
 
+
 # 4.2) Ejercicios con LCEL
 def run_exercise_4_lcel():
     # CHISTES DINÁMICOS
@@ -254,8 +257,8 @@ def run_exercise_4_lcel():
     print(summary)
     print()
 
-    # PENDIENDE DE TERMINAR -----------------------------------------------------------------
     # PREGUNTAS Y RESPUESTAS DINÁMICAS
+    # Dar contexto y pregunta para obtener respuesta.
     qa_chain = build_lcel_chain(
         """
 Responde la pregunta usando solo el contexto.
@@ -267,21 +270,28 @@ Contexto: {content}
 Respuesta:
 """
     )
+
+    # Contenido para el contexto.
     qa_content = (
         "Los planetas interiores del sistema solar son Mercurio, Venus, Tierra y Marte, y son rocosos. "
         "Los exteriores son gigantes gaseosos."
     )
+
+    # Invocar el chain pasando un diccionario con la pregunta y el contexto.
     qa_answer = qa_chain.invoke(
         {
             "question": "Que planetas del sistema solar son rocosos?",
             "content": qa_content,
         }
     )
+
+    # Imprimir el resultado.
     print("=== LCEL QA ===")
     print(qa_answer)
     print()
 
-    # 4) Clasificacion
+    # CLASIFICACION DINÁMICA
+    # Dar categorias y clasificar texto en una de ellas.
     classification_chain = build_lcel_chain(
         """
 Clasifica el texto en una categoria de esta lista: {categories}
@@ -295,11 +305,14 @@ Categoria:
             "categories": "Entretenimiento, Comida y Restaurantes, Tecnologia, Literatura, Musica",
         }
     )
+
+    # Imprimir el resultado.
     print("=== LCEL CLASSIFICATION ===")
     print(category)
     print()
 
-    # 5) Generacion SQL
+    # GENERACION SQL DINÁMICA
+    # Dar descripcion para generar consulta SQL.
     sql_chain = build_lcel_chain(
         """
 Genera una consulta SQL basada en la descripcion.
