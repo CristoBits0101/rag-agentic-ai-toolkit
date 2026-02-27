@@ -25,7 +25,7 @@ from langchain_core.prompts import PromptTemplate
 # --- EJERCICIO 1: PROMPT ENGINEERING ---
 
 
-# Función para cargar el modelo:
+# 1.1) Función para cargar el modelo:
 # @params: prompt_txt: Texto del prompt.
 # @params: params: Diccionario de parámetros.
 # @return: Respuesta del modelo.
@@ -81,29 +81,7 @@ def llm_model(prompt_txt, params=None):
     
     return llm.invoke(prompt_txt)
 
-# Función para construir un chain LCEL con PromptTemplate y OllamaLLM:
-# @params: prompt_template: Texto del template con variables entre llaves {variable}.
-# @return: Chain de LCEL que puede ser invocado con invoke().
-def build_lcel_chain(prompt_template):
-    # Inicializa el modelo Ollama con parámetros por defecto.
-    llm = OllamaLLM(
-        model="llama3.2:3b",
-        temperature=0.3,
-        top_p=0.9,
-        top_k=40,
-        num_predict=256,
-    )
-
-    # Crea un PromptTemplate a partir del texto con variables.
-    prompt = PromptTemplate.from_template(prompt_template)
-
-    # Construye el chain usando LCEL (Runnable chains).
-    # | es el operador pipe para encadenar componentes.
-    chain = prompt | llm
-
-    return chain
-
-# Imprime la respuesta del modelo.
+# 1.2) Imprime la respuesta del modelo.
 # python 01-prompt-engineering-templates.py
 print(llm_model("Hola, ¿cómo estás?", params=None))
 
@@ -175,7 +153,7 @@ def run_few_shot():
 def run_exercise_3_step_by_step():
     params = {"max_new_tokens": 220, "temperature": 0.3, "top_p": 0.9, "top_k": 40}
 
-    # 3.1) Explicar un proceso.
+    # 3.1) Solicitar explicar un proceso.
     decision_making_prompt = """Explica el proceso de toma de decisiones paso a paso para elegir el mejor portatil para comprar.
 
 Respuesta:
@@ -198,6 +176,8 @@ Instrucciones:
         print(response)
         print()
 
+    # 3.4) Razonamiento guiado.
+    # Aumentamos el max_new_tokens para permitir respuestas más largas y detalladas.
     params_reasoning = {
         "max_new_tokens": 512,
         "temperature": 0.2,
@@ -205,12 +185,13 @@ Instrucciones:
         "top_k": 40,
     }
 
-    # 3.3) Razonamiento guiado (pedir multiples caminos).
+    # Solicitar multiples caminos de razonamiento para resolver un problema y luego determinar el resultado más coherente.
     reasoning_prompt = """Cuando tenia 6 anos, mi hermana tenia la mitad de mi edad. Ahora tengo 70, que edad tiene mi hermana?
 
 Proporciona tres calculos y explicaciones independientes y, a continuacion, determina el resultado mas coherente.
 """
 
+    # Generar la respuesta para el prompt de razonamiento guiado.
     response = llm_model(reasoning_prompt, params_reasoning)
     print(f"entrada: {reasoning_prompt}\n")
     print(f"respuesta: {response}\n")
@@ -219,28 +200,62 @@ Proporciona tres calculos y explicaciones independientes y, a continuacion, dete
 # --- EJERCICIO 4: LOGICA LCEL ---
 
 
+# 4.1) Función para construir un chain LCEL con PromptTemplate y OllamaLLM:
+# @params: prompt_template: Texto del template con variables entre llaves {variable}.
+# @return: Chain de LCEL que puede ser invocado con invoke().
+def build_lcel_chain(prompt_template):
+    # Inicializa el modelo Ollama con parámetros por defecto.
+    llm = OllamaLLM(
+        model="llama3.2:3b",
+        temperature=0.3,
+        top_p=0.9,
+        top_k=40,
+        num_predict=256,
+    )
+
+    # Crea un PromptTemplate a partir de un texto con variables dinámicas entre llaves {}.
+    prompt = PromptTemplate.from_template(prompt_template)
+
+    # En LangChain "LCEL" significa que todo componente ejecutable es un Runnable.
+    # Un Runnable es un objeto que implementa .invoke() recibe una entrada y devuelve una salida.
+    # Construimos un Runnable Chain usando LCEL con el operador | (pipe) se encadena Runnables.
+    # Creando un chain que primero procesa el prompt introduciendo el valor de las variables al momento de la invocación.
+    # Luego se pasa el prompt formateado al LLM que genera la respuesta mediante el operador | (pipe).
+    chain = prompt | llm
+
+    # Se puede invocar el chain con invoke() pasando un diccionario con los valores de las variables.
+    return chain
+
+# 4.2) Ejercicios con LCEL
 def run_exercise_4_lcel():
-    # 1) Chiste por plantilla
+    # CHISTES DINÁMICOS
+    # Generar un Chain sobre chistes dinámicos con variables para adjetivo y contenido.
     joke_chain = build_lcel_chain("""Cuentame un chiste {adjective} sobre {content}.""")
+    # Invocar el chain pasando un diccionario con los valores de las variables.
     joke = joke_chain.invoke({"adjective": "gracioso", "content": "gallinas"})
+    # Imprimir el resultado.
     print("=== LCEL JOKE ===")
     print(joke)
     print()
 
-    # 2) Resumen
-    summarize_chain = build_lcel_chain(
-        """Resume el siguiente contenido en una frase:\n{content}"""
-    )
+    # RESUMENES DINÁMICOS
+    # Contenido para resumir.
     content = (
         "El rapido avance de la tecnologia en el siglo XXI ha transformado salud, educacion y transporte. "
         "IA y machine learning mejoran diagnosticos, eficiencia y acceso al conocimiento."
     )
+    # Generar un Chain para resumir contenido dinámico con una variable para el contenido a resumir.
+    summarize_chain = build_lcel_chain(
+        """Resume el siguiente contenido en una frase:\n{content}"""
+    )
+    # Invocar el chain pasando un diccionario con el contenido a resumir.
     summary = summarize_chain.invoke({"content": content})
     print("=== LCEL SUMMARY ===")
     print(summary)
     print()
 
-    # 3) QA con contexto
+    # PENDIENDE DE TERMINAR -----------------------------------------------------------------
+    # PREGUNTAS Y RESPUESTAS DINÁMICAS
     qa_chain = build_lcel_chain(
         """
 Responde la pregunta usando solo el contexto.
