@@ -1,129 +1,148 @@
-﻿# FastAPI
+# RAG and Agentic AI Toolkit
 
-## Leyenda
+## Estado actual
 
-1. LangChain: Prompts, Memory, Chains, Agents, Tools, RAG, LLMs
-2. LangChain Core: PromptTemplate, Runnable/LCEL, ChatModel/LLM, OutputParser
-3. LangChain Ollama: llama3.1:latest, mistral:latest, phi3.5:latest
+- Base FastAPI creada en `app/main.py`.
+- Router versionado activo en `app/api/v1/router.py`.
+- Endpoints base activos para `genai`, `gradio`, `llm`, `rag` y `prompt`.
+- Flujo de Prompt Engineering modelado con `schemas`, `services` y `prompts/templates.py`.
+- Varias capas ya fueron creadas como esqueleto, pero aun estan vacias.
+
+## Arquitectura (actual)
+
+```text
+app/
+  main.py
+  api/
+    v1/
+      router.py
+      genai/router.py
+      gradio/router.py
+      llm/router.py
+      rag/router.py
+      prompt/router.py
+  schemas/
+    prompt_schemas.py
+    chat_schema.py           # vacio
+    agent_schema.py          # vacio
+  services/
+    prompt_service.py
+    llm_service.py           # vacio
+  prompts/
+    templates.py
+    support_prompt.txt       # vacio
+    orchestrator_prompt.txt  # vacio
+  core/
+    config.py
+    settings.py              # vacio
+    logging.py               # vacio
+  agents/                    # vacio
+  rag/                       # vacio
+  embeddings/                # vacio
+  vector_db/                 # vacio
+  memory/                    # vacio
+  tools/                     # vacio
+```
+
+## Componentes
+
+| Componente | Ubicacion | Responsabilidad |
+| --- | --- | --- |
+| `main` | `app/main.py` | Bootstrap de FastAPI y registro de rutas globales. |
+| `api` | `app/api/v1/...` | Capa HTTP: endpoints, metodos, codigos y validacion de entrada/salida. |
+| `schemas` | `app/schemas/...` | Contratos Pydantic para requests/responses. |
+| `services` | `app/services/...` | Casos de uso y orquestacion de logica de negocio. |
+| `prompts` | `app/prompts/templates.py` | Plantillas reutilizables para prompts del LLM. |
+| `core` | `app/core/...` | Configuracion y piezas transversales de infraestructura. |
+
+## Endpoints documentados
+
+| Metodo | Ruta | Estado |
+| --- | --- | --- |
+| GET | `/` | Activo |
+| GET | `/health` | Activo |
+| GET | `/api/v1/genai/` | Activo |
+| GET | `/api/v1/gradio/` | Activo |
+| GET | `/api/v1/llm/` | Activo |
+| GET | `/api/v1/rag/` | Activo |
+| GET | `/api/v1/prompt/` | Activo |
+| POST | `/api/v1/prompt/exercise-1/completion` | Definido |
+| POST | `/api/v1/prompt/exercise-2/task-prompts` | Definido |
+| POST | `/api/v1/prompt/exercise-3/step-by-step` | Definido |
+| POST | `/api/v1/prompt/exercise-4/lcel` | Definido |
+| POST | `/api/v1/prompt/exercise-5/reasoning-reviews` | Definido |
+
+## Lo que falta
+
+### 1) Implementar archivos placeholder (vacios)
+
+- `app/core/settings.py`
+- `app/core/logging.py`
+- `app/services/llm_service.py`
+- `app/schemas/chat_schema.py`
+- `app/schemas/agent_schema.py`
+- `app/agents/base_agent.py`
+- `app/agents/support_agent.py`
+- `app/agents/orchestrator.py`
+- `app/rag/retriever.py`
+- `app/rag/chunking.py`
+- `app/rag/pipeline.py`
+- `app/embeddings/embedding_service.py`
+- `app/vector_db/qdrant_client.py`
+- `app/memory/redis_memory.py`
+- `app/memory/postgres_memory.py`
+- `app/tools/search_tool.py`
+- `app/tools/calculator_tool.py`
+- `app/tools/database_tool.py`
+- `app/prompts/support_prompt.txt`
+- `app/prompts/orchestrator_prompt.txt`
+
+### 2) Corregir acoplamientos de rutas
+
+- `app/api/v1/prompt/router.py` importa `app.service.prompt_service`.
+- La ruta actual del servicio es `app/services/prompt_service.py`.
+- Se debe actualizar el import para evitar `ModuleNotFoundError`.
+
+### 3) Completar artefactos Docker
+
+- `docker/Dockerfile` esta vacio.
+- `docker/docker-compose.yml` esta vacio.
+- `docker-compose.yml` en raiz tambien esta vacio.
 
 ## Instalacion
 
-1. Ollama: `irm https://ollama.com/install.ps1 | iex`
-2. LLM llama3.2:3b: `ollama pull llama3.2:3b`
-3. LangChain*: `pip install -U langchain langchain-core langchain-ollama`
-4. LangChain Ollama: `pip install -U langchain-ollama`
-
-## Verificacion
-
-1. Ollama: `ollama --version`
-2. Ollama Servidor: `ollama serve`
-3. LangChain: `pip show langchain`
-4. Ollama Modelos: `ollama list`
-
-## Dependencias (Prompt)
-
-1. `OllamaLLM`: Para interactuar con modelos Ollama desde LangChain.
-2. `PromptTemplate`: Para crear plantillas de prompts con variables dinamicas.
-
-## Comandos de configuración y ejecución
-
 ```bash
-# Configuración de Git para evitar problemas de saltos de línea
-git config --global core.autocrlf input
+# Entorno virtual
+python -m venv venv
 
-# Crear entorno virtual
-python3 -m venv venv
-
-# Activar entorno en Windows PowerShell
-.\venv\Scripts\Activate.ps1
+# Activar en PowerShell
+.\\venv\\Scripts\\Activate.ps1
 
 # Instalar dependencias
-pip install fastapi uvicorn[standard] gunicorn pydantic-settings
+pip install -r requirements.txt
+```
 
-# Generar requirements.txt
-pip freeze > requirements.txt
+## Ejecucion
 
-# Ejecutar servidor en desarrollo
-# main:app hace referencia a la variable 'app' dentro de main.py
-uvicorn main:app --reload
-
-# /app/main.py:app
+```bash
+# Desde la raiz del repo
 uvicorn app.main:app --reload
 ```
 
-## Formateo de código
+## Verificacion
 
 ```bash
-# Instalar Black (si no está instalado)
-pip install black
+# Salud
+curl http://127.0.0.1:8000/health
 
-# Formatear el proyecto
-black .
+# Docs OpenAPI
+http://127.0.0.1:8000/docs
 ```
 
-## Rutas de la API
+## Dependencias clave de Prompt
 
-| Método | Ruta | Descripción |
-| --- | --- | --- |
-| GET | `http://127.0.0.1:8000/` | Información general del servicio. |
-| GET | `http://127.0.0.1:8000/health` | Estado de salud (`{"status": "ok"}`). |
-| GET | `http://127.0.0.1:8000/api/v1/genai/` | Mensaje de éxito de GenAI. |
-| GET | `http://127.0.0.1:8000/api/v1/gradio/` | Mensaje de éxito de Gradio. |
-| GET | `http://127.0.0.1:8000/api/v1/llm/` | Mensaje de éxito de LLM. |
-| GET | `http://127.0.0.1:8000/api/v1/prompt/` | Mensaje de éxito para generación de prompts. |
-| GET | `http://127.0.0.1:8000/api/v1/rag/` | Mensaje de éxito de RAG. |
-
-## Componentes del proyecto
-
-| Componente | Ubicación | ¿Para qué sirve? | Ejemplo |
-| --- | --- | --- | --- |
-| `main` | `app/main.py` | Bootstrap FastAPI: instancia app, metadata y registro de routers. | `app.include_router(api_v1_router)` |
-| `api` | `app/api/v1/...` | Capa HTTP: rutas, métodos, contratos y manejo de estado HTTP. | `app/api/v1/prompt/router.py` |
-| `service` | `app/service/...` | Capa de negocio: ejecuta casos de uso y orquesta integraciones. | `app/service/prompt_service.py` |
-| `schemas` | `app/schemas/...` | Contratos Pydantic: validación y tipado de request/response. | `app/schemas/prompt_schemas.py` |
-| `core` | `app/core/...` | Núcleo compartido: settings, constantes y utilidades transversales. | `app/core/config.py` |
-| `templates` | `app/prompts/templates.py` | Repositorio de prompts base reutilizables desacoplados de HTTP. | `DEFAULT_REVIEW_TEMPLATE` |
-| `requirements` | `requirements.txt` | Manifiesto de dependencias y versiones runtime del proyecto. | `fastapi`, `langchain`, `uvicorn` |
-
-## Flujo y orden de llamadas
-
-```text
-Cliente (Postman/Frontend/curl)
-        |
-        v
-app/main.py
-  FastAPI app + include_router(api_v1_router)
-        |
-        v
-app/api/v1/router.py
-  Router principal /api/v1
-        |
-        +-------------------> /genai  -> app/api/v1/genai/router.py
-        +-------------------> /llm    -> app/api/v1/llm/router.py
-        +-------------------> /gradio -> app/api/v1/gradio/router.py
-        +-------------------> /rag    -> app/api/v1/rag/router.py
-        |
-        +-------------------> /prompt -> app/api/v1/prompt/router.py
-                                      |
-                                      v
-                           app/schemas/prompt_schemas.py
-                           (valida request/response)
-                                      |
-                                      v
-                           app/service/prompt_service.py
-                           (lógica de negocio)
-                                      |
-                                      v
-                           app/prompts/templates.py
-                           (plantillas base de prompts)
-                                      |
-                                      v
-                           LangChain/Ollama (ejecución LLM)
-                                      |
-                                      v
-                              Respuesta JSON al cliente
-```
-
-
-
-
+- `langchain`
+- `langchain-core`
+- `langchain-ollama`
+- `OllamaLLM`
+- `PromptTemplate`

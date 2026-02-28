@@ -249,6 +249,3 @@ class PromptService:
 
 
 prompt_service = PromptService()
-
-
-

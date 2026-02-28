@@ -1,4 +1,3 @@
-
 from fastapi import APIRouter, HTTPException, status
 
 from app.schemas.prompt_schemas import (
@@ -13,7 +12,7 @@ from app.schemas.prompt_schemas import (
     PromptCompletionRequest,
     PromptCompletionResponse,
 )
-from app.service.prompt_service import prompt_service
+from app.services.prompt_service import prompt_service
 
 router = APIRouter(
     prefix="/prompt",
