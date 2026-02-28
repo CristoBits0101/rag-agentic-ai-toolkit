@@ -1,17 +1,11 @@
 from fastapi import APIRouter, HTTPException, status
 
-from app.schemas.prompt_schemas import (
-    Exercise2Request,
-    Exercise2Response,
-    Exercise3Request,
-    Exercise3Response,
-    Exercise4Request,
-    Exercise4Response,
-    Exercise5Request,
-    Exercise5Response,
-    PromptCompletionRequest,
-    PromptCompletionResponse,
-)
+from app.schemas.prompt_schemas import (Exercise2Request, Exercise2Response,
+                                        Exercise3Request, Exercise3Response,
+                                        Exercise4Request, Exercise4Response,
+                                        Exercise5Request, Exercise5Response,
+                                        PromptCompletionRequest,
+                                        PromptCompletionResponse)
 from app.services.prompt_service import prompt_service
 
 router = APIRouter(
@@ -35,7 +29,7 @@ async def exercise_1_completion(
         return PromptCompletionResponse(output=output)
     except RuntimeError as exc:
         raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail=str(exc),
         ) from exc
 
@@ -48,7 +42,7 @@ async def exercise_2_task_prompts(payload: Exercise2Request) -> Exercise2Respons
         return Exercise2Response(**result)
     except RuntimeError as exc:
         raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail=str(exc),
         ) from exc
 
@@ -61,7 +55,7 @@ async def exercise_3_step_by_step(payload: Exercise3Request) -> Exercise3Respons
         return Exercise3Response(**result)
     except RuntimeError as exc:
         raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail=str(exc),
         ) from exc
 
@@ -74,7 +68,7 @@ async def exercise_4_lcel(payload: Exercise4Request) -> Exercise4Response:
         return Exercise4Response(outputs=outputs)
     except RuntimeError as exc:
         raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail=str(exc),
         ) from exc
 
@@ -87,6 +81,6 @@ async def exercise_5_reasoning_reviews(payload: Exercise5Request) -> Exercise5Re
         return Exercise5Response(**result)
     except RuntimeError as exc:
         raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail=str(exc),
         ) from exc

@@ -3,14 +3,10 @@ from __future__ import annotations
 from typing import Any
 
 from app.prompts import templates
-from app.schemas.prompt_schemas import (
-    Exercise2Request,
-    Exercise3Request,
-    Exercise4Request,
-    Exercise5Request,
-    GenerationParams,
-    PromptCompletionRequest,
-)
+from app.schemas.prompt_schemas import (Exercise2Request, Exercise3Request,
+                                        Exercise4Request, Exercise5Request,
+                                        GenerationParams,
+                                        PromptCompletionRequest)
 
 
 class PromptService:
