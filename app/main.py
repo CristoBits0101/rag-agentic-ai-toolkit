@@ -21,8 +21,13 @@ class Settings(BaseSettings):
 
 # Crea una instancia de la configuración.
 settings = Settings()
+
 # Crea una instancia de la aplicación FastAPI utilizando el nombre definido en la configuración.
-app = FastAPI(title=settings.app_name)
+app = FastAPI(
+    title=settings.app_name,
+    description=settings.app_description,
+    version=settings.app_version,
+)
 
 
 # --- RUTAS ---
