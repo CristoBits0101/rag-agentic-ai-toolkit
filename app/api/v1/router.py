@@ -15,6 +15,7 @@ from .rag.router import router as rag_router
 # Cada router importado se incluirá bajo este prefijo.
 router = APIRouter(prefix="/api/v1", tags=["API v1"])
 
+# Incluir los routers de cada módulo en el router principal.
 router.include_router(genai_router)
 router.include_router(gradio_router)
 router.include_router(llm_router)
