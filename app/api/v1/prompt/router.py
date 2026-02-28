@@ -25,6 +25,7 @@ async def prompt_health() -> dict[str, str]:
     return {"prompt": "Prompt service ready"}
 
 
+# --- EJERCICIO 1: PROMPT ENGINEERING ---
 @router.post("/exercise-1/completion", response_model=PromptCompletionResponse)
 async def exercise_1_completion(
     payload: PromptCompletionRequest,
@@ -39,6 +40,7 @@ async def exercise_1_completion(
         ) from exc
 
 
+# --- EJERCICIO 2: CREACION DE PROMPTS PARA TAREAS ESPECIFICAS ---
 @router.post("/exercise-2/task-prompts", response_model=Exercise2Response)
 async def exercise_2_task_prompts(payload: Exercise2Request) -> Exercise2Response:
     try:
@@ -51,6 +53,7 @@ async def exercise_2_task_prompts(payload: Exercise2Request) -> Exercise2Respons
         ) from exc
 
 
+# --- EJERCICIO 3: CREACION DE PROMPTS PASO A PASO ---
 @router.post("/exercise-3/step-by-step", response_model=Exercise3Response)
 async def exercise_3_step_by_step(payload: Exercise3Request) -> Exercise3Response:
     try:
@@ -63,6 +66,7 @@ async def exercise_3_step_by_step(payload: Exercise3Request) -> Exercise3Respons
         ) from exc
 
 
+# --- EJERCICIO 4: LOGICA LCEL ---
 @router.post("/exercise-4/lcel", response_model=Exercise4Response)
 async def exercise_4_lcel(payload: Exercise4Request) -> Exercise4Response:
     try:
@@ -75,6 +79,7 @@ async def exercise_4_lcel(payload: Exercise4Request) -> Exercise4Response:
         ) from exc
 
 
+# --- EJERCICIO 5: RAZONAMIENTO GUIADO + ANALISIS ESTRUCTURADO ---
 @router.post("/exercise-5/reasoning-reviews", response_model=Exercise5Response)
 async def exercise_5_reasoning_reviews(payload: Exercise5Request) -> Exercise5Response:
     try:
