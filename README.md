@@ -29,7 +29,10 @@ pip freeze > requirements.txt
 
 ```bash
 # Ejecutar servidor en desarrollo.
+# main:app hace referencia a la variable 'app' dentro del archivo 'main.py'.
 uvicorn main:app --reload
+# /app/main.py:app
+uvicorn app.main:app --reload
 ```
 
 ## Formateo de código
