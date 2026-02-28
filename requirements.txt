@@ -10,18 +10,18 @@ gunicorn==25.1.0            # Servidor WSGI y ASGI orientado a produccion.
 h11==0.16.0                 # Implementacion de HTTP uno punto uno de bajo nivel.
 httptools==0.7.1            # Analizador HTTP de alto rendimiento usado por Uvicorn.
 idna==3.11                  # Soporte para nombres de dominio internacionales.
-packaging==26.0             # Utilidades para gestionar versiones de paquetes.
+langchain==0.3.27           # Framework de orquestacion LLM usado en los ejercicios y servicios.
+langchain-core==0.3.80      # Componentes base de LangChain (PromptTemplate, Runnable, parsers).
+langchain-ollama==0.3.10    # Integracion LangChain para ejecutar modelos locales via Ollama.
+packaging==25.0             # Fijado por compatibilidad: langchain-core 0.3.80 requiere <26.0.
 pydantic==2.12.5            # Validacion de datos mediante modelos tipados.
 pydantic-settings==2.13.1   # Gestion de configuracion basada en variables de entorno.
 pydantic_core==2.41.5       # Nucleo de alto rendimiento de Pydantic.
-PyYAML==6.0.3               # Biblioteca para procesar archivos YAML.
 python-dotenv==1.2.1        # Carga variables de entorno desde archivos .env.
+PyYAML==6.0.3               # Biblioteca para procesar archivos YAML.
 starlette==0.52.1           # Framework ASGI sobre el que se construye FastAPI.
 typing-inspection==0.4.2    # Herramientas de introspeccion del sistema de tipos.
 typing_extensions==4.15.0   # Extensiones de tipado para compatibilidad entre versiones.
 uvicorn==0.41.0             # Servidor ASGI ligero para desarrollo y produccion.
 watchfiles==1.1.1           # Recarga automatica del servidor durante el desarrollo.
 websockets==16.0            # Implementacion del protocolo WebSocket para ASGI.
-langchain==0.3.27
-langchain-core==0.3.80
-langchain-ollama==0.3.10
