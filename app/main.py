@@ -48,7 +48,7 @@ async def root():
     return {
         "author": settings.app_author,
         "service": settings.app_name,
-        "Description": settings.app_description,
+        "description": settings.app_description,
         "version": settings.app_version,
     }
 
