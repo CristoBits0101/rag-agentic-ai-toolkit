@@ -1,17 +1,11 @@
 from fastapi import APIRouter, HTTPException, status
 
-from app.schemas.prompt_schemas import (
-    Exercise2Request,
-    Exercise2Response,
-    Exercise3Request,
-    Exercise3Response,
-    Exercise4Request,
-    Exercise4Response,
-    Exercise5Request,
-    Exercise5Response,
-    PromptCompletionRequest,
-    PromptCompletionResponse,
-)
+from app.schemas.prompt_schemas import (Exercise2Request, Exercise2Response,
+                                        Exercise3Request, Exercise3Response,
+                                        Exercise4Request, Exercise4Response,
+                                        Exercise5Request, Exercise5Response,
+                                        PromptCompletionRequest,
+                                        PromptCompletionResponse)
 from app.service.prompt_service import prompt_service
 
 router = APIRouter(
@@ -26,7 +20,9 @@ async def prompt_health() -> dict[str, str]:
 
 
 @router.post("/exercise-1/completion", response_model=PromptCompletionResponse)
-async def exercise_1_completion(payload: PromptCompletionRequest) -> PromptCompletionResponse:
+async def exercise_1_completion(
+    payload: PromptCompletionRequest,
+) -> PromptCompletionResponse:
     try:
         output = prompt_service.run_exercise_1(payload)
         return PromptCompletionResponse(output=output)

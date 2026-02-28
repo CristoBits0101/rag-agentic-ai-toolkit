@@ -3,13 +3,11 @@
 
 # Importa la clase principal de FastAPI.
 from fastapi import FastAPI
-
 # Importa la herramienta para gestionar configuración.
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 # Importa el router de la API v1 para incluirlo en la aplicación.
 from app.api.v1.router import router as api_v1_router
-
 
 # --- CONFIGURACIÓN ---
 

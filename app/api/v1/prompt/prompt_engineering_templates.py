@@ -98,12 +98,10 @@ DEFAULT_FEW_SHOT_PROMPT = (
     'Ingles: "How are you?"\\n'
     'Frances: "Comment ca va?"\\n'
     'Ingles: "Where is the train station?"\\n'
-    'Frances:'
+    "Frances:"
 )
 
-DEFAULT_DECISION_PROMPT = (
-    "Explica el proceso de toma de decisiones paso a paso para elegir el mejor portatil para comprar."
-)
+DEFAULT_DECISION_PROMPT = "Explica el proceso de toma de decisiones paso a paso para elegir el mejor portatil para comprar."
 
 DEFAULT_SANDWICH_PROMPT = "Explica paso a paso como hacer un sandwich simple."
 
