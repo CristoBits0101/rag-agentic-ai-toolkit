@@ -17,7 +17,12 @@ from app.api.v1.router import router as api_v1_router
 # Definir un modelo de configuración.
 class Settings(BaseSettings):
     # Nombre de la aplicación para la documentación de FastAPI.
+    app_author: str = "Cristo Suárez"
+    app_description: str = (
+        "A toolkit for building Retrieval-Augmented Generation (RAG) and Agentic AI applications."
+    )
     app_name: str = "RAG and Agentic AI Toolkit"
+    app_version: str = "1.0.0"
     # Configuración para cargar variables de entorno desde un archivo .env
     model_config = SettingsConfigDict(env_file=".env")
 
@@ -27,8 +32,9 @@ settings = Settings()
 
 # Crea una instancia de la aplicación FastAPI utilizando el nombre definido en la configuración.
 app = FastAPI(
-    title=settings.app_name,
+    author=settings.app_author,
     description=settings.app_description,
+    title=settings.app_name,
     version=settings.app_version,
 )
 
@@ -39,7 +45,12 @@ app = FastAPI(
 # Ruta raíz para verificar que la aplicación está funcionando y para mostrar el nombre del servicio.
 @app.get("/", tags=["Root"])
 async def root():
-    return {"service": settings.app_name}
+    return {
+        "author": settings.app_author,
+        "service": settings.app_name,
+        "Description": settings.app_description,
+        "version": settings.app_version,
+    }
 
 
 # Ruta útil para verificar la salud del servicio al monitoreo y despliegue.

@@ -1,6 +1,5 @@
 # --- DEPENDENCIAS ---
 from fastapi import APIRouter
-from .rag_document_summarization_langchain_llms import summarize_document
 
 router = APIRouter(
     prefix="/rag",
