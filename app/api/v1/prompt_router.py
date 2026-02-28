@@ -1,13 +1,37 @@
+# --- DEPENDENCIAS ---
+
+
+#     APIRouter: Permite organizar las rutas de la API en módulos separados.
+# HTTPException: Permite manejar errores y devolver respuestas HTTP con códigos de estado específicos.
+#        status: Proporciona constantes para códigos de estado HTTP.
 from fastapi import APIRouter, HTTPException, status
 
-from app.schemas.prompt_schemas import (Exercise2Request, Exercise2Response,
-                                        Exercise3Request, Exercise3Response,
-                                        Exercise4Request, Exercise4Response,
-                                        Exercise5Request, Exercise5Response,
-                                        PromptCompletionRequest,
-                                        PromptCompletionResponse)
+# Importamos los modelos de datos para las solicitudes y respuestas de cada ejercicio.
+# Se utilizan para validar y estructurar los datos que se envían y reciben a través de la API.
+from app.schemas.prompt_schemas import (
+    Exercise2Request,
+    Exercise2Response,
+    Exercise3Request,
+    Exercise3Response,
+    Exercise4Request,
+    Exercise4Response,
+    Exercise5Request,
+    Exercise5Response,
+    PromptCompletionRequest,
+    PromptCompletionResponse,
+)
+
+# Importamos el servicio que contiene la lógica de negocio para cada ejercicio.
+# Este servicio se encargará de procesar las solicitudes y generar las respuestas correspondientes.
 from app.services.prompt_service import prompt_service
 
+
+# -- RUTAS DE LA API ---
+
+
+# Creamos un router para organizar las rutas relacionadas con los prompts.
+# El prefijo "/prompt" se añadirá a todas las rutas definidas en este router.
+# Las etiquetas se utilizan para la documentación automática de la API.
 router = APIRouter(
     prefix="/prompt",
     tags=["Prompt"],
