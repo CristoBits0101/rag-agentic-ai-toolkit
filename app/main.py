@@ -14,7 +14,7 @@ from app.api.v1.router import router as api_v1_router
 # --- CONFIGURACIÓN ---
 
 
-# Definir un modelo de configuración.
+# Clase para definir un modelo de configuración.
 class Settings(BaseSettings):
     # Autor de la aplicación útil para la documentación y el contacto en la API.
     app_author: str = "Cristo Suárez"
