@@ -20,6 +20,8 @@
 # 2.   PromptTemplate: Para crear plantillas de prompts con variables dinámicas.
 from langchain_ollama import OllamaLLM
 from langchain_core.prompts import PromptTemplate
+from langchain_core.runnables import RunnableLambda
+from langchain_core.output_parsers import StrOutputParser
 
 
 # --- EJERCICIO 1: PROMPT ENGINEERING ---
@@ -330,6 +332,79 @@ SQL:
     print()
 
 
+# --- EJERCICIO 5: RAZONAMIENTO GUIADO + ANALISIS ESTRUCTURADO EN LCEL ---
+
+
+def run_exercise_5_reasoning_and_reviews():
+    # 5.1) LLM dedicado para este ejercicio con salida mas extensa.
+    llm = OllamaLLM(
+        model="llama3.2:3b",
+        temperature=0.2,
+        top_p=0.9,
+        top_k=40,
+        num_predict=512,
+    )
+
+    # 5.2) Plantilla para analizar resenas con formato fijo.
+    review_template = """
+Analiza la siguiente resena de producto:
+"{review}"
+
+Proporciona tu analisis en el siguiente formato:
+- Sentimiento: (positivo, negativo o neutral)
+- Caracteristicas clave mencionadas: (lista de caracteristicas)
+- Resumen: (resumen en una frase)
+"""
+    review_prompt = PromptTemplate.from_template(review_template)
+
+    # 5.3) Formateador explicito + parser de texto para cadena LCEL completa.
+    def format_review_prompt(variables):
+        return review_prompt.format(**variables)
+
+    review_analysis_chain = RunnableLambda(format_review_prompt) | llm | StrOutputParser()
+
+    # 5.4) Procesar multiples resenas (batch simple).
+    reviews = [
+        "I love this smartphone! The camera quality is exceptional and the battery lasts all day. The only downside is that it heats up a bit during gaming.",
+        "This laptop is terrible. It's slow, crashes frequently, and the keyboard stopped working after just two months. Customer service was unhelpful.",
+    ]
+
+    for review in reviews:
+        result = review_analysis_chain.invoke({"review": review})
+        print("=== EX5 REVIEW ===")
+        print("Review:", review)
+        print("Analysis:", result)
+        print("-" * 60)
+
+    # 5.5) Prompt de razonamiento paso a paso con formato de salida.
+    reasoning_template = """
+Resuelve el siguiente problema paso a paso y al final da una respuesta final corta.
+
+Problema:
+{problem}
+
+Formato:
+1) Datos
+2) Razonamiento
+3) Respuesta final
+"""
+    reasoning_prompt = PromptTemplate.from_template(reasoning_template)
+
+    def format_reasoning_prompt(variables):
+        return reasoning_prompt.format(**variables)
+
+    reasoning_chain = (
+        RunnableLambda(format_reasoning_prompt) | llm | StrOutputParser()
+    )
+    problem = "Cuando tenia 6 anos, mi hermana tenia la mitad de mi edad. Ahora tengo 70. Cuantos anos tiene mi hermana?"
+    reasoning_result = reasoning_chain.invoke({"problem": problem})
+
+    print("=== EX5 REASONING ===")
+    print("Problema:", problem)
+    print("Resolucion:", reasoning_result)
+    print()
+
+
 if __name__ == "__main__":
     run_baseline()
     run_task_prompts()
@@ -341,3 +416,4 @@ if __name__ == "__main__":
     run_few_shot()
     run_exercise_3_step_by_step()
     run_exercise_4_lcel()
+    run_exercise_5_reasoning_and_reviews()
