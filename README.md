@@ -1,13 +1,22 @@
 # FastAPI
 
-## COMANDOS
-- git config --global core.autocrlf input
+## Comandos
 
-- python3 -m venv venv
+```bash
+# Configuración de Git (evita problemas de saltos de línea).
+git config --global core.autocrlf input
 
-- .\venv\Scripts\Activate.ps1
+# Crear entorno virtual.
+python3 -m venv venv
 
-- pip install fastapi uvicorn[standard] gunicorn pydantic-settings
-- pip freeze > requirements.txt
+# Activar entorno (Windows PowerShell).
+.\venv\Scripts\Activate.ps1
 
--uvicorn main:app --reload
+# Instalar dependencias.
+pip install fastapi uvicorn[standard] gunicorn pydantic-settings
+
+# Generar requirements.txt.
+pip freeze > requirements.txt
+
+# Ejecutar servidor en desarrollo.
+uvicorn main:app --reload
