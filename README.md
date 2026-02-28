@@ -1,148 +1,135 @@
 # RAG and Agentic AI Toolkit
 
-## Estado actual
+Toolkit monolitico en FastAPI para experimentar con Prompt Engineering, RAG y orquestacion de agentes.
 
-- Base FastAPI creada en `app/main.py`.
-- Router versionado activo en `app/api/v1/router.py`.
-- Endpoints base activos para `genai`, `gradio`, `llm`, `rag` y `prompt`.
-- Flujo de Prompt Engineering modelado con `schemas`, `services` y `prompts/templates.py`.
-- Varias capas ya fueron creadas como esqueleto, pero aun estan vacias.
-
-## Arquitectura (actual)
+## Estructura actual
 
 ```text
 app/
-  main.py
-  api/
-    v1/
-      router.py
-      genai/router.py
-      gradio/router.py
-      llm/router.py
-      rag/router.py
-      prompt/router.py
-  schemas/
-    prompt_schemas.py
-    chat_schema.py           # vacio
-    agent_schema.py          # vacio
-  services/
-    prompt_service.py
-    llm_service.py           # vacio
-  prompts/
-    templates.py
-    support_prompt.txt       # vacio
-    orchestrator_prompt.txt  # vacio
-  core/
-    config.py
-    settings.py              # vacio
-    logging.py               # vacio
-  agents/                    # vacio
-  rag/                       # vacio
-  embeddings/                # vacio
-  vector_db/                 # vacio
-  memory/                    # vacio
-  tools/                     # vacio
+|-- main.py
+|-- api/
+|   `-- v1/
+|       |-- router.py
+|       |-- agent_router.py
+|       |-- chat_router.py
+|       |-- llm_router.py
+|       |-- rag_router.py
+|       `-- prompt_router.py
+|-- agents/
+|   |-- base_agent.py
+|   |-- orchestrator.py
+|   `-- support_agent.py
+|-- prompts/
+|   |-- templates.py
+|   |-- orchestrator_prompt.txt
+|   `-- support_prompt.txt
+|-- services/
+|   |-- llm_service.py
+|   `-- prompt_service.py
+|-- rag/
+|   |-- retriever.py
+|   |-- pipeline.py
+|   `-- chunking.py
+|-- embeddings/
+|   `-- embedding_service.py
+|-- vector_db/
+|   `-- qdrant_client.py
+|-- memory/
+|   |-- redis_memory.py
+|   `-- postgres_memory.py
+|-- tools/
+|   |-- calculator_tool.py
+|   |-- database_tool.py
+|   `-- search_tool.py
+|-- schemas/
+|   |-- agent_schema.py
+|   |-- chat_schema.py
+|   `-- prompt_schemas.py
+`-- core/
+    |-- config.py
+    |-- settings.py
+    `-- logging.py
 ```
 
-## Componentes
+## Capas y responsabilidades (actuales y futuras)
 
-| Componente | Ubicacion | Responsabilidad |
-| --- | --- | --- |
-| `main` | `app/main.py` | Bootstrap de FastAPI y registro de rutas globales. |
-| `api` | `app/api/v1/...` | Capa HTTP: endpoints, metodos, codigos y validacion de entrada/salida. |
-| `schemas` | `app/schemas/...` | Contratos Pydantic para requests/responses. |
-| `services` | `app/services/...` | Casos de uso y orquestacion de logica de negocio. |
-| `prompts` | `app/prompts/templates.py` | Plantillas reutilizables para prompts del LLM. |
-| `core` | `app/core/...` | Configuracion y piezas transversales de infraestructura. |
+| Capa | Ruta | Responsabilidad actual | Responsabilidad futura |
+| --- | --- | --- | --- |
+| API | `app/api/v1/*_router.py` | Exponer endpoints y validar contrato HTTP basico. | Versionado de API, manejo de errores estandar y auth por router. |
+| Schemas | `app/schemas/*.py` | Definir modelos de entrada/salida para prompt y base de chat/agent. | Contratos completos por dominio (`agent`, `chat`, `rag`) con validaciones de negocio. |
+| Services | `app/services/*_service.py` | Ejecutar casos de uso de prompt engineering y wrapper de LLM. | Orquestacion de agentes, politicas de retries/timeouts y trazabilidad por request. |
+| Agents | `app/agents/*` | Estructura creada (base/orchestrator/support) aun sin logica productiva. | Router inteligente de tareas, delegacion multi-agente y control de herramientas. |
+| Prompts | `app/prompts/*` | Plantillas base y archivos de prompt del sistema. | Versionado de prompts, variantes por canal/idioma y experimentacion A/B. |
+| RAG | `app/rag/*` | Estructura de pipeline/retriever/chunking preparada. | Ingestion documental, chunking configurable, retrieval hibrido y reranking. |
+| Embeddings | `app/embeddings/*` | Capa placeholder para generacion de embeddings. | Normalizacion de embeddings, caching y soporte multi-modelo. |
+| Vector DB | `app/vector_db/*` | Cliente placeholder para motor vectorial. | Integracion real con Qdrant, colecciones, filtros y busqueda semantica. |
+| Memory | `app/memory/*` | Estructura placeholder para memoria conversacional. | Memoria corta/larga por sesion con Redis/Postgres y politicas de expiracion. |
+| Tools | `app/tools/*` | Carpeta de herramientas definida sin implementacion funcional. | Tool calling seguro (search/db/calc), permisos y auditoria de ejecuciones. |
+| Core | `app/core/*` | Config base y archivos de settings/logging creados. | Config central por entorno, secretos, observabilidad y logging estructurado. |
+## Rutas activas
 
-## Endpoints documentados
+| Metodo | Ruta |
+| --- | --- |
+| GET | `/` |
+| GET | `/health` |
+| GET | `/api/v1/agent/` |
+| GET | `/api/v1/chat/` |
+| GET | `/api/v1/llm/` |
+| GET | `/api/v1/rag/` |
+| GET | `/api/v1/prompt/` |
+| POST | `/api/v1/prompt/exercise-1/completion` |
+| POST | `/api/v1/prompt/exercise-2/task-prompts` |
+| POST | `/api/v1/prompt/exercise-3/step-by-step` |
+| POST | `/api/v1/prompt/exercise-4/lcel` |
+| POST | `/api/v1/prompt/exercise-5/reasoning-reviews` |
 
-| Metodo | Ruta | Estado |
-| --- | --- | --- |
-| GET | `/` | Activo |
-| GET | `/health` | Activo |
-| GET | `/api/v1/genai/` | Activo |
-| GET | `/api/v1/gradio/` | Activo |
-| GET | `/api/v1/llm/` | Activo |
-| GET | `/api/v1/rag/` | Activo |
-| GET | `/api/v1/prompt/` | Activo |
-| POST | `/api/v1/prompt/exercise-1/completion` | Definido |
-| POST | `/api/v1/prompt/exercise-2/task-prompts` | Definido |
-| POST | `/api/v1/prompt/exercise-3/step-by-step` | Definido |
-| POST | `/api/v1/prompt/exercise-4/lcel` | Definido |
-| POST | `/api/v1/prompt/exercise-5/reasoning-reviews` | Definido |
-
-## Lo que falta
-
-### 1) Implementar archivos placeholder (vacios)
-
-- `app/core/settings.py`
-- `app/core/logging.py`
-- `app/services/llm_service.py`
-- `app/schemas/chat_schema.py`
-- `app/schemas/agent_schema.py`
-- `app/agents/base_agent.py`
-- `app/agents/support_agent.py`
-- `app/agents/orchestrator.py`
-- `app/rag/retriever.py`
-- `app/rag/chunking.py`
-- `app/rag/pipeline.py`
-- `app/embeddings/embedding_service.py`
-- `app/vector_db/qdrant_client.py`
-- `app/memory/redis_memory.py`
-- `app/memory/postgres_memory.py`
-- `app/tools/search_tool.py`
-- `app/tools/calculator_tool.py`
-- `app/tools/database_tool.py`
-- `app/prompts/support_prompt.txt`
-- `app/prompts/orchestrator_prompt.txt`
-
-### 2) Corregir acoplamientos de rutas
-
-- `app/api/v1/prompt/router.py` importa `app.service.prompt_service`.
-- La ruta actual del servicio es `app/services/prompt_service.py`.
-- Se debe actualizar el import para evitar `ModuleNotFoundError`.
-
-### 3) Completar artefactos Docker
-
-- `docker/Dockerfile` esta vacio.
-- `docker/docker-compose.yml` esta vacio.
-- `docker-compose.yml` en raiz tambien esta vacio.
+Nota: los endpoints de `prompt` devuelven `503` cuando faltan dependencias/modelos LLM en runtime.
 
 ## Instalacion
 
 ```bash
-# Entorno virtual
 python -m venv venv
-
-# Activar en PowerShell
 .\\venv\\Scripts\\Activate.ps1
-
-# Instalar dependencias
 pip install -r requirements.txt
 ```
 
 ## Ejecucion
 
 ```bash
-# Desde la raiz del repo
 uvicorn app.main:app --reload
 ```
 
-## Verificacion
+## Tests
+
+Smoke tests en `tests/test_api_smoke.py`.
 
 ```bash
-# Salud
-curl http://127.0.0.1:8000/health
-
-# Docs OpenAPI
-http://127.0.0.1:8000/docs
+python -m pytest -q
 ```
 
-## Dependencias clave de Prompt
+## Estado de implementacion
 
-- `langchain`
-- `langchain-core`
-- `langchain-ollama`
-- `OllamaLLM`
-- `PromptTemplate`
+Modulos aun en modo placeholder (estructura creada, implementacion pendiente):
+
+- `app/agents/*`
+- `app/core/settings.py`
+- `app/core/logging.py`
+- `app/services/llm_service.py`
+- `app/rag/*`
+- `app/embeddings/embedding_service.py`
+- `app/vector_db/qdrant_client.py`
+- `app/memory/*`
+- `app/tools/*`
+- `app/schemas/agent_schema.py`
+- `app/schemas/chat_schema.py`
+- `app/prompts/orchestrator_prompt.txt`
+- `app/prompts/support_prompt.txt`
+
+## Docker
+
+Archivos presentes pero vacios:
+
+- `docker/Dockerfile`
+- `docker/docker-compose.yml`
+- `docker-compose.yml`
+
