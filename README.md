@@ -82,7 +82,7 @@ black .
 | `service` | `app/service/...` | Capa de negocio: ejecuta casos de uso y orquesta integraciones. | `app/service/prompt_service.py` |
 | `schemas` | `app/schemas/...` | Contratos Pydantic: validación y tipado de request/response. | `app/schemas/prompt_schemas.py` |
 | `core` | `app/core/...` | Núcleo compartido: settings, constantes y utilidades transversales. | `app/core/config.py` |
-| `templates` | `app/api/v1/prompt/prompt_engineering_templates.py` | Repositorio de prompts base reutilizables desacoplados de HTTP. | `DEFAULT_REVIEW_TEMPLATE` |
+| `templates` | `app/core/prompts/prompt_templates.py` | Repositorio de prompts base reutilizables desacoplados de HTTP. | `DEFAULT_REVIEW_TEMPLATE` |
 | `requirements` | `requirements.txt` | Manifiesto de dependencias y versiones runtime del proyecto. | `fastapi`, `langchain`, `uvicorn` |
 
 ## Flujo y orden de llamadas
@@ -114,7 +114,7 @@ app/api/v1/router.py
                            (lógica de negocio)
                                       |
                                       v
-                           app/api/v1/prompt/prompt_engineering_templates.py
+                           app/core/prompts/prompt_templates.py
                            (plantillas base de prompts)
                                       |
                                       v
@@ -123,4 +123,6 @@ app/api/v1/router.py
                                       v
                               Respuesta JSON al cliente
 ```
+
+
 

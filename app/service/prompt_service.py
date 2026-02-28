@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from app.api.v1.prompt import prompt_engineering_templates as templates
+from app.core.prompts import prompt_templates as templates
 from app.schemas.prompt_schemas import (
     Exercise2Request,
     Exercise3Request,
@@ -249,3 +249,5 @@ class PromptService:
 
 
 prompt_service = PromptService()
+
+
