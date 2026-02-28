@@ -7,6 +7,9 @@ from fastapi import FastAPI
 # Importa la herramienta para gestionar configuración.
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+# Importa el router de la API v1 para incluirlo en la aplicación.
+from app.api.v1.router import router as api_v1_router
+
 
 # --- CONFIGURACIÓN ---
 
@@ -43,3 +46,6 @@ async def root():
 @app.get("/health", tags=["Health"])
 async def health_check():
     return {"status": "ok"}
+
+# Incluye el router de la API v1 en la aplicación principal.
+app.include_router(api_v1_router)
