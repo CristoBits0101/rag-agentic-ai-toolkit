@@ -47,5 +47,6 @@ async def root():
 async def health_check():
     return {"status": "ok"}
 
+
 # Incluye el router de la API v1 en la aplicación principal.
 app.include_router(api_v1_router)
