@@ -19,11 +19,6 @@
 # 1.        OllamaLLM: Para interactuar con modelos Ollama desde LangChain.
 # 2.   PromptTemplate: Para crear plantillas de prompts con variables dinamicas.
 
-# Nota:
-# Este modulo mantiene intactos los comentarios pedagogicos de los ejercicios.
-# La ejecucion real por API se implementa en:
-# - app/service/prompt_service.py
-# - app/api/v1/prompt/router.py
 
 
 # --- EJERCICIO 1: PROMPT ENGINEERING ---
