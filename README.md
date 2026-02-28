@@ -52,13 +52,13 @@ black .
 
 | Componente | Ubicación | ¿Para qué sirve? | Ejemplo |
 | --- | --- | --- | --- |
-| `main` | `app/main.py` | Punto de entrada de FastAPI. Crea la app, configura metadata y registra rutas globales (`/`, `/health`, `/api/v1`). | `app.include_router(api_v1_router)` |
-| `api` | `app/api/v1/...` | Capa HTTP. Define endpoints, métodos, validación de entrada/salida y códigos de respuesta. No debería contener lógica pesada de negocio. | `app/api/v1/prompt/router.py` |
-| `service` | `app/service/...` | Lógica de negocio y orquestación de casos de uso. Recibe datos ya validados desde `api` y ejecuta el flujo principal. | `app/service/prompt_service.py` |
-| `schemas` | `app/schemas/...` | Modelos Pydantic para requests/responses. Garantiza contrato de datos entre cliente y API. | `app/schemas/prompt_schemas.py` |
-| `core` | `app/core/...` | Configuración compartida y utilidades base de infraestructura (settings, constantes globales, etc.). | `app/core/config.py` |
-| `templates` | `app/api/v1/prompt/prompt_engineering_templates.py` | Plantillas y textos base reutilizables de prompts (sin acoplarse a HTTP). | `DEFAULT_REVIEW_TEMPLATE` |
-| `requirements` | `requirements.txt` | Dependencias necesarias para ejecutar la aplicación. | `fastapi`, `langchain`, `uvicorn` |
+| `main` | `app/main.py` | Bootstrap FastAPI: instancia app, metadata y registro de routers. | `app.include_router(api_v1_router)` |
+| `api` | `app/api/v1/...` | Capa HTTP: rutas, métodos, contratos y manejo de estado HTTP. | `app/api/v1/prompt/router.py` |
+| `service` | `app/service/...` | Capa de negocio: ejecuta casos de uso y orquesta integraciones. | `app/service/prompt_service.py` |
+| `schemas` | `app/schemas/...` | Contratos Pydantic: validación y tipado de request/response. | `app/schemas/prompt_schemas.py` |
+| `core` | `app/core/...` | Núcleo compartido: settings, constantes y utilidades transversales. | `app/core/config.py` |
+| `templates` | `app/api/v1/prompt/prompt_engineering_templates.py` | Repositorio de prompts base reutilizables desacoplados de HTTP. | `DEFAULT_REVIEW_TEMPLATE` |
+| `requirements` | `requirements.txt` | Manifiesto de dependencias y versiones runtime del proyecto. | `fastapi`, `langchain`, `uvicorn` |
 
 ## Flujo y orden de llamadas
 
