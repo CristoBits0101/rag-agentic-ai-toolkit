@@ -32,10 +32,10 @@ settings = Settings()
 
 # Crea una instancia de la aplicación FastAPI utilizando el nombre definido en la configuración.
 app = FastAPI(
-    author=settings.app_author,
     description=settings.app_description,
     title=settings.app_name,
     version=settings.app_version,
+    contact={"name": settings.app_author},
 )
 
 

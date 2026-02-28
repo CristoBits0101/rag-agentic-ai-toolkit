@@ -9,4 +9,4 @@ router = APIRouter(
 
 @router.get("/")
 async def genai():
-    return{"genai": "GenAI app built successfully!"}
+    return {"genai": "GenAI app built successfully!"}
