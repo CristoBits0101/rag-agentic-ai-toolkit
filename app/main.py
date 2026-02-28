@@ -3,6 +3,7 @@
 
 # Importa la clase principal de FastAPI.
 from fastapi import FastAPI
+
 # Importa la herramienta para gestionar configuración.
 from pydantic_settings import BaseSettings, SettingsConfigDict
 

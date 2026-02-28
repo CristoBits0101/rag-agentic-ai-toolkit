@@ -1,11 +1,17 @@
 from fastapi import APIRouter, HTTPException, status
 
-from app.schemas.prompt_schemas import (Exercise2Request, Exercise2Response,
-                                        Exercise3Request, Exercise3Response,
-                                        Exercise4Request, Exercise4Response,
-                                        Exercise5Request, Exercise5Response,
-                                        PromptCompletionRequest,
-                                        PromptCompletionResponse)
+from app.schemas.prompt_schemas import (
+    Exercise2Request,
+    Exercise2Response,
+    Exercise3Request,
+    Exercise3Response,
+    Exercise4Request,
+    Exercise4Response,
+    Exercise5Request,
+    Exercise5Response,
+    PromptCompletionRequest,
+    PromptCompletionResponse,
+)
 from app.service.prompt_service import prompt_service
 
 router = APIRouter(
