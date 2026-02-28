@@ -16,14 +16,18 @@ from app.api.v1.router import router as api_v1_router
 
 # Definir un modelo de configuración.
 class Settings(BaseSettings):
-    # Nombre de la aplicación para la documentación de FastAPI.
+    # Autor de la aplicación útil para la documentación y el contacto en la API.
     app_author: str = "Cristo Suárez"
+    # Descripción de la aplicación para la documentación de FastAPI útil para que los usuarios entiendan el propósito del servicio.
     app_description: str = (
         "A toolkit for building Retrieval-Augmented Generation (RAG) and Agentic AI applications."
     )
+    # Nombre de la aplicación para la documentación de FastAPI útil para identificar el servicio en la documentación y en los logs.
     app_name: str = "RAG and Agentic AI Toolkit"
+    # Versión de la aplicación para la documentación de FastAPI útil para el versionado y la gestión de cambios en la API.
     app_version: str = "1.0.0"
-    # Configuración para cargar variables de entorno desde un archivo .env
+    # Configura la clase para que lea las variables de entorno desde un archivo .env en el directorio raíz del proyecto.
+    # Esto permite gestionar la configuración de manera más segura y flexible especialmente para despliegues en producción.
     model_config = SettingsConfigDict(env_file=".env")
 
 
