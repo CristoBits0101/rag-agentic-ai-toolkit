@@ -16,40 +16,43 @@ app/
 |       |-- rag_router.py
 |       `-- prompt_router.py
 |-- agents/
-|   |-- base_agent.py
-|   |-- orchestrator.py
-|   `-- support_agent.py
-|-- prompts/
-|   |-- templates.py
-|   |-- orchestrator_prompt.txt
-|   `-- support_prompt.txt
-|-- services/
-|   |-- llm_service.py
-|   `-- prompt_service.py
-|-- rag/
-|   |-- retriever.py
-|   |-- pipeline.py
-|   `-- chunking.py
+|-- core/
+|-- db/
 |-- embeddings/
-|   `-- embedding_service.py
-|-- vector_db/
-|   `-- qdrant_client.py
 |-- memory/
-|   |-- redis_memory.py
-|   `-- postgres_memory.py
-|-- tools/
-|   |-- calculator_tool.py
-|   |-- database_tool.py
-|   `-- search_tool.py
+|-- middleware/
+|-- models/
+|-- prompts/
+|-- rag/
+|-- repository/
 |-- schemas/
-|   |-- agent_schema.py
-|   |-- chat_schema.py
-|   `-- prompt_schemas.py
-`-- core/
-    |-- config.py
-    |-- settings.py
-    `-- logging.py
+|-- services/
+|-- tools/
+|-- utils/
+|-- vector_db/
+`-- __pycache__/            # autogenerado por Python
 ```
+## Carpetas en app (completo)
+
+| Carpeta | Estado actual | Responsabilidad actual/futura |
+| --- | --- | --- |
+| `app/api` | Activa | Capa HTTP y versionado de endpoints (`v1`). |
+| `app/agents` | Placeholder | Base de agentes, orquestador y especializaciones. |
+| `app/core` | Parcial | Configuracion global, settings y logging transversal. |
+| `app/db` | Placeholder | Configuracion de conexion y session de base de datos. |
+| `app/embeddings` | Placeholder | Generacion/normalizacion de embeddings. |
+| `app/memory` | Placeholder | Memoria conversacional (redis/postgres). |
+| `app/middleware` | Placeholder | Middlewares cross-cutting (logs, trace, auth, rate-limit). |
+| `app/models` | Placeholder | Modelos de persistencia/ORM. |
+| `app/prompts` | Activa | Plantillas reutilizables y prompts de sistema. |
+| `app/rag` | Placeholder | Chunking, retrieval y pipeline RAG. |
+| `app/repository` | Placeholder | Acceso a datos (DAO/Repository pattern). |
+| `app/schemas` | Parcial | Contratos Pydantic de entrada/salida. |
+| `app/services` | Parcial | Casos de uso y orquestacion de negocio. |
+| `app/tools` | Placeholder | Herramientas invocables por agentes. |
+| `app/utils` | Placeholder | Helpers utilitarios compartidos. |
+| `app/vector_db` | Placeholder | Cliente del motor vectorial (Qdrant u otro). |
+| `app/__pycache__` | Autogenerado | Cache de bytecode Python; no es capa funcional. |
 
 ## Capas y responsabilidades (actuales y futuras)
 
@@ -132,4 +135,5 @@ Archivos presentes pero vacios:
 - `docker/Dockerfile`
 - `docker/docker-compose.yml`
 - `docker-compose.yml`
+
 
