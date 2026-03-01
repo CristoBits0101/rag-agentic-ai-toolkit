@@ -1,9 +1,6 @@
-from fastapi import APIRouter
+﻿from fastapi import APIRouter
 
-router = APIRouter(
-    prefix="/llm",
-    tags=["LLM"],
-)
+router = APIRouter(prefix="/llm", tags=["LLM"])
 
 
 @router.get("/")

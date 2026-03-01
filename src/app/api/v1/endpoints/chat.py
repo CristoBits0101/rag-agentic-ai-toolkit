@@ -1,12 +1,8 @@
-# --- DEPENDENCIAS ---
-from fastapi import APIRouter
+﻿from fastapi import APIRouter
 
-router = APIRouter(
-    prefix="/chat",
-    tags=["Chat"],
-)
+router = APIRouter(prefix="/chat", tags=["Chat"])
 
 
 @router.get("/")
-async def chat():
+async def chat() -> dict[str, str]:
     return {"chat": "Chat app generated successfully!"}

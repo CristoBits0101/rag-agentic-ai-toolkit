@@ -1,18 +1,6 @@
-# --- DEPENDENCIAS DE FASTAPI ---
+﻿from fastapi import APIRouter, HTTPException, status
 
-
-#     APIRouter: Permite organizar las rutas de la API en módulos separados.
-# HTTPException: Permite manejar errores y devolver respuestas HTTP con códigos de estado específicos.
-#        status: Proporciona constantes para códigos de estado HTTP.
-from fastapi import APIRouter, HTTPException, status
-
-
-# --- MODELOS DE DATOS ---
-
-
-# Importamos los modelos de datos para las solicitudes y respuestas de cada ejercicio.
-# Se utilizan para validar y estructurar los datos que se envían y reciben a través de la API.
-from app.rest_api.schemas.prompt_schemas import (
+from app.modules.apps.chatbot.schemas import (
     Exercise2Request,
     Exercise2Response,
     Exercise3Request,
@@ -24,29 +12,9 @@ from app.rest_api.schemas.prompt_schemas import (
     PromptCompletionRequest,
     PromptCompletionResponse,
 )
+from app.modules.apps.chatbot.service import prompt_service
 
-
-# --- SERVICIOS DE LÓGICA DE NEGOCIO ---
-
-
-# Importamos el servicio que contiene la lógica de negocio para cada ejercicio.
-# Este servicio se encargará de procesar las solicitudes y generar las respuestas correspondientes.
-from app.rest_api.services.prompt_service import prompt_service
-
-
-# -- RUTAS DE LA API ---
-
-
-# Creamos un router para organizar las rutas relacionadas con los prompts.
-# El prefijo "/prompt" se añadirá a todas las rutas definidas en este router.
-# Las etiquetas se utilizan para la documentación automática de la API.
-router = APIRouter(
-    prefix="/prompt",
-    tags=["Prompt"],
-)
-
-
-# --- CONTROLADORES DE PRUEBA ---
+router = APIRouter(prefix="/prompt", tags=["Prompt"])
 
 
 @router.get("/")
@@ -54,16 +22,10 @@ async def prompt_health() -> dict[str, str]:
     return {"prompt": "Prompt service ready"}
 
 
-# --- EJERCICIO 1: PROMPT ENGINEERING ---
 @router.post("/exercise-1/completion", response_model=PromptCompletionResponse)
 async def exercise_1_completion(
     payload: PromptCompletionRequest,
 ) -> PromptCompletionResponse:
-    # 1.2) Imprime la respuesta del modelo.
-    # python 01-prompt-engineering-templates.py
-    # En el script monolítico esto era:
-    # print(llm_model("Hola, ¿cómo estás?", params=None))
-    # En la API queda expuesto como endpoint HTTP y responde JSON.
     try:
         output = prompt_service.run_exercise_1(payload)
         return PromptCompletionResponse(output=output)
@@ -74,10 +36,6 @@ async def exercise_1_completion(
         ) from exc
 
 
-# --- CONTROLADORES PARA PROMPTS ENGINEERING ---
-
-
-# --- EJERCICIO 2: CREACION DE PROMPTS PARA TAREAS ESPECIFICAS ---
 @router.post("/exercise-2/task-prompts", response_model=Exercise2Response)
 async def exercise_2_task_prompts(payload: Exercise2Request) -> Exercise2Response:
     try:
@@ -90,7 +48,6 @@ async def exercise_2_task_prompts(payload: Exercise2Request) -> Exercise2Respons
         ) from exc
 
 
-# --- EJERCICIO 3: CREACION DE PROMPTS PASO A PASO ---
 @router.post("/exercise-3/step-by-step", response_model=Exercise3Response)
 async def exercise_3_step_by_step(payload: Exercise3Request) -> Exercise3Response:
     try:
@@ -103,7 +60,6 @@ async def exercise_3_step_by_step(payload: Exercise3Request) -> Exercise3Respons
         ) from exc
 
 
-# --- EJERCICIO 4: LOGICA LCEL ---
 @router.post("/exercise-4/lcel", response_model=Exercise4Response)
 async def exercise_4_lcel(payload: Exercise4Request) -> Exercise4Response:
     try:
@@ -116,7 +72,6 @@ async def exercise_4_lcel(payload: Exercise4Request) -> Exercise4Response:
         ) from exc
 
 
-# --- EJERCICIO 5: RAZONAMIENTO GUIADO + ANALISIS ESTRUCTURADO ---
 @router.post("/exercise-5/reasoning-reviews", response_model=Exercise5Response)
 async def exercise_5_reasoning_reviews(payload: Exercise5Request) -> Exercise5Response:
     try:

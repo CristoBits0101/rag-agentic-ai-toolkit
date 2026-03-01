@@ -1,64 +1,49 @@
-# AGENTS.md
+﻿# AGENTS.md
 
 Guia operativa para mantener coherencia tecnica en este monolito FastAPI.
 
 ## Objetivo
 
-Estandarizar como se agregan routers, services, schemas y prompts para evitar acoplamientos y regresiones.
+Estandarizar como se agregan endpoints, services, schemas y prompts para evitar acoplamientos y regresiones.
 
 ## Convenciones de arquitectura
 
-- `app/rest_api/api/v1`: capa HTTP (`*_router.py`).
-- `app/rest_api/services`: casos de uso y orquestacion.
-- `app/rest_api/schemas`: contratos Pydantic request/response.
-- `app/ai_agents/prompts`: plantillas y prompts reutilizables.
-- `app/rest_api/core`: configuracion y utilidades transversales.
-
-## Convenciones de nombres
-
-- Routers: `*_router.py`.
-- Services: `*_service.py`.
-- Schemas: `*_schema.py` o `<dominio>_schemas.py`.
-- Prompts: `templates.py` y `*_prompt.txt`.
+- `src/app/api/v1/endpoints`: capa HTTP (`*.py`).
+- `src/app/modules/apps`: casos de uso de aplicacion.
+- `src/app/modules/capabilities`: capacidades IA reutilizables.
+- `src/app/core`: configuracion y utilidades transversales.
+- `src/app/infra`: adaptadores a servicios externos.
 
 ## Reglas de imports
 
 - Import absoluto desde `app...`.
-- Correcto: `from app.rest_api.services.prompt_service import prompt_service`.
+- Correcto: `from app.modules.apps.chatbot.service import prompt_service`.
 - Evitar rutas antiguas tipo `app.service...`.
 
 ## Flujo recomendado
 
-1. Definir o ajustar schema en `app/rest_api/schemas`.
-2. Implementar logica en `app/rest_api/services`.
-3. Exponer endpoint en `app/rest_api/api/v1/*_router.py`.
-4. Registrar router en `app/rest_api/api/v1/router.py`.
-5. Si aplica, agregar o actualizar prompt en `app/ai_agents/prompts`.
-6. Agregar test smoke o regresion en `tests/`.
+1. Definir o ajustar schema en `src/app/modules/**/schemas.py`.
+2. Implementar logica en `src/app/modules/**/service.py` o `client.py`.
+3. Exponer endpoint en `src/app/api/v1/endpoints/*.py`.
+4. Registrar endpoint en `src/app/api/v1/router.py`.
+5. Si aplica, agregar o actualizar prompt en `src/app/modules/capabilities/agents/prompts`.
+6. Agregar test en `tests/unit` o `tests/integration`.
 
 ## Criterios minimos por cambio
 
-- El modulo compila e importa (`python -m compileall app`).
+- El modulo compila e importa (`python -m compileall src/app`).
 - Endpoints nuevos aparecen en `/docs`.
-- Si toca rutas existentes, actualizar test smoke.
-- No introducir logica de negocio dentro de routers.
+- Si toca rutas existentes, actualizar smoke tests.
+- No introducir logica de negocio dentro de endpoints.
 
 ## Testing
-
-Comando base:
 
 ```bash
 python -m pytest -q
 ```
 
-Si no existen dependencias de test en el entorno:
+Si no existen dependencias de test:
 
 ```bash
 pip install pytest httpx
 ```
-
-## Notas operativas
-
-- Endpoints de prompt deben responder `503` cuando falten dependencias o modelos LLM.
-- Mantener `README.md` sincronizado con estructura real y rutas activas.
-- No mover prompts reutilizables a `api/`; deben permanecer en `app/ai_agents/prompts`.

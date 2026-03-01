@@ -1,0 +1,28 @@
+﻿[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rag-agentic-ai-toolkit"
+version = "0.1.0"
+description = "FastAPI toolkit for RAG and agentic AI workflows"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.134.0",
+  "pydantic-settings>=2.0.0",
+  "uvicorn[standard]>=0.30.0",
+  "langchain>=0.3.0",
+  "langchain-core>=0.3.0",
+  "langchain-ollama>=0.3.0",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]

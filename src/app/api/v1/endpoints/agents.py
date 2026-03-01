@@ -1,12 +1,8 @@
-# --- DEPENDENCIAS ---
-from fastapi import APIRouter
+﻿from fastapi import APIRouter
 
-router = APIRouter(
-    prefix="/agent",
-    tags=["Agent"],
-)
+router = APIRouter(prefix="/agent", tags=["Agent"])
 
 
 @router.get("/")
-async def agent():
+async def agent() -> dict[str, str]:
     return {"agent": "Agent app built successfully!"}
