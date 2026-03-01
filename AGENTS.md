@@ -1,5 +1,4 @@
-﻿
-# Reglas de estilo para comentarios y estructura.
+﻿# Reglas de estilo para comentarios y estructura.
 
 1. Todos los comentarios deben terminar con punto final.
 2. No se debe escribir texto entre parentesis ni usar comas en comentarios.
