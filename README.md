@@ -4,10 +4,11 @@ Monolito FastAPI para experimentar con Prompt Engineering, RAG y agentes de IA.
 
 ## Arquitectura
 
-El codigo vive en `src/app` y esta separado en dos grupos principales:
+El codigo vive en `src/app` y esta separado por capas:
 
 - API REST: `src/app/api`, `src/app/core`, `src/app/infra`
-- IA y capacidades: `src/app/modules/components`, `src/app/modules/use_cases`, `src/app/common`
+- Dominio y contratos: `src/app/domain`, `src/app/common`
+- Features y componentes IA: `src/app/modules/features`, `src/app/modules/components`
 
 Referencia extendida: `docs/architecture.md`.
 
@@ -26,9 +27,10 @@ Referencia extendida: `docs/architecture.md`.
         +-- main.py
         +-- api/v1/endpoints/
         +-- core/
+        +-- domain/
         +-- infra/
         +-- modules/components/
-        +-- modules/use_cases/
+        +-- modules/features/
         +-- common/
 ```
 
