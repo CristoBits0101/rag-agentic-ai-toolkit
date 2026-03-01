@@ -1,6 +1,17 @@
+# --- DEPENDENCIAS ---
+
+
+# Any: Es un tipo especial que puede ser cualquier cosa.
+# Se utiliza cuando no se conoce de antemano el tipo de dato que se va a manejar.
+# En este caso se usa para permitir que las variables en las invocaciones de Lcel puedan ser de cualquier tipo.
 from typing import Any
 
+# BaseModel: Es la clase base de Pydantic que se utiliza para definir modelos de datos.
+# Field: Es una función de Pydantic que se utiliza para definir campos en los modelos de datos.
 from pydantic import BaseModel, Field
+
+
+# --- MODELOS DE DATOS ---
 
 
 class GenerationParams(BaseModel):
