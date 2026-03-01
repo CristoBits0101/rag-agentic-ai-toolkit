@@ -56,3 +56,20 @@ PYTHONPATH=src uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 # Guardar lock simple de dependencias.
 pip freeze > requirements.txt
 ```
+
+## Rutas de API
+
+| Metodo | Ruta | Descripcion |
+| --- | --- | --- |
+| GET | `/api/v1/agent/` | Endpoint de prueba del modulo de agentes. |
+| GET | `/api/v1/chat/` | Endpoint de prueba del modulo de chat. |
+| GET | `/api/v1/health/` | Health check de la API versionada v1. |
+| GET | `/api/v1/llm/` | Endpoint de prueba del modulo LLM. |
+| GET | `/api/v1/prompt/` | Health check del servicio de prompts. |
+| POST | `/api/v1/prompt/exercise-1/completion` | Ejecuta el ejercicio 1 de prompts. |
+| POST | `/api/v1/prompt/exercise-2/task-prompts` | Ejecuta el ejercicio 2 de prompts. |
+| POST | `/api/v1/prompt/exercise-3/step-by-step` | Ejecuta el ejercicio 3 de prompts. |
+| POST | `/api/v1/prompt/exercise-4/lcel` | Ejecuta el ejercicio 4 de prompts. |
+| POST | `/api/v1/prompt/exercise-5/reasoning-reviews` | Ejecuta el ejercicio 5 de prompts. |
+| GET | `/api/v1/rag/` | Endpoint de prueba del modulo de retrieval RAG. |
+| GET | `/health` | Health check general de la aplicacion. |
