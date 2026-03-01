@@ -28,4 +28,5 @@ app = FastAPI(
 async def health_check() -> dict[str, str]:
     return {"status": "ok"}
 
+# Incluye todos los endpoints definidos en el router de la carpeta api/v1.
 app.include_router(api_v1_router)
