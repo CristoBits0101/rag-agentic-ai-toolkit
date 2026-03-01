@@ -3,7 +3,7 @@
 from typing import Any
 
 from app.modules.components.agents.prompts import templates
-from app.modules.use_cases.chatbot.schemas import (
+from app.modules.features.chatbot.schemas import (
     Exercise2Request,
     Exercise3Request,
     Exercise4Request,

@@ -1,6 +1,6 @@
 ﻿from fastapi import APIRouter, HTTPException, status
 
-from app.modules.use_cases.chatbot.schemas import (
+from app.modules.features.chatbot.schemas import (
     Exercise2Request,
     Exercise2Response,
     Exercise3Request,
@@ -12,7 +12,7 @@ from app.modules.use_cases.chatbot.schemas import (
     PromptCompletionRequest,
     PromptCompletionResponse,
 )
-from app.modules.use_cases.chatbot.service import prompt_service
+from app.modules.features.chatbot.service import prompt_service
 
 router = APIRouter(prefix="/prompt", tags=["Prompt"])
 

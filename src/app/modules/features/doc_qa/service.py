@@ -1,4 +1,4 @@
-from app.modules.use_cases.doc_qa.schemas import ChatRequest, ChatResponse
+from app.modules.features.doc_qa.schemas import ChatRequest, ChatResponse
 
 
 def run_doc_qa(payload: ChatRequest) -> ChatResponse:

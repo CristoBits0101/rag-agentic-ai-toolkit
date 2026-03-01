@@ -1,4 +1,4 @@
-from app.modules.use_cases.agent_runner.schemas import (
+from app.modules.features.agent_runner.schemas import (
     AgentRunnerRequest,
     AgentRunnerResponse,
 )
