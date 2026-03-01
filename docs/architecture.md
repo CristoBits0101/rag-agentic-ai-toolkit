@@ -4,9 +4,9 @@
 
 - `src/app/api`: HTTP layer (versioned routers and endpoints).
 - `src/app/core`: settings, logging, and cross-cutting concerns.
-- `src/app/infra`: technical adapters (db/cache/vector-db).
-- `src/app/modules/capabilities`: reusable AI capabilities (llm, retrieval, agents).
-- `src/app/modules/apps`: application-level use cases.
+- `src/app/infra`: technical adapters (db/cache/vector-store).
+- `src/app/modules/components`: reusable AI capabilities (llm, retrieval, agents).
+- `src/app/modules/use_cases`: application-level use cases.
 - `src/app/common`: shared utility types/functions.
 
 ## Current active API routes

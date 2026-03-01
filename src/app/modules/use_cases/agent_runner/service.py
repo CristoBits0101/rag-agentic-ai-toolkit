@@ -1,4 +1,7 @@
-﻿from app.modules.apps.agent_runner.schemas import AgentRunnerRequest, AgentRunnerResponse
+from app.modules.use_cases.agent_runner.schemas import (
+    AgentRunnerRequest,
+    AgentRunnerResponse,
+)
 
 
 def run_agent(payload: AgentRunnerRequest) -> AgentRunnerResponse:

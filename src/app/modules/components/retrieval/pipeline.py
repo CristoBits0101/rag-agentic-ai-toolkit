@@ -1,4 +1,4 @@
-﻿from app.modules.capabilities.retrieval.retriever import retrieve
+from app.modules.components.retrieval.retriever import retrieve
 
 
 def run_pipeline(query: str) -> str:

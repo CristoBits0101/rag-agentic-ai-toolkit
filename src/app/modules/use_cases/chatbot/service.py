@@ -2,8 +2,8 @@
 
 from typing import Any
 
-from app.modules.capabilities.agents.prompts import templates
-from app.modules.apps.chatbot.schemas import (
+from app.modules.components.agents.prompts import templates
+from app.modules.use_cases.chatbot.schemas import (
     Exercise2Request,
     Exercise3Request,
     Exercise4Request,
