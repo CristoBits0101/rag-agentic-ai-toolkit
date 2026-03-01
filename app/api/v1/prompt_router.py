@@ -1,10 +1,14 @@
-# --- DEPENDENCIAS ---
+# --- DEPENDENCIAS DE FASTAPI ---
 
 
 #     APIRouter: Permite organizar las rutas de la API en módulos separados.
 # HTTPException: Permite manejar errores y devolver respuestas HTTP con códigos de estado específicos.
 #        status: Proporciona constantes para códigos de estado HTTP.
 from fastapi import APIRouter, HTTPException, status
+
+
+# --- MODELOS DE DATOS ---
+
 
 # Importamos los modelos de datos para las solicitudes y respuestas de cada ejercicio.
 # Se utilizan para validar y estructurar los datos que se envían y reciben a través de la API.
@@ -21,6 +25,10 @@ from app.schemas.prompt_schemas import (
     PromptCompletionResponse,
 )
 
+
+# --- SERVICIOS DE LÓGICA DE NEGOCIO ---
+
+
 # Importamos el servicio que contiene la lógica de negocio para cada ejercicio.
 # Este servicio se encargará de procesar las solicitudes y generar las respuestas correspondientes.
 from app.services.prompt_service import prompt_service
@@ -36,6 +44,9 @@ router = APIRouter(
     prefix="/prompt",
     tags=["Prompt"],
 )
+
+
+# --- CONTROLADORES DE PRUEBA ---
 
 
 @router.get("/")
@@ -56,6 +67,9 @@ async def exercise_1_completion(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail=str(exc),
         ) from exc
+
+
+# --- CONTROLADORES PARA PROMPTS ENGINEERING ---
 
 
 # --- EJERCICIO 2: CREACION DE PROMPTS PARA TAREAS ESPECIFICAS ---
