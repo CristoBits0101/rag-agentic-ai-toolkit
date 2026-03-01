@@ -1,127 +1,53 @@
-﻿# RAG and Agentic AI Toolkit
+# RAG and Agentic AI Toolkit
 
-Toolkit monolitico en FastAPI para experimentar con Prompt Engineering, RAG y agentes de IA.
+Monolito FastAPI para experimentar con Prompt Engineering, RAG y agentes de IA.
 
-## Estructura del proyecto
+## Arquitectura
+
+El codigo vive en `src/app` y esta separado en dos grupos principales:
+
+- API REST: `src/app/api`, `src/app/core`, `src/app/infra`
+- IA y capacidades: `src/app/modules/capabilities`, `src/app/modules/apps`, `src/app/common`
+
+Referencia extendida: `docs/architecture.md`.
+
+## Estructura (resumen)
 
 ```text
 .
-├── pyproject.toml
-├── README.md
-├── .env.example
-├── .gitignore
-├── compose.yaml
-├── Dockerfile
-├── scripts/
-│   ├── start_dev.sh
-│   └── start_prod.sh
-├── docs/
-│   └── architecture.md
-├── tests/
-│   ├── unit/
-│   ├── integration/
-│   └── conftest.py
-└── src/
-    └── app/
-        ├── __init__.py
-        ├── main.py
-        ├── api/
-        │   ├── __init__.py
-        │   └── v1/
-        │       ├── __init__.py
-        │       ├── router.py
-        │       └── endpoints/
-        │           ├── __init__.py
-        │           ├── health.py
-        │           ├── chat.py
-        │           ├── agents.py
-        │           ├── retrieval.py
-        │           ├── llm.py
-        │           └── prompts.py
-        ├── core/
-        │   ├── __init__.py
-        │   ├── settings.py
-        │   ├── logging.py
-        │   ├── errors.py
-        │   └── security.py
-        ├── infra/
-        │   ├── __init__.py
-        │   ├── db/
-        │   │   ├── __init__.py
-        │   │   ├── session.py
-        │   │   └── models/
-        │   ├── cache/
-        │   │   ├── __init__.py
-        │   │   └── redis_client.py
-        │   └── vector_db/
-        │       ├── __init__.py
-        │       └── qdrant_client.py
-        ├── modules/
-        │   ├── __init__.py
-        │   ├── capabilities/
-        │   │   ├── __init__.py
-        │   │   ├── llm/
-        │   │   │   ├── __init__.py
-        │   │   │   ├── client.py
-        │   │   │   └── schemas.py
-        │   │   ├── retrieval/
-        │   │   │   ├── __init__.py
-        │   │   │   ├── chunking.py
-        │   │   │   ├── retriever.py
-        │   │   │   ├── pipeline.py
-        │   │   │   ├── embeddings/
-        │   │   │   │   ├── __init__.py
-        │   │   │   │   └── embedding_service.py
-        │   │   │   └── schemas.py
-        │   │   ├── agents/
-        │   │   │   ├── __init__.py
-        │   │   │   ├── orchestrators/
-        │   │   │   │   ├── __init__.py
-        │   │   │   │   └── orchestrator.py
-        │   │   │   ├── agents/
-        │   │   │   │   ├── __init__.py
-        │   │   │   │   ├── base_agent.py
-        │   │   │   │   └── support_agent.py
-        │   │   │   ├── tools/
-        │   │   │   │   ├── __init__.py
-        │   │   │   │   ├── calculator_tool.py
-        │   │   │   │   ├── database_tool.py
-        │   │   │   │   └── search_tool.py
-        │   │   │   ├── memory/
-        │   │   │   │   ├── __init__.py
-        │   │   │   │   ├── postgres_memory.py
-        │   │   │   │   └── redis_memory.py
-        │   │   │   ├── prompts/
-        │   │   │   │   ├── __init__.py
-        │   │   │   │   ├── templates.py
-        │   │   │   │   ├── orchestrator_prompt.txt
-        │   │   │   │   └── support_prompt.txt
-        │   │   │   └── schemas.py
-        │   │   └── vision/
-        │   │       ├── __init__.py
-        │   │       ├── pipelines.py
-        │   │       └── schemas.py
-        │   └── apps/
-        │       ├── __init__.py
-        │       ├── chatbot/
-        │       │   ├── __init__.py
-        │       │   ├── service.py
-        │       │   └── schemas.py
-        │       ├── doc_qa/
-        │       │   ├── __init__.py
-        │       │   ├── service.py
-        │       │   └── schemas.py
-        │       └── agent_runner/
-        │           ├── __init__.py
-        │           ├── service.py
-        │           └── schemas.py
-        └── common/
-            ├── __init__.py
-            ├── types.py
-            └── utils/
-                ├── __init__.py
-                └── strings.py
++-- compose.yaml
++-- Dockerfile
++-- pyproject.toml
++-- scripts/
++-- docs/
++-- tests/
++-- src/
+    +-- app/
+        +-- main.py
+        +-- api/v1/endpoints/
+        +-- core/
+        +-- infra/
+        +-- modules/capabilities/
+        +-- modules/apps/
+        +-- common/
 ```
+
+## Requisitos
+
+- Python 3.11+
+- Dependencias del proyecto (`pip install -e .`)
+- Ollama + modelo local (solo para endpoints de prompts/LLM con ejecucion real)
+
+## Configuracion
+
+Variables base en `.env.example`:
+
+- `APP_AUTHOR`
+- `APP_DESCRIPTION`
+- `APP_NAME`
+- `APP_VERSION`
+
+La app carga `.env` via `pydantic-settings`.
 
 ## Ejecutar en desarrollo
 
@@ -130,11 +56,54 @@ pip install -e .
 ./scripts/start_dev.sh
 ```
 
-## Ejecutar con Docker Compose
+Alternativa directa:
+
+```bash
+PYTHONPATH=src uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+## Ejecutar en produccion
+
+```bash
+./scripts/start_prod.sh
+```
+
+## Docker Compose
 
 ```bash
 docker compose -f compose.yaml up --build
 ```
+
+## Documentacion OpenAPI
+
+- Swagger UI: `http://localhost:8000/docs`
+- ReDoc: `http://localhost:8000/redoc`
+
+## Endpoints activos
+
+Base:
+
+- `GET /`
+- `GET /health`
+
+Versionados (`/api/v1`):
+
+- `GET /api/v1/health/`
+- `GET /api/v1/agent/`
+- `GET /api/v1/chat/`
+- `GET /api/v1/llm/`
+- `GET /api/v1/rag/`
+- `GET /api/v1/prompt/`
+- `POST /api/v1/prompt/exercise-1/completion`
+- `POST /api/v1/prompt/exercise-2/task-prompts`
+- `POST /api/v1/prompt/exercise-3/step-by-step`
+- `POST /api/v1/prompt/exercise-4/lcel`
+- `POST /api/v1/prompt/exercise-5/reasoning-reviews`
+
+## Nota operativa de prompts
+
+Si faltan dependencias de LangChain/Ollama o el modelo local no esta disponible,
+los endpoints de prompts pueden responder `503 Service Unavailable`.
 
 ## Tests
 
@@ -142,4 +111,4 @@ docker compose -f compose.yaml up --build
 python -m pytest -q
 ```
 
-Nota: `tests/conftest.py` agrega `src/` al `PYTHONPATH` para importar `app.*`.
+`tests/conftest.py` agrega `src/` al `PYTHONPATH` para importar `app.*`.
