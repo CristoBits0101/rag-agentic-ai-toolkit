@@ -1,28 +1,66 @@
-﻿[build-system]
+﻿# =============================================================================================
+# Build System Configuration
+# =============================================================================================
+
+[build-system]
+# Herramientas necesarias para construir el paquete.
 requires = ["setuptools>=68", "wheel"]
+
+# Backend que usará pip para construir el proyecto.
 build-backend = "setuptools.build_meta"
 
+
+# =============================================================================================
+# Project Metadata
+# =============================================================================================
+
 [project]
+# Nombre del paquete como aparecerá en PyPI.
 name = "rag-agentic-ai-toolkit"
+
+# Versión actual del proyecto SemVer recomendado.
 version = "0.1.0"
+
+# Descripción corta del proyecto.
 description = "FastAPI toolkit for RAG and agentic AI workflows"
+
+# Archivo README usado como descripción larga.
 readme = "README.md"
+
+# Versión mínima de Python requerida.
 requires-python = ">=3.11"
+
+# Dependencias principales necesarias en runtime.
 dependencies = [
-  "fastapi>=0.134.0",
-  "pydantic-settings>=2.0.0",
-  "uvicorn[standard]>=0.30.0",
-  "langchain>=0.3.0",
-  "langchain-core>=0.3.0",
-  "langchain-ollama>=0.3.0",
+  "fastapi>=0.134.0",          # Framework API.
+  "pydantic-settings>=2.0.0",  # Gestión de configuración tipada.
+  "uvicorn[standard]>=0.30.0", # ASGI server para producción/desarrollo.
+  "langchain>=0.3.0",          # Framework LLM orchestration.
+  "langchain-core>=0.3.0",     # Núcleo LCEL y Runnables.
+  "langchain-ollama>=0.3.0",   # Integración con Ollama.
 ]
 
+
+# =============================================================================================
+# Setuptools Configuration
+# =============================================================================================
+
 [tool.setuptools]
-package-dir = {"" = "src"}
+# Indica que el código fuente está dentro de la carpeta src.
+package-dir = { "" = "src" }
 
 [tool.setuptools.packages.find]
+# Busca automáticamente paquetes dentro de src.
 where = ["src"]
 
+
+# =============================================================================================
+# Pytest Configuration
+# =============================================================================================
+
 [tool.pytest.ini_options]
+# Carpeta donde se encuentran los tests.
 testpaths = ["tests"]
+
+# Patrón de archivos que pytest reconocerá como test.
 python_files = ["test_*.py"]
