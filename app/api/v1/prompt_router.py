@@ -59,6 +59,11 @@ async def prompt_health() -> dict[str, str]:
 async def exercise_1_completion(
     payload: PromptCompletionRequest,
 ) -> PromptCompletionResponse:
+    # 1.2) Imprime la respuesta del modelo.
+    # python 01-prompt-engineering-templates.py
+    # En el script monolítico esto era:
+    # print(llm_model("Hola, ¿cómo estás?", params=None))
+    # En la API queda expuesto como endpoint HTTP y responde JSON.
     try:
         output = prompt_service.run_exercise_1(payload)
         return PromptCompletionResponse(output=output)
