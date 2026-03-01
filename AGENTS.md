@@ -11,3 +11,4 @@
 
 5. Cada archivo `.py` debe separar responsabilidades con el bloque `# --- DEPENDENCIAS ---`.
 6. Debe existir un solo espacio de separacion entre bloques y nunca dos lineas en blanco seguidas.
+7. No debe existir espacio en blanco al inicio de cualquier tipo de archivo y siempre uno al final del mismo.
