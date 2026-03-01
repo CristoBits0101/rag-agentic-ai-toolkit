@@ -12,7 +12,7 @@ from fastapi import APIRouter, HTTPException, status
 
 # Importamos los modelos de datos para las solicitudes y respuestas de cada ejercicio.
 # Se utilizan para validar y estructurar los datos que se envían y reciben a través de la API.
-from app.schemas.prompt_schemas import (
+from app.rest_api.schemas.prompt_schemas import (
     Exercise2Request,
     Exercise2Response,
     Exercise3Request,
@@ -31,7 +31,7 @@ from app.schemas.prompt_schemas import (
 
 # Importamos el servicio que contiene la lógica de negocio para cada ejercicio.
 # Este servicio se encargará de procesar las solicitudes y generar las respuestas correspondientes.
-from app.services.prompt_service import prompt_service
+from app.rest_api.services.prompt_service import prompt_service
 
 
 # -- RUTAS DE LA API ---

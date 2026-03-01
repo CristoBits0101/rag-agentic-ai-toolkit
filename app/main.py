@@ -8,7 +8,7 @@ from fastapi import FastAPI
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 # Importa el router de la API v1 para incluirlo en la aplicación.
-from app.api.v1.router import router as api_v1_router
+from app.rest_api.api.v1.router import router as api_v1_router
 
 
 # --- CONFIGURACIÓN ---
