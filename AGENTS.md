@@ -1,20 +1,53 @@
 # =============================================================================================
+# PRINCIPIOS DE ACTUACION DEL AGENTE
+# =============================================================================================
+
+1. El agente debe interpretar la intencion del usuario y no ejecutar instrucciones de forma literal sin analisis.
+2. El agente debe analizar el contexto del proyecto antes de modificar archivos o ejecutar comandos.
+3. El agente debe validar impacto tecnico en arquitectura seguridad estabilidad mantenibilidad y rendimiento.
+4. Si una accion rompe el proyecto implica mala practica o aumenta riesgo tecnico la accion no se ejecuta.
+5. Cuando una accion no se ejecuta el agente debe comunicar el motivo y proponer una alternativa segura.
+6. El agente debe priorizar buenas practicas estandares de la industria y codigo moderno compatible con el stack actual.
+7. El agente debe aplicar cambios minimos y enfocados para resolver la solicitud sin efectos colaterales.
+8. Si faltan datos criticos el agente debe preguntar antes de aplicar cambios de alto riesgo.
+
+# =============================================================================================
+# ORDEN DE EJECUCION OBLIGATORIO
+# =============================================================================================
+
+9. Paso uno analizar la solicitud y definir objetivo tecnico verificable.
+10. Paso dos revisar archivos y rutas afectadas antes de editar.
+11. Paso tres aplicar cambios con criterio de minima superficie.
+12. Paso cuatro validar resultado con test y compilacion.
+13. Paso cinco actualizar documentacion si existen cambios funcionales o de arquitectura.
+14. Paso seis comunicar resultado final con archivos modificados y validaciones ejecutadas.
+
+# =============================================================================================
 # REGLAS DE ESTILO PARA COMENTARIOS Y ESTRUCTURA
 # =============================================================================================
 
-1. Los comentarios deben mantener texto fluido y directo.
-2. Todos los comentarios deben terminar con punto final.
-3. No se debe escribir texto entre parentesis en comentarios.
-4. No se deben usar comas ni punto y coma en comentarios.
-5. Despues de los dos puntos debe existir un espacio y una mayuscula.
-6. Los titulos de cabecera deben usar este formato exacto con una linea en blanco antes y despues del bloque.
+15. Los comentarios deben mantener texto fluido y directo.
+16. Todos los comentarios deben terminar con punto final.
+17. No se debe escribir texto entre parentesis en comentarios.
+18. No se deben usar comas ni punto y coma en comentarios.
+19. Despues de los dos puntos debe existir un espacio y una mayuscula.
+20. Los titulos de cabecera deben usar este formato exacto con una linea en blanco antes y despues del bloque y con longitud exacta de 95 caracteres por linea en todos los comentarios con `=====`.
 
 # =============================================================================================
-# HERRAMIENTAS Y LINTERS PRO
+# REGLAS DE ARCHIVOS Y MANTENIMIENTO
 # =============================================================================================
 
-7. Cada archivo `.py` no vacio debe separar responsabilidades con el bloque `# --- DEPENDENCIAS ---`.
-8. Debe existir un solo espacio de separacion entre bloques y nunca dos lineas en blanco seguidas.
-9. No debe existir espacio en blanco al inicio de cualquier archivo y debe existir un solo salto final.
-10. Nunca se deben modificar archivos de dependencias del lenguaje o del sistema operativo.
-11. Todo archivo que no sea de codigo debe ordenarse alfabeticamente si no provoca errores.
+21. Cada archivo `.py` no vacio debe separar responsabilidades con el bloque `# --- DEPENDENCIAS ---`.
+22. Debe existir un solo espacio de separacion entre bloques y nunca dos lineas en blanco seguidas.
+23. No debe existir espacio en blanco al inicio de cualquier archivo y debe existir un solo salto final.
+24. Nunca se deben modificar archivos de dependencias del lenguaje o del sistema operativo.
+25. Todo archivo que no sea de codigo debe ordenarse alfabeticamente si no provoca errores.
+
+# =============================================================================================
+# VALIDACION ANTES DE EJECUTAR EN LOCAL
+# =============================================================================================
+
+26. Antes de arrancar el servidor web en local se deben ejecutar los test.
+27. Antes de arrancar el servidor web en local se debe validar la compilacion de Python con `python -m compileall src`.
+28. Si falla algun test o falla la compilacion el servidor no se arranca y se reporta el error.
+29. Antes de arrancar el servidor web en local se debe actualizar el README cuando existan cambios funcionales o cambios de arquitectura.
