@@ -81,6 +81,8 @@ src/
   app/
     api/
       v1/
+        endpoints/
+          prompts.py
         router.py
     infra/
       llm/
