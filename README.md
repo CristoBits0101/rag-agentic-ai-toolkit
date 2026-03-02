@@ -74,6 +74,30 @@ pip freeze > requirements.txt
 | GET | `/api/v1/rag/` | Endpoint de prueba del modulo de retrieval RAG. |
 | GET | `/health` | Health check general de la aplicacion. |
 
+## Archivos comentados
+
+```text
+src/
+  app/
+    api/
+      v1/
+        router.py
+    infra/
+      llm/
+        ollama_client.py
+        openai_client.py
+    main.py
+    modules/
+      components/
+        agents/
+          prompts/
+            templates.py
+      features/
+        chatbot/
+          schemas.py
+          service.py
+```
+
 ## Glosario de Terminos
 
 | Termino | Descripcion |
