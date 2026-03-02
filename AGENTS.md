@@ -14,3 +14,4 @@
 7. No debe existir espacio en blanco al inicio de cualquier tipo de archivo y siempre uno al final del mismo.
 8. Todo archivo que no sea de codigo debe ordenarse alfabeticamente si no provoca errores.
 9. Nunca se deben modificar archivos de dependencias del lenguaje o del sistema operativo al comentar.
+10. Despues de : siempre en mayusculas y con espacio despues de los dos puntos.
