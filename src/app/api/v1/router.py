@@ -1,4 +1,7 @@
-﻿from fastapi import APIRouter
+﻿# --- DEPENDENCIAS ---
+
+# Sirve para definir las rutas de la API. 
+from fastapi import APIRouter
 
 from app.api.v1.endpoints.agents import router as agents_router
 from app.api.v1.endpoints.chat import router as chat_router
