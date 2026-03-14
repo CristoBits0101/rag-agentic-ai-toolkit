@@ -132,7 +132,6 @@ src/
 | --- | --- |
 | Agentes de IA | Integran LLMs con planificacion herramientas y memoria para ejecutar acciones autonomas. |
 | IA Generativa | Predice la siguiente secuencia probable y genera texto imagen audio o video segun el modelo. |
-| LLMs | No son agentes por si solos y producen texto de salida a partir de texto de entrada sin herramientas externas. |
 | Multimodal Generative AI | Procesa y genera varios tipos de datos en una misma interaccion. |
 | RAG | Combina recuperacion de informacion y generacion para fundamentar respuestas con contexto externo. |
 
