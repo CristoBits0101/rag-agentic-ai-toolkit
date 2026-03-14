@@ -131,9 +131,9 @@ src/
 | Termino | Descripcion |
 | --- | --- |
 | 🟢 IA Generativa | Predice la siguiente secuencia probable y genera texto imagen audio o video segun el modelo. |
-| 🟡 Multimodal Generative AI | Procesa y genera varios tipos de datos en una misma interaccion. |
-| 🟠 RAG | Combina recuperacion de informacion y generacion para fundamentar respuestas con contexto externo. |
-| 🔴 Agentes de IA | Integran LLMs con planificacion herramientas y memoria para ejecutar acciones autonomas. |
+| 🟡 RAG | Combina recuperacion de informacion y generacion para fundamentar respuestas con contexto externo. |
+| 🟠 Agentes de IA | Integran LLMs con planificacion herramientas y memoria para ejecutar acciones autonomas. |
+| 🔴 Multimodal Generative AI | Procesa y genera varios tipos de datos en una misma interaccion. |
 
 ## IA Generativa para Tareas Especificas
 
