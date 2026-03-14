@@ -126,7 +126,7 @@ src/
 | Tokenizacion | Segmentacion del texto en unidades llamadas tokens para su procesamiento por modelos. |
 | Vector Database | Base de datos optimizada para almacenar y consultar vectores por similitud semantica. |
 
-## Tipos de Agentes
+## Tipos de Sistemas de IA
 
 | Termino | Descripcion |
 | --- | --- |
