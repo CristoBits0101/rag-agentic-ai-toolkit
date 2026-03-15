@@ -1,0 +1,32 @@
+# Indice de Practicas
+
+Este archivo resume de forma rapida de que va cada practica del directorio `spikes` y que aprendizaje principal deja cada una.
+
+## Vista Rapida
+
+| Practica | Tema | De que va | Que aprendes | Enlace |
+| --- | --- | --- | --- | --- |
+| 01 | Prompting y LCEL. | Introduce prompts basicos plantillas y composicion de flujos con `LangChain` y `LCEL`. | A estructurar prompts encadenar pasos y razonar sobre salidas de un `LLM` local. | [01-prompting_lcel_lab](./01-prompting_lcel_lab/README.md) |
+| 02 | Interfaz con Gradio y Llama. | Construye una interfaz sencilla que conecta formulario estado y modelo local con `Gradio`. | A separar UI estado y acceso a modelo en una app minima de IA. | [02-gradio_llama_lab](./02-gradio_llama_lab/README.md) |
+| 03 | RAG sobre PDF. | Implementa un bot de preguntas y respuestas sobre un PDF con carga division embeddings retrieval y respuesta. | A montar un flujo `RAG` clasico de extremo a extremo sobre documentos. | [03-rag_pdf_qa_bot_lab](./03-rag_pdf_qa_bot_lab/README.md) |
+| 04 | LinkedIn Icebreaker Bot. | Usa perfiles mock tipo LinkedIn para generar contexto preguntas y respuestas conversacionales con `RAG`. | A convertir datos estructurados en contexto util para personalizacion y conversacion. | [04-linkedin_icebreaker_bot_lab](./04-linkedin_icebreaker_bot_lab/README.md) |
+| 05 | Similarity Search by Hand. | Explica la busqueda por similitud desde cero con embeddings normalizacion y calculo manual de metricas. | A entender como funcionan coseno distancia y ranking sin depender de una vector DB. | [05-similarity_search_by_hand_lab](./05-similarity_search_by_hand_lab/README.md) |
+| 06 | ChromaDB Cheat Sheet. | Resume conceptos de vector databases y demuestra operaciones CRUD consultas y filtros en `ChromaDB`. | A manejar colecciones metadatos y consultas semanticas basicas en una base vectorial. | [06-vector_databases_chromadb_cheat_sheet_lab](./06-vector_databases_chromadb_cheat_sheet_lab/README.md) |
+| 07 | Similaridad en empleados y libros. | Aplica `ChromaDB` a dos dominios pequenos con embeddings deterministas y filtros de metadatos. | A modelar colecciones distintas y comparar busqueda semantica con restricciones de negocio. | [07-employee_similarity_search_chromadb_lab](./07-employee_similarity_search_chromadb_lab/README.md) |
+| 08 | Recomendaciones de comida con RAG. | Combina retrieval en `ChromaDB` con generacion para recomendar platos segun consulta contexto y filtros. | A construir un sistema de recomendacion simple apoyado en retrieval y respuesta generada. | [08-food_recommendation_systems_chromadb_rag_lab](./08-food_recommendation_systems_chromadb_rag_lab/README.md) |
+| 09 | Context Retrieval con LangChain. | Explora `top k` `MMR` `score threshold` `MultiQueryRetriever` `SelfQueryRetriever` y `ParentDocumentRetriever`. | A elegir tecnicas de retrieval segun consulta expansion filtros y preservacion de contexto. | [09-langchain_context_retrieval_lab](./09-langchain_context_retrieval_lab/README.md) |
+| 10 | Advanced Retrievers con LlamaIndex. | Recorre `VectorIndexRetriever` `BM25` `DocumentSummaryIndex` `AutoMergingRetriever` `RecursiveRetriever` y `QueryFusionRetriever`. | A comparar retrievers avanzados y a crear estrategias hibridas y pipelines `RAG` mas robustos. | [10-advanced_retrievers_llamaindex_lab](./10-advanced_retrievers_llamaindex_lab/README.md) |
+| 11 | Semantic Similarity con FAISS. | Implementa preprocesamiento vectorizacion e indexacion con `FAISS IndexFlatL2` sobre un corpus local. | A entender el flujo completo de semantic search con un indice vectorial real. | [11-semantic_similarity_faiss_lab](./11-semantic_similarity_faiss_lab/README.md) |
+| 12 | YouTube Summarizer y QA con FAISS. | Procesa transcriptos chunking retrieval con `LangChain FAISS` y genera resumenes y respuestas sobre un video. | A construir una mini aplicacion `RAG` para contenido multimedia basado en transcriptos. | [12-youtube_summarizer_rag_faiss_lab](./12-youtube_summarizer_rag_faiss_lab/README.md) |
+
+## Ruta de Aprendizaje Sugerida
+
+1. Empieza por `01` y `02` si quieres dominar prompts `LCEL` y una interfaz minima.
+2. Sigue con `03` `05` y `06` para entender `RAG` embeddings similitud y bases vectoriales.
+3. Continua con `07` y `08` para ver casos de uso concretos de retrieval y recomendacion.
+4. Pasa a `09` y `10` cuando quieras profundizar en retrievers avanzados.
+5. Cierra con `11` y `12` para trabajar `FAISS` y un flujo aplicado de resumen y QA.
+
+## Nota
+
+La mayoria de practicas estan adaptadas para ejecutarse de forma local y reproducible. Cuando un laboratorio original dependia de servicios externos el repositorio usa datos locales embeddings deterministas o modelos de demostracion para mantener estabilidad y trazabilidad en tests.
