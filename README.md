@@ -115,6 +115,16 @@ pip install -U sentence-transformers==4.1.0 scipy torch
 python .\spikes\05-similarity_search_by_hand_lab\main.py
 ```
 
+## Ejecutar Practica 06
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# Ejecutar la practica de introduccion a ChromaDB.
+python .\spikes\06-vector_databases_chromadb_cheat_sheet_lab\main.py
+```
+
 ## Parar Gradio
 
 ```powershell
@@ -266,6 +276,21 @@ spikes/
       similarity_search_orchestration.py
     state/
       similarity_runtime_state.py
+  06-vector_databases_chromadb_cheat_sheet_lab/
+    README.md
+    main.py
+    config/
+      chromadb_cheat_sheet_config.py
+    data/
+      chromadb_demo_dataset.py
+    models/
+      chromadb_keyword_embedding_gateway.py
+    orchestration/
+      chromadb_cheat_sheet_runner.py
+      chromadb_collection_orchestration.py
+      chromadb_query_orchestration.py
+    state/
+      chromadb_runtime_state.py
 ```
 
 ## Glosario de Terminos
@@ -298,26 +323,6 @@ spikes/
 | Tokenizacion | Segmentacion del texto en unidades llamadas tokens para su procesamiento por modelos. |
 | Vector Database | Base de datos optimizada para almacenar y consultar vectores por similitud semantica. |
 
-## Resumen de ChromaDB
-
-Las bases de datos vectoriales simplifican el almacenamiento la organizacion y la recuperacion de datos complejos como imagenes gustos sonidos texto patrones mapas informacion genomica y otros tipos de datos de alta dimensionalidad. En lugar de guardar solo registros tradicionales almacenan objetos matematicos definidos por magnitud y direccion. Un vector es una matriz de valores numericos que representa atributos o caracteristicas de los datos originales.
-
-Estas bases se usan en tareas de analisis que agrupan clasifican y sugieren relaciones entre elementos. Tambien aceleran sistemas de recomendacion analisis de redes sociales grafos de conocimiento analisis de grafos busqueda semantica y procesamiento de imagenes y videos. En escenarios geoespaciales ayudan en GPS gestion de flotas y sugerencias de trafico en tiempo real. En marketing y productos sociales facilitan el manejo de perfiles de usuario tendencias y optimizacion de recursos.
-
-Las bases de datos vectoriales son una pieza importante en aprendizaje automatico porque ofrecen alto rendimiento y escalabilidad para dominios muy distintos. Para responder rapido sobre grandes colecciones suelen apoyarse en computacion distribuida indexacion procesamiento paralelo y algoritmos de vecinos mas cercanos aproximados. Entre las tecnicas mas habituales estan los indices invertidos la cuantificacion de productos y el hashing sensible a la localidad.
-
-Existen varias familias de bases de datos vectoriales como las bases en memoria en disco distribuidas graficas y temporales. Tambien hay motores tradicionales o marcos de procesamiento que soportan busqueda vectorial guardando datos como BLOB matrices o tipos definidos por el usuario. Entre proveedores conocidos de bases vectoriales aparecen `FAISS` `Annoy` y `Milvus`. Entre sistemas con soporte de busqueda vectorial aparecen `SingleStore` `Elasticsearch` `PostgreSQL` `MySQL` `RedisAI` `MongoDB` y `Apache Cassandra`.
-
-`ChromaDB` es una base de datos vectorial centrada en tareas de recuperacion para aplicaciones de IA. Soporta busqueda vectorial busqueda de texto completo filtrado por metadatos y escenarios multimodales. Puede ejecutarse en modo autonomo o en arquitectura cliente servidor y se integra bien con frameworks populares del ecosistema de LLMs. Su enfoque de vecinos mas cercanos aproximados permite encontrar rapidamente los fragmentos mas cercanos a una consulta dentro de una coleccion.
-
-En este repositorio `ChromaDB` se usa como una opcion simple para flujos RAG locales. Encaja bien en practicas como la [03](C:/Workspace/rag-agentic-ai-toolkit/spikes/03-rag_pdf_qa_bot_lab/README.md) cuando hay que indexar trozos de documentos y recuperar contexto antes de responder con un modelo.
-
-## Busqueda de Similitud
-
-La forma manual de hacer busqueda por similitud consiste en generar embeddings normalizar vectores y comparar una consulta contra una coleccion usando distancia euclidiana producto punto o similitud coseno. Esa idea esta resumida en la [practica 05](C:/Workspace/rag-agentic-ai-toolkit/spikes/05-similarity_search_by_hand_lab/README.md) donde se implementan los calculos a mano y se comparan contra operaciones matriciales y librerias externas.
-
-Con `ChromaDB` el flujo se simplifica: primero se crean embeddings de los documentos luego se almacenan junto con sus metadatos y finalmente se ejecutan consultas por similitud para recuperar los fragmentos mas cercanos. Esto permite construir buscadores semanticos chatbots basados en IA recuperacion de documentos y sistemas de recomendacion con menos trabajo operativo sobre indices y almacenamiento.
-
 ## Tipos de Sistemas de IA
 
 | Termino | Descripcion |
@@ -348,3 +353,23 @@ Con `ChromaDB` el flujo se simplifica: primero se crean embeddings de los docume
 | Language Model | Modelo que genera o transforma texto segun una entrada. |
 | Output Parsers | Componentes que transforman la salida del modelo en formatos estructurados. |
 | Prompt Templates | Plantillas predefinidas para construir prompts de forma reutilizable y consistente. |
+
+## Resumen de ChromaDB
+
+Las bases de datos vectoriales simplifican el almacenamiento la organizacion y la recuperacion de datos complejos como imagenes gustos sonidos texto patrones mapas informacion genomica y otros tipos de datos de alta dimensionalidad. En lugar de guardar solo registros tradicionales almacenan objetos matematicos definidos por magnitud y direccion. Un vector es una matriz de valores numericos que representa atributos o caracteristicas de los datos originales.
+
+Estas bases se usan en tareas de analisis que agrupan clasifican y sugieren relaciones entre elementos. Tambien aceleran sistemas de recomendacion analisis de redes sociales grafos de conocimiento analisis de grafos busqueda semantica y procesamiento de imagenes y videos. En escenarios geoespaciales ayudan en GPS gestion de flotas y sugerencias de trafico en tiempo real. En marketing y productos sociales facilitan el manejo de perfiles de usuario tendencias y optimizacion de recursos.
+
+Las bases de datos vectoriales son una pieza importante en aprendizaje automatico porque ofrecen alto rendimiento y escalabilidad para dominios muy distintos. Para responder rapido sobre grandes colecciones suelen apoyarse en computacion distribuida indexacion procesamiento paralelo y algoritmos de vecinos mas cercanos aproximados. Entre las tecnicas mas habituales estan los indices invertidos la cuantificacion de productos y el hashing sensible a la localidad.
+
+Existen varias familias de bases de datos vectoriales como las bases en memoria en disco distribuidas graficas y temporales. Tambien hay motores tradicionales o marcos de procesamiento que soportan busqueda vectorial guardando datos como BLOB matrices o tipos definidos por el usuario. Entre proveedores conocidos de bases vectoriales aparecen `FAISS` `Annoy` y `Milvus`. Entre sistemas con soporte de busqueda vectorial aparecen `SingleStore` `Elasticsearch` `PostgreSQL` `MySQL` `RedisAI` `MongoDB` y `Apache Cassandra`.
+
+`ChromaDB` es una base de datos vectorial centrada en tareas de recuperacion para aplicaciones de IA. Soporta busqueda vectorial busqueda de texto completo filtrado por metadatos y escenarios multimodales. Puede ejecutarse en modo autonomo o en arquitectura cliente servidor y se integra bien con frameworks populares del ecosistema de LLMs. Su enfoque de vecinos mas cercanos aproximados permite encontrar rapidamente los fragmentos mas cercanos a una consulta dentro de una coleccion.
+
+En este repositorio `ChromaDB` se usa como una opcion simple para flujos RAG locales. Encaja bien en practicas como la [03](C:/Workspace/rag-agentic-ai-toolkit/spikes/03-rag_pdf_qa_bot_lab/README.md) cuando hay que indexar trozos de documentos y recuperar contexto antes de responder con un modelo.
+
+## Busqueda de Similitud
+
+La forma manual de hacer busqueda por similitud consiste en generar embeddings normalizar vectores y comparar una consulta contra una coleccion usando distancia euclidiana producto punto o similitud coseno. Esa idea esta resumida en la [practica 05](C:/Workspace/rag-agentic-ai-toolkit/spikes/05-similarity_search_by_hand_lab/README.md) donde se implementan los calculos a mano y se comparan contra operaciones matriciales y librerias externas.
+
+Con `ChromaDB` el flujo se simplifica: primero se crean embeddings de los documentos luego se almacenan junto con sus metadatos y finalmente se ejecutan consultas por similitud para recuperar los fragmentos mas cercanos. Esto permite construir buscadores semanticos chatbots basados en IA recuperacion de documentos y sistemas de recomendacion con menos trabajo operativo sobre indices y almacenamiento.
