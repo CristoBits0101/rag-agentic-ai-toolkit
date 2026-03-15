@@ -49,6 +49,9 @@ pip install -U langchain-ollama
 # ChromaDB: Base de datos vectorial para retrieval local.
 pip install -U chromadb
 
+# FAISS CPU: Indice vectorial para busqueda por similitud.
+pip install -U faiss-cpu==1.13.2
+
 # LlamaIndex Core: Componentes base para indices y retrievers.
 pip install -U llama-index-core==0.12.49
 
@@ -178,6 +181,16 @@ python .\spikes\09-langchain_context_retrieval_lab\main.py
 
 # Ejecutar la practica de retrievers avanzados con LlamaIndex.
 python .\spikes\10-advanced_retrievers_llamaindex_lab\main.py
+```
+
+## Ejecutar Practica 11
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# Ejecutar la practica de semantic similarity con FAISS.
+python .\spikes\11-semantic_similarity_faiss_lab\main.py
 ```
 
 ## Parar Gradio
@@ -417,6 +430,20 @@ spikes/
       advanced_retrievers_fusion_orchestration.py
       advanced_retrievers_index_orchestration.py
       advanced_retrievers_lab_runner.py
+  11-semantic_similarity_faiss_lab/
+    README.md
+    main.py
+    config/
+      faiss_similarity_config.py
+    data/
+      faiss_forum_posts.py
+    models/
+      faiss_semantic_embedding_gateway.py
+    orchestration/
+      faiss_index_orchestration.py
+      faiss_preprocessing_orchestration.py
+      faiss_search_orchestration.py
+      faiss_similarity_lab_runner.py
 ```
 
 ## Glosario de Terminos
@@ -457,6 +484,7 @@ spikes/
 | Reranking | Reordenacion posterior de resultados recuperados para mejorar la relevancia final. |
 | Retriever | Componente encargado de recuperar contexto relevante desde una base de conocimiento indexada. |
 | Retrieval | Proceso de recuperar contexto relevante desde una base de conocimiento antes de generar una respuesta. |
+| Semantic Search | Busqueda que compara significado y contexto en lugar de depender solo de coincidencias exactas de palabras. |
 | TF-IDF | Representacion clasica de texto basada en frecuencia de termino y frecuencia inversa de documento. |
 | Tokenizacion | Segmentacion del texto en unidades llamadas tokens para su procesamiento por modelos. |
 | Vector Database | Base de datos optimizada para almacenar y consultar vectores por similitud semantica. |

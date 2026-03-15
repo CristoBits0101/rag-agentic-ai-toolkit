@@ -27,6 +27,7 @@ dependencies = [
   "llama-index-core>=0.12.49",
   "llama-index-retrievers-bm25>=0.5.2",
   "chromadb>=1.5.5",
+  "faiss-cpu>=1.13.2",
   "rank-bm25>=0.2.2",
   "PyStemmer>=2.2.0.3",
   "lark>=1.1.9,<2.0.0",
