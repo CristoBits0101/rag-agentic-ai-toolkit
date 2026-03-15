@@ -49,6 +49,18 @@ pip install -U langchain-ollama
 # ChromaDB: Base de datos vectorial para retrieval local.
 pip install -U chromadb
 
+# LlamaIndex Core: Componentes base para indices y retrievers.
+pip install -U llama-index-core==0.12.49
+
+# LlamaIndex BM25: Retriever lexico para busqueda avanzada.
+pip install -U llama-index-retrievers-bm25==0.5.2
+
+# Rank BM25: Implementacion del ranking BM25.
+pip install -U rank-bm25==0.2.2
+
+# PyStemmer: Stemming para BM25 sobre texto.
+pip install -U PyStemmer==2.2.0.3
+
 # Lark: Parser requerido por SelfQueryRetriever de LangChain.
 pip install -U lark==1.1.9
 
@@ -156,6 +168,16 @@ python .\spikes\08-food_recommendation_systems_chromadb_rag_lab\main.py
 
 # Ejecutar la practica de context retrieval con LangChain.
 python .\spikes\09-langchain_context_retrieval_lab\main.py
+```
+
+## Ejecutar Practica 10
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# Ejecutar la practica de retrievers avanzados con LlamaIndex.
+python .\spikes\10-advanced_retrievers_llamaindex_lab\main.py
 ```
 
 ## Parar Gradio
@@ -379,6 +401,22 @@ spikes/
       context_retrieval_parent_orchestration.py
       context_retrieval_search_orchestration.py
       context_retrieval_self_query_orchestration.py
+  10-advanced_retrievers_llamaindex_lab/
+    README.md
+    main.py
+    config/
+      advanced_retrievers_config.py
+    data/
+      advanced_retrievers_documents.py
+    models/
+      advanced_retrievers_demo_llm.py
+      llamaindex_demo_embedding_gateway.py
+    orchestration/
+      advanced_retrievers_context_orchestration.py
+      advanced_retrievers_core_orchestration.py
+      advanced_retrievers_fusion_orchestration.py
+      advanced_retrievers_index_orchestration.py
+      advanced_retrievers_lab_runner.py
 ```
 
 ## Glosario de Terminos
@@ -388,6 +426,7 @@ spikes/
 | Agentes de IA | Sistemas basados en inteligencia artificial que planifican acciones y ejecutan tareas con cierto grado de autonomia. |
 | ANN | Busqueda aproximada de vecinos mas cercanos para escalar retrieval vectorial con baja latencia. |
 | Advanced Retriever | Recuperador con estrategias mas sofisticadas que un top k simple como fusion filtros o reranking. |
+| BM25 | Algoritmo de ranking lexico que mejora TF IDF con saturacion de frecuencia y normalizacion por longitud de documento. |
 | Chain-of-Thought | Tecnica de prompting que fuerza un razonamiento intermedio paso a paso para mejorar respuestas complejas. |
 | Chaining | Flujo secuencial Retrieval -> Extraction -> Processing -> Generation para transformar contexto en una salida util. |
 | ChromaDB | Base de datos vectorial orientada a embeddings usada para almacenar y recuperar contexto por similitud semantica. |
