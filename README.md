@@ -193,6 +193,16 @@ python .\spikes\10-advanced_retrievers_llamaindex_lab\main.py
 python .\spikes\11-semantic_similarity_faiss_lab\main.py
 ```
 
+## Ejecutar Practica 12
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# Ejecutar la practica de resumen y QA sobre YouTube con RAG y FAISS.
+python .\spikes\12-youtube_summarizer_rag_faiss_lab\main.py
+```
+
 ## Parar Gradio
 
 ```powershell
@@ -444,6 +454,20 @@ spikes/
       faiss_preprocessing_orchestration.py
       faiss_search_orchestration.py
       faiss_similarity_lab_runner.py
+  12-youtube_summarizer_rag_faiss_lab/
+    README.md
+    main.py
+    config/
+      youtube_rag_config.py
+    data/
+      youtube_transcript_catalog.py
+    models/
+      youtube_rag_demo_llm.py
+      youtube_rag_embedding_gateway.py
+    orchestration/
+      youtube_rag_lab_runner.py
+      youtube_rag_orchestration.py
+      youtube_transcript_orchestration.py
 ```
 
 ## Glosario de Terminos
@@ -462,6 +486,7 @@ spikes/
 | Embeddings | Vectores numericos que representan el significado semantico de palabras frases o documentos. |
 | FAISS | Libreria de Meta para busqueda vectorial de alto rendimiento en una sola maquina con CPU o GPU. Ofrece control fino del indice con opciones como Flat IVF LSH y HNSW pero no incluye metadatos ni escalado distribuido de forma nativa. |
 | Fine-tuning | Ajuste adicional de un modelo preentrenado con datos de dominio para mejorar su rendimiento en tareas especificas. |
+| Grounding | Uso de contexto recuperado para anclar la respuesta del modelo a evidencia concreta. |
 | Hallucination Mitigation | Estrategias para reducir respuestas inventadas o inexactas en modelos de lenguaje. |
 | HNSW | Indice ANN basado en grafos jerarquicos de tipo small world. Usa capas superiores dispersas para hacer saltos largos y capas inferiores densas para refinar la busqueda con alta velocidad y buena precision sobre colecciones grandes. |
 | LangChain | Framework de codigo abierto para crear aplicaciones con LLMs y componentes como prompts cadenas agentes y herramientas. |
