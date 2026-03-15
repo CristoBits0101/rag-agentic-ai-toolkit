@@ -11,19 +11,25 @@ def get_all_documents(collection):
     return collection.get()
 
 
-# 1.2. Funcion para filtrar por metadatos.
+# 1.2. Funcion para recuperar documentos por id.
+def get_documents_by_id(collection, ids: list[str]):
+    # Devuelve ids metadatos y documentos del subconjunto pedido.
+    return collection.get(ids=ids)
+
+
+# 1.3. Funcion para filtrar por metadatos.
 def get_documents_with_metadata_filter(collection, where_filter: dict):
     # Devuelve solo los elementos que cumplen el filtro indicado.
     return collection.get(where=where_filter)
 
 
-# 1.3. Funcion para filtrar por contenido textual del documento.
+# 1.4. Funcion para filtrar por contenido textual del documento.
 def get_documents_with_document_filter(collection, where_document: dict):
     # Devuelve solo los documentos cuyo texto coincide con el filtro.
     return collection.get(where_document=where_document)
 
 
-# 1.4. Funcion para ejecutar una consulta de similitud por embedding.
+# 1.5. Funcion para ejecutar una consulta de similitud por embedding.
 def query_by_text(
     collection,
     query_text: str,
@@ -43,7 +49,7 @@ def query_by_text(
     )
 
 
-# 1.5. Funcion para resumir resultados tipo get en texto legible.
+# 1.6. Funcion para resumir resultados tipo get en texto legible.
 def format_get_result(get_result: dict) -> str:
     # Extrae las listas principales del resultado.
     ids = get_result.get("ids", [])
@@ -61,7 +67,7 @@ def format_get_result(get_result: dict) -> str:
     return "\n".join(lines) if lines else "Sin resultados."
 
 
-# 1.6. Funcion para resumir resultados tipo query en texto legible.
+# 1.7. Funcion para resumir resultados tipo query en texto legible.
 def format_query_result(query_result: dict) -> str:
     # Extrae la primera lista de resultados de la consulta.
     ids = query_result.get("ids", [[]])[0]

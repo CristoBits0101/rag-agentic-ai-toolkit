@@ -37,6 +37,10 @@ DEMO_ITEMS = [
 ]
 BASIC_QUERY_TEXT = "Which document talks about polar bears and Arctic wildlife?"
 TECH_QUERY_TEXT = "Which technical document focuses on Python retrieval workflows?"
+RAG_QUERY_TEXT = "How does RAG use vector databases to retrieve context for a query?"
+RECOMMENDATION_QUERY_TEXT = (
+    "How can vector databases recommend similar products and content?"
+)
 CASE_SENSITIVE_TEXT = "Pandas"
 CASE_SENSITIVE_TEXT_EXPECTED = "pandas"
 METADATA_FILTER = {"topic": "animals"}
@@ -48,3 +52,10 @@ COMPLEX_METADATA_FILTER = {
 }
 DOCUMENT_FILTER = {"$contains": "pandas"}
 DOCUMENT_FILTER_NEGATIVE = {"$not_contains": "library"}
+CRUD_DEMO_ITEM = {
+    "id": "doc_99",
+    "document": (
+        "Recommendation systems use vector databases to suggest similar products and content."
+    ),
+    "metadata": {"topic": "recommendation", "source": "product.blog", "version": 1.0},
+}

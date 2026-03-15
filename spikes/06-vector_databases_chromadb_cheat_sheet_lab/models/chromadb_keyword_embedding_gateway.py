@@ -38,8 +38,16 @@ KEYWORD_GROUPS = {
         "python",
         "query",
         "rag",
+        "recommend",
+        "recommendation",
+        "recommendations",
+        "retrieve",
         "retrieval",
         "search",
+        "similar",
+        "suggest",
+        "products",
+        "content",
         "vector",
         "workflows",
     },
@@ -96,7 +104,7 @@ def build_keyword_embedding(text: str) -> np.ndarray:
 
     # Evita vectores nulos para no degradar la similitud coseno.
     if not vector.any():
-        return np.array([1.0, 1.0, 1.0], dtype=np.float32)
+        return np.ones(5, dtype=np.float32)
 
     # Devuelve el embedding como vector Numpy.
     return vector
