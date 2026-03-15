@@ -355,18 +355,25 @@ spikes/
 | Termino | Descripcion |
 | --- | --- |
 | Agentes de IA | Sistemas basados en inteligencia artificial que planifican acciones y ejecutan tareas con cierto grado de autonomia. |
+| ANN | Busqueda aproximada de vecinos mas cercanos para escalar retrieval vectorial con baja latencia. |
+| Advanced Retriever | Recuperador con estrategias mas sofisticadas que un top k simple como fusion filtros o reranking. |
 | Chain-of-Thought | Tecnica de prompting que fuerza un razonamiento intermedio paso a paso para mejorar respuestas complejas. |
 | Chaining | Flujo secuencial Retrieval -> Extraction -> Processing -> Generation para transformar contexto en una salida util. |
 | ChromaDB | Base de datos vectorial orientada a embeddings usada para almacenar y recuperar contexto por similitud semantica. |
 | Chunk | Trozo de texto dividido de un archivo. |
+| Chunking Strategy | Criterio para dividir documentos en fragmentos antes del indexado y la recuperacion. |
 | Embeddings | Vectores numericos que representan el significado semantico de palabras frases o documentos. |
+| FAISS | Libreria de Meta para busqueda vectorial eficiente y de alto rendimiento orientada a similitud en memoria. |
 | Fine-tuning | Ajuste adicional de un modelo preentrenado con datos de dominio para mejorar su rendimiento en tareas especificas. |
 | Hallucination Mitigation | Estrategias para reducir respuestas inventadas o inexactas en modelos de lenguaje. |
+| HNSW | Indice basado en grafos para recuperar vecinos cercanos aproximados con buena velocidad y precision. |
 | LangChain | Framework de codigo abierto para crear aplicaciones con LLMs y componentes como prompts cadenas agentes y herramientas. |
 | LCEL | Lenguaje declarativo de LangChain para componer cadenas de ejecucion centradas en LLM de forma modular. |
 | Lematizacion | Proceso de reducir palabras a su forma canonica para normalizar texto y mejorar analisis. |
 | LlamaIndex | Framework para construir aplicaciones con LLMs orientadas a documentos indices y retrieval en flujos RAG. |
 | LLM | Modelo de lenguaje de gran escala entrenado para comprender y generar texto. |
+| LSH | Tecnica de hashing sensible a la localidad usada para aproximar similitud en espacios de alta dimension. |
+| Milvus | Base de datos vectorial orientada a escalado y despliegues de produccion sobre grandes colecciones. |
 | Multi-Agent System | Arquitectura donde varios agentes cooperan para resolver objetivos comunes. |
 | NLG | Generacion de lenguaje natural a partir de datos o representaciones internas. |
 | NLP | Procesamiento de lenguaje natural para analizar y transformar texto humano en estructuras utiles. |
@@ -375,19 +382,24 @@ spikes/
 | Point | 1 point = 1 chunk como objeto guardado en la vector DB. |
 | Prompting | Diseno de instrucciones y contexto para guiar la salida de un modelo. |
 | Prompting Templates | Plantillas reutilizables para estructurar prompts de forma consistente. |
+| Query Fusion | Estrategia que combina resultados de varias consultas o recuperadores para mejorar cobertura y relevancia. |
 | RAG | Enfoque que combina recuperacion de informacion y generacion para producir respuestas mas precisas y trazables. |
+| Reranking | Reordenacion posterior de resultados recuperados para mejorar la relevancia final. |
+| Retriever | Componente encargado de recuperar contexto relevante desde una base de conocimiento indexada. |
 | Retrieval | Proceso de recuperar contexto relevante desde una base de conocimiento antes de generar una respuesta. |
+| TF-IDF | Representacion clasica de texto basada en frecuencia de termino y frecuencia inversa de documento. |
 | Tokenizacion | Segmentacion del texto en unidades llamadas tokens para su procesamiento por modelos. |
 | Vector Database | Base de datos optimizada para almacenar y consultar vectores por similitud semantica. |
+| Vector Store Retriever | Recuperador que usa una base vectorial para localizar fragmentos cercanos a una consulta embebida. |
 
 ## Tipos de Sistemas de IA
 
 | Termino | Descripcion |
 | --- | --- |
-| 🟢 IA Generativa | Predice la siguiente secuencia probable y genera texto imagen audio o video segun el modelo. |
-| 🟡 RAG | Combina recuperacion de informacion y generacion para fundamentar respuestas con contexto externo. |
-| 🟠 Agentes de IA | Integran LLMs con planificacion herramientas y memoria para ejecutar acciones autonomas. |
-| 🔴 Multimodal Generative AI | Procesa y genera varios tipos de datos en una misma interaccion. |
+| IA Generativa | Predice la siguiente secuencia probable y genera texto imagen audio o video segun el modelo. |
+| RAG | Combina recuperacion de informacion y generacion para fundamentar respuestas con contexto externo. |
+| Agentes de IA | Integran LLMs con planificacion herramientas y memoria para ejecutar acciones autonomas. |
+| IA Generativa Multimodal | Procesa y genera varios tipos de datos en una misma interaccion. |
 
 ## IA Generativa para Tareas Especificas
 
@@ -430,3 +442,15 @@ En este repositorio `ChromaDB` se usa como una opcion simple para flujos RAG loc
 La forma manual de hacer busqueda por similitud consiste en generar embeddings normalizar vectores y comparar una consulta contra una coleccion usando distancia euclidiana producto punto o similitud coseno. Esa idea esta resumida en la [practica 05](C:/Workspace/rag-agentic-ai-toolkit/spikes/05-similarity_search_by_hand_lab/README.md) donde se implementan los calculos a mano y se comparan contra operaciones matriciales y librerias externas.
 
 Con `ChromaDB` el flujo se simplifica: primero se crean embeddings de los documentos luego se almacenan junto con sus metadatos y finalmente se ejecutan consultas por similitud para recuperar los fragmentos mas cercanos. Esto permite construir buscadores semanticos chatbots basados en IA recuperacion de documentos y sistemas de recomendacion con menos trabajo operativo sobre indices y almacenamiento.
+
+## Conceptos Avanzados de Retrieval
+
+Los `retrievers` son la pieza que convierte una base de conocimiento en contexto util para un flujo `RAG`. Un `vector store retriever` usa embeddings y una base vectorial para encontrar fragmentos cercanos a una consulta. Un `advanced retriever` anade tecnicas como filtros por metadatos fusion de consultas o `reranking` para mejorar precision y cobertura.
+
+En cursos y proyectos mas avanzados tambien aparecen estrategias como `Query Fusion` para mezclar resultados de varias formulaciones de una misma pregunta y enfoques hibridos que comparan metodos semanticos con metodos lexicos como `TF-IDF`. Estas tecnicas son relevantes cuando el top k basico no es suficiente o cuando se necesita mayor robustez frente a ambiguedad terminologica.
+
+## FAISS vs ChromaDB vs Milvus
+
+`FAISS` destaca cuando se necesita busqueda vectorial muy eficiente y control fino del indice en memoria. `ChromaDB` simplifica el desarrollo de aplicaciones `RAG` porque combina colecciones metadatos filtros y retrieval en una experiencia mas directa para prototipos y proyectos locales. `Milvus` entra mejor en escenarios de mayor escala y despliegue distribuido donde el volumen de vectores y los requisitos operativos son mas altos.
+
+En este repositorio `ChromaDB` es la opcion principal porque reduce complejidad para aprendizaje y pruebas. `FAISS` y `Milvus` conviene entenderlos como alternativas importantes para retrieval avanzado y escalado de produccion.
