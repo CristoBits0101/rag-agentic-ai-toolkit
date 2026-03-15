@@ -21,6 +21,7 @@ Este archivo resume de forma rapida de que va cada practica del directorio `spik
 | 13 | Story Generator y Text to Speech. | Genera una historia educativa para un tema dado y la transforma en un artefacto de audio local o en variantes reales con `Ollama` `Mistral API` y `edge-tts`. | A combinar prompting generacion de texto y una salida de audio reproducible dentro del repo o con proveedores reales. | [13-story_generator_text_to_speech_lab](./13-story_generator_text_to_speech_lab/README.md) |
 | 14 | Vision Multimodal Basica. | Construye mensajes con imagen y texto responde preguntas visuales y hace matching simple contra un catalogo. Tambien incluye variantes reales con `llava` `llama3.2-vision` y `qwen2.5vl` en `Ollama`. | A entender el patron basico de `vision querying` `VQA` y similitud visual ligera con demo local o modelos reales. | [14-basic_vision_multimodal_lab](./14-basic_vision_multimodal_lab/README.md) |
 | 15 | AI Meeting Assistant. | Transcribe audio de reunion normaliza terminos financieros y genera acta con tareas descargables. | A encadenar `Speech to Text` limpieza de transcript y generacion estructurada en una app de reuniones. | [15-ai_meeting_assistant_lab](./15-ai_meeting_assistant_lab/README.md) |
+| 16 | DALL-E Image Generation. | Genera imagenes desde prompts con `dall-e-2` y `dall-e-3` y guarda los resultados en archivos locales. | A comparar dos versiones reales de la API de imagenes de `OpenAI` y adaptar salidas de notebook a un flujo ejecutable desde terminal. | [16-dalle_image_generation_lab](./16-dalle_image_generation_lab/README.md) |
 
 ## Ruta de Aprendizaje Sugerida
 
@@ -28,7 +29,7 @@ Este archivo resume de forma rapida de que va cada practica del directorio `spik
 2. Sigue con `03` `05` y `06` para entender `RAG` embeddings similitud y bases vectoriales.
 3. Continua con `07` y `08` para ver casos de uso concretos de retrieval y recomendacion.
 4. Pasa a `09` y `10` cuando quieras profundizar en retrievers avanzados.
-5. Cierra con `11` `12` `13` `14` y `15` para trabajar `FAISS` contenido multimedia `Text to Speech` vision multimodal y asistentes de reunion.
+5. Cierra con `11` `12` `13` `14` `15` y `16` para trabajar `FAISS` contenido multimedia `Text to Speech` vision multimodal asistentes de reunion y generacion de imagenes.
 
 ## Nota
 

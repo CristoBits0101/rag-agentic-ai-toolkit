@@ -82,6 +82,9 @@ pip install -U gTTS
 # edge-tts: Sintesis de voz gratuita para la variante real de la practica 13.
 pip install -U edge-tts
 
+# OpenAI: Cliente oficial para la practica 16 de generacion de imagenes.
+pip install -U openai
+
 # Transformers y Torch: Soporte opcional para Whisper en la practica 15.
 pip install -U transformers torch
 
@@ -262,6 +265,22 @@ python .\spikes\14-basic_vision_multimodal_lab\qwen2_5vl_vision_querying\main.py
 
 # Ejecutar la practica del asistente de reuniones.
 python .\spikes\15-ai_meeting_assistant_lab\main.py
+```
+
+## Ejecutar Practica 16
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# Ejecutar la practica de generacion de imagenes con DALL-E.
+python .\spikes\16-dalle_image_generation_lab\main.py
+
+# Variante real con DALL-E 2.
+python .\spikes\16-dalle_image_generation_lab\dall_e_2_generation\main.py
+
+# Variante real con DALL-E 3.
+python .\spikes\16-dalle_image_generation_lab\dall_e_3_generation\main.py
 ```
 
 ## Parar Gradio
@@ -602,6 +621,24 @@ spikes/
       meeting_transcription_orchestration.py
     ui/
       meeting_assistant_ui.py
+  16-dalle_image_generation_lab/
+    README.md
+    main.py
+    config/
+      dalle_image_generation_config.py
+    dall_e_2_generation/
+      README.md
+      main.py
+    dall_e_3_generation/
+      README.md
+      main.py
+    data/
+      dalle_prompt_catalog.py
+    models/
+      dalle_openai_gateway.py
+    orchestration/
+      dalle_generation_orchestration.py
+      dalle_lab_runner.py
 ```
 
 ## Glosario de Terminos
@@ -654,6 +691,7 @@ spikes/
 | NLP | Procesamiento de lenguaje natural para analizar y transformar texto humano en estructuras utiles. |
 | NLU | Comprension del lenguaje natural para extraer intencion entidades y contexto semantico. |
 | Orchestration | Coordinacion del flujo entre agentes herramientas y pasos de ejecucion. |
+| OpenAI | Proveedor de modelos y APIs usado en este repositorio para practicas especificas como generacion de imagenes. |
 | Point | 1 point = 1 chunk como objeto guardado en la vector DB. |
 | Prompting | Diseno de instrucciones y contexto para guiar la salida de un modelo. |
 | Prompting Templates | Plantillas reutilizables para estructurar prompts de forma consistente. |
