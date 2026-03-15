@@ -125,6 +125,16 @@ python .\spikes\05-similarity_search_by_hand_lab\main.py
 python .\spikes\06-vector_databases_chromadb_cheat_sheet_lab\main.py
 ```
 
+## Ejecutar Practica 07
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# Ejecutar la practica de similitud sobre empleados y libros con ChromaDB.
+python .\spikes\07-employee_similarity_search_chromadb_lab\main.py
+```
+
 ## Parar Gradio
 
 ```powershell
@@ -291,6 +301,24 @@ spikes/
       chromadb_query_orchestration.py
     state/
       chromadb_runtime_state.py
+  07-employee_similarity_search_chromadb_lab/
+    README.md
+    main.py
+    config/
+      employee_similarity_config.py
+    data/
+      book_records.py
+      employee_records.py
+    models/
+      employee_book_embedding_gateway.py
+    orchestration/
+      book_collection_orchestration.py
+      book_search_orchestration.py
+      employee_collection_orchestration.py
+      employee_search_orchestration.py
+      employee_similarity_lab_runner.py
+    state/
+      employee_similarity_state.py
 ```
 
 ## Glosario de Terminos
