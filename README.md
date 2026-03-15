@@ -76,6 +76,9 @@ pip install -U PyYAML
 # Gradio: Interfaces web rapidas para demos y pruebas.
 pip install -U gradio
 
+# gTTS: Sintesis de voz opcional para la practica 13.
+pip install -U gTTS
+
 # Hugging Face Hub: Acceso a modelos datasets y artefactos.
 pip install -U huggingface_hub
 ```
@@ -201,6 +204,16 @@ python .\spikes\11-semantic_similarity_faiss_lab\main.py
 
 # Ejecutar la practica de resumen y QA sobre YouTube con RAG y FAISS.
 python .\spikes\12-youtube_summarizer_rag_faiss_lab\main.py
+```
+
+## Ejecutar Practica 13
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# Ejecutar la practica de generacion de historias y texto a voz.
+python .\spikes\13-story_generator_text_to_speech_lab\main.py
 ```
 
 ## Parar Gradio
@@ -468,6 +481,18 @@ spikes/
       youtube_rag_lab_runner.py
       youtube_rag_orchestration.py
       youtube_transcript_orchestration.py
+  13-story_generator_text_to_speech_lab/
+    README.md
+    main.py
+    config/
+      story_tts_config.py
+    models/
+      story_audio_gateway.py
+      story_demo_model.py
+    orchestration/
+      story_audio_orchestration.py
+      story_generation_orchestration.py
+      story_tts_lab_runner.py
 ```
 
 ## Glosario de Terminos
