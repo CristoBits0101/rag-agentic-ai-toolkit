@@ -79,6 +79,9 @@ pip install -U gradio
 # gTTS: Sintesis de voz opcional para la practica 13.
 pip install -U gTTS
 
+# edge-tts: Sintesis de voz gratuita para la variante real de la practica 13.
+pip install -U edge-tts
+
 # Transformers y Torch: Soporte opcional para Whisper en la practica 15.
 pip install -U transformers torch
 
@@ -99,6 +102,10 @@ ollama pull llama3.2:3b
 ollama --version
 ollama list
 ```
+
+## Politica de Modelos para Practicas
+
+Para las practicas de `spikes` se prioriza `Ollama` cuando la tarea puede resolverse bien con modelos locales de texto o embeddings compatibles con el repositorio. Si una practica multimodal o cualquier ejercicio de IA no encaja correctamente con `Ollama` se debe usar el modelo recomendado por la propia practica. Si existe una variante gratuita y accesible en internet que cubra ese mismo caso de uso de forma razonable esa opcion gratuita debe priorizarse frente a alternativas privativas o de pago.
 
 ## Ejecutar Gradio
 
@@ -217,6 +224,15 @@ python .\spikes\12-youtube_summarizer_rag_faiss_lab\main.py
 
 # Ejecutar la practica de generacion de historias y texto a voz.
 python .\spikes\13-story_generator_text_to_speech_lab\main.py
+
+# Variante real con Ollama y mistral.
+python .\spikes\13-story_generator_text_to_speech_lab\ollama_mistral_story_tts\main.py
+
+# Variante real con Mistral API.
+python .\spikes\13-story_generator_text_to_speech_lab\mistral_api_story_tts\main.py
+
+# Variante real con Ollama y edge-tts.
+python .\spikes\13-story_generator_text_to_speech_lab\ollama_mistral_edge_tts_story_tts\main.py
 ```
 
 ## Ejecutar Practica 14
@@ -227,6 +243,15 @@ python .\spikes\13-story_generator_text_to_speech_lab\main.py
 
 # Ejecutar la practica de vision multimodal basica.
 python .\spikes\14-basic_vision_multimodal_lab\main.py
+
+# Variante real con llava.
+python .\spikes\14-basic_vision_multimodal_lab\llava_vision_querying\main.py
+
+# Variante real con llama3.2-vision.
+python .\spikes\14-basic_vision_multimodal_lab\llama3_2_vision_querying\main.py
+
+# Variante real con qwen2.5vl.
+python .\spikes\14-basic_vision_multimodal_lab\qwen2_5vl_vision_querying\main.py
 ```
 
 ## Ejecutar Practica 15
@@ -508,28 +533,57 @@ spikes/
     README.md
     main.py
     config/
+      story_real_provider_config.py
       story_tts_config.py
+    mistral_api_story_tts/
+      README.md
+      main.py
     models/
       story_audio_gateway.py
       story_demo_model.py
+      story_edge_tts_gateway.py
+      story_mistral_api_gateway.py
+      story_ollama_mistral_gateway.py
+    ollama_mistral_edge_tts_story_tts/
+      README.md
+      main.py
+    ollama_mistral_story_tts/
+      README.md
+      main.py
     orchestration/
       story_audio_orchestration.py
       story_generation_orchestration.py
+      story_real_variants_orchestration.py
       story_tts_lab_runner.py
   14-basic_vision_multimodal_lab/
     README.md
     main.py
+    assets/
+      city_scene_real.png
+      nutrition_label_real.png
     config/
+      vision_real_provider_config.py
       vision_multimodal_config.py
     data/
       vision_sample_dataset.py
+    llama3_2_vision_querying/
+      README.md
+      main.py
+    llava_vision_querying/
+      README.md
+      main.py
     models/
       vision_demo_model.py
+      vision_ollama_gateway.py
     orchestration/
       vision_image_orchestration.py
       vision_lab_runner.py
       vision_query_orchestration.py
+      vision_real_variants_orchestration.py
       vision_similarity_orchestration.py
+    qwen2_5vl_vision_querying/
+      README.md
+      main.py
   15-ai_meeting_assistant_lab/
     README.md
     main.py
@@ -570,6 +624,7 @@ spikes/
 | Deepfake | Contenido sintetico de imagen audio o video que imita personas o eventos con alto realismo. |
 | Diffusion Model | Familia de modelos generativos que crea contenido refinando ruido paso a paso hasta obtener una salida coherente. |
 | Edge Computing | Ejecucion de modelos cerca de la fuente de datos para reducir latencia dependencia de red y coste de transferencia. |
+| edge-tts | Proveedor de sintesis de voz accesible desde Python que permite generar audio de forma gratuita mediante internet. |
 | Embeddings | Vectores numericos que representan el significado semantico de palabras frases o documentos. |
 | Explainable AI | Enfoque para hacer mas comprensibles las decisiones y salidas producidas por sistemas de IA. |
 | FAISS | Libreria de Meta para busqueda vectorial de alto rendimiento en una sola maquina con CPU o GPU. Ofrece control fino del indice con opciones como Flat IVF LSH y HNSW pero no incluye metadatos ni escalado distribuido de forma nativa. |
@@ -586,11 +641,13 @@ spikes/
 | LCEL | Lenguaje declarativo de LangChain para componer cadenas de ejecucion centradas en LLM de forma modular. |
 | Lematizacion | Proceso de reducir palabras a su forma canonica para normalizar texto y mejorar analisis. |
 | Llama 4 | Familia de modelos multimodales de Meta orientada a razonamiento y generacion sobre varias modalidades. |
+| LLaVA | Familia de modelos de vision y lenguaje orientada a consultas sobre imagenes mediante instrucciones en texto. |
 | LlamaIndex | Framework para construir aplicaciones con LLMs orientadas a documentos indices y retrieval en flujos RAG. |
 | LLM | Modelo de lenguaje de gran escala entrenado para comprender y generar texto. |
 | LSH | Tecnica de hashing sensible a la localidad usada para aproximar similitud en espacios de alta dimension. |
 | Milvus | Base de datos vectorial orientada a escalado y despliegues de produccion sobre grandes colecciones. |
 | MM-RAG | Variante multimodal de RAG que recupera y combina contexto desde texto imagen audio o video antes de generar una respuesta. |
+| Mistral | Familia de modelos de lenguaje y proveedor de inferencia usados para generacion de texto y tareas instruct. |
 | Multi-Agent System | Arquitectura donde varios agentes cooperan para resolver objetivos comunes. |
 | Multimodal Fusion | Integracion de varias modalidades dentro del modelo o pipeline para producir una interpretacion o salida unificada. |
 | NLG | Generacion de lenguaje natural a partir de datos o representaciones internas. |
@@ -601,6 +658,7 @@ spikes/
 | Prompting | Diseno de instrucciones y contexto para guiar la salida de un modelo. |
 | Prompting Templates | Plantillas reutilizables para estructurar prompts de forma consistente. |
 | Query Fusion | Estrategia que combina resultados de varias consultas o recuperadores para mejorar cobertura y relevancia. |
+| Qwen2.5VL | Modelo multimodal de vision y lenguaje de la familia Qwen orientado a descripcion visual y OCR ligero. |
 | RAG | Enfoque que combina recuperacion de informacion y generacion para producir respuestas mas precisas y trazables. |
 | Reranking | Reordenacion posterior de resultados recuperados para mejorar la relevancia final. |
 | Retriever | Componente encargado de recuperar contexto relevante desde una base de conocimiento indexada. |
