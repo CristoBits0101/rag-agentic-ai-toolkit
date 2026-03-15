@@ -1,0 +1,66 @@
+﻿# =============================================================================================
+# Build System Configuration
+# =============================================================================================
+
+[build-system]
+# Herramientas necesarias para construir el paquete.
+requires = ["setuptools>=68", "wheel"]
+
+# Backend que usará pip para construir el proyecto.
+build-backend = "setuptools.build_meta"
+
+# =============================================================================================
+# Project Metadata
+# =============================================================================================
+
+[project]
+# Descripción corta del proyecto.
+description = "FastAPI toolkit for RAG and agentic AI workflows"
+
+# Dependencias principales necesarias en runtime.
+dependencies = [
+  "fastapi>=0.134.0",
+  "langchain>=0.3.0",
+  "langchain-community>=0.3.27",
+  "langchain-core>=0.3.0",
+  "langchain-ollama>=0.3.0",
+  "chromadb>=1.5.5",
+  "pydantic-settings>=2.0.0",
+  "pypdf>=6.8.0",
+  "uvicorn[standard]>=0.30.0",
+]
+
+# Nombre del paquete como aparecerá en PyPI.
+name = "rag-agentic-ai-toolkit"
+
+# Archivo README usado como descripción larga.
+readme = "README.md"
+
+# Versión mínima de Python requerida.
+requires-python = ">=3.11"
+
+# Versión actual del proyecto SemVer recomendado.
+version = "0.1.0"
+
+# =============================================================================================
+# Setuptools Configuration
+# =============================================================================================
+
+[tool.setuptools]
+# Indica que el código fuente está dentro de la carpeta src.
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+# Busca automáticamente paquetes dentro de src.
+where = ["src"]
+
+# =============================================================================================
+# Pytest Configuration
+# =============================================================================================
+
+[tool.pytest.ini_options]
+# Patrón de archivos que pytest reconocerá como test.
+python_files = ["test_*.py"]
+
+# Carpeta donde se encuentran los tests.
+testpaths = ["tests"]
