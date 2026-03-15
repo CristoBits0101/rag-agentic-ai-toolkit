@@ -17,6 +17,9 @@ pydantic-settings==2.13.1
 # PDF reader.
 pypdf==6.8.0
 
+# Parser required by LangChain SelfQueryRetriever.
+lark==1.1.9
+
 # YAML support.
 PyYAML==6.0.3
 

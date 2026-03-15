@@ -1,0 +1,13 @@
+Company Policy Handbook
+
+Email Policy
+Company email is for business communication only. Employees must not send customer records through personal mail accounts. Sensitive attachments must be encrypted before sending.
+
+Smoking Policy
+Smoking and vaping are prohibited inside offices, meeting rooms, and within ten meters of entrances. Employees may use only the designated outdoor smoking area during approved breaks.
+
+Remote Work Policy
+Hybrid employees may work from home two days each week with manager approval. Staff must remain reachable in the company chat during core hours.
+
+Security Policy
+Multi factor authentication is required for all internal systems. Laptops must auto lock after five minutes and confidential data must be stored only in approved tools.

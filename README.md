@@ -49,6 +49,9 @@ pip install -U langchain-ollama
 # ChromaDB: Base de datos vectorial para retrieval local.
 pip install -U chromadb
 
+# Lark: Parser requerido por SelfQueryRetriever de LangChain.
+pip install -U lark==1.1.9
+
 # Python Dotenv: Carga variables de entorno desde archivos .env.
 pip install -U python-dotenv
 
@@ -143,6 +146,16 @@ python .\spikes\07-employee_similarity_search_chromadb_lab\main.py
 
 # Ejecutar la practica de recomendaciones de comida con ChromaDB y RAG.
 python .\spikes\08-food_recommendation_systems_chromadb_rag_lab\main.py
+```
+
+## Ejecutar Practica 09
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# Ejecutar la practica de context retrieval con LangChain.
+python .\spikes\09-langchain_context_retrieval_lab\main.py
 ```
 
 ## Parar Gradio
@@ -348,6 +361,24 @@ spikes/
       food_data_pipeline.py
     state/
       food_recommendation_state.py
+  09-langchain_context_retrieval_lab/
+    README.md
+    main.py
+    config/
+      context_retrieval_config.py
+    data/
+      company_policies.txt
+      context_retrieval_movie_dataset.py
+      langchain_retrieval_notes.txt
+    models/
+      context_retrieval_demo_llm.py
+      context_retrieval_embedding_gateway.py
+    orchestration/
+      context_retrieval_collection_orchestration.py
+      context_retrieval_lab_runner.py
+      context_retrieval_parent_orchestration.py
+      context_retrieval_search_orchestration.py
+      context_retrieval_self_query_orchestration.py
 ```
 
 ## Glosario de Terminos

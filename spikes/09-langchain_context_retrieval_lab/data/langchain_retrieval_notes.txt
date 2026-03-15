@@ -1,0 +1,15 @@
+LangChain Context Retrieval Notes
+
+LangChain connects language models with prompt templates, tools, retrievers, vector stores, and chains. Its design encourages modular retrieval flows that can be assembled step by step.
+
+Multi Query Retrieval
+In LangChain, MultiQueryRetriever rewrites a user question into multiple alternatives. Different phrasings improve recall when one similarity search misses a relevant chunk.
+
+Self Query Retrieval
+SelfQueryRetriever uses an LLM to separate semantic intent from metadata constraints. It converts phrases like higher than 8.5 or directed by Greta Gerwig into vector store filters.
+
+Parent Document Retrieval
+ParentDocumentRetriever indexes smaller child chunks but returns larger parent documents. This preserves local relevance while restoring the surrounding context for the final answer.
+
+Context Retrieval Strategy
+A strong LangChain retrieval pipeline balances chunk size, metadata filters, query reformulation, and context window limits. The goal is high recall without flooding the answer stage with noisy text.
