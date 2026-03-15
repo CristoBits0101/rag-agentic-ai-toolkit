@@ -508,8 +508,15 @@ spikes/
 | ChromaDB | Base de datos vectorial orientada a embeddings usada para almacenar y recuperar contexto por similitud semantica. |
 | Chunk | Trozo de texto dividido de un archivo. |
 | Chunking Strategy | Criterio para dividir documentos en fragmentos antes del indexado y la recuperacion. |
+| Computer Vision | Disciplina de IA que permite interpretar imagenes y video para detectar objetos escenas texto y relaciones visuales. |
+| Cross-Modal Alignment | Alineacion entre modalidades para que texto imagen audio o video representen el mismo significado dentro del sistema. |
+| Cross-Modal Understanding | Capacidad de relacionar informacion entre modalidades para responder o generar contenido con contexto compartido. |
 | DALL-E | Modelo generativo orientado a crear imagenes a partir de instrucciones en lenguaje natural. |
+| Deepfake | Contenido sintetico de imagen audio o video que imita personas o eventos con alto realismo. |
+| Diffusion Model | Familia de modelos generativos que crea contenido refinando ruido paso a paso hasta obtener una salida coherente. |
+| Edge Computing | Ejecucion de modelos cerca de la fuente de datos para reducir latencia dependencia de red y coste de transferencia. |
 | Embeddings | Vectores numericos que representan el significado semantico de palabras frases o documentos. |
+| Explainable AI | Enfoque para hacer mas comprensibles las decisiones y salidas producidas por sistemas de IA. |
 | FAISS | Libreria de Meta para busqueda vectorial de alto rendimiento en una sola maquina con CPU o GPU. Ofrece control fino del indice con opciones como Flat IVF LSH y HNSW pero no incluye metadatos ni escalado distribuido de forma nativa. |
 | Fine-tuning | Ajuste adicional de un modelo preentrenado con datos de dominio para mejorar su rendimiento en tareas especificas. |
 | Flask | Framework web ligero de Python usado para exponer aplicaciones y APIs de IA. |
@@ -519,6 +526,7 @@ spikes/
 | Hugging Face | Ecosistema de modelos datasets y librerias para entrenamiento inferencia y despliegue de sistemas de IA. |
 | IA Multimodal | Capacidad de un sistema para comprender combinar o generar informacion en texto imagen audio y video. |
 | Image Captioning | Tarea de vision y lenguaje que genera descripciones textuales a partir de imagenes. |
+| Image-to-Video | Generacion o animacion de video a partir de una imagen fija mediante prediccion de movimiento y consistencia temporal. |
 | LangChain | Framework de codigo abierto para crear aplicaciones con LLMs y componentes como prompts cadenas agentes y herramientas. |
 | LCEL | Lenguaje declarativo de LangChain para componer cadenas de ejecucion centradas en LLM de forma modular. |
 | Lematizacion | Proceso de reducir palabras a su forma canonica para normalizar texto y mejorar analisis. |
@@ -529,6 +537,7 @@ spikes/
 | Milvus | Base de datos vectorial orientada a escalado y despliegues de produccion sobre grandes colecciones. |
 | MM-RAG | Variante multimodal de RAG que recupera y combina contexto desde texto imagen audio o video antes de generar una respuesta. |
 | Multi-Agent System | Arquitectura donde varios agentes cooperan para resolver objetivos comunes. |
+| Multimodal Fusion | Integracion de varias modalidades dentro del modelo o pipeline para producir una interpretacion o salida unificada. |
 | NLG | Generacion de lenguaje natural a partir de datos o representaciones internas. |
 | NLP | Procesamiento de lenguaje natural para analizar y transformar texto humano en estructuras utiles. |
 | NLU | Comprension del lenguaje natural para extraer intencion entidades y contexto semantico. |
@@ -541,17 +550,25 @@ spikes/
 | Reranking | Reordenacion posterior de resultados recuperados para mejorar la relevancia final. |
 | Retriever | Componente encargado de recuperar contexto relevante desde una base de conocimiento indexada. |
 | Retrieval | Proceso de recuperar contexto relevante desde una base de conocimiento antes de generar una respuesta. |
+| Self-Supervised Learning | Aprendizaje que usa patrones internos de los datos para entrenar modelos sin depender por completo de etiquetas manuales. |
 | Semantic Search | Busqueda que compara significado y contexto en lugar de depender solo de coincidencias exactas de palabras. |
+| Speech Processing | Conjunto de tecnicas para reconocer entender analizar o generar voz humana en sistemas de IA. |
 | Speech to Text | Conversion automatica de audio o voz a texto para transcripcion y analisis. |
 | TF-IDF | Representacion clasica de texto basada en frecuencia de termino y frecuencia inversa de documento. |
+| Temporal Consistency | Propiedad de video y audio generados o analizados donde la transicion entre pasos mantiene coherencia visual o sonora. |
+| Text Processing | Tecnicas para limpiar clasificar resumir extraer y generar informacion a partir de texto. |
 | Text to Image | Generacion de imagenes a partir de una descripcion textual. |
 | Text to Speech | Sintesis de voz a partir de texto escrito. |
 | Text to Video | Generacion de video a partir de instrucciones textuales o guiones. |
 | Tokenizacion | Segmentacion del texto en unidades llamadas tokens para su procesamiento por modelos. |
+| Transparency | Capacidad de documentar fuentes decisiones limites y comportamiento de un sistema para hacerlo auditable y confiable. |
+| VAE | Autoencoder variacional usado para aprender representaciones latentes y generar muestras nuevas de forma controlada. |
 | Vector Database | Base de datos optimizada para almacenar y consultar vectores por similitud semantica. |
 | Vector Store Retriever | Recuperador que usa una base vectorial para localizar fragmentos cercanos a una consulta embebida. |
+| Visual Question Answering | Tarea multimodal donde un modelo responde preguntas en lenguaje natural sobre el contenido de una imagen. |
 | Visual Search | Busqueda basada en similitud visual o en contenido de imagenes para localizar elementos relacionados. |
 | Whisper | Modelo de reconocimiento automatico de voz usado para transcripcion y traduccion de audio. |
+| Zero-Shot Learning | Capacidad de resolver tareas o reconocer conceptos no vistos explicitamente durante el ajuste de un modelo. |
 
 ## Tipos de Sistemas de IA
 
@@ -567,11 +584,16 @@ spikes/
 
 La IA multimodal combina varias modalidades dentro del mismo flujo de aplicacion. En la practica esto aparece en tareas como `Speech to Text` `Text to Speech` `Image Captioning` `Text to Image` `Text to Video` y `MM-RAG`. Frameworks como `Flask` `Gradio` `LangChain` y `Hugging Face` ayudan a prototipar interfaces orquestar pipelines y conectar modelos especializados de voz imagen y video.
 
+## Capacidades y Retos de IA Multimodal
+
+Entre las capacidades mas importantes de la IA multimodal estan `Computer Vision` para interpretar imagenes y video `Text Processing` para comprender lenguaje `Speech Processing` para trabajar con voz `Visual Question Answering` para responder sobre contenido visual e integraciones como `Text to Video` e `Image-to-Video`. En paralelo los retos mas relevantes siguen siendo `Cross-Modal Alignment` `Multimodal Fusion` `Hallucination Mitigation` sesgo privacidad coste computacional y `Transparency` para explicar como decide el sistema.
+
 ## IA Generativa para Tareas Especificas
 
 | Termino | Descripcion |
 | --- | --- |
 | Image Captioning | Generacion de subtitulos o descripciones textuales a partir de imagenes. |
+| Image-to-Video | Animacion o generacion de video a partir de una imagen de entrada. |
 | Language Translation | Traduccion automatica de contenido entre idiomas. |
 | Sentiment Analysis | Clasificacion de la emocion o postura expresada en un texto. |
 | Speech to Text | Transcripcion automatica de audio o voz a texto utilizable por otros sistemas. |
@@ -579,6 +601,7 @@ La IA multimodal combina varias modalidades dentro del mismo flujo de aplicacion
 | Text to Image | Generacion de imagenes a partir de instrucciones en lenguaje natural. |
 | Text to Speech | Generacion de voz sintetica a partir de texto. |
 | Text to Video | Generacion de video a partir de un prompt o una descripcion textual. |
+| Visual Question Answering | Respuesta a preguntas sobre una imagen o escena usando lenguaje natural. |
 | Visual Search | Recuperacion de elementos visualmente similares o semanticamente relacionados a partir de una imagen. |
 | Virtual Assistant Chatbot | Asistente conversacional que simula dialogo humano para soporte y automatizacion. |
 
