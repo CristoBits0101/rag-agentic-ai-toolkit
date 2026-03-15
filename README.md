@@ -165,7 +165,7 @@ src/
 spikes/
   01-prompting_lcel_lab.py
   02-gradio_llama_lab.py
-  03-loaded_documents_qa_bot_lab.py
+  03-rag_pdf_qa_bot_lab.py
 ```
 
 ## Glosario de Terminos
