@@ -83,7 +83,7 @@ ollama list
 .\venv\Scripts\Activate.ps1
 
 # Ejecutar la practica de Gradio.
-python .\spikes\02-gradio_llama_lab.py
+python .\spikes\02-gradio_llama_lab\02-gradio_llama_lab.py
 
 # Abrir la interfaz en el navegador.
 http://127.0.0.1:7860
@@ -163,9 +163,12 @@ src/
           schemas.py
           service.py
 spikes/
-  01-prompting_lcel_lab.py
-  02-gradio_llama_lab.py
-  03-rag_pdf_qa_bot_lab.py
+  01-prompting_lcel_lab/
+    01-prompting_lcel_lab.py
+  02-gradio_llama_lab/
+    02-gradio_llama_lab.py
+  03-rag_pdf_qa_bot_lab/
+    03-rag_pdf_qa_bot_lab.py
 ```
 
 ## Glosario de Terminos
