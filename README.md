@@ -102,6 +102,19 @@ python .\spikes\04-linkedin_icebreaker_bot_lab\main.py
 http://127.0.0.1:7861
 ```
 
+## Ejecutar Practica 05
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# Instalar dependencias del laboratorio de similitud.
+pip install -U sentence-transformers==4.1.0 scipy torch
+
+# Ejecutar la practica de similitud vectorial.
+python .\spikes\05-similarity_search_by_hand_lab\main.py
+```
+
 ## Parar Gradio
 
 ```powershell
@@ -238,6 +251,21 @@ spikes/
       icebreaker_state.py
     ui/
       icebreaker_ui.py
+  05-similarity_search_by_hand_lab/
+    README.md
+    main.py
+    config/
+      similarity_runtime_config.py
+    data/
+      similarity_documents.py
+    models/
+      similarity_embedding_gateway.py
+    orchestration/
+      similarity_lab_runner.py
+      similarity_metrics_orchestration.py
+      similarity_search_orchestration.py
+    state/
+      similarity_runtime_state.py
 ```
 
 ## Glosario de Terminos
@@ -247,6 +275,7 @@ spikes/
 | Agentes de IA | Sistemas basados en inteligencia artificial que planifican acciones y ejecutan tareas con cierto grado de autonomia. |
 | Chain-of-Thought | Tecnica de prompting que fuerza un razonamiento intermedio paso a paso para mejorar respuestas complejas. |
 | Chaining | Flujo secuencial Retrieval -> Extraction -> Processing -> Generation para transformar contexto en una salida util. |
+| ChromaDB | Base de datos vectorial orientada a embeddings usada para almacenar y recuperar contexto por similitud semantica. |
 | Chunk | Trozo de texto dividido de un archivo. |
 | Embeddings | Vectores numericos que representan el significado semantico de palabras frases o documentos. |
 | Fine-tuning | Ajuste adicional de un modelo preentrenado con datos de dominio para mejorar su rendimiento en tareas especificas. |
