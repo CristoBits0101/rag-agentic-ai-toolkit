@@ -483,19 +483,26 @@ spikes/
 | ChromaDB | Base de datos vectorial orientada a embeddings usada para almacenar y recuperar contexto por similitud semantica. |
 | Chunk | Trozo de texto dividido de un archivo. |
 | Chunking Strategy | Criterio para dividir documentos en fragmentos antes del indexado y la recuperacion. |
+| DALL-E | Modelo generativo orientado a crear imagenes a partir de instrucciones en lenguaje natural. |
 | Embeddings | Vectores numericos que representan el significado semantico de palabras frases o documentos. |
 | FAISS | Libreria de Meta para busqueda vectorial de alto rendimiento en una sola maquina con CPU o GPU. Ofrece control fino del indice con opciones como Flat IVF LSH y HNSW pero no incluye metadatos ni escalado distribuido de forma nativa. |
 | Fine-tuning | Ajuste adicional de un modelo preentrenado con datos de dominio para mejorar su rendimiento en tareas especificas. |
+| Flask | Framework web ligero de Python usado para exponer aplicaciones y APIs de IA. |
 | Grounding | Uso de contexto recuperado para anclar la respuesta del modelo a evidencia concreta. |
 | Hallucination Mitigation | Estrategias para reducir respuestas inventadas o inexactas en modelos de lenguaje. |
 | HNSW | Indice ANN basado en grafos jerarquicos de tipo small world. Usa capas superiores dispersas para hacer saltos largos y capas inferiores densas para refinar la busqueda con alta velocidad y buena precision sobre colecciones grandes. |
+| Hugging Face | Ecosistema de modelos datasets y librerias para entrenamiento inferencia y despliegue de sistemas de IA. |
+| IA Multimodal | Capacidad de un sistema para comprender combinar o generar informacion en texto imagen audio y video. |
+| Image Captioning | Tarea de vision y lenguaje que genera descripciones textuales a partir de imagenes. |
 | LangChain | Framework de codigo abierto para crear aplicaciones con LLMs y componentes como prompts cadenas agentes y herramientas. |
 | LCEL | Lenguaje declarativo de LangChain para componer cadenas de ejecucion centradas en LLM de forma modular. |
 | Lematizacion | Proceso de reducir palabras a su forma canonica para normalizar texto y mejorar analisis. |
+| Llama 4 | Familia de modelos multimodales de Meta orientada a razonamiento y generacion sobre varias modalidades. |
 | LlamaIndex | Framework para construir aplicaciones con LLMs orientadas a documentos indices y retrieval en flujos RAG. |
 | LLM | Modelo de lenguaje de gran escala entrenado para comprender y generar texto. |
 | LSH | Tecnica de hashing sensible a la localidad usada para aproximar similitud en espacios de alta dimension. |
 | Milvus | Base de datos vectorial orientada a escalado y despliegues de produccion sobre grandes colecciones. |
+| MM-RAG | Variante multimodal de RAG que recupera y combina contexto desde texto imagen audio o video antes de generar una respuesta. |
 | Multi-Agent System | Arquitectura donde varios agentes cooperan para resolver objetivos comunes. |
 | NLG | Generacion de lenguaje natural a partir de datos o representaciones internas. |
 | NLP | Procesamiento de lenguaje natural para analizar y transformar texto humano en estructuras utiles. |
@@ -510,27 +517,44 @@ spikes/
 | Retriever | Componente encargado de recuperar contexto relevante desde una base de conocimiento indexada. |
 | Retrieval | Proceso de recuperar contexto relevante desde una base de conocimiento antes de generar una respuesta. |
 | Semantic Search | Busqueda que compara significado y contexto en lugar de depender solo de coincidencias exactas de palabras. |
+| Speech to Text | Conversion automatica de audio o voz a texto para transcripcion y analisis. |
 | TF-IDF | Representacion clasica de texto basada en frecuencia de termino y frecuencia inversa de documento. |
+| Text to Image | Generacion de imagenes a partir de una descripcion textual. |
+| Text to Speech | Sintesis de voz a partir de texto escrito. |
+| Text to Video | Generacion de video a partir de instrucciones textuales o guiones. |
 | Tokenizacion | Segmentacion del texto en unidades llamadas tokens para su procesamiento por modelos. |
 | Vector Database | Base de datos optimizada para almacenar y consultar vectores por similitud semantica. |
 | Vector Store Retriever | Recuperador que usa una base vectorial para localizar fragmentos cercanos a una consulta embebida. |
+| Visual Search | Busqueda basada en similitud visual o en contenido de imagenes para localizar elementos relacionados. |
+| Whisper | Modelo de reconocimiento automatico de voz usado para transcripcion y traduccion de audio. |
 
 ## Tipos de Sistemas de IA
 
 | Termino | Descripcion |
 | --- | --- |
-| IA Generativa | Predice la siguiente secuencia probable y genera texto imagen audio o video segun el modelo. |
-| RAG | Combina recuperacion de informacion y generacion para fundamentar respuestas con contexto externo. |
 | Agentes de IA | Integran LLMs con planificacion herramientas y memoria para ejecutar acciones autonomas. |
+| IA Generativa | Predice la siguiente secuencia probable y genera texto imagen audio o video segun el modelo. |
 | IA Generativa Multimodal | Procesa y genera varios tipos de datos en una misma interaccion. |
+| MM-RAG | Combina retrieval y generacion sobre varias modalidades para fundamentar respuestas con contexto mixto. |
+| RAG | Combina recuperacion de informacion y generacion para fundamentar respuestas con contexto externo. |
+
+## Flujos Multimodales
+
+La IA multimodal combina varias modalidades dentro del mismo flujo de aplicacion. En la practica esto aparece en tareas como `Speech to Text` `Text to Speech` `Image Captioning` `Text to Image` `Text to Video` y `MM-RAG`. Frameworks como `Flask` `Gradio` `LangChain` y `Hugging Face` ayudan a prototipar interfaces orquestar pipelines y conectar modelos especializados de voz imagen y video.
 
 ## IA Generativa para Tareas Especificas
 
 | Termino | Descripcion |
 | --- | --- |
+| Image Captioning | Generacion de subtitulos o descripciones textuales a partir de imagenes. |
 | Language Translation | Traduccion automatica de contenido entre idiomas. |
 | Sentiment Analysis | Clasificacion de la emocion o postura expresada en un texto. |
+| Speech to Text | Transcripcion automatica de audio o voz a texto utilizable por otros sistemas. |
 | Spam Detection | Identificacion de mensajes no deseados o maliciosos. |
+| Text to Image | Generacion de imagenes a partir de instrucciones en lenguaje natural. |
+| Text to Speech | Generacion de voz sintetica a partir de texto. |
+| Text to Video | Generacion de video a partir de un prompt o una descripcion textual. |
+| Visual Search | Recuperacion de elementos visualmente similares o semanticamente relacionados a partir de una imagen. |
 | Virtual Assistant Chatbot | Asistente conversacional que simula dialogo humano para soporte y automatizacion. |
 
 ## Componentes de LangChain
