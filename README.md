@@ -135,6 +135,16 @@ python .\spikes\06-vector_databases_chromadb_cheat_sheet_lab\main.py
 python .\spikes\07-employee_similarity_search_chromadb_lab\main.py
 ```
 
+## Ejecutar Practica 08
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# Ejecutar la practica de recomendaciones de comida con ChromaDB y RAG.
+python .\spikes\08-food_recommendation_systems_chromadb_rag_lab\main.py
+```
+
 ## Parar Gradio
 
 ```powershell
@@ -319,6 +329,25 @@ spikes/
       employee_similarity_lab_runner.py
     state/
       employee_similarity_state.py
+  08-food_recommendation_systems_chromadb_rag_lab/
+    README.md
+    main.py
+    config/
+      food_recommendation_config.py
+    data/
+      food_dataset.json
+    models/
+      food_embedding_gateway.py
+      food_ollama_gateway.py
+    orchestration/
+      food_collection_orchestration.py
+      food_rag_orchestration.py
+      food_recommendation_lab_runner.py
+      food_search_orchestration.py
+    pipeline/
+      food_data_pipeline.py
+    state/
+      food_recommendation_state.py
 ```
 
 ## Glosario de Terminos

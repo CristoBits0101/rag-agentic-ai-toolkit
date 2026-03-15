@@ -1,0 +1,386 @@
+[
+  {
+    "food_id": 1,
+    "food_name": "Apple Pie",
+    "food_description": "A classic dessert with flaky crust and tender apples baked until golden.",
+    "food_calories_per_serving": 320,
+    "food_nutritional_factors": {
+      "carbohydrates": "42g",
+      "protein": "3g",
+      "fat": "15g"
+    },
+    "food_ingredients": ["Apples", "Flour", "Butter", "Sugar", "Cinnamon", "Nutmeg"],
+    "food_health_benefits": "Provides fiber from apples and comforting warmth for dessert lovers.",
+    "cooking_method": "Baking",
+    "cuisine_type": "American",
+    "meal_type": "Dessert",
+    "dietary_tags": ["Sweet", "Baked"],
+    "food_features": {
+      "taste": "sweet",
+      "texture": "crisp and tender",
+      "appearance": "golden brown",
+      "preparation": "baked",
+      "serving_type": "warm"
+    }
+  },
+  {
+    "food_id": 2,
+    "food_name": "Chocolate Lava Cake",
+    "food_description": "An indulgent chocolate dessert with a soft cake exterior and molten center.",
+    "food_calories_per_serving": 410,
+    "food_nutritional_factors": {
+      "carbohydrates": "46g",
+      "protein": "6g",
+      "fat": "22g"
+    },
+    "food_ingredients": ["Dark Chocolate", "Butter", "Eggs", "Sugar", "Flour", "Cocoa"],
+    "food_health_benefits": "Dark chocolate contributes antioxidants while delivering a rich treat.",
+    "cooking_method": "Baking",
+    "cuisine_type": "French",
+    "meal_type": "Dessert",
+    "dietary_tags": ["Sweet", "Chocolate"],
+    "food_features": {
+      "taste": "rich and sweet",
+      "texture": "soft with molten center",
+      "appearance": "dark glossy finish",
+      "preparation": "baked",
+      "serving_type": "warm"
+    }
+  },
+  {
+    "food_id": 3,
+    "food_name": "Creamy Pasta Primavera",
+    "food_description": "Italian pasta tossed with cream sauce and colorful spring vegetables.",
+    "food_calories_per_serving": 480,
+    "food_nutritional_factors": {
+      "carbohydrates": "58g",
+      "protein": "14g",
+      "fat": "18g"
+    },
+    "food_ingredients": ["Pasta", "Cream", "Parmesan", "Zucchini", "Peas", "Garlic"],
+    "food_health_benefits": "Vegetables add vitamins while pasta makes it a hearty comfort dish.",
+    "cooking_method": "Boiling",
+    "cuisine_type": "Italian",
+    "meal_type": "Dinner",
+    "dietary_tags": ["Vegetarian", "Comfort Food"],
+    "food_features": {
+      "taste": "creamy and savory",
+      "texture": "silky and tender",
+      "appearance": "bright green and creamy",
+      "preparation": "stovetop",
+      "serving_type": "hot"
+    }
+  },
+  {
+    "food_id": 4,
+    "food_name": "Margherita Pizza",
+    "food_description": "Thin crust pizza with tomato sauce fresh mozzarella and basil.",
+    "food_calories_per_serving": 360,
+    "food_nutritional_factors": {
+      "carbohydrates": "38g",
+      "protein": "15g",
+      "fat": "14g"
+    },
+    "food_ingredients": ["Pizza Dough", "Tomato", "Mozzarella", "Basil", "Olive Oil"],
+    "food_health_benefits": "Tomatoes and basil bring antioxidants to a classic Italian favorite.",
+    "cooking_method": "Baking",
+    "cuisine_type": "Italian",
+    "meal_type": "Dinner",
+    "dietary_tags": ["Vegetarian", "Classic"],
+    "food_features": {
+      "taste": "fresh and savory",
+      "texture": "chewy with crisp crust",
+      "appearance": "red white and green",
+      "preparation": "wood fired style",
+      "serving_type": "hot"
+    }
+  },
+  {
+    "food_id": 5,
+    "food_name": "Spicy Thai Basil Chicken",
+    "food_description": "Stir fried chicken with chili garlic basil and jasmine rice.",
+    "food_calories_per_serving": 430,
+    "food_nutritional_factors": {
+      "carbohydrates": "34g",
+      "protein": "31g",
+      "fat": "17g"
+    },
+    "food_ingredients": ["Chicken", "Thai Basil", "Chili", "Garlic", "Soy Sauce", "Rice"],
+    "food_health_benefits": "High protein meal with herbs and aromatics for an energizing dinner.",
+    "cooking_method": "Stir Frying",
+    "cuisine_type": "Thai",
+    "meal_type": "Dinner",
+    "dietary_tags": ["Spicy", "Protein Rich"],
+    "food_features": {
+      "taste": "spicy and savory",
+      "texture": "tender and juicy",
+      "appearance": "glossy with fresh basil",
+      "preparation": "wok cooked",
+      "serving_type": "hot"
+    }
+  },
+  {
+    "food_id": 6,
+    "food_name": "Chicken Tikka Bowl",
+    "food_description": "Marinated grilled chicken served with vegetables yogurt sauce and rice.",
+    "food_calories_per_serving": 390,
+    "food_nutritional_factors": {
+      "carbohydrates": "33g",
+      "protein": "32g",
+      "fat": "14g"
+    },
+    "food_ingredients": ["Chicken", "Yogurt", "Turmeric", "Cumin", "Rice", "Spinach"],
+    "food_health_benefits": "Protein rich and balanced with spices vegetables and cultured yogurt.",
+    "cooking_method": "Grilling",
+    "cuisine_type": "Indian",
+    "meal_type": "Dinner",
+    "dietary_tags": ["Protein Rich", "Balanced"],
+    "food_features": {
+      "taste": "spiced and savory",
+      "texture": "charred and tender",
+      "appearance": "orange grilled pieces",
+      "preparation": "grilled",
+      "serving_type": "hot"
+    }
+  },
+  {
+    "food_id": 7,
+    "food_name": "Greek Salad",
+    "food_description": "A light salad with cucumber tomato olives feta and lemon dressing.",
+    "food_calories_per_serving": 210,
+    "food_nutritional_factors": {
+      "carbohydrates": "12g",
+      "protein": "6g",
+      "fat": "15g"
+    },
+    "food_ingredients": ["Cucumber", "Tomato", "Feta", "Olives", "Red Onion", "Lemon"],
+    "food_health_benefits": "Packed with vegetables healthy fats and refreshing hydration.",
+    "cooking_method": "No Cook",
+    "cuisine_type": "Mediterranean",
+    "meal_type": "Lunch",
+    "dietary_tags": ["Healthy", "Vegetarian", "Light"],
+    "food_features": {
+      "taste": "fresh and tangy",
+      "texture": "crisp and juicy",
+      "appearance": "bright colorful bowl",
+      "preparation": "tossed",
+      "serving_type": "cold"
+    }
+  },
+  {
+    "food_id": 8,
+    "food_name": "Cucumber Soba Salad",
+    "food_description": "Chilled soba noodles with cucumber sesame ginger and light dressing.",
+    "food_calories_per_serving": 220,
+    "food_nutritional_factors": {
+      "carbohydrates": "30g",
+      "protein": "8g",
+      "fat": "7g"
+    },
+    "food_ingredients": ["Soba Noodles", "Cucumber", "Sesame", "Ginger", "Soy Sauce", "Scallions"],
+    "food_health_benefits": "Offers a light and refreshing meal with whole grain noodles and vegetables.",
+    "cooking_method": "Boiling",
+    "cuisine_type": "Japanese",
+    "meal_type": "Lunch",
+    "dietary_tags": ["Healthy", "Light"],
+    "food_features": {
+      "taste": "light and umami",
+      "texture": "cool and slurpable",
+      "appearance": "green and tan noodles",
+      "preparation": "chilled",
+      "serving_type": "cold"
+    }
+  },
+  {
+    "food_id": 9,
+    "food_name": "Avocado Toast",
+    "food_description": "Toasted sourdough topped with mashed avocado herbs and chili flakes.",
+    "food_calories_per_serving": 280,
+    "food_nutritional_factors": {
+      "carbohydrates": "24g",
+      "protein": "7g",
+      "fat": "16g"
+    },
+    "food_ingredients": ["Sourdough", "Avocado", "Lemon", "Chili Flakes", "Microgreens"],
+    "food_health_benefits": "Provides healthy fats fiber and a satisfying breakfast texture.",
+    "cooking_method": "Toasting",
+    "cuisine_type": "Health Food",
+    "meal_type": "Breakfast",
+    "dietary_tags": ["Healthy", "Vegetarian"],
+    "food_features": {
+      "taste": "fresh and savory",
+      "texture": "creamy and crisp",
+      "appearance": "green spread on toast",
+      "preparation": "toasted",
+      "serving_type": "warm"
+    }
+  },
+  {
+    "food_id": 10,
+    "food_name": "Greek Yogurt Parfait",
+    "food_description": "Layered yogurt with berries granola and a drizzle of honey.",
+    "food_calories_per_serving": 240,
+    "food_nutritional_factors": {
+      "carbohydrates": "26g",
+      "protein": "17g",
+      "fat": "7g"
+    },
+    "food_ingredients": ["Greek Yogurt", "Blueberries", "Strawberries", "Granola", "Honey"],
+    "food_health_benefits": "High in protein probiotics and fruit antioxidants for breakfast.",
+    "cooking_method": "Assembly",
+    "cuisine_type": "Health Food",
+    "meal_type": "Breakfast",
+    "dietary_tags": ["Healthy", "Protein Rich"],
+    "food_features": {
+      "taste": "sweet and tangy",
+      "texture": "creamy and crunchy",
+      "appearance": "layered glass parfait",
+      "preparation": "assembled",
+      "serving_type": "cold"
+    }
+  },
+  {
+    "food_id": 11,
+    "food_name": "Lentil Soup",
+    "food_description": "Hearty lentil soup with carrots celery herbs and olive oil.",
+    "food_calories_per_serving": 260,
+    "food_nutritional_factors": {
+      "carbohydrates": "31g",
+      "protein": "15g",
+      "fat": "8g"
+    },
+    "food_ingredients": ["Lentils", "Carrots", "Celery", "Tomato", "Olive Oil", "Parsley"],
+    "food_health_benefits": "Rich in plant protein fiber and minerals for balanced comfort eating.",
+    "cooking_method": "Simmering",
+    "cuisine_type": "Mediterranean",
+    "meal_type": "Dinner",
+    "dietary_tags": ["Healthy", "Vegetarian", "Protein Rich"],
+    "food_features": {
+      "taste": "earthy and comforting",
+      "texture": "hearty and smooth",
+      "appearance": "rustic bowl of soup",
+      "preparation": "slow simmered",
+      "serving_type": "hot"
+    }
+  },
+  {
+    "food_id": 12,
+    "food_name": "Mushroom Risotto",
+    "food_description": "Creamy risotto with mushrooms parmesan and a rich savory finish.",
+    "food_calories_per_serving": 440,
+    "food_nutritional_factors": {
+      "carbohydrates": "49g",
+      "protein": "12g",
+      "fat": "17g"
+    },
+    "food_ingredients": ["Arborio Rice", "Mushrooms", "Parmesan", "Vegetable Stock", "Butter"],
+    "food_health_benefits": "Mushrooms bring minerals while the dish delivers cozy comfort food appeal.",
+    "cooking_method": "Stirring",
+    "cuisine_type": "Italian",
+    "meal_type": "Dinner",
+    "dietary_tags": ["Vegetarian", "Comfort Food"],
+    "food_features": {
+      "taste": "creamy and earthy",
+      "texture": "velvety and tender",
+      "appearance": "glossy white rice with mushrooms",
+      "preparation": "stovetop",
+      "serving_type": "hot"
+    }
+  },
+  {
+    "food_id": 13,
+    "food_name": "Grilled Veggie Wrap",
+    "food_description": "Whole grain wrap filled with grilled vegetables hummus and greens.",
+    "food_calories_per_serving": 290,
+    "food_nutritional_factors": {
+      "carbohydrates": "32g",
+      "protein": "10g",
+      "fat": "11g"
+    },
+    "food_ingredients": ["Whole Grain Wrap", "Zucchini", "Bell Pepper", "Hummus", "Spinach"],
+    "food_health_benefits": "Offers fiber vegetables and plant based satisfaction for a quick meal.",
+    "cooking_method": "Grilling",
+    "cuisine_type": "Health Food",
+    "meal_type": "Lunch",
+    "dietary_tags": ["Healthy", "Vegetarian", "Light"],
+    "food_features": {
+      "taste": "fresh and savory",
+      "texture": "soft with crisp vegetables",
+      "appearance": "charred vegetables in wrap",
+      "preparation": "grilled",
+      "serving_type": "warm"
+    }
+  },
+  {
+    "food_id": 14,
+    "food_name": "Beef Chili",
+    "food_description": "A hearty bowl of beef beans tomatoes and warming spices.",
+    "food_calories_per_serving": 450,
+    "food_nutritional_factors": {
+      "carbohydrates": "28g",
+      "protein": "29g",
+      "fat": "20g"
+    },
+    "food_ingredients": ["Beef", "Beans", "Tomatoes", "Chili Powder", "Onion", "Garlic"],
+    "food_health_benefits": "Provides protein and iron while delivering a deeply warming comfort meal.",
+    "cooking_method": "Simmering",
+    "cuisine_type": "American",
+    "meal_type": "Dinner",
+    "dietary_tags": ["Spicy", "Comfort Food", "Protein Rich"],
+    "food_features": {
+      "taste": "spicy and hearty",
+      "texture": "thick and chunky",
+      "appearance": "deep red bowl",
+      "preparation": "slow simmered",
+      "serving_type": "hot"
+    }
+  },
+  {
+    "food_id": 15,
+    "food_name": "Tofu Stir Fry",
+    "food_description": "A colorful stir fry with tofu broccoli carrots and ginger sauce.",
+    "food_calories_per_serving": 300,
+    "food_nutritional_factors": {
+      "carbohydrates": "24g",
+      "protein": "18g",
+      "fat": "12g"
+    },
+    "food_ingredients": ["Tofu", "Broccoli", "Carrots", "Ginger", "Soy Sauce", "Sesame"],
+    "food_health_benefits": "Balanced plant protein with vegetables and a lighter calorie profile.",
+    "cooking_method": "Stir Frying",
+    "cuisine_type": "Asian",
+    "meal_type": "Dinner",
+    "dietary_tags": ["Healthy", "Vegetarian", "Protein Rich"],
+    "food_features": {
+      "taste": "savory with mild heat",
+      "texture": "tender and crisp",
+      "appearance": "bright vegetables with tofu cubes",
+      "preparation": "wok cooked",
+      "serving_type": "hot"
+    }
+  },
+  {
+    "food_id": 16,
+    "food_name": "Egg White Omelette",
+    "food_description": "A fluffy omelette with spinach tomatoes herbs and lean protein.",
+    "food_calories_per_serving": 230,
+    "food_nutritional_factors": {
+      "carbohydrates": "9g",
+      "protein": "22g",
+      "fat": "10g"
+    },
+    "food_ingredients": ["Egg Whites", "Spinach", "Tomatoes", "Herbs", "Goat Cheese"],
+    "food_health_benefits": "Very high in protein and lower in calories for a light breakfast.",
+    "cooking_method": "Sauteing",
+    "cuisine_type": "French",
+    "meal_type": "Breakfast",
+    "dietary_tags": ["Healthy", "Protein Rich", "Light"],
+    "food_features": {
+      "taste": "savory and fresh",
+      "texture": "fluffy and tender",
+      "appearance": "folded golden omelette",
+      "preparation": "stovetop",
+      "serving_type": "hot"
+    }
+  }
+]
