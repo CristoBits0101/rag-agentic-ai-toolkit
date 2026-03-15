@@ -164,11 +164,32 @@ src/
           service.py
 spikes/
   01-prompting_lcel_lab/
+    README.md
     01-prompting_lcel_lab.py
+    prompting_config.py
+    prompting_exercises.py
+    prompting_lcel.py
+    prompting_llm.py
+    prompting_reasoning.py
   02-gradio_llama_lab/
+    README.md
     02-gradio_llama_lab.py
+    gradio_llama_config.py
+    gradio_llama_model.py
+    gradio_llama_state.py
+    gradio_llama_steps.py
+    gradio_llama_ui.py
   03-rag_pdf_qa_bot_lab/
+    README.md
     03-rag_pdf_qa_bot_lab.py
+    rag_bootstrap.py
+    rag_config.py
+    rag_document_pipeline.py
+    rag_models.py
+    rag_qa.py
+    rag_retrieval.py
+    rag_state.py
+    rag_ui.py
 ```
 
 ## Glosario de Terminos
