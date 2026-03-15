@@ -2,14 +2,14 @@
 # 1.  Prompting Basico: Para ejecutar ejercicios de prompting directo.
 # 2.              LCEL: Para ejecutar ejercicios con cadenas LCEL.
 # 3.       Razonamiento: Para ejecutar el ejercicio de analisis estructurado.
-from prompting_exercises import run_baseline
-from prompting_exercises import run_exercise_3_step_by_step
-from prompting_exercises import run_few_shot
-from prompting_exercises import run_greeting_example
-from prompting_exercises import run_one_shot_prompts
-from prompting_exercises import run_task_prompts
-from prompting_lcel import run_exercise_4_lcel
-from prompting_reasoning import run_exercise_5_reasoning_and_reviews
+from orchestration.prompting_orchestration_basic import run_baseline
+from orchestration.prompting_orchestration_basic import run_exercise_3_step_by_step
+from orchestration.prompting_orchestration_basic import run_few_shot
+from orchestration.prompting_orchestration_basic import run_greeting_example
+from orchestration.prompting_orchestration_basic import run_one_shot_prompts
+from orchestration.prompting_orchestration_basic import run_task_prompts
+from orchestration.prompting_orchestration_lcel import run_exercise_4_lcel
+from orchestration.prompting_orchestration_reasoning import run_exercise_5_reasoning_and_reviews
 
 
 # Ejecuta todos los ejercicios de la practica.

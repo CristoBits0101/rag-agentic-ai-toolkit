@@ -1,6 +1,6 @@
 # --- DEPENDENCIAS ---
 # 1. Modelo Prompting: Para ejecutar prompts directos con Ollama.
-from prompting_llm import llm_model
+from models.prompting_model_gateway import llm_model
 
 
 # Imprime la respuesta del ejemplo inicial.

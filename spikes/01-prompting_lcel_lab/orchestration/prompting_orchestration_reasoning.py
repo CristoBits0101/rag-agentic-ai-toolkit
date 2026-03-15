@@ -7,7 +7,7 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import PromptTemplate
 from langchain_core.runnables import RunnableLambda
 
-from prompting_llm import build_lcel_llm
+from models.prompting_model_gateway import build_lcel_llm
 
 
 # Ejecuta el ejercicio de razonamiento y analisis estructurado.

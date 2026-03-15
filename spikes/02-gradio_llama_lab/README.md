@@ -6,6 +6,15 @@
 2. Ollama Llama: Modelo local para responder desde la practica.
 3. Practica: Suma formulario y Llama en una sola interfaz.
 
+## Roles de Archivos
+
+- `main.py`: Punto de entrada de la practica.
+- `config/gradio_llama_runtime_config.py`: Constantes de configuracion.
+- `state/gradio_llama_runtime_state.py`: Estado compartido del modelo.
+- `models/gradio_llama_model_gateway.py`: Acceso al modelo Ollama.
+- `orchestration/gradio_llama_orchestration_steps.py`: Orquestacion de los pasos funcionales.
+- `ui/gradio_llama_ui_builder.py`: Construccion de la interfaz Gradio.
+
 ## Instalacion
 
 1. Ollama: `irm https://ollama.com/install.ps1 | iex`.

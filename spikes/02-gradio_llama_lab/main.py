@@ -1,9 +1,9 @@
 # --- DEPENDENCIAS ---
 # 1.        Configuracion: Para obtener host y puerto de la practica.
 # 2.           Interfaz: Para construir la app de Gradio.
-from gradio_llama_config import SERVER_HOST
-from gradio_llama_config import SERVER_PORT
-from gradio_llama_ui import build_demo
+from config.gradio_llama_runtime_config import SERVER_HOST
+from config.gradio_llama_runtime_config import SERVER_PORT
+from ui.gradio_llama_ui_builder import build_demo
 
 # Construye la interfaz principal de la practica.
 demo = build_demo()

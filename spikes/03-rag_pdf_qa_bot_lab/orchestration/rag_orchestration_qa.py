@@ -4,8 +4,8 @@
 # 3.     Retrieval: Para obtener el retriever del flujo RAG.
 from langchain.chains import RetrievalQA
 
-from rag_models import get_llm
-from rag_retrieval import get_rag_retriever
+from models.rag_models import get_llm
+from orchestration.rag_orchestration_retrieval import get_rag_retriever
 
 # --- QA ---
 # 1.1. Funcion para responder preguntas sobre un PDF cargado.

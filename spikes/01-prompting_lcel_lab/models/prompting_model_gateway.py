@@ -3,8 +3,8 @@
 # 2. Configuracion: Para leer el modelo y parametros por defecto.
 from langchain_ollama import OllamaLLM
 
-from prompting_config import DEFAULT_LLM_PARAMS
-from prompting_config import MODEL_NAME
+from config.prompting_runtime_config import DEFAULT_LLM_PARAMS
+from config.prompting_runtime_config import MODEL_NAME
 
 
 # Construye un modelo Ollama con parametros explicitos.

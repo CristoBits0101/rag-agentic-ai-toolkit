@@ -4,8 +4,8 @@
 # 3.        Estado: Para reutilizar la instancia cargada.
 from langchain_ollama import OllamaLLM
 
-from gradio_llama_config import MODEL_NAME
-from gradio_llama_state import runtime_state
+from config.gradio_llama_runtime_config import MODEL_NAME
+from state.gradio_llama_runtime_state import runtime_state
 
 
 # Carga el modelo solo una vez.

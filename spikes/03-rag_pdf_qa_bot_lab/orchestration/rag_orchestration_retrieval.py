@@ -6,11 +6,11 @@
 # 5.        Estado: Para reutilizar la indexacion en memoria.
 from langchain_community.vectorstores import Chroma
 
-from rag_config import COLLECTION_NAME
-from rag_config import TOP_K
-from rag_document_pipeline import prepare_pdf_chunks
-from rag_models import get_embedding_model
-from rag_state import runtime_state
+from config.rag_config import COLLECTION_NAME
+from config.rag_config import TOP_K
+from models.rag_models import get_embedding_model
+from pipeline.rag_document_pipeline import prepare_pdf_chunks
+from state.rag_state import runtime_state
 
 # --- RETRIEVAL ---
 # 1.1. Funcion para crear la base vectorial desde los fragmentos.

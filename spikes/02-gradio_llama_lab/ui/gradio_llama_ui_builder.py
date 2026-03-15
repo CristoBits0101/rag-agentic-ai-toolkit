@@ -3,9 +3,9 @@
 # 2.  Pasos: Para conectar la interfaz con la logica.
 import gradio as gr
 
-from gradio_llama_steps import add_numbers
-from gradio_llama_steps import build_sentence
-from gradio_llama_steps import run_llama_step
+from orchestration.gradio_llama_orchestration_steps import add_numbers
+from orchestration.gradio_llama_orchestration_steps import build_sentence
+from orchestration.gradio_llama_orchestration_steps import run_llama_step
 
 
 # Construye la interfaz completa de la practica.

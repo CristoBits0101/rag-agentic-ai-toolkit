@@ -83,7 +83,7 @@ ollama list
 .\venv\Scripts\Activate.ps1
 
 # Ejecutar la practica de Gradio.
-python .\spikes\02-gradio_llama_lab\02-gradio_llama_lab.py
+python .\spikes\02-gradio_llama_lab\main.py
 
 # Abrir la interfaz en el navegador.
 http://127.0.0.1:7860
@@ -165,31 +165,46 @@ src/
 spikes/
   01-prompting_lcel_lab/
     README.md
-    01-prompting_lcel_lab.py
-    prompting_config.py
-    prompting_exercises.py
-    prompting_lcel.py
-    prompting_llm.py
-    prompting_reasoning.py
+    main.py
+    config/
+      prompting_runtime_config.py
+    models/
+      prompting_model_gateway.py
+    orchestration/
+      prompting_orchestration_basic.py
+      prompting_orchestration_lcel.py
+      prompting_orchestration_reasoning.py
   02-gradio_llama_lab/
     README.md
-    02-gradio_llama_lab.py
-    gradio_llama_config.py
-    gradio_llama_model.py
-    gradio_llama_state.py
-    gradio_llama_steps.py
-    gradio_llama_ui.py
+    main.py
+    config/
+      gradio_llama_runtime_config.py
+    models/
+      gradio_llama_model_gateway.py
+    orchestration/
+      gradio_llama_orchestration_steps.py
+    state/
+      gradio_llama_runtime_state.py
+    ui/
+      gradio_llama_ui_builder.py
   03-rag_pdf_qa_bot_lab/
     README.md
-    03-rag_pdf_qa_bot_lab.py
-    rag_bootstrap.py
-    rag_config.py
-    rag_document_pipeline.py
-    rag_models.py
-    rag_qa.py
-    rag_retrieval.py
-    rag_state.py
-    rag_ui.py
+    main.py
+    bootstrap/
+      rag_bootstrap.py
+    config/
+      rag_config.py
+    models/
+      rag_models.py
+    orchestration/
+      rag_orchestration_qa.py
+      rag_orchestration_retrieval.py
+    pipeline/
+      rag_document_pipeline.py
+    state/
+      rag_state.py
+    ui/
+      rag_ui.py
 ```
 
 ## Glosario de Terminos

@@ -5,8 +5,8 @@
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import PyPDFLoader
 
-from rag_config import CHUNK_OVERLAP
-from rag_config import CHUNK_SIZE
+from config.rag_config import CHUNK_OVERLAP
+from config.rag_config import CHUNK_SIZE
 
 # --- DOCUMENTOS ---
 # 1.1. Funcion para cargar un PDF como documentos LangChain.

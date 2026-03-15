@@ -6,9 +6,9 @@
 from langchain_ollama import OllamaEmbeddings
 from langchain_ollama import OllamaLLM
 
-from rag_config import EMBED_MODEL_NAME
-from rag_config import MODEL_NAME
-from rag_state import runtime_state
+from config.rag_config import EMBED_MODEL_NAME
+from config.rag_config import MODEL_NAME
+from state.rag_state import runtime_state
 
 # --- MODELOS ---
 # 1.1. Funcion para cargar el modelo LLM de Ollama.

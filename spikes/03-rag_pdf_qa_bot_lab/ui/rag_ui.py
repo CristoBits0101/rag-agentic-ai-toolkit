@@ -3,7 +3,7 @@
 # 2. RAG QA PDF: Para responder preguntas usando el PDF cargado.
 import gradio as gr
 
-from rag_qa import rag_qa
+from orchestration.rag_orchestration_qa import rag_qa
 
 # --- INTERFAZ ---
 # 1.1. Funcion para construir la interfaz web de la practica.

@@ -1,6 +1,6 @@
 # --- DEPENDENCIAS ---
 # 1. Modelo Llama: Para ejecutar la consulta al modelo local.
-from gradio_llama_model import get_llama_model
+from models.gradio_llama_model_gateway import get_llama_model
 
 # Objetivos disponibles para la tarea final con Llama.
 PROMPTS_BY_GOAL = {

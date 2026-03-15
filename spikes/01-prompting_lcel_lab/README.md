@@ -6,6 +6,15 @@
 2. LangChain Core: PromptTemplate Runnable LCEL ChatModel LLM OutputParser.
 3. LangChain Ollama: llama3.1 latest mistral latest phi3.5 latest.
 
+## Roles de Archivos
+
+- `main.py`: Punto de entrada de la practica.
+- `config/prompting_runtime_config.py`: Constantes y parametros por defecto.
+- `models/prompting_model_gateway.py`: Acceso al modelo Ollama.
+- `orchestration/prompting_orchestration_basic.py`: Orquestacion de ejercicios basicos de prompting.
+- `orchestration/prompting_orchestration_lcel.py`: Orquestacion de ejercicios LCEL.
+- `orchestration/prompting_orchestration_reasoning.py`: Orquestacion de ejercicios de razonamiento.
+
 ## Instalacion
 
 1. Ollama: `irm https://ollama.com/install.ps1 | iex`.

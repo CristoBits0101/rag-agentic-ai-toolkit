@@ -3,7 +3,7 @@
 # 2.  Modelo LCEL: Para construir el modelo usado en las cadenas.
 from langchain_core.prompts import PromptTemplate
 
-from prompting_llm import build_lcel_llm
+from models.prompting_model_gateway import build_lcel_llm
 
 
 # Construye una cadena LCEL con plantilla y modelo.
