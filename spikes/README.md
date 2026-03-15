@@ -1,4 +1,4 @@
-# Indice de Practicas
+# README de Spikes
 
 Este archivo resume de forma rapida de que va cada practica del directorio `spikes` y que aprendizaje principal deja cada una.
 
