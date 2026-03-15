@@ -89,6 +89,19 @@ python .\spikes\02-gradio_llama_lab\main.py
 http://127.0.0.1:7860
 ```
 
+## Ejecutar Practica 04
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# Ejecutar la practica de LinkedIn Icebreaker con Ollama.
+python .\spikes\04-linkedin_icebreaker_bot_lab\main.py
+
+# Abrir la interfaz en el navegador.
+http://127.0.0.1:7861
+```
+
 ## Parar Gradio
 
 ```powershell
@@ -205,6 +218,26 @@ spikes/
       rag_state.py
     ui/
       rag_ui.py
+  04-linkedin_icebreaker_bot_lab/
+    README.md
+    main.py
+    config/
+      icebreaker_config.py
+    data/
+      ana_martinez.json
+      diego_santos.json
+    models/
+      icebreaker_models.py
+    orchestration/
+      icebreaker_orchestration_profile.py
+      icebreaker_orchestration_qa.py
+      icebreaker_orchestration_retrieval.py
+    pipeline/
+      icebreaker_profile_pipeline.py
+    state/
+      icebreaker_state.py
+    ui/
+      icebreaker_ui.py
 ```
 
 ## Glosario de Terminos

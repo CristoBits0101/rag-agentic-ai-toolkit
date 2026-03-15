@@ -1,0 +1,65 @@
+{
+  "full_name": "Diego Santos",
+  "headline": "Head of Developer Relations at Cloud Forge",
+  "location": "Lisbon, Portugal",
+  "about": "Diego helps developer communities adopt cloud platforms through education content workshops and open source examples. He enjoys turning technical product launches into stories that engineers can actually use.",
+  "experience": [
+    {
+      "company": "Cloud Forge",
+      "title": "Head of Developer Relations",
+      "start_date": "2022-06",
+      "end_date": "Present",
+      "description": "Runs the developer advocacy strategy across Europe. Built a field enablement program that supported twelve regional workshops and doubled the newsletter subscriber base in one year."
+    },
+    {
+      "company": "Stack Harbor",
+      "title": "Senior Developer Advocate",
+      "start_date": "2019-03",
+      "end_date": "2022-05",
+      "description": "Published technical tutorials for container security and observability. Open sourced demo apps used by solution architects during customer meetings."
+    },
+    {
+      "company": "ByteCraft",
+      "title": "Full Stack Engineer",
+      "start_date": "2015-09",
+      "end_date": "2019-02",
+      "description": "Developed SaaS features for engineering analytics dashboards. Worked across backend services frontend delivery and developer tooling."
+    }
+  ],
+  "education": [
+    {
+      "school": "Universidade Nova de Lisboa",
+      "degree": "Master in Information Management",
+      "start_year": "2013",
+      "end_year": "2015",
+      "details": "Specialized in digital products analytics and communication."
+    },
+    {
+      "school": "Instituto Politecnico de Setubal",
+      "degree": "Bachelor in Software Engineering",
+      "start_year": "2010",
+      "end_year": "2013",
+      "details": "Completed capstone work on collaborative web platforms."
+    }
+  ],
+  "skills": [
+    "Developer Relations",
+    "Public Speaking",
+    "Technical Writing",
+    "Cloud Architecture",
+    "JavaScript",
+    "Community Building"
+  ],
+  "certifications": [
+    "Certified Kubernetes Application Developer"
+  ],
+  "accomplishments": [
+    "Host of a monthly community livestream for platform engineering teams.",
+    "Mentor in an open source newcomers program."
+  ],
+  "languages": [
+    "Portuguese",
+    "English",
+    "Spanish"
+  ]
+}

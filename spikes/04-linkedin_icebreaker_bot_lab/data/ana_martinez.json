@@ -1,0 +1,65 @@
+{
+  "full_name": "Ana Martinez",
+  "headline": "Principal AI Engineer at Nova Retail",
+  "location": "Madrid, Spain",
+  "about": "Ana builds production copilots for commerce and support teams. She focuses on retrieval augmented generation, conversational search and machine learning platforms that move from pilot to measurable business impact.",
+  "experience": [
+    {
+      "company": "Nova Retail",
+      "title": "Principal AI Engineer",
+      "start_date": "2023-04",
+      "end_date": "Present",
+      "description": "Leads a small AI platform team that shipped an internal support copilot powered by RAG. The rollout reduced first response time by 38 percent and improved agent handoff quality."
+    },
+    {
+      "company": "Iberia Data Labs",
+      "title": "Senior Machine Learning Engineer",
+      "start_date": "2020-01",
+      "end_date": "2023-03",
+      "description": "Built recommendation and demand forecasting services for retail clients. Mentored three junior engineers and introduced reusable MLOps templates for deployment."
+    },
+    {
+      "company": "MedCloud",
+      "title": "Data Scientist",
+      "start_date": "2018-02",
+      "end_date": "2019-12",
+      "description": "Designed analytics workflows for hospital operations and patient scheduling. Collaborated with product teams to explain model outcomes to non technical stakeholders."
+    }
+  ],
+  "education": [
+    {
+      "school": "Universidad Politecnica de Madrid",
+      "degree": "Master in Data Science",
+      "start_year": "2017",
+      "end_year": "2018",
+      "details": "Final project on conversational search quality for enterprise knowledge bases."
+    },
+    {
+      "school": "Universidad de Granada",
+      "degree": "Bachelor in Computer Engineering",
+      "start_year": "2013",
+      "end_year": "2017",
+      "details": "Focused on software engineering and distributed systems."
+    }
+  ],
+  "skills": [
+    "Python",
+    "RAG",
+    "LangChain",
+    "Vector Databases",
+    "MLOps",
+    "Leadership"
+  ],
+  "certifications": [
+    "AWS Machine Learning Specialty",
+    "Google Professional Data Engineer"
+  ],
+  "accomplishments": [
+    "Speaker at Madrid AI Builders meetup on evaluation for retrieval systems.",
+    "Volunteer mentor for a women in data community."
+  ],
+  "languages": [
+    "Spanish",
+    "English"
+  ]
+}
