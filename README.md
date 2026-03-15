@@ -394,10 +394,10 @@ spikes/
 | Chunk | Trozo de texto dividido de un archivo. |
 | Chunking Strategy | Criterio para dividir documentos en fragmentos antes del indexado y la recuperacion. |
 | Embeddings | Vectores numericos que representan el significado semantico de palabras frases o documentos. |
-| FAISS | Libreria de Meta para busqueda vectorial eficiente y de alto rendimiento orientada a similitud en memoria. |
+| FAISS | Libreria de Meta para busqueda vectorial de alto rendimiento en una sola maquina con CPU o GPU. Ofrece control fino del indice con opciones como Flat IVF LSH y HNSW pero no incluye metadatos ni escalado distribuido de forma nativa. |
 | Fine-tuning | Ajuste adicional de un modelo preentrenado con datos de dominio para mejorar su rendimiento en tareas especificas. |
 | Hallucination Mitigation | Estrategias para reducir respuestas inventadas o inexactas en modelos de lenguaje. |
-| HNSW | Indice basado en grafos para recuperar vecinos cercanos aproximados con buena velocidad y precision. |
+| HNSW | Indice ANN basado en grafos jerarquicos de tipo small world. Usa capas superiores dispersas para hacer saltos largos y capas inferiores densas para refinar la busqueda con alta velocidad y buena precision sobre colecciones grandes. |
 | LangChain | Framework de codigo abierto para crear aplicaciones con LLMs y componentes como prompts cadenas agentes y herramientas. |
 | LCEL | Lenguaje declarativo de LangChain para componer cadenas de ejecucion centradas en LLM de forma modular. |
 | Lematizacion | Proceso de reducir palabras a su forma canonica para normalizar texto y mejorar analisis. |
