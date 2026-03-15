@@ -79,6 +79,9 @@ pip install -U gradio
 # gTTS: Sintesis de voz opcional para la practica 13.
 pip install -U gTTS
 
+# Transformers y Torch: Soporte opcional para Whisper en la practica 15.
+pip install -U transformers torch
+
 # Hugging Face Hub: Acceso a modelos datasets y artefactos.
 pip install -U huggingface_hub
 ```
@@ -224,6 +227,16 @@ python .\spikes\13-story_generator_text_to_speech_lab\main.py
 
 # Ejecutar la practica de vision multimodal basica.
 python .\spikes\14-basic_vision_multimodal_lab\main.py
+```
+
+## Ejecutar Practica 15
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# Ejecutar la practica del asistente de reuniones.
+python .\spikes\15-ai_meeting_assistant_lab\main.py
 ```
 
 ## Parar Gradio
@@ -517,6 +530,24 @@ spikes/
       vision_lab_runner.py
       vision_query_orchestration.py
       vision_similarity_orchestration.py
+  15-ai_meeting_assistant_lab/
+    README.md
+    main.py
+    config/
+      meeting_assistant_config.py
+    data/
+      meeting_transcript_catalog.py
+    models/
+      meeting_assistant_demo_llm.py
+      meeting_assistant_llm_gateway.py
+    orchestration/
+      meeting_assistant_lab_runner.py
+      meeting_assistant_orchestration.py
+      meeting_cleanup_orchestration.py
+      meeting_minutes_orchestration.py
+      meeting_transcription_orchestration.py
+    ui/
+      meeting_assistant_ui.py
 ```
 
 ## Glosario de Terminos
@@ -576,6 +607,7 @@ spikes/
 | Retrieval | Proceso de recuperar contexto relevante desde una base de conocimiento antes de generar una respuesta. |
 | Self-Supervised Learning | Aprendizaje que usa patrones internos de los datos para entrenar modelos sin depender por completo de etiquetas manuales. |
 | Semantic Search | Busqueda que compara significado y contexto en lugar de depender solo de coincidencias exactas de palabras. |
+| Speech Recognition | Reconocimiento automatico del habla para convertir audio en texto o en unidades linguisticamente utiles. |
 | Speech Processing | Conjunto de tecnicas para reconocer entender analizar o generar voz humana en sistemas de IA. |
 | Speech to Text | Conversion automatica de audio o voz a texto para transcripcion y analisis. |
 | TF-IDF | Representacion clasica de texto basada en frecuencia de termino y frecuencia inversa de documento. |
@@ -585,6 +617,7 @@ spikes/
 | Text to Speech | Sintesis de voz a partir de texto escrito. |
 | Text to Video | Generacion de video a partir de instrucciones textuales o guiones. |
 | Tokenizacion | Segmentacion del texto en unidades llamadas tokens para su procesamiento por modelos. |
+| Transcription | Proceso de transformar una fuente de audio o voz en texto legible y reutilizable. |
 | Transparency | Capacidad de documentar fuentes decisiones limites y comportamiento de un sistema para hacerlo auditable y confiable. |
 | VAE | Autoencoder variacional usado para aprender representaciones latentes y generar muestras nuevas de forma controlada. |
 | Vector Database | Base de datos optimizada para almacenar y consultar vectores por similitud semantica. |

@@ -1,0 +1,10 @@
+# --- DEPENDENCIAS ---
+OLLAMA_MODEL_NAME = "llama3.2:3b"
+USE_OLLAMA_BY_DEFAULT = False
+SAMPLE_AUDIO_FILE_NAME = "sample-meeting.wav"
+OUTPUT_FILE_NAME = "meeting_minutes_and_tasks.txt"
+WHISPER_MODEL_NAME = "openai/whisper-tiny.en"
+WHISPER_CHUNK_SECONDS = 30
+WHISPER_BATCH_SIZE = 8
+GRADIO_HOST = "0.0.0.0"
+GRADIO_PORT = 5000
