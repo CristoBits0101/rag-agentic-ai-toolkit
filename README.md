@@ -216,6 +216,16 @@ python .\spikes\12-youtube_summarizer_rag_faiss_lab\main.py
 python .\spikes\13-story_generator_text_to_speech_lab\main.py
 ```
 
+## Ejecutar Practica 14
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# Ejecutar la practica de vision multimodal basica.
+python .\spikes\14-basic_vision_multimodal_lab\main.py
+```
+
 ## Parar Gradio
 
 ```powershell
@@ -493,6 +503,20 @@ spikes/
       story_audio_orchestration.py
       story_generation_orchestration.py
       story_tts_lab_runner.py
+  14-basic_vision_multimodal_lab/
+    README.md
+    main.py
+    config/
+      vision_multimodal_config.py
+    data/
+      vision_sample_dataset.py
+    models/
+      vision_demo_model.py
+    orchestration/
+      vision_image_orchestration.py
+      vision_lab_runner.py
+      vision_query_orchestration.py
+      vision_similarity_orchestration.py
 ```
 
 ## Glosario de Terminos

@@ -19,6 +19,7 @@ Este archivo resume de forma rapida de que va cada practica del directorio `spik
 | 11 | Semantic Similarity con FAISS. | Implementa preprocesamiento vectorizacion e indexacion con `FAISS IndexFlatL2` sobre un corpus local. | A entender el flujo completo de semantic search con un indice vectorial real. | [11-semantic_similarity_faiss_lab](./11-semantic_similarity_faiss_lab/README.md) |
 | 12 | YouTube Summarizer y QA con FAISS. | Procesa transcriptos chunking retrieval con `LangChain FAISS` y genera resumenes y respuestas sobre un video. | A construir una mini aplicacion `RAG` para contenido multimedia basado en transcriptos. | [12-youtube_summarizer_rag_faiss_lab](./12-youtube_summarizer_rag_faiss_lab/README.md) |
 | 13 | Story Generator y Text to Speech. | Genera una historia educativa para un tema dado y la transforma en un artefacto de audio local. | A combinar prompting generacion de texto y una salida de audio reproducible dentro del repo. | [13-story_generator_text_to_speech_lab](./13-story_generator_text_to_speech_lab/README.md) |
+| 14 | Vision Multimodal Basica. | Construye mensajes con imagen y texto responde preguntas visuales y hace matching simple contra un catalogo. | A entender el patron basico de `vision querying` `VQA` y similitud visual ligera sin infraestructura remota. | [14-basic_vision_multimodal_lab](./14-basic_vision_multimodal_lab/README.md) |
 
 ## Ruta de Aprendizaje Sugerida
 
@@ -26,7 +27,7 @@ Este archivo resume de forma rapida de que va cada practica del directorio `spik
 2. Sigue con `03` `05` y `06` para entender `RAG` embeddings similitud y bases vectoriales.
 3. Continua con `07` y `08` para ver casos de uso concretos de retrieval y recomendacion.
 4. Pasa a `09` y `10` cuando quieras profundizar en retrievers avanzados.
-5. Cierra con `11` `12` y `13` para trabajar `FAISS` contenido multimedia y una introduccion a `Text to Speech`.
+5. Cierra con `11` `12` `13` y `14` para trabajar `FAISS` contenido multimedia `Text to Speech` y vision multimodal.
 
 ## Nota
 
