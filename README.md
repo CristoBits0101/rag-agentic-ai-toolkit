@@ -221,6 +221,7 @@ spikes/
 | LangChain | Framework de codigo abierto para crear aplicaciones con LLMs y componentes como prompts cadenas agentes y herramientas. |
 | LCEL | Lenguaje declarativo de LangChain para componer cadenas de ejecucion centradas en LLM de forma modular. |
 | Lematizacion | Proceso de reducir palabras a su forma canonica para normalizar texto y mejorar analisis. |
+| LlamaIndex | Framework para construir aplicaciones con LLMs orientadas a documentos indices y retrieval en flujos RAG. |
 | LLM | Modelo de lenguaje de gran escala entrenado para comprender y generar texto. |
 | Multi-Agent System | Arquitectura donde varios agentes cooperan para resolver objetivos comunes. |
 | NLG | Generacion de lenguaje natural a partir de datos o representaciones internas. |
