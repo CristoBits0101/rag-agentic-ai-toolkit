@@ -20,6 +20,18 @@ def build_ollama_vision_payload(
     prompt: str,
     image_path: str | Path,
 ) -> dict:
+    return build_ollama_vision_payload_from_base64(
+        model_name=model_name,
+        prompt=prompt,
+        encoded_image=encode_real_image_file(image_path),
+    )
+
+
+def build_ollama_vision_payload_from_base64(
+    model_name: str,
+    prompt: str,
+    encoded_image: str,
+) -> dict:
     return {
         "model": model_name,
         "stream": False,
@@ -27,7 +39,7 @@ def build_ollama_vision_payload(
             {
                 "role": "user",
                 "content": prompt,
-                "images": [encode_real_image_file(image_path)],
+                "images": [encoded_image],
             }
         ],
     }
@@ -71,6 +83,23 @@ def generate_ollama_vision_response(
     request_sender=send_ollama_vision_request,
 ) -> str:
     payload = build_ollama_vision_payload(model_name, prompt, image_path)
+    response_payload = request_sender(payload)
+    content = extract_ollama_vision_text(response_payload)
+    if not content:
+        raise RuntimeError(
+            f"Ollama returned an empty response for model {model_name}. Verify the model is installed."
+        )
+
+    return content
+
+
+def generate_ollama_vision_response_from_base64(
+    model_name: str,
+    prompt: str,
+    encoded_image: str,
+    request_sender=send_ollama_vision_request,
+) -> str:
+    payload = build_ollama_vision_payload_from_base64(model_name, prompt, encoded_image)
     response_payload = request_sender(payload)
     content = extract_ollama_vision_text(response_payload)
     if not content:

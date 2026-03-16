@@ -88,6 +88,9 @@ pip install -U openai
 # Transformers y Torch: Soporte opcional para Whisper en la practica 15.
 pip install -U transformers torch
 
+# Torchvision: Soporte opcional para ResNet50 en la extension Style Finder de la practica 14.
+pip install -U torchvision
+
 # Hugging Face Hub: Acceso a modelos datasets y artefactos.
 pip install -U huggingface_hub
 ```
@@ -255,6 +258,18 @@ python .\spikes\14-basic_vision_multimodal_lab\llama3_2_vision_querying\main.py
 
 # Variante real con qwen2.5vl.
 python .\spikes\14-basic_vision_multimodal_lab\qwen2_5vl_vision_querying\main.py
+
+# Extension avanzada Style Finder.
+python .\spikes\14-basic_vision_multimodal_lab\style_finder_fashion_rag_app\main.py
+
+# Variante Style Finder con llama3.2-vision.
+python .\spikes\14-basic_vision_multimodal_lab\style_finder_llama3_2_vision_app\main.py
+
+# Variante Style Finder con llava.
+python .\spikes\14-basic_vision_multimodal_lab\style_finder_llava_app\main.py
+
+# Variante Style Finder con qwen2.5vl.
+python .\spikes\14-basic_vision_multimodal_lab\style_finder_qwen2_5vl_app\main.py
 ```
 
 ## Ejecutar Practica 15
@@ -581,9 +596,11 @@ spikes/
       city_scene_real.png
       nutrition_label_real.png
     config/
+      style_finder_fashion_config.py
       vision_real_provider_config.py
       vision_multimodal_config.py
     data/
+      style_finder_fashion_dataset.py
       vision_sample_dataset.py
     llama3_2_vision_querying/
       README.md
@@ -592,9 +609,16 @@ spikes/
       README.md
       main.py
     models/
+      style_finder_image_processor.py
+      style_finder_llm_service.py
       vision_demo_model.py
       vision_ollama_gateway.py
     orchestration/
+      style_finder_app_orchestration.py
+      style_finder_asset_orchestration.py
+      style_finder_dataset_orchestration.py
+      style_finder_helpers.py
+      style_finder_lab_runner.py
       vision_image_orchestration.py
       vision_lab_runner.py
       vision_query_orchestration.py
@@ -603,6 +627,20 @@ spikes/
     qwen2_5vl_vision_querying/
       README.md
       main.py
+    style_finder_fashion_rag_app/
+      README.md
+      main.py
+    style_finder_llama3_2_vision_app/
+      README.md
+      main.py
+    style_finder_llava_app/
+      README.md
+      main.py
+    style_finder_qwen2_5vl_app/
+      README.md
+      main.py
+    ui/
+      style_finder_ui.py
   15-ai_meeting_assistant_lab/
     README.md
     main.py

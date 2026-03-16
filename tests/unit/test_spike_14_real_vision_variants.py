@@ -15,6 +15,7 @@ from config.vision_real_provider_config import LLAVA_MODEL_NAME
 from config.vision_real_provider_config import QWEN25_VL_MODEL_NAME
 from config.vision_real_provider_config import REAL_CITY_SCENE_IMAGE_PATH
 from config.vision_real_provider_config import REAL_NUTRITION_LABEL_IMAGE_PATH
+from models.vision_ollama_gateway import build_ollama_vision_payload_from_base64
 from models.vision_ollama_gateway import build_ollama_vision_payload
 from models.vision_ollama_gateway import encode_real_image_file
 from models.vision_ollama_gateway import extract_ollama_vision_text
@@ -39,6 +40,16 @@ def test_build_ollama_vision_payload_includes_model_prompt_and_image():
     assert payload["stream"] is False
     assert payload["messages"][0]["content"] == "Describe the image."
     assert len(payload["messages"][0]["images"]) == 1
+
+
+def test_build_ollama_vision_payload_from_base64_keeps_encoded_image():
+    payload = build_ollama_vision_payload_from_base64(
+        model_name=LLAVA_MODEL_NAME,
+        prompt="Describe the image.",
+        encoded_image="encoded-image",
+    )
+
+    assert payload["messages"][0]["images"] == ["encoded-image"]
 
 
 def test_extract_ollama_vision_text_reads_message_content():
