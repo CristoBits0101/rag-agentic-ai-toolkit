@@ -91,6 +91,18 @@ pip install -U openai
 # Transformers y Torch: Soporte opcional para Whisper en la practica 15.
 pip install -U transformers torch
 
+# sounddevice: Captura de audio desde microfono para la practica 17.
+pip install -U sounddevice
+
+# keyboard: Deteccion local de la tecla push to talk en el runner de consola de la practica 17.
+pip install -U keyboard
+
+# PyAutoGUI: Automatizacion de teclado para la practica 17.
+pip install -U pyautogui
+
+# Send2Trash: Envio seguro a la papelera para la practica 17.
+pip install -U Send2Trash
+
 # Torchvision: Soporte opcional para ResNet50 en la extension Style Finder de la practica 14.
 pip install -U torchvision
 
@@ -314,6 +326,30 @@ python .\spikes\16-dalle_image_generation_lab\dall_e_2_generation\main.py
 
 # Variante real con DALL-E 3.
 python .\spikes\16-dalle_image_generation_lab\dall_e_3_generation\main.py
+```
+
+## Ejecutar Practica 17
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# Instalar dependencias locales de voz y automatizacion.
+pip install -U transformers torch sounddevice pyautogui Send2Trash
+
+# Dependencia opcional para el runner de consola legado.
+pip install -U keyboard
+
+# Arrancar Ollama.
+ollama serve
+
+# Descargar un modelo recomendado para planificacion.
+ollama pull qwen2.5:7b
+
+# Ejecutar la practica de asistente de escritorio por voz con ventana nativa.
+# La respuesta hablada usa la voz local de Windows si esta disponible.
+# La app puede abrir y cerrar aplicaciones permitidas con confirmacion verifica si el proceso sigue vivo antes de reportar un fallo de cierre y resume el ultimo estado en una sola linea.
+python .\spikes\17-voice_desktop_assistant_lab\main.py
 ```
 
 ## Parar Gradio
@@ -721,6 +757,27 @@ spikes/
     orchestration/
       dalle_generation_orchestration.py
       dalle_lab_runner.py
+  17-voice_desktop_assistant_lab/
+    README.md
+    main.py
+    config/
+      voice_desktop_config.py
+    data/
+      voice_command_catalog.py
+    models/
+      voice_agent_demo_planner.py
+      voice_agent_ollama_gateway.py
+      voice_desktop_entities.py
+      voice_local_tts_gateway.py
+      voice_microphone_gateway.py
+      voice_transcription_gateway.py
+    orchestration/
+      voice_desktop_execution_orchestration.py
+      voice_desktop_lab_runner.py
+      voice_desktop_planning_orchestration.py
+      voice_desktop_session_orchestration.py
+    ui/
+      voice_desktop_ui.py
 ```
 
 ## Glosario de Terminos

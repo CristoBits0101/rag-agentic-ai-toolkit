@@ -22,6 +22,121 @@ Este archivo resume de forma rapida de que va cada practica del directorio `spik
 | 14 | Vision Multimodal Basica. | Construye mensajes con imagen y texto responde preguntas visuales hace captioning en lote matching simple contra un catalogo y se extiende con `Style Finder` en `Gradio` y `Nutrition Coach` en `Flask`. Tambien incluye variantes reales con `llava` `llama3.2-vision` y `qwen2.5vl` en `Ollama`. | A entender el patron basico de `vision querying` `VQA` `Image Captioning` y como escalarlo a apps completas de `multimodal RAG` para moda y nutricion. | [14-basic_vision_multimodal_lab](./14-basic_vision_multimodal_lab/README.md) |
 | 15 | AI Meeting Assistant. | Transcribe audio de reunion normaliza terminos financieros y genera acta con tareas descargables. | A encadenar `Speech to Text` limpieza de transcript y generacion estructurada en una app de reuniones. | [15-ai_meeting_assistant_lab](./15-ai_meeting_assistant_lab/README.md) |
 | 16 | DALL-E Image Generation. | Genera imagenes desde prompts con `dall-e-2` y `dall-e-3` guarda los resultados en archivos locales y define requests configurables para tamano calidad y salida multiple. | A comparar dos versiones reales de la API de imagenes de `OpenAI` y adaptar salidas de notebook a un flujo ejecutable desde terminal. | [16-dalle_image_generation_lab](./16-dalle_image_generation_lab/README.md) |
+| 17 | Voice Desktop Assistant. | Escucha ordenes desde un micro con `push to talk` las transcribe en local con `Whisper` y ejecuta acciones seguras de escritorio con `Ollama` incluyendo cierre confirmado de apps envio a papelera con confirmacion fallback si `Ollama` devuelve un plan invalido verificacion del estado real del proceso al cerrar y un estado resumido en una sola linea. | A combinar audio local `Speech to Text` planificacion segura con `Ollama` y automatizacion de escritorio con una politica de permisos minima. | [17-voice_desktop_assistant_lab](./17-voice_desktop_assistant_lab/README.md) |
+
+## Guia de Prueba
+
+Estas instrucciones asumen que estas en la raiz del repositorio y que ya activaste el entorno con `.\venv\Scripts\Activate.ps1`. Cuando una practica usa `Ollama` debes arrancar `ollama serve` antes de ejecutarla y descargar los modelos indicados en el `README` propio del spike.
+
+### Practica 01
+
+Compilacion: `python -m compileall spikes\01-prompting_lcel_lab`.
+Ejecucion: `python .\spikes\01-prompting_lcel_lab\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_01_prompting.py`.
+
+### Practica 02
+
+Compilacion: `python -m compileall spikes\02-gradio_llama_lab`.
+Ejecucion: `python .\spikes\02-gradio_llama_lab\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_02_gradio_llama.py`.
+
+### Practica 03
+
+Compilacion: `python -m compileall spikes\03-rag_pdf_qa_bot_lab`.
+Ejecucion: `python .\spikes\03-rag_pdf_qa_bot_lab\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_03_rag_pdf_qa_bot.py`.
+
+### Practica 04
+
+Compilacion: `python -m compileall spikes\04-linkedin_icebreaker_bot_lab`.
+Ejecucion: `python .\spikes\04-linkedin_icebreaker_bot_lab\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_04_profile_pipeline.py`.
+
+### Practica 05
+
+Dependencias extra: `pip install -U sentence-transformers==4.1.0 scipy torch`.
+Compilacion: `python -m compileall spikes\05-similarity_search_by_hand_lab`.
+Ejecucion: `python .\spikes\05-similarity_search_by_hand_lab\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_05_similarity_metrics.py`.
+
+### Practica 06
+
+Compilacion: `python -m compileall spikes\06-vector_databases_chromadb_cheat_sheet_lab`.
+Ejecucion: `python .\spikes\06-vector_databases_chromadb_cheat_sheet_lab\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_06_chromadb_cheat_sheet.py`.
+
+### Practica 07
+
+Compilacion: `python -m compileall spikes\07-employee_similarity_search_chromadb_lab`.
+Ejecucion: `python .\spikes\07-employee_similarity_search_chromadb_lab\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_07_employee_similarity.py`.
+
+### Practica 08
+
+Compilacion: `python -m compileall spikes\08-food_recommendation_systems_chromadb_rag_lab`.
+Ejecucion: `python .\spikes\08-food_recommendation_systems_chromadb_rag_lab\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_08_food_recommendation.py`.
+
+### Practica 09
+
+Compilacion: `python -m compileall spikes\09-langchain_context_retrieval_lab`.
+Ejecucion: `python .\spikes\09-langchain_context_retrieval_lab\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_09_context_retrieval.py`.
+
+### Practica 10
+
+Compilacion: `python -m compileall spikes\10-advanced_retrievers_llamaindex_lab`.
+Ejecucion: `python .\spikes\10-advanced_retrievers_llamaindex_lab\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_10_advanced_retrievers_llamaindex.py`.
+
+### Practica 11
+
+Compilacion: `python -m compileall spikes\11-semantic_similarity_faiss_lab`.
+Ejecucion: `python .\spikes\11-semantic_similarity_faiss_lab\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_11_semantic_similarity_faiss.py`.
+
+### Practica 12
+
+Compilacion: `python -m compileall spikes\12-youtube_summarizer_rag_faiss_lab`.
+Ejecucion: `python .\spikes\12-youtube_summarizer_rag_faiss_lab\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_12_youtube_summarizer_rag_faiss.py`.
+
+### Practica 13
+
+Compilacion: `python -m compileall spikes\13-story_generator_text_to_speech_lab`.
+Ejecucion base: `python .\spikes\13-story_generator_text_to_speech_lab\main.py`.
+Variantes: `python .\spikes\13-story_generator_text_to_speech_lab\ollama_mistral_story_tts\main.py` `python .\spikes\13-story_generator_text_to_speech_lab\mistral_api_story_tts\main.py` `python .\spikes\13-story_generator_text_to_speech_lab\ollama_mistral_edge_tts_story_tts\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_13_story_generator_text_to_speech.py tests\unit\test_spike_13_story_generator_real_variants.py`.
+
+### Practica 14
+
+Compilacion: `python -m compileall spikes\14-basic_vision_multimodal_lab`.
+Ejecucion base: `python .\spikes\14-basic_vision_multimodal_lab\main.py`.
+Variantes principales: `python .\spikes\14-basic_vision_multimodal_lab\llava_vision_querying\main.py` `python .\spikes\14-basic_vision_multimodal_lab\llama3_2_vision_querying\main.py` `python .\spikes\14-basic_vision_multimodal_lab\qwen2_5vl_vision_querying\main.py`.
+Apps extendidas: `python .\spikes\14-basic_vision_multimodal_lab\style_finder_fashion_rag_app\main.py` `python .\spikes\14-basic_vision_multimodal_lab\nutrition_coach_flask_app\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_14_basic_vision_multimodal.py tests\unit\test_spike_14_real_vision_variants.py tests\unit\test_spike_14_style_finder_fashion_rag_app.py tests\unit\test_spike_14_nutrition_coach_flask_app.py`.
+
+### Practica 15
+
+Compilacion: `python -m compileall spikes\15-ai_meeting_assistant_lab`.
+Ejecucion: `python .\spikes\15-ai_meeting_assistant_lab\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_15_ai_meeting_assistant.py`.
+
+### Practica 16
+
+Prerequisito: exportar `OPENAI_API_KEY` si quieres probar las variantes reales.
+Compilacion: `python -m compileall spikes\16-dalle_image_generation_lab`.
+Ejecucion base: `python .\spikes\16-dalle_image_generation_lab\main.py`.
+Variantes: `python .\spikes\16-dalle_image_generation_lab\dall_e_2_generation\main.py` `python .\spikes\16-dalle_image_generation_lab\dall_e_3_generation\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_16_dalle_image_generation.py`.
+
+### Practica 17
+
+Dependencias extra: `pip install -U transformers torch sounddevice pyautogui Send2Trash`.
+Dependencia opcional del runner de consola: `pip install -U keyboard`.
+Compilacion: `python -m compileall src spikes\17-voice_desktop_assistant_lab`.
+Ejecucion: `python .\spikes\17-voice_desktop_assistant_lab\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_17_voice_desktop_assistant.py`.
 
 ## Ruta de Aprendizaje Sugerida
 
@@ -29,7 +144,7 @@ Este archivo resume de forma rapida de que va cada practica del directorio `spik
 2. Sigue con `03` `05` y `06` para entender `RAG` embeddings similitud y bases vectoriales.
 3. Continua con `07` y `08` para ver casos de uso concretos de retrieval y recomendacion.
 4. Pasa a `09` y `10` cuando quieras profundizar en retrievers avanzados.
-5. Cierra con `11` `12` `13` `14` `15` y `16` para trabajar `FAISS` contenido multimedia `Text to Speech` vision multimodal captioning visual apps `Gradio` y `Flask` asistentes de reunion y generacion de imagenes.
+5. Cierra con `11` `12` `13` `14` `15` `16` y `17` para trabajar `FAISS` contenido multimedia `Text to Speech` vision multimodal captioning visual apps `Gradio` y `Flask` asistentes de reunion generacion de imagenes y control local por voz con permisos.
 
 ## Nota
 
