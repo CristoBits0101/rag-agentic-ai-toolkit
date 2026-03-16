@@ -76,6 +76,9 @@ pip install -U PyYAML
 # Gradio: Interfaces web rapidas para demos y pruebas.
 pip install -U gradio
 
+# Flask: Framework web ligero usado por la extension Nutrition Coach de la practica 14.
+pip install -U flask
+
 # gTTS: Sintesis de voz opcional para la practica 13.
 pip install -U gTTS
 
@@ -270,6 +273,21 @@ python .\spikes\14-basic_vision_multimodal_lab\style_finder_llava_app\main.py
 
 # Variante Style Finder con qwen2.5vl.
 python .\spikes\14-basic_vision_multimodal_lab\style_finder_qwen2_5vl_app\main.py
+
+# Extension avanzada Nutrition Coach.
+python .\spikes\14-basic_vision_multimodal_lab\nutrition_coach_flask_app\main.py
+
+# Variante Nutrition Coach con llama3.2-vision.
+python .\spikes\14-basic_vision_multimodal_lab\nutrition_coach_llama3_2_vision_app\main.py
+
+# Variante Nutrition Coach con llava.
+python .\spikes\14-basic_vision_multimodal_lab\nutrition_coach_llava_app\main.py
+
+# Variante Nutrition Coach con qwen2.5vl.
+python .\spikes\14-basic_vision_multimodal_lab\nutrition_coach_qwen2_5vl_app\main.py
+
+# Tras validar compilacion y tests puedes lanzar la interfaz Flask.
+python .\spikes\14-basic_vision_multimodal_lab\nutrition_coach_flask_app\app.py
 ```
 
 ## Ejecutar Practica 15
@@ -596,10 +614,12 @@ spikes/
       city_scene_real.png
       nutrition_label_real.png
     config/
+      nutrition_coach_config.py
       style_finder_fashion_config.py
       vision_real_provider_config.py
       vision_multimodal_config.py
     data/
+      nutrition_coach_dataset.py
       style_finder_fashion_dataset.py
       vision_sample_dataset.py
     llama3_2_vision_querying/
@@ -608,12 +628,36 @@ spikes/
     llava_vision_querying/
       README.md
       main.py
+    nutrition_coach_flask_app/
+      README.md
+      app.py
+      main.py
+      static/
+        style.css
+      templates/
+        index.html
+    nutrition_coach_llama3_2_vision_app/
+      README.md
+      main.py
+    nutrition_coach_llava_app/
+      README.md
+      main.py
+    nutrition_coach_qwen2_5vl_app/
+      README.md
+      main.py
     models/
+      nutrition_coach_image_processor.py
+      nutrition_coach_llm_service.py
       style_finder_image_processor.py
       style_finder_llm_service.py
       vision_demo_model.py
       vision_ollama_gateway.py
     orchestration/
+      nutrition_coach_app_orchestration.py
+      nutrition_coach_asset_orchestration.py
+      nutrition_coach_dataset_orchestration.py
+      nutrition_coach_helpers.py
+      nutrition_coach_lab_runner.py
       style_finder_app_orchestration.py
       style_finder_asset_orchestration.py
       style_finder_dataset_orchestration.py

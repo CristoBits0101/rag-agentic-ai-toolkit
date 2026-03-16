@@ -9,6 +9,7 @@
 5. Prompts especializados: Demuestra un flujo de moda y otro de nutricion sin servicios remotos.
 6. Variantes reales con Ollama: Ejemplos separados para `llava` `llama3.2-vision` y `qwen2.5vl`.
 7. Style Finder avanzado: App de moda con retrieval visual dataset estructurado y analisis catalogado con `Gradio`.
+8. Nutrition Coach visual: App `Flask` para estimar calorias y desglosar nutrientes desde una foto.
 
 ## Adaptacion
 
@@ -19,6 +20,8 @@ La practica base se mantiene determinista para tests. Ademas incluye tres varian
 Esta practica absorbe la parte de la cheat sheet centrada en vision multimodal. Aqui viven `Image Captioning` `Image Encoding` `Message Formatting` `Model Invocation` `Object Detection` por pregunta consultas visuales con mensajes de texto e imagen y captioning en lote sobre varias imagenes.
 
 La extension `Style Finder` lleva la practica al siguiente nivel con un flujo `multimodal RAG` aplicado a moda. Construye ejemplos locales de outfits calcula embeddings visuales gratuitos con backend automatico genera retrieval sobre un dataset estructurado y permite analisis con `llama3.2-vision` `llava` o `qwen2.5vl` a traves de `Ollama`.
+
+La extension `Nutrition Coach` aplica el mismo patron a imagenes de comida con una interfaz `Flask`. Genera ejemplos locales de platos hace retrieval visual sobre un dataset nutricional estructurado y produce una respuesta multimodal con fallback determinista cuando `Ollama` no esta disponible.
 
 ## Roles de Archivos
 
@@ -35,9 +38,18 @@ La extension `Style Finder` lleva la practica al siguiente nivel con un flujo `m
 - `orchestration/vision_similarity_orchestration.py`: Embeddings deterministas y matching por coseno.
 - `orchestration/vision_lab_runner.py`: Ejecucion guiada del laboratorio.
 - `config/style_finder_fashion_config.py`: Configuracion de la extension avanzada Style Finder.
+- `config/nutrition_coach_config.py`: Configuracion de la extension Nutrition Coach.
+- `data/nutrition_coach_dataset.py`: Dataset estructurado de platos y nutrientes.
 - `data/style_finder_fashion_dataset.py`: Dataset estructurado de looks y prendas para moda.
+- `models/nutrition_coach_image_processor.py`: Procesador visual reutilizable para la app de nutricion.
+- `models/nutrition_coach_llm_service.py`: Servicio de nutricion sobre modelos de vision en `Ollama`.
 - `models/style_finder_image_processor.py`: Codificacion de imagen y embeddings visuales con backend automatico.
 - `models/style_finder_llm_service.py`: Servicio de analisis de moda sobre modelos de vision en `Ollama`.
+- `orchestration/nutrition_coach_asset_orchestration.py`: Generacion de platos de ejemplo para la app.
+- `orchestration/nutrition_coach_dataset_orchestration.py`: Construccion del dataset nutricional con embeddings.
+- `orchestration/nutrition_coach_helpers.py`: Helpers de formateo y contexto nutricional.
+- `orchestration/nutrition_coach_app_orchestration.py`: Orquestacion principal de la app Flask.
+- `orchestration/nutrition_coach_lab_runner.py`: Runner de consola para el flujo Nutrition Coach.
 - `orchestration/style_finder_asset_orchestration.py`: Generacion de imagenes de ejemplo para la app.
 - `orchestration/style_finder_dataset_orchestration.py`: Construccion del dataset enriquecido con embeddings.
 - `orchestration/style_finder_helpers.py`: Helpers de retrieval alternativas y postproceso.
@@ -47,6 +59,10 @@ La extension `Style Finder` lleva la practica al siguiente nivel con un flujo `m
 - `llava_vision_querying`: Variante real con `llava`.
 - `llama3_2_vision_querying`: Variante real con `llama3.2-vision`.
 - `qwen2_5vl_vision_querying`: Variante real con `qwen2.5vl:3b`.
+- `nutrition_coach_flask_app`: Extension avanzada principal para nutricion.
+- `nutrition_coach_llama3_2_vision_app`: Variante del Nutrition Coach con `llama3.2-vision`.
+- `nutrition_coach_llava_app`: Variante del Nutrition Coach con `llava`.
+- `nutrition_coach_qwen2_5vl_app`: Variante del Nutrition Coach con `qwen2.5vl:3b`.
 - `style_finder_fashion_rag_app`: Extension avanzada principal.
 - `style_finder_llama3_2_vision_app`: Variante del Style Finder con `llama3.2-vision`.
 - `style_finder_llava_app`: Variante del Style Finder con `llava`.
@@ -55,11 +71,11 @@ La extension `Style Finder` lleva la practica al siguiente nivel con un flujo `m
 ## Instalacion
 
 1. Activar entorno: `.\venv\Scripts\Activate.ps1`.
-2. Dependencias ya cubiertas por el repo: `numpy` `pandas` `pillow` y `gradio`.
+2. Dependencias ya cubiertas por el repo: `numpy` `pandas` `pillow` `gradio` y `flask`.
 3. Para variantes reales: `ollama serve`.
 4. Modelos reales opcionales: `ollama pull llava` `ollama pull llama3.2-vision` y `ollama pull qwen2.5vl:3b`.
 5. Backend visual opcional para parecerse mas al laboratorio original: `pip install torch torchvision`.
-6. `Gradio` ya esta disponible en el entorno para la UI avanzada.
+6. `Gradio` ya esta disponible para Style Finder y `Flask` para Nutrition Coach.
 
 ## Verificacion
 
@@ -73,6 +89,11 @@ La extension `Style Finder` lleva la practica al siguiente nivel con un flujo `m
 8. Style Finder con `llama3.2-vision`: `.\venv\Scripts\python.exe .\spikes\14-basic_vision_multimodal_lab\style_finder_llama3_2_vision_app\main.py`.
 9. Style Finder con `llava`: `.\venv\Scripts\python.exe .\spikes\14-basic_vision_multimodal_lab\style_finder_llava_app\main.py`.
 10. Style Finder con `qwen2.5vl`: `.\venv\Scripts\python.exe .\spikes\14-basic_vision_multimodal_lab\style_finder_qwen2_5vl_app\main.py`.
+11. Nutrition Coach principal: `.\venv\Scripts\python.exe .\spikes\14-basic_vision_multimodal_lab\nutrition_coach_flask_app\main.py`.
+12. Nutrition Coach con `llama3.2-vision`: `.\venv\Scripts\python.exe .\spikes\14-basic_vision_multimodal_lab\nutrition_coach_llama3_2_vision_app\main.py`.
+13. Nutrition Coach con `llava`: `.\venv\Scripts\python.exe .\spikes\14-basic_vision_multimodal_lab\nutrition_coach_llava_app\main.py`.
+14. Nutrition Coach con `qwen2.5vl`: `.\venv\Scripts\python.exe .\spikes\14-basic_vision_multimodal_lab\nutrition_coach_qwen2_5vl_app\main.py`.
+15. Tras validar compilacion y tests puedes lanzar la app Flask: `.\venv\Scripts\python.exe .\spikes\14-basic_vision_multimodal_lab\nutrition_coach_flask_app\app.py`.
 
 ## Cobertura
 
@@ -88,3 +109,6 @@ La extension `Style Finder` lleva la practica al siguiente nivel con un flujo `m
 10. `StyleFinderApp`: App avanzada con retrieval visual y analisis contextual.
 11. `build_style_finder_interface`: UI `Gradio` para la extension de moda.
 12. `run_style_finder_fashion_rag_app`: Runner de consola para probar el pipeline completo.
+13. `create_nutrition_coach_app`: Fabrica Flask para el analisis nutricional.
+14. `NutritionCoachVisionService`: Servicio multimodal con fallback determinista.
+15. `run_nutrition_coach_lab`: Runner de consola para probar la extension nutricional.
