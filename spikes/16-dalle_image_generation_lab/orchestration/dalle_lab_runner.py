@@ -1,9 +1,12 @@
 # --- DEPENDENCIAS ---
+from config.dalle_image_generation_config import DALL_E_3_SUPPORTED_SIZES
 from config.dalle_image_generation_config import DALL_E_2_EXERCISE_FILE_NAME
 from config.dalle_image_generation_config import DALL_E_3_EXERCISE_FILE_NAME
 from config.dalle_image_generation_config import EXERCISE_PROMPT
 from config.dalle_image_generation_config import OUTPUTS_DIR
+from orchestration.dalle_generation_orchestration import build_custom_dalle_3_request
 from orchestration.dalle_generation_orchestration import build_dalle_2_request
+from orchestration.dalle_generation_orchestration import build_dalle_2_gallery_request
 from orchestration.dalle_generation_orchestration import build_dalle_3_request
 from orchestration.dalle_generation_orchestration import generate_default_dalle_2_cat_image
 from orchestration.dalle_generation_orchestration import generate_default_dalle_3_cat_image
@@ -18,6 +21,12 @@ def print_separator(title: str) -> None:
 
 def run_dalle_image_generation_lab() -> None:
     print_separator("16. DALL-E IMAGE GENERATION LAB")
+    gallery_request = build_dalle_2_gallery_request()
+    hd_request = build_custom_dalle_3_request(
+        prompt=EXERCISE_PROMPT,
+        size=DALL_E_3_SUPPORTED_SIZES[1],
+        quality="hd",
+    )
 
     try:
         dalle_2_cat = generate_default_dalle_2_cat_image()
@@ -40,3 +49,8 @@ def run_dalle_image_generation_lab() -> None:
     print("\nExercise Prompt Results:")
     print(f"{dalle_2_lake.model_name}: {dalle_2_lake.output_path}")
     print(f"{dalle_3_lake.model_name}: {dalle_3_lake.output_path}")
+    print("\nAdditional Request Templates:")
+    print(
+        f"{gallery_request.model_name}: size={gallery_request.size} n={gallery_request.n}"
+    )
+    print(f"{hd_request.model_name}: size={hd_request.size} quality={hd_request.quality}")

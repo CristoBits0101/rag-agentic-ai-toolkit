@@ -15,6 +15,17 @@ def generate_model_response(
     return response["choices"][0]["message"]["content"]
 
 
+def generate_image_captions(
+    encoded_images: list[str],
+    user_query: str = "Describe the photo",
+    assistant_prompt: str = DEFAULT_ASSISTANT_PROMPT,
+) -> list[str]:
+    return [
+        generate_model_response(encoded_image, user_query, assistant_prompt)
+        for encoded_image in encoded_images
+    ]
+
+
 def generate_nutrition_response(encoded_image: str, user_query: str) -> str:
     assistant_prompt = """
 You are an expert nutritionist. Your task is to analyze the food items displayed in the image and provide a detailed nutritional assessment.

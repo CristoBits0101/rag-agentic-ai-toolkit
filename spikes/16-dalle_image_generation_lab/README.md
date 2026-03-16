@@ -14,10 +14,12 @@ Esta practica adapta la guia original de generacion de imagenes con `DALL-E` a u
 
 La practica se conserva por fidelidad al material original. Segun la documentacion oficial actual de `OpenAI` estos modelos son heredados y conviene entender esta practica como una guia historica y comparativa.
 
+Esta practica absorbe la parte de la cheat sheet centrada en generacion visual. Aqui se cubren `DALL-E 2` `DALL-E 3` `b64_json` guardado local comparacion de versiones y diferencias practicas entre tamanos calidad salida a archivo y generacion multiple con `dall-e-2`.
+
 ## Roles de Archivos
 
 - `main.py`: Punto de entrada de la practica.
-- `config/dalle_image_generation_config.py`: Prompts tamaños y rutas de salida.
+- `config/dalle_image_generation_config.py`: Prompts tamanos y rutas de salida.
 - `data/dalle_prompt_catalog.py`: Catalogo de prompts base y de ejercicios.
 - `models/dalle_openai_gateway.py`: Cliente opcional de `OpenAI` para el endpoint de imagenes.
 - `orchestration/dalle_generation_orchestration.py`: Construccion de requests generacion y guardado local.
@@ -42,7 +44,12 @@ La practica se conserva por fidelidad al material original. Segun la documentaci
 ## Cobertura
 
 1. `build_dalle_2_request`: Request de generacion para `dall-e-2`.
-2. `build_dalle_3_request`: Request de generacion para `dall-e-3`.
-3. `generate_image_with_openai`: Llamada real a la API de imagenes.
-4. `save_generated_image`: Escritura local del resultado.
-5. `run_dalle_image_generation_lab`: Comparacion basica entre ambas versiones.
+2. `build_custom_dalle_2_request`: Request configurable para tamano cantidad y formato de salida.
+3. `build_dalle_2_gallery_request`: Plantilla para generacion multiple con `dall-e-2`.
+4. `build_dalle_3_request`: Request de generacion para `dall-e-3`.
+5. `build_custom_dalle_3_request`: Request configurable para tamano calidad y formato.
+6. `generate_image_with_openai`: Llamada real a la API de imagenes.
+7. `generate_image_batch_with_openai`: Generacion multiple y exportacion local en lote.
+8. `save_generated_image`: Escritura local del resultado.
+9. `save_generated_images`: Escritura local de varias respuestas.
+10. `run_dalle_image_generation_lab`: Comparacion basica entre ambas versiones y ejemplos de requests ampliados.

@@ -649,6 +649,7 @@ spikes/
 | ANN | Busqueda aproximada de vecinos mas cercanos para escalar retrieval vectorial con baja latencia. |
 | Advanced Retriever | Recuperador con estrategias mas sofisticadas que un top k simple como fusion filtros o reranking. |
 | BM25 | Algoritmo de ranking lexico que mejora TF IDF con saturacion de frecuencia y normalizacion por longitud de documento. |
+| b64_json | Formato de respuesta donde una imagen generada via API se devuelve como Base64 embebido en JSON en lugar de una URL temporal. |
 | Chain-of-Thought | Tecnica de prompting que fuerza un razonamiento intermedio paso a paso para mejorar respuestas complejas. |
 | Chaining | Flujo secuencial Retrieval -> Extraction -> Processing -> Generation para transformar contexto en una salida util. |
 | ChromaDB | Base de datos vectorial orientada a embeddings usada para almacenar y recuperar contexto por similitud semantica. |
@@ -658,6 +659,8 @@ spikes/
 | Cross-Modal Alignment | Alineacion entre modalidades para que texto imagen audio o video representen el mismo significado dentro del sistema. |
 | Cross-Modal Understanding | Capacidad de relacionar informacion entre modalidades para responder o generar contenido con contexto compartido. |
 | DALL-E | Modelo generativo orientado a crear imagenes a partir de instrucciones en lenguaje natural. |
+| DALL-E Edits | Capacidad de editar una imagen existente con una mascara y un prompt para reemplazar regiones concretas. |
+| DALL-E Variations | Capacidad de generar variantes visuales de una imagen base manteniendo rasgos de estilo o composicion. |
 | Deepfake | Contenido sintetico de imagen audio o video que imita personas o eventos con alto realismo. |
 | Diffusion Model | Familia de modelos generativos que crea contenido refinando ruido paso a paso hasta obtener una salida coherente. |
 | Edge Computing | Ejecucion de modelos cerca de la fuente de datos para reducir latencia dependencia de red y coste de transferencia. |
@@ -673,7 +676,10 @@ spikes/
 | Hugging Face | Ecosistema de modelos datasets y librerias para entrenamiento inferencia y despliegue de sistemas de IA. |
 | IA Multimodal | Capacidad de un sistema para comprender combinar o generar informacion en texto imagen audio y video. |
 | Image Captioning | Tarea de vision y lenguaje que genera descripciones textuales a partir de imagenes. |
+| Image Validation and Encoding | Paso previo que verifica formato tamano y consistencia de una imagen y la convierte a una representacion apta para el modelo como Base64. |
 | Image-to-Video | Generacion o animacion de video a partir de una imagen fija mediante prediccion de movimiento y consistencia temporal. |
+| Inpainting | Tecnica de edicion generativa donde se rellenan o sustituyen regiones de una imagen segun una mascara y un prompt. |
+| Input Processing | Etapa donde se preparan entradas como texto imagen audio o video antes de invocar el modelo. |
 | LangChain | Framework de codigo abierto para crear aplicaciones con LLMs y componentes como prompts cadenas agentes y herramientas. |
 | LCEL | Lenguaje declarativo de LangChain para componer cadenas de ejecucion centradas en LLM de forma modular. |
 | Lematizacion | Proceso de reducir palabras a su forma canonica para normalizar texto y mejorar analisis. |
@@ -687,6 +693,7 @@ spikes/
 | Mistral | Familia de modelos de lenguaje y proveedor de inferencia usados para generacion de texto y tareas instruct. |
 | Multi-Agent System | Arquitectura donde varios agentes cooperan para resolver objetivos comunes. |
 | Multimodal Fusion | Integracion de varias modalidades dentro del modelo o pipeline para producir una interpretacion o salida unificada. |
+| Multimodal Message | Estructura de solicitud que combina texto e imagen en un mismo payload para modelos de vision y lenguaje. |
 | NLG | Generacion de lenguaje natural a partir de datos o representaciones internas. |
 | NLP | Procesamiento de lenguaje natural para analizar y transformar texto humano en estructuras utiles. |
 | NLU | Comprension del lenguaje natural para extraer intencion entidades y contexto semantico. |
@@ -694,6 +701,7 @@ spikes/
 | OpenAI | Proveedor de modelos y APIs usado en este repositorio para practicas especificas como generacion de imagenes. |
 | Point | 1 point = 1 chunk como objeto guardado en la vector DB. |
 | Prompting | Diseno de instrucciones y contexto para guiar la salida de un modelo. |
+| Prompt Engineering Visual | Diseno de prompts para imagen o video especificando sujeto estilo composicion iluminacion movimiento y contexto. |
 | Prompting Templates | Plantillas reutilizables para estructurar prompts de forma consistente. |
 | Query Fusion | Estrategia que combina resultados de varias consultas o recuperadores para mejorar cobertura y relevancia. |
 | Qwen2.5VL | Modelo multimodal de vision y lenguaje de la familia Qwen orientado a descripcion visual y OCR ligero. |
@@ -703,6 +711,7 @@ spikes/
 | Retrieval | Proceso de recuperar contexto relevante desde una base de conocimiento antes de generar una respuesta. |
 | Self-Supervised Learning | Aprendizaje que usa patrones internos de los datos para entrenar modelos sin depender por completo de etiquetas manuales. |
 | Semantic Search | Busqueda que compara significado y contexto en lugar de depender solo de coincidencias exactas de palabras. |
+| Storyboard | Secuencia visual planificada de escenas o tomas usada para dirigir la generacion o edicion de video. |
 | Speech Recognition | Reconocimiento automatico del habla para convertir audio en texto o en unidades linguisticamente utiles. |
 | Speech Processing | Conjunto de tecnicas para reconocer entender analizar o generar voz humana en sistemas de IA. |
 | Speech to Text | Conversion automatica de audio o voz a texto para transcripcion y analisis. |
@@ -718,6 +727,9 @@ spikes/
 | VAE | Autoencoder variacional usado para aprender representaciones latentes y generar muestras nuevas de forma controlada. |
 | Vector Database | Base de datos optimizada para almacenar y consultar vectores por similitud semantica. |
 | Vector Store Retriever | Recuperador que usa una base vectorial para localizar fragmentos cercanos a una consulta embebida. |
+| Vision-Language Model | Modelo multimodal capaz de procesar conjuntamente imagenes y texto para describir analizar o responder preguntas sobre contenido visual. |
+| Visual Encoder | Componente que transforma una imagen en representaciones numericas que luego se alinean con el lenguaje. |
+| Visual Generation Workflow | Flujo que pasa de prompt a generacion de imagen y despues a visualizacion guardado o postproceso del resultado. |
 | Visual Question Answering | Tarea multimodal donde un modelo responde preguntas en lenguaje natural sobre el contenido de una imagen. |
 | Visual Search | Busqueda basada en similitud visual o en contenido de imagenes para localizar elementos relacionados. |
 | Whisper | Modelo de reconocimiento automatico de voz usado para transcripcion y traduccion de audio. |
@@ -740,6 +752,16 @@ La IA multimodal combina varias modalidades dentro del mismo flujo de aplicacion
 ## Capacidades y Retos de IA Multimodal
 
 Entre las capacidades mas importantes de la IA multimodal estan `Computer Vision` para interpretar imagenes y video `Text Processing` para comprender lenguaje `Speech Processing` para trabajar con voz `Visual Question Answering` para responder sobre contenido visual e integraciones como `Text to Video` e `Image-to-Video`. En paralelo los retos mas relevantes siguen siendo `Cross-Modal Alignment` `Multimodal Fusion` `Hallucination Mitigation` sesgo privacidad coste computacional y `Transparency` para explicar como decide el sistema.
+
+## Integracion Visual y de Video
+
+En vision multimodal suele repetirse un patron comun. Primero ocurre `Input Processing` donde se prepara el prompt y se valida la imagen. Despues llega `Image Validation and Encoding` para convertir el archivo a una forma transportable como `Base64` o un `Multimodal Message`. Por ultimo un `Vision-Language Model` combina la salida del `Visual Encoder` con el contexto textual para tareas como `Image Captioning` `Visual Question Answering` u OCR ligero.
+
+En generacion visual tambien conviene separar capacidades por proveedor y modelo. `DALL-E 2` destaca por `DALL-E Edits` `DALL-E Variations` multiples imagenes por request y formatos de salida como `b64_json`. `DALL-E 3` se orienta mas a calidad y composicion con menos opciones operativas. En video el vocabulario cambia hacia `Prompt Engineering Visual` `Storyboard` consistencia temporal y operaciones de iteracion sobre escenas.
+
+Dentro de este repositorio la hoja de trucos de integracion visual y de video queda absorbida por dos practicas ya existentes. La practica `14` cubre mensajes multimodales codificacion de imagen `Image Captioning` `Visual Question Answering` object detection por pregunta y analisis visual. La practica `16` cubre generacion con `DALL-E` exportacion local `b64_json` y comparacion entre `dall-e-2` y `dall-e-3` sin necesidad de un spike adicional.
+
+Tras la extension de ambas practicas la `14` tambien cubre captioning en lote sobre varias imagenes y la `16` ya incluye requests configurables para tamano calidad y generacion multiple con `dall-e-2`. Con esto la hoja de trucos queda representada de forma ejecutable sin duplicar contenido en un laboratorio nuevo.
 
 ## IA Generativa para Tareas Especificas
 

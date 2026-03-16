@@ -11,6 +11,7 @@ if str(SPIKE) not in sys.path:
     sys.path.insert(0, str(SPIKE))
 
 from config.vision_multimodal_config import CAR_COUNT_QUERY
+from config.vision_multimodal_config import CAT_IMAGE_URL
 from config.vision_multimodal_config import CITY_SCENE_URL
 from config.vision_multimodal_config import DEFAULT_VISION_QUERY
 from config.vision_multimodal_config import FASHION_IMAGE_URL
@@ -18,8 +19,10 @@ from config.vision_multimodal_config import JACKET_QUERY
 from config.vision_multimodal_config import NUTRITION_LABEL_URL
 from config.vision_multimodal_config import SODIUM_QUERY
 from orchestration.vision_image_orchestration import create_vision_message
+from orchestration.vision_image_orchestration import encode_images_from_urls
 from orchestration.vision_image_orchestration import encode_image_from_url
 from orchestration.vision_query_orchestration import generate_fashion_response
+from orchestration.vision_query_orchestration import generate_image_captions
 from orchestration.vision_query_orchestration import generate_model_response
 from orchestration.vision_query_orchestration import generate_nutrition_response
 from orchestration.vision_similarity_orchestration import build_catalog_dataset
@@ -43,6 +46,15 @@ def test_general_image_query_returns_city_description():
 
     assert "city street" in response.lower()
     assert "three cars" in response.lower()
+
+
+def test_generate_image_captions_returns_one_caption_per_image():
+    encoded_images = encode_images_from_urls([CAT_IMAGE_URL, CITY_SCENE_URL])
+    captions = generate_image_captions(encoded_images)
+
+    assert len(captions) == 2
+    assert "orange cat" in captions[0].lower()
+    assert "city street" in captions[1].lower()
 
 
 def test_object_count_and_attribute_questions_return_expected_answers():

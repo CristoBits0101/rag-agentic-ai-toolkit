@@ -15,6 +15,8 @@ Esta practica toma ideas de querying visual object detection por prompt y simili
 
 La practica base se mantiene determinista para tests. Ademas incluye tres variantes reales pensadas para `Ollama` que permiten ejecutar el mismo patron con modelos de vision disponibles hoy en su libreria oficial: `llava_vision_querying` `llama3_2_vision_querying` y `qwen2_5vl_vision_querying`.
 
+Esta practica absorbe la parte de la cheat sheet centrada en vision multimodal. Aqui viven `Image Captioning` `Image Encoding` `Message Formatting` `Model Invocation` `Object Detection` por pregunta consultas visuales con mensajes de texto e imagen y captioning en lote sobre varias imagenes.
+
 ## Roles de Archivos
 
 - `main.py`: Punto de entrada de la practica.
@@ -53,9 +55,10 @@ La practica base se mantiene determinista para tests. Ademas incluye tres varian
 
 1. `create_vision_message`: Estructura de texto e imagen para un modelo multimodal.
 2. `generate_model_response`: Consulta basica sobre una imagen.
-3. `generate_nutrition_response`: Analisis de una etiqueta nutricional.
-4. `generate_fashion_response`: Analisis orientado a retail con items similares.
-5. `find_closest_match`: Matching por similitud coseno sobre embeddings visuales ligeros.
-6. `run_llava_example`: Ejemplo real con `llava`.
-7. `run_llama32_vision_example`: Ejemplo real con `llama3.2-vision`.
-8. `run_qwen25_vl_example`: Ejemplo real con `qwen2.5vl`.
+3. `generate_image_captions`: Captioning en lote para varias imagenes.
+4. `generate_nutrition_response`: Analisis de una etiqueta nutricional.
+5. `generate_fashion_response`: Analisis orientado a retail con items similares.
+6. `find_closest_match`: Matching por similitud coseno sobre embeddings visuales ligeros.
+7. `run_llava_example`: Ejemplo real con `llava`.
+8. `run_llama32_vision_example`: Ejemplo real con `llama3.2-vision`.
+9. `run_qwen25_vl_example`: Ejemplo real con `qwen2.5vl`.
