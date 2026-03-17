@@ -25,6 +25,8 @@ Este archivo resume de forma rapida de que va cada practica del directorio `spik
 | 17 | Voice Desktop Assistant. | Escucha ordenes desde un micro con `push to talk` las transcribe en local con `Whisper` y ejecuta acciones seguras de escritorio con `Ollama` incluyendo cierre confirmado de apps envio a papelera con confirmacion verificacion del estado real del proceso al cerrar y un estado resumido en una sola linea. | A combinar audio local `Speech to Text` planificacion segura con `Ollama` y automatizacion de escritorio con una politica de permisos minima. | [17-voice_desktop_assistant_lab](./17-voice_desktop_assistant_lab/README.md) |
 | 18 | LangChain Tool Calling Math Assistant. | Construye un asistente matematico con tools de `LangChain` definidas con `@tool` y `ChatOllama` como modelo principal junto con un catalogo factual local y un bucle controlado de tool calling. | A entender el contrato real de `tool calling` probar herramientas por separado y componer calculos multi paso con un modelo real compatible con el stack del repo. | [18-langchain_tool_calling_math_assistant_lab](./18-langchain_tool_calling_math_assistant_lab/README.md) |
 | 19 | DataWizard AI Powered Data Analysis. | Construye un asistente de analisis de datos con `LangChain` y `ChatOllama` que descubre CSV locales mantiene una cache de `DataFrame` resume datasets ejecuta metodos seguros de `pandas` y evalua modelos de clasificacion o regresion con `scikit-learn`. | A conectar lenguaje natural con analisis tabular real y a comparar un baseline conversacional sin tools frente a un executor agent con modelo real y workflows multi paso. | [19-datawizard_ai_powered_data_analysis_lab](./19-datawizard_ai_powered_data_analysis_lab/README.md) |
+| 20 | Interactive LLM Agents with Tools. | Construye un laboratorio de `manual tool calling` con `LangChain` y `ChatOllama` que define tools aritmeticas y de propina parsea `tool_calls` ejecuta `ToolMessage` y encapsula el flujo en agentes interactivos. | A entender paso a paso como se enlaza un modelo con herramientas reales y como convertir ese ciclo en clases de agente reutilizables. | [20-interactive_llm_agents_with_tools_lab](./20-interactive_llm_agents_with_tools_lab/README.md) |
+| 21 | YouTube Tool Calling Agent. | Construye un agente con `LangChain` y `ChatOllama` que usa tools reales de YouTube para extraer `video_id` buscar videos recuperar transcriptos leer metadatos y thumbnails y automatizar tanto un flujo fijo como una cadena recursiva. | A llevar el `tool calling` a un caso multi paso contra servicios externos reales y a comparar orquestacion manual automatizada y recursiva. | [21-youtube_tool_calling_agent_lab](./21-youtube_tool_calling_agent_lab/README.md) |
 
 ## Guia de Prueba
 
@@ -165,13 +167,28 @@ Compilacion: `python -m compileall spikes\19-datawizard_ai_powered_data_analysis
 Ejecucion: `python .\spikes\19-datawizard_ai_powered_data_analysis_lab\main.py`.
 Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_19_datawizard_ai_powered_data_analysis.py`.
 
+### Practica 20
+
+Prerequisito: arrancar `ollama serve` y descargar `qwen2.5:7b` o `llama3.2:3b`.
+Compilacion: `python -m compileall spikes\20-interactive_llm_agents_with_tools_lab`.
+Ejecucion: `python .\spikes\20-interactive_llm_agents_with_tools_lab\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_20_interactive_llm_agents_with_tools.py`.
+
+### Practica 21
+
+Dependencias extra: `pip install -U yt-dlp youtube-transcript-api`.
+Prerequisito: arrancar `ollama serve` y descargar `qwen2.5:7b` o `llama3.2:3b`.
+Compilacion: `python -m compileall spikes\21-youtube_tool_calling_agent_lab`.
+Ejecucion: `python .\spikes\21-youtube_tool_calling_agent_lab\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_21_youtube_tool_calling_agent.py`.
+
 ## Ruta de Aprendizaje Sugerida
 
 1. Empieza por `01` y `02` si quieres dominar prompts `LCEL` y una interfaz minima.
 2. Sigue con `03` `05` y `06` para entender `RAG` embeddings similitud y bases vectoriales.
 3. Continua con `07` y `08` para ver casos de uso concretos de retrieval y recomendacion.
 4. Pasa a `09` y `10` cuando quieras profundizar en retrievers avanzados.
-5. Cierra con `11` `12` `13` `14` `15` `16` `17` `18` y `19` para trabajar `FAISS` contenido multimedia `Text to Speech` vision multimodal captioning visual apps `Gradio` y `Flask` asistentes de reunion generacion de imagenes control local por voz con permisos `tool calling` moderno en `LangChain` y analisis tabular con `pandas` y `scikit-learn`.
+5. Cierra con `11` `12` `13` `14` `15` `16` `17` `18` `19` `20` y `21` para trabajar `FAISS` contenido multimedia `Text to Speech` vision multimodal captioning visual apps `Gradio` y `Flask` asistentes de reunion generacion de imagenes control local por voz con permisos `tool calling` moderno en `LangChain` analisis tabular con `pandas` y `scikit-learn` el ciclo manual completo de agentes interactivos con tools y la integracion multi paso con YouTube real.
 
 ## Nota
 

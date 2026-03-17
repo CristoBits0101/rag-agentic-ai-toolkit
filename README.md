@@ -91,6 +91,12 @@ pip install -U gTTS
 # edge-tts: Sintesis de voz gratuita para la variante real de la practica 13.
 pip install -U edge-tts
 
+# youtube-transcript-api: Recuperacion de transcriptos reales para la practica 21.
+pip install -U youtube-transcript-api
+
+# yt-dlp: Busqueda y metadatos de YouTube para la practica 21.
+pip install -U yt-dlp
+
 # OpenAI: Cliente oficial para la practica 16 de generacion de imagenes.
 pip install -U openai
 
@@ -449,6 +455,49 @@ ollama pull qwen2.5:7b
 # Ejecutar la practica de analisis de datos con tool calling local.
 # El laboratorio compara un baseline sin tools con un executor agent.
 python .\spikes\19-datawizard_ai_powered_data_analysis_lab\main.py
+```
+
+## Ejecutar Practica 20
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# Arrancar Ollama.
+ollama serve
+
+# Descargar un modelo recomendado para tool calling interactivo.
+ollama pull qwen2.5:7b
+
+# Alternativa de menor consumo.
+ollama pull llama3.2:3b
+
+# Ejecutar la practica de agentes interactivos con tools de LangChain.
+# El laboratorio demuestra bind_tools tool_calls ToolMessage y clases de agente.
+python .\spikes\20-interactive_llm_agents_with_tools_lab\main.py
+```
+
+## Ejecutar Practica 21
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# Instalar dependencias del laboratorio YouTube.
+pip install -U yt-dlp youtube-transcript-api
+
+# Arrancar Ollama.
+ollama serve
+
+# Descargar un modelo recomendado para tool calling sobre YouTube.
+ollama pull qwen2.5:7b
+
+# Alternativa de menor consumo.
+ollama pull llama3.2:3b
+
+# Ejecutar la practica de agente con tools reales de YouTube.
+# El laboratorio demuestra tool calling manual cadena fija y cadena recursiva.
+python .\spikes\21-youtube_tool_calling_agent_lab\main.py
 ```
 
 ## Parar Gradio
