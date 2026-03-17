@@ -529,6 +529,29 @@ ollama pull llama3.2:3b
 python .\spikes\22-natural_language_data_visualization_agent_lab\main.py
 ```
 
+## Ejecutar Practica 23
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# Instalar la dependencia del toolkit SQL si hace falta.
+pip install -U langchain-community
+
+# Arrancar Ollama.
+ollama serve
+
+# Descargar un modelo recomendado para el agente SQL.
+ollama pull qwen2.5:7b
+
+# Alternativa de menor consumo.
+ollama pull llama3.2:3b
+
+# Ejecutar la practica de consultas SQL en lenguaje natural.
+# El laboratorio genera una base Chinook local en SQLite y muestra el SQL usado por el agente.
+python .\spikes\23-natural_language_sql_agent_lab\main.py
+```
+
 ## Parar Gradio
 
 ```powershell
@@ -1153,8 +1176,8 @@ Esta guia no intenta cubrir todo el catalogo de `LangChain`. Sirve para conectar
 | Retrieval documental | `Document Loaders` `VectorStoreQA` `SelfQueryRetriever` `ParentDocumentRetriever` | Cubierto. | Practicas `03` `09` y `12`. |
 | Busqueda vectorial | `Chroma` `FAISS` `BM25` `Query Fusion` | Cubierto. | Practicas `06` `07` `08` `10` y `11`. |
 | Busqueda externa | `Wikipedia` `Tavily Search` `ArXiv` | Parcial. | Extension natural de `09` o `12`. |
-| Analisis y calculo | `Python REPL` `Pandas DataFrame` `LLMMathChain` | No cubierto todavia. | Buen candidato para un spike de agentes analiticos. |
-| Datos estructurados | `SQL Database Toolkit` `JSON Toolkit` | No cubierto todavia. | Buen candidato para consultas sobre datos reales. |
+| Analisis y calculo | `Python REPL` `Pandas DataFrame` `LLMMathChain` | Cubierto. | Practicas `18` `19` y `22`. |
+| Datos estructurados | `SQL Database Toolkit` `JSON Toolkit` | Cubierto en SQL y parcial en JSON. | Practica `23` para SQL y buen candidato futuro para JSON. |
 | Web y APIs | `Requests Toolkit` `Playwright Browser` | No cubierto todavia. | Buen candidato para agentes con navegacion y automatizacion web. |
 | Productividad | `GitHub Toolkit` `Slack Toolkit` `Gmail Toolkit` | No cubierto todavia. | Interesante para workflows agenticos orientados a negocio. |
 

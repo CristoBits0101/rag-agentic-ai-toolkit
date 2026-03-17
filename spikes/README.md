@@ -28,6 +28,7 @@ Este archivo resume de forma rapida de que va cada practica del directorio `spik
 | 20 | Interactive LLM Agents with Tools. | Construye un laboratorio de `manual tool calling` con `LangChain` y `ChatOllama` que define tools aritmeticas y de propina parsea `tool_calls` ejecuta `ToolMessage` y encapsula el flujo en agentes interactivos. | A entender paso a paso como se enlaza un modelo con herramientas reales y como convertir ese ciclo en clases de agente reutilizables. | [20-interactive_llm_agents_with_tools_lab](./20-interactive_llm_agents_with_tools_lab/README.md) |
 | 21 | YouTube Tool Calling Agent. | Construye un agente con `LangChain` y `ChatOllama` que usa tools reales de YouTube para extraer `video_id` buscar videos recuperar transcriptos leer metadatos y thumbnails y automatizar tanto un flujo fijo como una cadena recursiva. | A llevar el `tool calling` a un caso multi paso contra servicios externos reales y a comparar orquestacion manual automatizada y recursiva. | [21-youtube_tool_calling_agent_lab](./21-youtube_tool_calling_agent_lab/README.md) |
 | 22 | Natural Language Data Visualization Agent. | Construye un agente de `LangChain` con `create_pandas_dataframe_agent` y `ChatOllama` para consultar un CSV en lenguaje natural generar charts y extraer el Python usado para cada respuesta o visualizacion. | A unir analisis tabular conversacional con graficos reproducibles en disco y a inspeccionar el codigo que el agente ejecuta sobre `pandas` y `matplotlib`. | [22-natural_language_data_visualization_agent_lab](./22-natural_language_data_visualization_agent_lab/README.md) |
+| 23 | Natural Language SQL Agent. | Construye un agente SQL de `LangChain` con `ChatOllama` y una base Chinook local en `SQLite` para traducir preguntas en lenguaje natural a consultas SQL inspeccionables. | A levantar una base relacional reproducible conectar `SQLDatabase Toolkit` y revisar las sentencias SQL que el agente ejecuta sobre un esquema real. | [23-natural_language_sql_agent_lab](./23-natural_language_sql_agent_lab/README.md) |
 
 ## Guia de Prueba
 
@@ -191,13 +192,21 @@ Compilacion: `python -m compileall spikes\22-natural_language_data_visualization
 Ejecucion: `python .\spikes\22-natural_language_data_visualization_agent_lab\main.py`.
 Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_22_natural_language_data_visualization_agent.py`.
 
+### Practica 23
+
+Dependencias extra: `pip install -U langchain-community`.
+Prerequisito: arrancar `ollama serve` y descargar `qwen2.5:7b` o `llama3.2:3b`.
+Compilacion: `python -m compileall spikes\23-natural_language_sql_agent_lab`.
+Ejecucion: `python .\spikes\23-natural_language_sql_agent_lab\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_23_natural_language_sql_agent.py`.
+
 ## Ruta de Aprendizaje Sugerida
 
 1. Empieza por `01` y `02` si quieres dominar prompts `LCEL` y una interfaz minima.
 2. Sigue con `03` `05` y `06` para entender `RAG` embeddings similitud y bases vectoriales.
 3. Continua con `07` y `08` para ver casos de uso concretos de retrieval y recomendacion.
 4. Pasa a `09` y `10` cuando quieras profundizar en retrievers avanzados.
-5. Cierra con `11` `12` `13` `14` `15` `16` `17` `18` `19` `20` `21` y `22` para trabajar `FAISS` contenido multimedia `Text to Speech` vision multimodal captioning visual apps `Gradio` y `Flask` asistentes de reunion generacion de imagenes control local por voz con permisos `tool calling` moderno en `LangChain` analisis tabular con `pandas` y `scikit-learn` el ciclo manual completo de agentes interactivos con tools la integracion multi paso con YouTube real y la visualizacion conversacional de datos con `pandas`.
+5. Cierra con `11` `12` `13` `14` `15` `16` `17` `18` `19` `20` `21` `22` y `23` para trabajar `FAISS` contenido multimedia `Text to Speech` vision multimodal captioning visual apps `Gradio` y `Flask` asistentes de reunion generacion de imagenes control local por voz con permisos `tool calling` moderno en `LangChain` analisis tabular con `pandas` y `scikit-learn` el ciclo manual completo de agentes interactivos con tools la integracion multi paso con YouTube real la visualizacion conversacional de datos con `pandas` y consultas SQL en lenguaje natural sobre un esquema relacional.
 
 ## Nota
 
