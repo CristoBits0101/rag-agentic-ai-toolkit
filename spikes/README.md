@@ -23,6 +23,7 @@ Este archivo resume de forma rapida de que va cada practica del directorio `spik
 | 15 | AI Meeting Assistant. | Transcribe audio de reunion normaliza terminos financieros y genera acta con tareas descargables. | A encadenar `Speech to Text` limpieza de transcript y generacion estructurada en una app de reuniones. | [15-ai_meeting_assistant_lab](./15-ai_meeting_assistant_lab/README.md) |
 | 16 | DALL-E Image Generation. | Genera imagenes desde prompts con `dall-e-2` y `dall-e-3` guarda los resultados en archivos locales y define requests configurables para tamano calidad y salida multiple. | A comparar dos versiones reales de la API de imagenes de `OpenAI` y adaptar salidas de notebook a un flujo ejecutable desde terminal. | [16-dalle_image_generation_lab](./16-dalle_image_generation_lab/README.md) |
 | 17 | Voice Desktop Assistant. | Escucha ordenes desde un micro con `push to talk` las transcribe en local con `Whisper` y ejecuta acciones seguras de escritorio con `Ollama` incluyendo cierre confirmado de apps envio a papelera con confirmacion fallback si `Ollama` devuelve un plan invalido verificacion del estado real del proceso al cerrar y un estado resumido en una sola linea. | A combinar audio local `Speech to Text` planificacion segura con `Ollama` y automatizacion de escritorio con una politica de permisos minima. | [17-voice_desktop_assistant_lab](./17-voice_desktop_assistant_lab/README.md) |
+| 18 | LangChain Tool Calling Math Assistant. | Construye un asistente matematico con tools de `LangChain` definidas con `@tool` un modelo demo con `bind_tools` y un bucle local que ejecuta llamadas secuenciales a herramientas incluyendo una consulta factual local. | A entender el contrato real de `tool calling` probar herramientas por separado y componer calculos multi paso sin depender de APIs externas ni de agentes legacy. | [18-langchain_tool_calling_math_assistant_lab](./18-langchain_tool_calling_math_assistant_lab/README.md) |
 
 ## Guia de Prueba
 
@@ -138,13 +139,19 @@ Compilacion: `python -m compileall src spikes\17-voice_desktop_assistant_lab`.
 Ejecucion: `python .\spikes\17-voice_desktop_assistant_lab\main.py`.
 Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_17_voice_desktop_assistant.py`.
 
+### Practica 18
+
+Compilacion: `python -m compileall spikes\18-langchain_tool_calling_math_assistant_lab`.
+Ejecucion: `python .\spikes\18-langchain_tool_calling_math_assistant_lab\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_18_langchain_tool_calling_math_assistant.py`.
+
 ## Ruta de Aprendizaje Sugerida
 
 1. Empieza por `01` y `02` si quieres dominar prompts `LCEL` y una interfaz minima.
 2. Sigue con `03` `05` y `06` para entender `RAG` embeddings similitud y bases vectoriales.
 3. Continua con `07` y `08` para ver casos de uso concretos de retrieval y recomendacion.
 4. Pasa a `09` y `10` cuando quieras profundizar en retrievers avanzados.
-5. Cierra con `11` `12` `13` `14` `15` `16` y `17` para trabajar `FAISS` contenido multimedia `Text to Speech` vision multimodal captioning visual apps `Gradio` y `Flask` asistentes de reunion generacion de imagenes y control local por voz con permisos.
+5. Cierra con `11` `12` `13` `14` `15` `16` `17` y `18` para trabajar `FAISS` contenido multimedia `Text to Speech` vision multimodal captioning visual apps `Gradio` y `Flask` asistentes de reunion generacion de imagenes control local por voz con permisos y `tool calling` moderno en `LangChain`.
 
 ## Nota
 

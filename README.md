@@ -352,6 +352,18 @@ ollama pull qwen2.5:7b
 python .\spikes\17-voice_desktop_assistant_lab\main.py
 ```
 
+## Ejecutar Practica 18
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# Ejecutar la practica de tool calling con LangChain.
+# El laboratorio usa tools con @tool y un modelo demo local.
+# No necesita claves de OpenAI IBM ni Ollama.
+python .\spikes\18-langchain_tool_calling_math_assistant_lab\main.py
+```
+
 ## Parar Gradio
 
 ```powershell
@@ -778,6 +790,20 @@ spikes/
       voice_desktop_session_orchestration.py
     ui/
       voice_desktop_ui.py
+  18-langchain_tool_calling_math_assistant_lab/
+    README.md
+    main.py
+    config/
+      tool_calling_math_config.py
+    data/
+      tool_calling_fact_catalog.py
+    models/
+      tool_calling_demo_chat_model.py
+      tool_calling_math_entities.py
+    orchestration/
+      tool_calling_agent_orchestration.py
+      tool_calling_lab_runner.py
+      tool_calling_tools_orchestration.py
 ```
 
 ## Glosario de Terminos
