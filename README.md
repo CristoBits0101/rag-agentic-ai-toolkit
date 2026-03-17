@@ -43,6 +43,9 @@ pip install -U langchain-community
 # LangChain Core: Primitivas base e interfaces compartidas.
 pip install -U langchain-core
 
+# LangChain Experimental: Agent toolkits avanzados como el DataFrame agent de la practica 22.
+pip install -U langchain-experimental
+
 # LangChain Ollama: Integracion con modelos servidos por Ollama.
 pip install -U langchain-ollama
 
@@ -78,6 +81,9 @@ pip install -U pandas numpy
 
 # Scikit Learn: Entrenamiento y evaluacion de modelos para la practica 19.
 pip install -U scikit-learn
+
+# Matplotlib y Seaborn: Visualizacion para la practica 22.
+pip install -U matplotlib seaborn
 
 # Gradio: Interfaces web rapidas para demos y pruebas.
 pip install -U gradio
@@ -498,6 +504,29 @@ ollama pull llama3.2:3b
 # Ejecutar la practica de agente con tools reales de YouTube.
 # El laboratorio demuestra tool calling manual cadena fija y cadena recursiva.
 python .\spikes\21-youtube_tool_calling_agent_lab\main.py
+```
+
+## Ejecutar Practica 22
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# Instalar dependencias del laboratorio de visualizacion.
+pip install -U langchain-experimental matplotlib seaborn
+
+# Arrancar Ollama.
+ollama serve
+
+# Descargar un modelo recomendado para el DataFrame agent.
+ollama pull qwen2.5:7b
+
+# Alternativa de menor consumo.
+ollama pull llama3.2:3b
+
+# Ejecutar la practica de visualizacion conversacional con pandas.
+# El laboratorio guarda los charts en artifacts y muestra el codigo generado por el agente.
+python .\spikes\22-natural_language_data_visualization_agent_lab\main.py
 ```
 
 ## Parar Gradio
