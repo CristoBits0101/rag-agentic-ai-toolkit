@@ -1,8 +1,23 @@
 # --- DEPENDENCIAS ---
 
-DEMO_INTRODUCTION = (
-    "Practica 18 adapta el lab de tool calling de LangChain con un modelo demo "
-    "determinista y un catalogo factual local."
+OLLAMA_API_URL = "http://127.0.0.1:11434/api/chat"
+OLLAMA_TAGS_URL = "http://127.0.0.1:11434/api/tags"
+OLLAMA_MODEL_CANDIDATES = (
+    "qwen2.5:7b",
+    "llama3.2:3b",
+    "mistral",
+)
+
+LAB_INTRODUCTION = (
+    "Practica 18 adapta el lab de tool calling de LangChain con un modelo real "
+    "servido por Ollama y un catalogo factual local."
+)
+
+TOOL_CALLING_SYSTEM_PROMPT = (
+    "You are a mathematical assistant that must use tools for arithmetic or factual "
+    "questions. Use one tool call at a time. For multi step questions complete the "
+    "first tool call then decide the next one using the tool result. Do not invent "
+    "numeric results when a tool can compute them."
 )
 
 DEFAULT_TOOL_CALLING_QUERIES = [

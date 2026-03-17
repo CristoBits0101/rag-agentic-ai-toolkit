@@ -23,7 +23,8 @@ Este archivo resume de forma rapida de que va cada practica del directorio `spik
 | 15 | AI Meeting Assistant. | Transcribe audio de reunion normaliza terminos financieros y genera acta con tareas descargables. | A encadenar `Speech to Text` limpieza de transcript y generacion estructurada en una app de reuniones. | [15-ai_meeting_assistant_lab](./15-ai_meeting_assistant_lab/README.md) |
 | 16 | DALL-E Image Generation. | Genera imagenes desde prompts con `dall-e-2` y `dall-e-3` guarda los resultados en archivos locales y define requests configurables para tamano calidad y salida multiple. | A comparar dos versiones reales de la API de imagenes de `OpenAI` y adaptar salidas de notebook a un flujo ejecutable desde terminal. | [16-dalle_image_generation_lab](./16-dalle_image_generation_lab/README.md) |
 | 17 | Voice Desktop Assistant. | Escucha ordenes desde un micro con `push to talk` las transcribe en local con `Whisper` y ejecuta acciones seguras de escritorio con `Ollama` incluyendo cierre confirmado de apps envio a papelera con confirmacion fallback si `Ollama` devuelve un plan invalido verificacion del estado real del proceso al cerrar y un estado resumido en una sola linea. | A combinar audio local `Speech to Text` planificacion segura con `Ollama` y automatizacion de escritorio con una politica de permisos minima. | [17-voice_desktop_assistant_lab](./17-voice_desktop_assistant_lab/README.md) |
-| 18 | LangChain Tool Calling Math Assistant. | Construye un asistente matematico con tools de `LangChain` definidas con `@tool` un modelo demo con `bind_tools` y un bucle local que ejecuta llamadas secuenciales a herramientas incluyendo una consulta factual local. | A entender el contrato real de `tool calling` probar herramientas por separado y componer calculos multi paso sin depender de APIs externas ni de agentes legacy. | [18-langchain_tool_calling_math_assistant_lab](./18-langchain_tool_calling_math_assistant_lab/README.md) |
+| 18 | LangChain Tool Calling Math Assistant. | Construye un asistente matematico con tools de `LangChain` definidas con `@tool` y `ChatOllama` como modelo principal junto con un catalogo factual local y un bucle controlado de tool calling. | A entender el contrato real de `tool calling` probar herramientas por separado y componer calculos multi paso con un modelo real compatible con el stack del repo. | [18-langchain_tool_calling_math_assistant_lab](./18-langchain_tool_calling_math_assistant_lab/README.md) |
+| 19 | DataWizard AI Powered Data Analysis. | Construye un asistente de analisis de datos con `LangChain` y `ChatOllama` que descubre CSV locales mantiene una cache de `DataFrame` resume datasets ejecuta metodos seguros de `pandas` y evalua modelos de clasificacion o regresion con `scikit-learn`. | A conectar lenguaje natural con analisis tabular real y a comparar un baseline conversacional sin tools frente a un executor agent con modelo real y workflows multi paso. | [19-datawizard_ai_powered_data_analysis_lab](./19-datawizard_ai_powered_data_analysis_lab/README.md) |
 
 ## Guia de Prueba
 
@@ -141,9 +142,18 @@ Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_s
 
 ### Practica 18
 
+Prerequisito: arrancar `ollama serve` y descargar `qwen2.5:7b` o `llama3.2:3b`.
 Compilacion: `python -m compileall spikes\18-langchain_tool_calling_math_assistant_lab`.
 Ejecucion: `python .\spikes\18-langchain_tool_calling_math_assistant_lab\main.py`.
 Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_18_langchain_tool_calling_math_assistant.py`.
+
+### Practica 19
+
+Dependencias extra: `pip install -U pandas numpy scikit-learn`.
+Prerequisito: arrancar `ollama serve` y descargar `qwen2.5:7b` o `llama3.2:3b`.
+Compilacion: `python -m compileall spikes\19-datawizard_ai_powered_data_analysis_lab`.
+Ejecucion: `python .\spikes\19-datawizard_ai_powered_data_analysis_lab\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_19_datawizard_ai_powered_data_analysis.py`.
 
 ## Ruta de Aprendizaje Sugerida
 
@@ -151,10 +161,10 @@ Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_s
 2. Sigue con `03` `05` y `06` para entender `RAG` embeddings similitud y bases vectoriales.
 3. Continua con `07` y `08` para ver casos de uso concretos de retrieval y recomendacion.
 4. Pasa a `09` y `10` cuando quieras profundizar en retrievers avanzados.
-5. Cierra con `11` `12` `13` `14` `15` `16` `17` y `18` para trabajar `FAISS` contenido multimedia `Text to Speech` vision multimodal captioning visual apps `Gradio` y `Flask` asistentes de reunion generacion de imagenes control local por voz con permisos y `tool calling` moderno en `LangChain`.
+5. Cierra con `11` `12` `13` `14` `15` `16` `17` `18` y `19` para trabajar `FAISS` contenido multimedia `Text to Speech` vision multimodal captioning visual apps `Gradio` y `Flask` asistentes de reunion generacion de imagenes control local por voz con permisos `tool calling` moderno en `LangChain` y analisis tabular con `pandas` y `scikit-learn`.
 
 ## Nota
 
-La mayoria de practicas estan adaptadas para ejecutarse de forma local y reproducible. Cuando un laboratorio original dependia de servicios externos el repositorio usa datos locales embeddings deterministas o modelos de demostracion para mantener estabilidad y trazabilidad en tests.
+La mayoria de practicas estan adaptadas para ejecutarse de forma local y reproducible. Cuando un laboratorio original dependia de servicios externos el repositorio prioriza modelos reales locales como `Ollama` si encajan tecnicamente con el caso de uso. Los datos locales los embeddings deterministas y los modelos de demostracion se reservan sobre todo para tests o para respaldos justificados cuando la practica no puede depender de red o credenciales.
 
 Cuando una practica de `spikes` puede resolverse bien con `Ollama` se prioriza esa via. Si la practica es multimodal o el caso de uso no encaja con `Ollama` se debe usar el modelo recomendado en el `README` de la propia practica. Si para ese mismo caso existe una alternativa gratuita y accesible en internet se debe priorizar esa opcion gratuita.

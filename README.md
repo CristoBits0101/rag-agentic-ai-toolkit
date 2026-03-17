@@ -73,6 +73,12 @@ pip install -U python-dotenv
 # PyYAML: Lectura y escritura de archivos YAML.
 pip install -U PyYAML
 
+# Pandas y NumPy: Analisis tabular y calculo numerico para la practica 19.
+pip install -U pandas numpy
+
+# Scikit Learn: Entrenamiento y evaluacion de modelos para la practica 19.
+pip install -U scikit-learn
+
 # Gradio: Interfaces web rapidas para demos y pruebas.
 pip install -U gradio
 
@@ -358,10 +364,35 @@ python .\spikes\17-voice_desktop_assistant_lab\main.py
 # Activar el entorno virtual.
 .\venv\Scripts\Activate.ps1
 
+# Arrancar Ollama.
+ollama serve
+
+# Descargar un modelo recomendado para tool calling.
+ollama pull qwen2.5:7b
+
 # Ejecutar la practica de tool calling con LangChain.
-# El laboratorio usa tools con @tool y un modelo demo local.
-# No necesita claves de OpenAI IBM ni Ollama.
+# El laboratorio usa tools con @tool y ChatOllama como modelo principal.
 python .\spikes\18-langchain_tool_calling_math_assistant_lab\main.py
+```
+
+## Ejecutar Practica 19
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# Instalar dependencias del laboratorio DataWizard.
+pip install -U pandas numpy scikit-learn
+
+# Arrancar Ollama.
+ollama serve
+
+# Descargar un modelo recomendado para DataWizard.
+ollama pull qwen2.5:7b
+
+# Ejecutar la practica de analisis de datos con tool calling local.
+# El laboratorio compara un baseline sin tools con un executor agent.
+python .\spikes\19-datawizard_ai_powered_data_analysis_lab\main.py
 ```
 
 ## Parar Gradio
@@ -798,12 +829,30 @@ spikes/
     data/
       tool_calling_fact_catalog.py
     models/
+      tool_calling_ollama_gateway.py
       tool_calling_demo_chat_model.py
       tool_calling_math_entities.py
     orchestration/
       tool_calling_agent_orchestration.py
       tool_calling_lab_runner.py
       tool_calling_tools_orchestration.py
+  19-datawizard_ai_powered_data_analysis_lab/
+    README.md
+    main.py
+    config/
+      datawizard_config.py
+    data/
+      classification-dataset.csv
+      regression-dataset.csv
+    models/
+      datawizard_baseline_chat.py
+      datawizard_demo_chat_model.py
+      datawizard_ollama_gateway.py
+      datawizard_entities.py
+    orchestration/
+      datawizard_agent_orchestration.py
+      datawizard_lab_runner.py
+      datawizard_tools_orchestration.py
 ```
 
 ## Glosario de Terminos

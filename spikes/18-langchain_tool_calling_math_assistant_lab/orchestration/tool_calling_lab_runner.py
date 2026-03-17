@@ -1,6 +1,6 @@
 # --- DEPENDENCIAS ---
 from config.tool_calling_math_config import DEFAULT_TOOL_CALLING_QUERIES
-from config.tool_calling_math_config import DEMO_INTRODUCTION
+from config.tool_calling_math_config import LAB_INTRODUCTION
 from orchestration.tool_calling_agent_orchestration import execute_tool_calling_query
 from orchestration.tool_calling_tools_orchestration import add_numbers
 from orchestration.tool_calling_tools_orchestration import build_math_assistant_tools
@@ -12,7 +12,7 @@ def print_divider(title: str) -> None:
 
 
 def run_langchain_tool_calling_math_assistant_lab() -> None:
-    print(DEMO_INTRODUCTION)
+    print(LAB_INTRODUCTION)
     print_divider("Tool Schema")
     for schema in describe_tool_schemas(build_math_assistant_tools()):
         print(schema["name"], "->", list(schema["args"].keys()))

@@ -53,12 +53,17 @@
 29. No se debe cerrar una practica con errores de ejecucion advertencias evitables imports no resueltos o alertas de configuracion que hayan sido introducidos por el cambio.
 30. Toda practica nueva o actualizada debe reflejarse en la documentacion correspondiente incluyendo `README.md` general `spikes/README.md` y el `README.md` propio de la practica cuando aplique.
 31. Cuando una practica nueva o actualizada introduzca dependencias comandos de ejecucion conceptos o guias de uso se deben documentar de forma explicita en los README afectados.
+32. Toda practica adaptada desde material externo debe usar modelos reales disponibles y verificables como implementacion principal.
+33. En practicas de `spikes` se deben priorizar modelos disponibles en `Ollama` y si eso no encaja se deben usar alternativas reales gratuitas o accesibles que mantengan el objetivo tecnico y pedagogico de la practica.
+34. No se permite introducir modelos irreales simuladores de respuesta o demos falsas como camino ejecutable de una practica.
+35. Si se necesita aislamiento para tests se deben mockear gateways proveedores o transporte sin sustituir la implementacion real del spike.
+36. Toda practica debe poder ejecutarse y probarse localmente sin perder el objetivo principal del material adaptado.
 
 # =============================================================================================
 # VALIDACION ANTES DE EJECUTAR EN LOCAL
 # =============================================================================================
 
-32. Antes de arrancar el servidor web en local se deben ejecutar los test.
-33. Antes de arrancar el servidor web en local se debe validar la compilacion de Python con `python -m compileall src`.
-34. Si falla algun test o falla la compilacion el servidor no se arranca y se reporta el error.
-35. Antes de arrancar el servidor web en local se debe actualizar el README cuando existan cambios funcionales o cambios de arquitectura.
+37. Antes de arrancar el servidor web en local se deben ejecutar los test.
+38. Antes de arrancar el servidor web en local se debe validar la compilacion de Python con `python -m compileall src`.
+39. Si falla algun test o falla la compilacion el servidor no se arranca y se reporta el error.
+40. Antes de arrancar el servidor web en local se debe actualizar el README cuando existan cambios funcionales o cambios de arquitectura.
