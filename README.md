@@ -932,6 +932,46 @@ Tras la extension de ambas practicas la `14` tambien cubre captioning en lote so
 | Output Parsers | Componentes que transforman la salida del modelo en formatos estructurados. |
 | Prompt Templates | Plantillas predefinidas para construir prompts de forma reutilizable y consistente. |
 
+## Mapa de Herramientas de LangChain en el Repositorio
+
+Esta guia no intenta cubrir todo el catalogo de `LangChain`. Sirve para conectar los tipos de herramientas integradas con las practicas ya presentes en el repo y para detectar huecos naturales de expansion. La disponibilidad la autenticacion y el coste de cada integracion pueden cambiar segun proveedor asi que conviene revisar siempre la documentacion oficial antes de adoptarla.
+
+| Area | Herramientas o toolkits | Estado en el repo | Uso sugerido |
+| --- | --- | --- | --- |
+| Retrieval documental | `Document Loaders` `VectorStoreQA` `SelfQueryRetriever` `ParentDocumentRetriever` | Cubierto. | Practicas `03` `09` y `12`. |
+| Busqueda vectorial | `Chroma` `FAISS` `BM25` `Query Fusion` | Cubierto. | Practicas `06` `07` `08` `10` y `11`. |
+| Busqueda externa | `Wikipedia` `Tavily Search` `ArXiv` | Parcial. | Extension natural de `09` o `12`. |
+| Analisis y calculo | `Python REPL` `Pandas DataFrame` `LLMMathChain` | No cubierto todavia. | Buen candidato para un spike de agentes analiticos. |
+| Datos estructurados | `SQL Database Toolkit` `JSON Toolkit` | No cubierto todavia. | Buen candidato para consultas sobre datos reales. |
+| Web y APIs | `Requests Toolkit` `Playwright Browser` | No cubierto todavia. | Buen candidato para agentes con navegacion y automatizacion web. |
+| Productividad | `GitHub Toolkit` `Slack Toolkit` `Gmail Toolkit` | No cubierto todavia. | Interesante para workflows agenticos orientados a negocio. |
+
+## Cuando Usar LLMs Flujos o Agentes
+
+No toda tarea con IA necesita un agente. Para tareas basicas y bien definidas suele bastar con un `LLM` y un prompt claro. Cuando el proceso es predecible y conviene controlar coste latencia y trazabilidad suele resultar mejor un workflow fijo. Los agentes quedan reservados para escenarios con mas ambiguedad donde hace falta decidir pasos usar herramientas distintas o adaptarse sobre la marcha.
+
+Una forma practica de decidirlo es revisar cuatro factores: ambiguedad de la tarea flexibilidad de los pasos variedad de herramientas necesarias e impacto del fallo. Si la tarea es simple repetible o de alto riesgo operativo conviene evitar agentes y preferir pipelines deterministas con validaciones explicitas.
+
+Los agentes actuales todavia presentan limites de fiabilidad coste y supervision. Por eso deben desplegarse con limites claros registros observabilidad control de resultados y un humano en el bucle cuando el impacto del error sea relevante.
+
+## Tool Calling y Arquitectura de Agentes
+
+El `tool calling` amplia a los `LLM` al conectarlos con datos y acciones externas en tiempo real. En lugar de depender solo del conocimiento del modelo permite consultar APIs bases de datos buscadores sistemas corporativos y utilidades multimodales para trabajar con texto imagen audio o video. Aunque el nombre sugiere ejecucion directa el modelo no ejecuta la herramienta por si solo. Lo que hace es proponer una llamada estructurada con el nombre de la herramienta y sus argumentos para que la aplicacion decida si la ejecuta o no.
+
+Cuando las herramientas se integran desde un framework como `LangChain` se reduce fragilidad frente a implementaciones ad hoc en cliente y mejora la trazabilidad del flujo. Esto ayuda a bajar alucinaciones porque el modelo deja de inventar ciertos datos y pasa a recuperarlos desde fuentes externas o a ejecutar acciones acotadas mediante interfaces definidas. Tambien encaja bien con patrones `RAG` cuando el agente necesita apoyarse en bases de conocimiento propias o especializadas. En `LangChain` la jerarquia base parte de `BaseTool` y para herramientas basadas en funciones suele ser preferible usar `@tool` o `StructuredTool` antes que enfoques mas antiguos o menos estructurados.
+
+Una arquitectura de agente eficaz suele separar memoria uso de herramientas planificacion y razonamiento en componentes modulares. Ese enfoque facilita auditar decisiones controlar riesgos y sustituir piezas concretas sin redisenar todo el sistema. Patrones como `Zero-Shot ReAct` pueden servir como punto de partida cuando el problema esta acotado y el agente solo necesita razonamiento sencillo con seleccion de herramientas.
+
+## Ciclo de Tool Calling
+
+En un flujo normal de `tool calling` la aplicacion registra primero las herramientas disponibles junto con su esquema de entrada. Despues el modelo recibe la consulta del usuario y decide si necesita llamar una herramienta. Si la necesita devuelve una solicitud estructurada con nombre y argumentos. La aplicacion valida esa solicitud ejecuta la herramienta si procede y devuelve el resultado al modelo para que redacte la respuesta final con ese dato ya incorporado al contexto.
+
+## LCEL y Runnables
+
+`LCEL` ofrece una forma simple de encadenar pasos con el operador `|` cuando el flujo es claro y determinista. Su base comun son los `Runnables` que permiten componer prompts modelos parsers y transformaciones bajo una interfaz consistente. Eso facilita reutilizar operaciones como `invoke` `batch` `ainvoke` o `stream` sin redisenar cada pipeline desde cero.
+
+En este repositorio `LCEL` encaja mejor en escenarios donde la secuencia de pasos ya esta decidida y conviene priorizar legibilidad trazabilidad y coste estable. Esa idea aparece de forma temprana en la [practica 01](C:/Workspace/rag-agentic-ai-toolkit/spikes/01-prompting_lcel_lab/README.md) y sirve como contrapunto a los casos donde un agente con herramientas necesita mas autonomia.
+
 ## Resumen de ChromaDB
 
 Las bases de datos vectoriales simplifican el almacenamiento la organizacion y la recuperacion de datos complejos como imagenes gustos sonidos texto patrones mapas informacion genomica y otros tipos de datos de alta dimensionalidad. En lugar de guardar solo registros tradicionales almacenan objetos matematicos definidos por magnitud y direccion. Un vector es una matriz de valores numericos que representa atributos o caracteristicas de los datos originales.
