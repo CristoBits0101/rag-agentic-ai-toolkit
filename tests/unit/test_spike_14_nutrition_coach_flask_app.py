@@ -91,7 +91,7 @@ def test_format_response_returns_html_markup():
     assert "<li>Cheeseburger</li>" in formatted
 
 
-def test_nutrition_service_falls_back_when_response_is_short():
+def test_nutrition_service_returns_explicit_error_when_response_is_short():
     image_processor = NutritionCoachImageProcessor()
     dataset = build_nutrition_coach_dataset(image_processor)
     related_items = get_all_items_for_image("salad_bowl", dataset)
@@ -106,8 +106,9 @@ def test_nutrition_service_falls_back_when_response_is_short():
         user_query="How many calories are in this food?",
     )
 
-    assert "**Identification**" in response
-    assert "**Nutrient Breakdown**" in response
+    assert "Error generating response" in response
+    assert "**Reference Context**" in response
+    assert "**Reference Nutrients**" in response
     assert "Total Calories: 367" in response
 
 

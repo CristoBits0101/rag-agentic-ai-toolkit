@@ -96,7 +96,7 @@ def test_format_alternatives_response_appends_markdown_section():
     assert "Sand blazer" in formatted
 
 
-def test_style_finder_service_falls_back_when_response_is_short():
+def test_style_finder_service_returns_explicit_error_when_response_is_short():
     image_processor = StyleFinderImageProcessor()
     dataset = build_style_finder_dataset(image_processor)
     matched_row = dataset.iloc[0]
@@ -113,7 +113,7 @@ def test_style_finder_service_falls_back_when_response_is_short():
         similarity_score=0.95,
     )
 
-    assert "Fashion Analysis" in response
+    assert "Error generating response" in response
     assert "ITEM DETAILS:" in response
 
 

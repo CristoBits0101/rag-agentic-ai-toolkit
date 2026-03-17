@@ -27,10 +27,8 @@ from config.advanced_retrievers_config import SIMILARITY_TOP_K
 from data.advanced_retrievers_documents import LONG_FORM_DOCUMENTS
 from data.advanced_retrievers_documents import RECURSIVE_TOPIC_DOCUMENTS
 from data.advanced_retrievers_documents import SAMPLE_DOCUMENTS
-from models.advanced_retrievers_demo_llm import build_advanced_retrievers_demo_llm
-from models.llamaindex_demo_embedding_gateway import (
-    build_advanced_retrievers_demo_embedding,
-)
+from models.advanced_retrievers_ollama_gateway import build_advanced_retrievers_embedding
+from models.advanced_retrievers_ollama_gateway import build_advanced_retrievers_llm
 
 # --- MODELOS ---
 @dataclass(frozen=True)
@@ -53,10 +51,10 @@ class RecursiveBundle:
     recursive_retriever: RecursiveRetriever
 
 
-def configure_demo_settings():
-    # Configura el LLM y los embeddings de demostracion.
-    Settings.llm = build_advanced_retrievers_demo_llm()
-    Settings.embed_model = build_advanced_retrievers_demo_embedding()
+def configure_ollama_settings():
+    # Configura el LLM y los embeddings reales servidos por Ollama.
+    Settings.llm = build_advanced_retrievers_llm()
+    Settings.embed_model = build_advanced_retrievers_embedding()
 
 
 def build_sample_documents() -> list[Document]:
@@ -84,7 +82,7 @@ def build_long_form_documents() -> list[Document]:
 @lru_cache(maxsize=1)
 def build_advanced_retrievers_lab_context() -> AdvancedRetrieversLabContext:
     # Crea documentos nodos e indices base del laboratorio.
-    configure_demo_settings()
+    configure_ollama_settings()
     documents = build_sample_documents()
     nodes = SentenceSplitter(chunk_size=160, chunk_overlap=20).get_nodes_from_documents(
         documents
@@ -107,7 +105,7 @@ def build_advanced_retrievers_lab_context() -> AdvancedRetrieversLabContext:
 @lru_cache(maxsize=1)
 def build_auto_merging_bundle() -> AutoMergingBundle:
     # Construye el storage jerarquico para auto merging.
-    configure_demo_settings()
+    configure_ollama_settings()
     documents = build_long_form_documents()
     parser = HierarchicalNodeParser.from_defaults(
         chunk_sizes=HIERARCHICAL_CHUNK_SIZES,
@@ -129,7 +127,7 @@ def build_auto_merging_bundle() -> AutoMergingBundle:
 @lru_cache(maxsize=1)
 def build_recursive_bundle() -> RecursiveBundle:
     # Construye un recursive retriever con dos niveles de referencias.
-    configure_demo_settings()
+    configure_ollama_settings()
     retriever_dict = {}
 
     for topic_name, records in RECURSIVE_TOPIC_DOCUMENTS.items():

@@ -17,42 +17,7 @@ class NutritionCoachVisionService:
         self.response_generator = response_generator
 
     def generate_response(self, encoded_image: str, prompt: str) -> str:
-        try:
-            return self.response_generator(self.model_name, prompt, encoded_image)
-        except Exception as exc:
-            logger.error("Error generating nutrition response: %s", str(exc))
-            return f"Error generating response: {exc}"
-
-    def build_fallback_response(self, related_items) -> str:
-        total_calories = int(related_items["Calories"].sum())
-        lines = [
-            "**Identification**",
-            build_identification_lines(related_items),
-            "",
-            "**Portion Size & Calorie Estimation**",
-            build_calorie_breakdown_lines(related_items),
-            "",
-            "**Total Calories**",
-            f"Total Calories: {total_calories}",
-            "",
-            "**Nutrient Breakdown**",
-            build_nutrient_breakdown_lines(related_items),
-            "",
-            "**Health Evaluation**",
-            (
-                "This estimate is grounded in the local nutrition catalog and suggests a balanced reading of "
-                "the visible meal components."
-            ),
-            "",
-            "**Disclaimer**",
-            (
-                "The nutritional information and calorie estimates provided are approximate and are based on "
-                "general food data. Actual values may vary depending on factors such as portion size specific "
-                "ingredients preparation methods and individual variations. For precise dietary advice or "
-                "medical guidance consult a qualified nutritionist or healthcare provider."
-            ),
-        ]
-        return "\n".join(lines)
+        return self.response_generator(self.model_name, prompt, encoded_image)
 
     def generate_nutrition_response(
         self,
@@ -73,10 +38,23 @@ class NutritionCoachVisionService:
             "**Disclaimer**\n\n"
             f"User query: {user_query}"
         )
-        response = self.generate_response(user_image_base64, prompt)
+        try:
+            response = self.generate_response(user_image_base64, prompt)
+        except Exception as exc:
+            logger.error("Error generating nutrition response: %s", str(exc))
+            return f"Error generating response: {exc}"
 
-        if response.startswith("Error generating response:") or len(response) < 120:
-            return self.build_fallback_response(related_items)
+        if len(response) < 120:
+            total_calories = int(related_items["Calories"].sum())
+            return (
+                "Error generating response: Ollama returned an incomplete nutrition analysis.\n\n"
+                "**Reference Context**\n"
+                f"{build_identification_lines(related_items)}\n\n"
+                "**Estimated Total Calories**\n"
+                f"Total Calories: {total_calories}\n\n"
+                "**Reference Nutrients**\n"
+                f"{build_nutrient_breakdown_lines(related_items)}"
+            )
 
         if "**Disclaimer**" not in response and "Disclaimer" not in response:
             response += (

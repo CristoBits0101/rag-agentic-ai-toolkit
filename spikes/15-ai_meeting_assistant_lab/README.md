@@ -10,15 +10,14 @@
 
 ## Adaptacion
 
-Esta practica adapta el laboratorio original a una version local y reproducible del repositorio. `Whisper` no se sustituye por `Ollama` porque son componentes de naturaleza distinta. Para transcripcion el spike intenta usar `Whisper` mediante `transformers` si esa dependencia esta instalada. Si no lo esta usa un transcript local de demostracion para mantener estabilidad en tests. Para la generacion de actas y tareas el flujo usa un `DemoLLM` local y deja `Ollama` como opcion gratuita y compatible para quien quiera probar un modelo real de texto.
+Esta practica adapta el laboratorio original a una version local y reproducible del repositorio. `Whisper` no se sustituye por `Ollama` porque son componentes de naturaleza distinta. La transcripcion puede ejecutarse con `Whisper` local o apoyarse en el audio de muestra del spike para pruebas controladas. La generacion de actas y tareas usa un modelo real de texto en `Ollama`.
 
 ## Roles de Archivos
 
 - `main.py`: Punto de entrada de la practica.
 - `config/meeting_assistant_config.py`: Parametros del spike y nombres de archivos.
-- `data/meeting_transcript_catalog.py`: Transcript local de muestra para la reunion demo.
-- `models/meeting_assistant_demo_llm.py`: Modelo local para limpieza financiera y actas.
-- `models/meeting_assistant_llm_gateway.py`: Seleccion entre `Ollama` y `DemoLLM`.
+- `data/meeting_transcript_catalog.py`: Transcript local de muestra para la reunion de ejemplo.
+- `models/meeting_assistant_llm_gateway.py`: Acceso al modelo real de `Ollama`.
 - `orchestration/meeting_transcription_orchestration.py`: Transcripcion con `Whisper` opcional o catalogo local.
 - `orchestration/meeting_cleanup_orchestration.py`: Ajuste del transcript y extraccion del bloque corregido.
 - `orchestration/meeting_minutes_orchestration.py`: Prompt template chain y escritura del reporte final.
@@ -31,6 +30,8 @@ Esta practica adapta el laboratorio original a una version local y reproducible 
 1. Activar entorno: `.\venv\Scripts\Activate.ps1`.
 2. Dependencias ya cubiertas por el repo: `gradio` `langchain-core` y `langchain-ollama`.
 3. Dependencia opcional para `Whisper`: `pip install -U transformers torch`.
+4. Arrancar `Ollama`: `ollama serve`.
+5. Modelo de texto: `ollama pull llama3.2:3b`.
 
 ## Verificacion
 
@@ -41,7 +42,7 @@ Esta practica adapta el laboratorio original a una version local y reproducible 
 ## Cobertura
 
 1. `remove_non_ascii`: Limpieza base del transcript.
-2. `transcribe_audio_source`: Transcripcion por catalogo local o `Whisper` opcional.
+2. `transcribe_audio_source`: Transcripcion con `Whisper` o con el audio de ejemplo del spike.
 3. `product_assistant`: Normalizacion de terminos financieros.
 4. `generate_meeting_minutes`: Generacion de acta y tareas.
 5. `transcript_audio`: Flujo completo con escritura de archivo descargable.

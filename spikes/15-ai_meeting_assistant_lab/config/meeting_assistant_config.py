@@ -1,6 +1,6 @@
 # --- DEPENDENCIAS ---
 OLLAMA_MODEL_NAME = "llama3.2:3b"
-USE_OLLAMA_BY_DEFAULT = False
+USE_OLLAMA_BY_DEFAULT = True
 SAMPLE_AUDIO_FILE_NAME = "sample-meeting.wav"
 OUTPUT_FILE_NAME = "meeting_minutes_and_tasks.txt"
 WHISPER_MODEL_NAME = "openai/whisper-tiny.en"

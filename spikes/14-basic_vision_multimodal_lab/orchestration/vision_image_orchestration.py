@@ -1,6 +1,7 @@
 # --- DEPENDENCIAS ---
 import base64
 import json
+from pathlib import Path
 
 from data.vision_sample_dataset import VISION_SAMPLE_RECORDS
 
@@ -21,6 +22,10 @@ def build_record_payload(image_id: str) -> bytes:
 
 
 def encode_image_from_url(image_url: str) -> str:
+    path = Path(image_url)
+    if path.exists():
+        return encode_image_bytes(path.read_bytes())
+
     for record in VISION_SAMPLE_RECORDS.values():
         if record.image_url == image_url:
             return encode_image_bytes(build_record_payload(record.image_id))

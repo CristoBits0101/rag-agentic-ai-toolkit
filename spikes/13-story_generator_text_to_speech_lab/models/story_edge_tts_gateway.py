@@ -1,6 +1,6 @@
 # --- DEPENDENCIAS ---
-import shutil
 import subprocess
+import sys
 from pathlib import Path
 
 from config.story_real_provider_config import EDGE_TTS_VOICE
@@ -11,15 +11,14 @@ def synthesize_story_with_edge_tts(
     output_path: str | Path,
     voice: str = EDGE_TTS_VOICE,
 ) -> Path:
-    if not shutil.which("edge-tts"):
-        raise RuntimeError("edge-tts is not available. Install it with pip install -U edge-tts.")
-
     path = Path(output_path)
     path.parent.mkdir(parents=True, exist_ok=True)
 
     result = subprocess.run(
         [
-            "edge-tts",
+            sys.executable,
+            "-m",
+            "edge_tts",
             "--voice",
             voice,
             "--text",

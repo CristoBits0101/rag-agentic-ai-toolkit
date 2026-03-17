@@ -1,49 +1,31 @@
 # --- DEPENDENCIAS ---
-import numpy as np
+import base64
+from io import BytesIO
 
-from data.vision_sample_dataset import FASHION_CATALOG_ITEMS
-from data.vision_sample_dataset import VISION_SAMPLE_RECORDS
-from models.vision_demo_model import decode_sample_record
+import numpy as np
+from PIL import Image
+
+from data.style_finder_fashion_dataset import STYLE_FINDER_OUTFITS
+from models.style_finder_image_processor import StyleFinderImageProcessor
+from orchestration.style_finder_asset_orchestration import ensure_style_finder_example_assets
 
 # --- SIMILARITY ---
-VISION_VOCABULARY = (
-    "fashion",
-    "business",
-    "casual",
-    "formal",
-    "navy",
-    "white",
-    "black",
-    "olive",
-    "beige",
-    "blazer",
-    "blouse",
-    "trousers",
-    "overshirt",
-    "chinos",
-    "dress",
-    "silver",
-)
-
-
-def build_term_vector(terms: tuple[str, ...]) -> np.ndarray:
-    normalized_terms = {term.lower() for term in terms}
-    return np.array(
-        [1.0 if token in normalized_terms else 0.0 for token in VISION_VOCABULARY],
-        dtype=float,
-    )
-
-
 def build_catalog_dataset() -> list[dict]:
+    image_processor = StyleFinderImageProcessor()
+    image_paths = ensure_style_finder_example_assets()
     dataset = []
 
-    for item in FASHION_CATALOG_ITEMS:
+    for outfit in STYLE_FINDER_OUTFITS:
+        primary_item = outfit["items"][0]
         dataset.append(
             {
-                "Item Name": item.item_name,
-                "Price": item.price,
-                "Link": item.link,
-                "Embedding": build_term_vector(item.vector_terms),
+                "Item Name": primary_item["Item Name"],
+                "Look Title": outfit["title"],
+                "Price": primary_item["Price"],
+                "Link": primary_item["Link"],
+                "Embedding": image_processor.build_embedding_for_path(
+                    image_paths[outfit["image_key"]]
+                ),
             }
         )
 
@@ -51,11 +33,10 @@ def build_catalog_dataset() -> list[dict]:
 
 
 def build_image_vector(encoded_image: str) -> np.ndarray:
-    record = decode_sample_record(encoded_image)
-    if not record:
-        raise ValueError("Unsupported encoded image for similarity matching.")
-
-    return build_term_vector(record.vector_terms)
+    image_bytes = base64.b64decode(encoded_image)
+    image = Image.open(BytesIO(image_bytes)).convert("RGB")
+    image_processor = StyleFinderImageProcessor()
+    return image_processor.extract_feature_vector(image)
 
 
 def cosine_similarity_score(left: np.ndarray, right: np.ndarray) -> float:

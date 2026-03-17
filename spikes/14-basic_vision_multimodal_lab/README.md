@@ -5,7 +5,7 @@
 1. Vision querying: Consulta una imagen con texto y obtiene una respuesta contextual.
 2. Vision messages: Crea mensajes con texto e imagen usando el formato multimodal mas comun.
 3. Object detection por pregunta: Responde conteos atributos y lectura simple de texto visual.
-4. Similaridad visual ligera: Compara una imagen con un catalogo mediante embeddings deterministas.
+4. Similaridad visual ligera: Compara una imagen con un catalogo mediante embeddings visuales locales.
 5. Prompts especializados: Demuestra un flujo de moda y otro de nutricion sin servicios remotos.
 6. Variantes reales con Ollama: Ejemplos separados para `llava` `llama3.2-vision` y `qwen2.5vl`.
 7. Style Finder avanzado: App de moda con retrieval visual dataset estructurado y analisis catalogado con `Gradio`.
@@ -13,15 +13,15 @@
 
 ## Adaptacion
 
-Esta practica toma ideas de querying visual object detection por prompt y similitud visual y las adapta a una version local y reproducible del repositorio. En lugar de depender de un modelo de vision remoto o de `ResNet50` con pesos externos el spike usa un `VisionDemoModel` y muestras visuales locales codificadas como payloads base64. Esto permite practicar el flujo completo de mensajes multimodales sin costes de infraestructura ni descargas pesadas.
+Esta practica toma ideas de querying visual object detection por prompt y similitud visual y las adapta a una version local y reproducible del repositorio. La ejecucion base usa un modelo real de vision en `Ollama` con imagenes locales y mensajes multimodales reales.
 
-La practica base se mantiene determinista para tests. Ademas incluye tres variantes reales pensadas para `Ollama` que permiten ejecutar el mismo patron con modelos de vision disponibles hoy en su libreria oficial: `llava_vision_querying` `llama3_2_vision_querying` y `qwen2_5vl_vision_querying`.
+Las variantes incluidas permiten ejecutar el mismo patron con distintos modelos de vision disponibles hoy en `Ollama`: `llava_vision_querying` `llama3_2_vision_querying` y `qwen2_5vl_vision_querying`.
 
 Esta practica absorbe la parte de la cheat sheet centrada en vision multimodal. Aqui viven `Image Captioning` `Image Encoding` `Message Formatting` `Model Invocation` `Object Detection` por pregunta consultas visuales con mensajes de texto e imagen y captioning en lote sobre varias imagenes.
 
 La extension `Style Finder` lleva la practica al siguiente nivel con un flujo `multimodal RAG` aplicado a moda. Construye ejemplos locales de outfits calcula embeddings visuales gratuitos con backend automatico genera retrieval sobre un dataset estructurado y permite analisis con `llama3.2-vision` `llava` o `qwen2.5vl` a traves de `Ollama`.
 
-La extension `Nutrition Coach` aplica el mismo patron a imagenes de comida con una interfaz `Flask`. Genera ejemplos locales de platos hace retrieval visual sobre un dataset nutricional estructurado y produce una respuesta multimodal con fallback determinista cuando `Ollama` no esta disponible.
+La extension `Nutrition Coach` aplica el mismo patron a imagenes de comida con una interfaz `Flask`. Genera ejemplos locales de platos hace retrieval visual sobre un dataset nutricional estructurado y produce una respuesta multimodal real sobre `Ollama`.
 
 ## Roles de Archivos
 
@@ -30,12 +30,11 @@ La extension `Nutrition Coach` aplica el mismo patron a imagenes de comida con u
 - `config/vision_real_provider_config.py`: Rutas de imagenes reales prompts y modelos de `Ollama`.
 - `data/vision_sample_dataset.py`: Imagenes de muestra y catalogo de moda del ejercicio.
 - `assets`: Imagenes locales reales para las variantes con `Ollama`.
-- `models/vision_demo_model.py`: Modelo local que responde preguntas visuales de forma determinista.
 - `models/vision_ollama_gateway.py`: Cliente HTTP minimo para `Ollama` con imagenes reales.
 - `orchestration/vision_image_orchestration.py`: Codificacion de imagenes y construccion de mensajes.
 - `orchestration/vision_query_orchestration.py`: Consultas generales nutricion y moda.
 - `orchestration/vision_real_variants_orchestration.py`: Flujo compartido para las variantes reales.
-- `orchestration/vision_similarity_orchestration.py`: Embeddings deterministas y matching por coseno.
+- `orchestration/vision_similarity_orchestration.py`: Embeddings visuales locales y matching por coseno.
 - `orchestration/vision_lab_runner.py`: Ejecucion guiada del laboratorio.
 - `config/style_finder_fashion_config.py`: Configuracion de la extension avanzada Style Finder.
 - `config/nutrition_coach_config.py`: Configuracion de la extension Nutrition Coach.
@@ -72,10 +71,11 @@ La extension `Nutrition Coach` aplica el mismo patron a imagenes de comida con u
 
 1. Activar entorno: `.\venv\Scripts\Activate.ps1`.
 2. Dependencias ya cubiertas por el repo: `numpy` `pandas` `pillow` `gradio` y `flask`.
-3. Para variantes reales: `ollama serve`.
-4. Modelos reales opcionales: `ollama pull llava` `ollama pull llama3.2-vision` y `ollama pull qwen2.5vl:3b`.
-5. Backend visual opcional para parecerse mas al laboratorio original: `pip install torch torchvision`.
-6. `Gradio` ya esta disponible para Style Finder y `Flask` para Nutrition Coach.
+3. Arrancar `Ollama`: `ollama serve`.
+4. Modelo base recomendado: `ollama pull qwen2.5vl:3b`.
+5. Modelos alternativos: `ollama pull llava` y `ollama pull llama3.2-vision`.
+6. Backend visual opcional para parecerse mas al laboratorio original: `pip install torch torchvision`.
+7. `Gradio` ya esta disponible para Style Finder y `Flask` para Nutrition Coach.
 
 ## Verificacion
 
@@ -110,5 +110,5 @@ La extension `Nutrition Coach` aplica el mismo patron a imagenes de comida con u
 11. `build_style_finder_interface`: UI `Gradio` para la extension de moda.
 12. `run_style_finder_fashion_rag_app`: Runner de consola para probar el pipeline completo.
 13. `create_nutrition_coach_app`: Fabrica Flask para el analisis nutricional.
-14. `NutritionCoachVisionService`: Servicio multimodal con fallback determinista.
+14. `NutritionCoachVisionService`: Servicio multimodal real con contexto nutricional recuperado.
 15. `run_nutrition_coach_lab`: Runner de consola para probar la extension nutricional.

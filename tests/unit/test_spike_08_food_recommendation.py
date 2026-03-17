@@ -62,7 +62,7 @@ def test_filtered_search_respects_calorie_limit():
     assert all(result["food_calories_per_serving"] <= 300 for result in results)
 
 
-def test_rag_response_uses_fallback_when_llm_is_unavailable(monkeypatch):
+def test_rag_response_uses_real_llm_output_when_gateway_is_stubbed(monkeypatch):
     collection, _food_items = bootstrap_food_collection()
     results = perform_similarity_search(
         collection,
@@ -71,7 +71,7 @@ def test_rag_response_uses_fallback_when_llm_is_unavailable(monkeypatch):
     )
     monkeypatch.setattr(
         "orchestration.food_rag_orchestration.invoke_llm",
-        lambda prompt: None,
+        lambda prompt: "Try Spicy Tofu Stir Fry first and keep Greek Salad as a lighter second option.",
     )
 
     response = generate_food_rag_response(
@@ -79,17 +79,17 @@ def test_rag_response_uses_fallback_when_llm_is_unavailable(monkeypatch):
         results,
     )
 
-    assert "For 'I want something spicy and healthy for dinner.'" in response
-    assert results[0]["food_name"] in response
+    assert "Spicy Tofu Stir Fry" in response
+    assert "Greek Salad" in response
 
 
-def test_query_comparison_fallback_mentions_both_top_results(monkeypatch):
+def test_query_comparison_uses_real_llm_output_when_gateway_is_stubbed(monkeypatch):
     collection, _food_items = bootstrap_food_collection()
     left_results = perform_similarity_search(collection, "chocolate dessert", 3)
     right_results = perform_similarity_search(collection, "healthy breakfast", 3)
     monkeypatch.setattr(
         "orchestration.food_rag_orchestration.invoke_llm",
-        lambda prompt: None,
+        lambda prompt: "Chocolate Lava Cake is richer while Greek Yogurt Parfait is the lighter breakfast choice.",
     )
 
     response = compare_food_queries(
@@ -99,5 +99,5 @@ def test_query_comparison_fallback_mentions_both_top_results(monkeypatch):
         right_results,
     )
 
-    assert left_results[0]["food_name"] in response
-    assert right_results[0]["food_name"] in response
+    assert "Chocolate Lava Cake" in response
+    assert "Greek Yogurt Parfait" in response

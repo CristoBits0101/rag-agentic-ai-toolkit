@@ -81,6 +81,23 @@ def test_normalize_plan_payload_maps_common_ollama_aliases():
     assert plan.requires_confirmation is True
 
 
+def test_normalize_plan_payload_infers_application_from_transcript():
+    plan = normalize_plan_payload(
+        {
+            "action": "open_app",
+            "parameters": {},
+            "response": "Abro la calculadora.",
+            "requires_confirmation": False,
+            "confirmation_prompt": "",
+        },
+        planner_model="qwen2.5:7b",
+        transcript="abre calculadora",
+    )
+
+    assert plan.action == "open_application"
+    assert plan.parameters["application"] == "calculator"
+
+
 def test_build_voice_action_plan_falls_back_to_demo_on_invalid_ollama_plan(monkeypatch):
     def fake_ollama_planner(transcript: str):
         raise RuntimeError("invalid plan")
@@ -93,10 +110,11 @@ def test_build_voice_action_plan_falls_back_to_demo_on_invalid_ollama_plan(monke
         fake_ollama_planner,
     )
 
-    plan = build_voice_action_plan("cierra google chrome")
-
-    assert plan.action == "close_application"
-    assert plan.parameters["application"] == "chrome"
+    try:
+        build_voice_action_plan("cierra google chrome")
+        assert False, "Expected build_voice_action_plan to raise when Ollama planning fails."
+    except RuntimeError as exc:
+        assert "invalid plan" in str(exc)
 
 
 def test_execute_voice_action_types_text_with_stubbed_pyautogui():

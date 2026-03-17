@@ -16,6 +16,10 @@ from config.advanced_retrievers_config import COMPREHENSIVE_QUERY
 from config.advanced_retrievers_config import LEARNING_TYPES_QUERY
 from config.advanced_retrievers_config import SAMPLE_QUERY
 from config.advanced_retrievers_config import TECHNICAL_QUERY
+from models.advanced_retrievers_demo_llm import build_advanced_retrievers_demo_llm
+from models.llamaindex_demo_embedding_gateway import (
+    build_advanced_retrievers_demo_embedding,
+)
 from orchestration.advanced_retrievers_context_orchestration import (
     retrieve_auto_merging_comparison,
 )
@@ -45,6 +49,30 @@ from orchestration.advanced_retrievers_fusion_orchestration import (
 )
 
 
+def patch_demo_models(monkeypatch) -> None:
+    from orchestration import advanced_retrievers_fusion_orchestration as fusion_orchestration
+    from orchestration import advanced_retrievers_index_orchestration as index_orchestration
+
+    monkeypatch.setattr(
+        index_orchestration,
+        "build_advanced_retrievers_llm",
+        build_advanced_retrievers_demo_llm,
+    )
+    monkeypatch.setattr(
+        index_orchestration,
+        "build_advanced_retrievers_embedding",
+        build_advanced_retrievers_demo_embedding,
+    )
+    monkeypatch.setattr(
+        fusion_orchestration,
+        "build_advanced_retrievers_llm",
+        build_advanced_retrievers_demo_llm,
+    )
+    index_orchestration.build_advanced_retrievers_lab_context.cache_clear()
+    index_orchestration.build_auto_merging_bundle.cache_clear()
+    index_orchestration.build_recursive_bundle.cache_clear()
+
+
 def test_vector_retriever_prioritizes_machine_learning_foundation():
     nodes = retrieve_vector_nodes(SAMPLE_QUERY)
 
@@ -60,7 +88,8 @@ def test_bm25_retriever_prioritizes_neural_networks_document():
     assert "deep learning" in nodes[0].text.lower()
 
 
-def test_document_summary_retrievers_return_learning_type_documents():
+def test_document_summary_retrievers_return_learning_type_documents(monkeypatch):
+    patch_demo_models(monkeypatch)
     llm_nodes = retrieve_document_summary_llm_nodes(LEARNING_TYPES_QUERY)
     embedding_nodes = retrieve_document_summary_embedding_nodes(LEARNING_TYPES_QUERY)
 
@@ -77,7 +106,8 @@ def test_document_summary_retrievers_return_learning_type_documents():
     )
 
 
-def test_auto_merging_returns_broader_parent_context():
+def test_auto_merging_returns_broader_parent_context(monkeypatch):
+    patch_demo_models(monkeypatch)
     leaf_nodes, merged_nodes = retrieve_auto_merging_comparison(ADVANCED_QUERY)
 
     assert leaf_nodes
@@ -87,7 +117,8 @@ def test_auto_merging_returns_broader_parent_context():
     assert "backpropagation" in merged_nodes[0].text.lower()
 
 
-def test_recursive_retriever_follows_application_references():
+def test_recursive_retriever_follows_application_references(monkeypatch):
+    patch_demo_models(monkeypatch)
     nodes = retrieve_recursive_nodes(APPLICATIONS_QUERY)
 
     assert nodes
@@ -96,7 +127,8 @@ def test_recursive_retriever_follows_application_references():
     assert "assistants" in combined_text or "computer vision" in combined_text
 
 
-def test_query_fusion_and_hybrid_retrieval_cover_learning_paradigms():
+def test_query_fusion_and_hybrid_retrieval_cover_learning_paradigms(monkeypatch):
+    patch_demo_models(monkeypatch)
     fusion_nodes = retrieve_query_fusion_nodes(COMPREHENSIVE_QUERY, "reciprocal_rerank")
     hybrid_nodes = retrieve_hybrid_nodes(COMPREHENSIVE_QUERY)
 
@@ -108,7 +140,8 @@ def test_query_fusion_and_hybrid_retrieval_cover_learning_paradigms():
     assert "hybrid retrieval" in hybrid_text or "supervised learning" in hybrid_text
 
 
-def test_production_rag_pipeline_returns_grounded_answer():
+def test_production_rag_pipeline_returns_grounded_answer(monkeypatch):
+    patch_demo_models(monkeypatch)
     answer = run_production_rag_pipeline(COMPREHENSIVE_QUERY)
 
     assert answer

@@ -1,11 +1,11 @@
 # --- DEPENDENCIAS ---
 # 1. Configuracion: Para reutilizar la consulta de demostracion.
 # 2. Colecciones: Para crear vector stores del laboratorio.
-# 3. LLM Demo: Para expandir consultas en MultiQueryRetriever.
+# 3. LLM: Para expandir consultas en MultiQueryRetriever.
 from config.context_retrieval_config import MULTI_QUERY_QUESTION
 from langchain.retrievers.multi_query import MultiQueryRetriever
 from langchain_core.documents import Document
-from models.context_retrieval_demo_llm import build_context_retrieval_demo_llm
+from models.context_retrieval_ollama_gateway import build_context_retrieval_llm
 from orchestration.context_retrieval_collection_orchestration import (
     build_policy_vectorstore,
 )
@@ -53,6 +53,6 @@ def retrieve_multi_query_documents(
     vectorstore, _notes_chunks = build_retrieval_notes_vectorstore()
     multi_query_retriever = MultiQueryRetriever.from_llm(
         retriever=vectorstore.as_retriever(search_kwargs={"k": 3}),
-        llm=build_context_retrieval_demo_llm(),
+        llm=build_context_retrieval_llm(),
     )
     return multi_query_retriever.invoke(query)

@@ -62,6 +62,25 @@ def normalize_application_name(
     raise RuntimeError(f"Ollama returned an unsupported application name: {application_name}.")
 
 
+def infer_application_name_from_transcript(
+    transcript: str,
+    allowed_applications: dict[str, list[str]],
+) -> str | None:
+    normalized_transcript = normalize_text(transcript)
+    if not normalized_transcript:
+        return None
+
+    for alias, resolved_name in APPLICATION_ALIASES.items():
+        if alias in normalized_transcript and resolved_name in allowed_applications:
+            return resolved_name
+
+    for application_name in allowed_applications:
+        if application_name in normalized_transcript:
+            return application_name
+
+    return None
+
+
 def list_installed_ollama_models(api_url: str = OLLAMA_TAGS_URL) -> list[str]:
     request = Request(api_url, headers={"Accept": "application/json"}, method="GET")
 
@@ -185,6 +204,7 @@ def extract_plan_payload(response_text: str) -> dict:
 def normalize_plan_payload(
     payload: dict,
     planner_model: str,
+    transcript: str = "",
 ) -> VoiceActionPlan:
     action = normalize_action_name(payload.get("action", "answer"))
     if action not in ALLOWED_ACTIONS:
@@ -196,19 +216,27 @@ def normalize_plan_payload(
     confirmation_prompt = str(payload.get("confirmation_prompt", "")).strip()
 
     if action == "open_application":
+        inferred_application = parameters.get("application") or infer_application_name_from_transcript(
+            transcript,
+            ALLOWED_APPLICATIONS,
+        )
         parameters = {
             **parameters,
             "application": normalize_application_name(
-                parameters.get("application"),
+                inferred_application,
                 ALLOWED_APPLICATIONS,
             ),
         }
 
     if action == "close_application":
+        inferred_application = parameters.get("application") or infer_application_name_from_transcript(
+            transcript,
+            CLOSEABLE_APPLICATION_PROCESSES,
+        )
         parameters = {
             **parameters,
             "application": normalize_application_name(
-                parameters.get("application"),
+                inferred_application,
                 CLOSEABLE_APPLICATION_PROCESSES,
             ),
         }
@@ -242,4 +270,8 @@ def plan_voice_command_with_ollama(
     if not response_text:
         raise RuntimeError(f"Ollama returned an empty plan for model {selected_model}.")
 
-    return normalize_plan_payload(extract_plan_payload(response_text), selected_model)
+    return normalize_plan_payload(
+        extract_plan_payload(response_text),
+        selected_model,
+        transcript=transcript,
+    )

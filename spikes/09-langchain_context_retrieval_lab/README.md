@@ -3,13 +3,13 @@
 ## Leyenda
 
 1. Retriever clasico: Similaridad top k MMR y score threshold sobre politicas de empresa.
-2. Multi Query Retrieval: Expansion de consultas con un LLM de demostracion determinista.
+2. Multi Query Retrieval: Expansion de consultas con un `LLM` real local en `Ollama`.
 3. Self Query Retrieval: Traduccion de lenguaje natural a filtros de metadatos sobre peliculas.
 4. Parent Document Retrieval: Recuperacion por child chunks con devolucion de contexto padre.
 
 ## Adaptacion
 
-Esta practica toma el notebook de IBM Skills Network y lo adapta al repositorio sin depender de watsonx ni de descargas remotas. Los documentos son locales. Los embeddings son deterministas. El LLM de apoyo tambien es determinista para mantener la practica estable y comprobable con tests.
+Esta practica toma el notebook de IBM Skills Network y lo adapta al repositorio sin depender de watsonx ni de descargas remotas. Los documentos son locales. Los embeddings y el `LLM` de apoyo se sirven desde `Ollama` para mantener una ejecucion local real y gratuita.
 
 ## Roles de Archivos
 
@@ -18,8 +18,8 @@ Esta practica toma el notebook de IBM Skills Network y lo adapta al repositorio 
 - `data/company_policies.txt`: Politicas de empresa para retrieval clasico y parent retrieval.
 - `data/langchain_retrieval_notes.txt`: Notas locales para MultiQueryRetriever.
 - `data/context_retrieval_movie_dataset.py`: Dataset local de peliculas para SelfQueryRetriever.
-- `models/context_retrieval_embedding_gateway.py`: Embeddings deterministas compatibles con LangChain.
-- `models/context_retrieval_demo_llm.py`: LLM de demostracion para MultiQueryRetriever y SelfQueryRetriever.
+- `models/context_retrieval_embedding_gateway.py`: Embeddings reales locales compatibles con LangChain.
+- `models/context_retrieval_ollama_gateway.py`: `LLM` real local para `MultiQueryRetriever` y `SelfQueryRetriever`.
 - `orchestration/context_retrieval_collection_orchestration.py`: Carga de documentos splitters y vector stores.
 - `orchestration/context_retrieval_search_orchestration.py`: Retrieval clasico y MultiQueryRetriever.
 - `orchestration/context_retrieval_self_query_orchestration.py`: SelfQueryRetriever y filtros por metadatos.
@@ -31,6 +31,10 @@ Esta practica toma el notebook de IBM Skills Network y lo adapta al repositorio 
 1. Activar entorno: `.\venv\Scripts\Activate.ps1`.
 2. ChromaDB: `pip install -U chromadb`.
 3. Lark: `pip install -U lark==1.1.9`.
+4. LangChain Ollama: `pip install -U langchain-ollama`.
+5. Arrancar `Ollama`: `ollama serve`.
+6. Embedding local: `ollama pull nomic-embed-text`.
+7. Modelo de texto: `ollama pull qwen2.5:7b`.
 
 ## Verificacion
 

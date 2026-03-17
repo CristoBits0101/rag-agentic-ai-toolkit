@@ -34,7 +34,7 @@ def run_food_recommendation_lab():
     collection, food_items = bootstrap_food_collection()
     print("Practice 08 Food Recommendation Systems With ChromaDB And RAG.")
     print(f"Dataset loaded: {len(food_items)} food items.")
-    print("RAG generation uses Ollama when available and falls back otherwise.")
+    print("RAG generation uses a real local Ollama model.")
 
     print_section("Interactive Search Style")
     print(f"Query: {BASIC_QUERY_TEXT}")

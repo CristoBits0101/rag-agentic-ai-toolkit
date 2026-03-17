@@ -13,14 +13,10 @@ class StyleFinderVisionService:
         self.response_generator = response_generator
 
     def generate_response(self, encoded_image, prompt):
-        try:
-            logger.info("Sending request to model %s with prompt length %d", self.model_name, len(prompt))
-            content = self.response_generator(self.model_name, prompt, encoded_image)
-            logger.info("Received response with length %d", len(content))
-            return content
-        except Exception as exc:
-            logger.error("Error generating response: %s", str(exc))
-            return f"Error generating response: {exc}"
+        logger.info("Sending request to model %s with prompt length %d", self.model_name, len(prompt))
+        content = self.response_generator(self.model_name, prompt, encoded_image)
+        logger.info("Received response with length %d", len(content))
+        return content
 
     def generate_fashion_response(
         self,
@@ -58,13 +54,17 @@ class StyleFinderVisionService:
                 "Always include the SIMILAR ITEMS section at the end."
             )
 
-        response = self.generate_response(user_image_base64, assistant_prompt)
+        try:
+            response = self.generate_response(user_image_base64, assistant_prompt)
+        except Exception as exc:
+            logger.error("Error generating fashion response: %s", str(exc))
+            return f"Error generating response: {exc}"
+
         section_header = "ITEM DETAILS:" if similarity_score >= threshold else "SIMILAR ITEMS:"
 
         if len(response) < 100:
             return (
-                "# Fashion Analysis\n\n"
-                f"The uploaded look is closest to {matched_row['Look Title']}.\n\n"
+                "Error generating response: Ollama returned an incomplete fashion analysis.\n\n"
                 f"{section_header}\n{items_description}"
             )
 

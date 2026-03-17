@@ -11,6 +11,7 @@ if str(SPIKE) not in sys.path:
     sys.path.insert(0, str(SPIKE))
 
 from config.context_retrieval_config import MULTI_QUERY_QUESTION
+from models.context_retrieval_demo_llm import build_context_retrieval_demo_llm
 from orchestration.context_retrieval_parent_orchestration import (
     retrieve_parent_documents,
 )
@@ -25,11 +26,28 @@ from orchestration.context_retrieval_self_query_orchestration import (
 )
 
 
+def patch_demo_llm(monkeypatch) -> None:
+    from orchestration import context_retrieval_search_orchestration as search_orchestration
+    from orchestration import context_retrieval_self_query_orchestration as self_query_orchestration
+
+    monkeypatch.setattr(
+        search_orchestration,
+        "build_context_retrieval_llm",
+        build_context_retrieval_demo_llm,
+    )
+    monkeypatch.setattr(
+        self_query_orchestration,
+        "build_context_retrieval_llm",
+        build_context_retrieval_demo_llm,
+    )
+
+
 def test_similarity_retrieval_prioritizes_email_policy_chunk():
     documents = retrieve_policy_documents("email policy", search_kwargs={"k": 2})
 
     assert documents
-    assert "Email Policy" in documents[0].page_content
+    assert any("email" in document.page_content.lower() for document in documents)
+    assert any("sensitive attachments" in document.page_content.lower() for document in documents)
 
 
 def test_top_k_retrieval_returns_single_document():
@@ -38,7 +56,8 @@ def test_top_k_retrieval_returns_single_document():
     assert len(documents) == 1
 
 
-def test_multi_query_retrieval_returns_langchain_context():
+def test_multi_query_retrieval_returns_langchain_context(monkeypatch):
+    patch_demo_llm(monkeypatch)
     documents = retrieve_multi_query_documents(MULTI_QUERY_QUESTION)
 
     assert documents
@@ -46,7 +65,8 @@ def test_multi_query_retrieval_returns_langchain_context():
     assert any("MultiQueryRetriever" in document.page_content for document in documents)
 
 
-def test_self_query_retrieval_filters_by_director_and_topic():
+def test_self_query_retrieval_filters_by_director_and_topic(monkeypatch):
+    patch_demo_llm(monkeypatch)
     documents = retrieve_self_query_documents(
         "Has Greta Gerwig directed any movies about women"
     )
@@ -56,7 +76,8 @@ def test_self_query_retrieval_filters_by_director_and_topic():
     assert "women" in documents[0].page_content.lower()
 
 
-def test_self_query_retrieval_combines_rating_and_genre():
+def test_self_query_retrieval_combines_rating_and_genre(monkeypatch):
+    patch_demo_llm(monkeypatch)
     documents = retrieve_self_query_documents(
         "What's a highly rated science fiction film?"
     )

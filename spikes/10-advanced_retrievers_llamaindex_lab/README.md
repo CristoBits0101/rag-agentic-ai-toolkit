@@ -13,15 +13,14 @@
 
 ## Adaptacion
 
-Esta practica adapta el notebook de IBM Skills Network a una version local y reproducible del repositorio. El laboratorio original usa watsonx.ai y embeddings remotos. En esta adaptacion todo corre con `LlamaIndex` real pero usando un embedding determinista y un `DemoLLM` local para mantener el resultado estable y comprobable con tests.
+Esta practica adapta el notebook de IBM Skills Network a una version local y reproducible del repositorio. El laboratorio original usa watsonx.ai y embeddings remotos. En esta adaptacion todo corre con `LlamaIndex` real mas un `LLM` y embeddings servidos por `Ollama`.
 
 ## Roles de Archivos
 
 - `main.py`: Punto de entrada de la practica.
 - `config/advanced_retrievers_config.py`: Consultas y parametros del laboratorio.
 - `data/advanced_retrievers_documents.py`: Documentos base documentos largos y corpus recursivo.
-- `models/llamaindex_demo_embedding_gateway.py`: Embeddings deterministas compatibles con `LlamaIndex`.
-- `models/advanced_retrievers_demo_llm.py`: LLM de demostracion para resumenes seleccion y fusion.
+- `models/advanced_retrievers_ollama_gateway.py`: `LLM` y embeddings reales locales compatibles con `LlamaIndex`.
 - `orchestration/advanced_retrievers_index_orchestration.py`: Construccion cacheada de indices y retrievers base.
 - `orchestration/advanced_retrievers_core_orchestration.py`: Vector retrieval BM25 y document summary.
 - `orchestration/advanced_retrievers_context_orchestration.py`: Auto merging y recursive retrieval.
@@ -33,6 +32,10 @@ Esta practica adapta el notebook de IBM Skills Network a una version local y rep
 1. Activar entorno: `.\venv\Scripts\Activate.ps1`.
 2. LlamaIndex Core: `pip install -U llama-index-core==0.12.49`.
 3. BM25 Retriever: `pip install -U llama-index-retrievers-bm25==0.5.2 rank-bm25==0.2.2 PyStemmer==2.2.0.3`.
+4. LangChain Ollama: `pip install -U langchain-ollama`.
+5. Arrancar `Ollama`: `ollama serve`.
+6. Embedding local: `ollama pull nomic-embed-text`.
+7. Modelo de texto: `ollama pull qwen2.5:7b`.
 
 ## Verificacion
 

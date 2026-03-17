@@ -12,17 +12,17 @@ Este archivo resume de forma rapida de que va cada practica del directorio `spik
 | 04 | LinkedIn Icebreaker Bot. | Usa perfiles mock tipo LinkedIn para generar contexto preguntas y respuestas conversacionales con `RAG`. | A convertir datos estructurados en contexto util para personalizacion y conversacion. | [04-linkedin_icebreaker_bot_lab](./04-linkedin_icebreaker_bot_lab/README.md) |
 | 05 | Similarity Search by Hand. | Explica la busqueda por similitud desde cero con embeddings normalizacion y calculo manual de metricas. | A entender como funcionan coseno distancia y ranking sin depender de una vector DB. | [05-similarity_search_by_hand_lab](./05-similarity_search_by_hand_lab/README.md) |
 | 06 | ChromaDB Cheat Sheet. | Resume conceptos de vector databases y demuestra operaciones CRUD consultas y filtros en `ChromaDB`. | A manejar colecciones metadatos y consultas semanticas basicas en una base vectorial. | [06-vector_databases_chromadb_cheat_sheet_lab](./06-vector_databases_chromadb_cheat_sheet_lab/README.md) |
-| 07 | Similaridad en empleados y libros. | Aplica `ChromaDB` a dos dominios pequenos con embeddings deterministas y filtros de metadatos. | A modelar colecciones distintas y comparar busqueda semantica con restricciones de negocio. | [07-employee_similarity_search_chromadb_lab](./07-employee_similarity_search_chromadb_lab/README.md) |
+| 07 | Similaridad en empleados y libros. | Aplica `ChromaDB` a dos dominios pequenos con embeddings reales locales y filtros de metadatos. | A modelar colecciones distintas y comparar busqueda semantica con restricciones de negocio. | [07-employee_similarity_search_chromadb_lab](./07-employee_similarity_search_chromadb_lab/README.md) |
 | 08 | Recomendaciones de comida con RAG. | Combina retrieval en `ChromaDB` con generacion para recomendar platos segun consulta contexto y filtros. | A construir un sistema de recomendacion simple apoyado en retrieval y respuesta generada. | [08-food_recommendation_systems_chromadb_rag_lab](./08-food_recommendation_systems_chromadb_rag_lab/README.md) |
 | 09 | Context Retrieval con LangChain. | Explora `top k` `MMR` `score threshold` `MultiQueryRetriever` `SelfQueryRetriever` y `ParentDocumentRetriever`. | A elegir tecnicas de retrieval segun consulta expansion filtros y preservacion de contexto. | [09-langchain_context_retrieval_lab](./09-langchain_context_retrieval_lab/README.md) |
 | 10 | Advanced Retrievers con LlamaIndex. | Recorre `VectorIndexRetriever` `BM25` `DocumentSummaryIndex` `AutoMergingRetriever` `RecursiveRetriever` y `QueryFusionRetriever`. | A comparar retrievers avanzados y a crear estrategias hibridas y pipelines `RAG` mas robustos. | [10-advanced_retrievers_llamaindex_lab](./10-advanced_retrievers_llamaindex_lab/README.md) |
 | 11 | Semantic Similarity con FAISS. | Implementa preprocesamiento vectorizacion e indexacion con `FAISS IndexFlatL2` sobre un corpus local. | A entender el flujo completo de semantic search con un indice vectorial real. | [11-semantic_similarity_faiss_lab](./11-semantic_similarity_faiss_lab/README.md) |
 | 12 | YouTube Summarizer y QA con FAISS. | Procesa transcriptos chunking retrieval con `LangChain FAISS` y genera resumenes y respuestas sobre un video. | A construir una mini aplicacion `RAG` para contenido multimedia basado en transcriptos. | [12-youtube_summarizer_rag_faiss_lab](./12-youtube_summarizer_rag_faiss_lab/README.md) |
-| 13 | Story Generator y Text to Speech. | Genera una historia educativa para un tema dado y la transforma en un artefacto de audio local o en variantes reales con `Ollama` `Mistral API` y `edge-tts`. | A combinar prompting generacion de texto y una salida de audio reproducible dentro del repo o con proveedores reales. | [13-story_generator_text_to_speech_lab](./13-story_generator_text_to_speech_lab/README.md) |
-| 14 | Vision Multimodal Basica. | Construye mensajes con imagen y texto responde preguntas visuales hace captioning en lote matching simple contra un catalogo y se extiende con `Style Finder` en `Gradio` y `Nutrition Coach` en `Flask`. Tambien incluye variantes reales con `llava` `llama3.2-vision` y `qwen2.5vl` en `Ollama`. | A entender el patron basico de `vision querying` `VQA` `Image Captioning` y como escalarlo a apps completas de `multimodal RAG` para moda y nutricion. | [14-basic_vision_multimodal_lab](./14-basic_vision_multimodal_lab/README.md) |
-| 15 | AI Meeting Assistant. | Transcribe audio de reunion normaliza terminos financieros y genera acta con tareas descargables. | A encadenar `Speech to Text` limpieza de transcript y generacion estructurada en una app de reuniones. | [15-ai_meeting_assistant_lab](./15-ai_meeting_assistant_lab/README.md) |
+| 13 | Story Generator y Text to Speech. | Genera una historia educativa con un `LLM` real en `Ollama` y la transforma en audio con `edge-tts` o variantes adicionales. | A combinar prompting generacion de texto y una salida de audio gratuita o local sin perder el objetivo del laboratorio. | [13-story_generator_text_to_speech_lab](./13-story_generator_text_to_speech_lab/README.md) |
+| 14 | Vision Multimodal Basica. | Construye mensajes con imagen y texto responde preguntas visuales con un modelo real de vision en `Ollama` hace captioning en lote matching local contra un catalogo y se extiende con `Style Finder` en `Gradio` y `Nutrition Coach` en `Flask`. | A entender el patron basico de `vision querying` `VQA` `Image Captioning` y como escalarlo a apps completas de `multimodal RAG` para moda y nutricion. | [14-basic_vision_multimodal_lab](./14-basic_vision_multimodal_lab/README.md) |
+| 15 | AI Meeting Assistant. | Transcribe audio de reunion normaliza terminos financieros y genera acta con tareas descargables con un modelo real de `Ollama` para la parte textual. | A encadenar `Speech to Text` limpieza de transcript y generacion estructurada en una app de reuniones. | [15-ai_meeting_assistant_lab](./15-ai_meeting_assistant_lab/README.md) |
 | 16 | DALL-E Image Generation. | Genera imagenes desde prompts con `dall-e-2` y `dall-e-3` guarda los resultados en archivos locales y define requests configurables para tamano calidad y salida multiple. | A comparar dos versiones reales de la API de imagenes de `OpenAI` y adaptar salidas de notebook a un flujo ejecutable desde terminal. | [16-dalle_image_generation_lab](./16-dalle_image_generation_lab/README.md) |
-| 17 | Voice Desktop Assistant. | Escucha ordenes desde un micro con `push to talk` las transcribe en local con `Whisper` y ejecuta acciones seguras de escritorio con `Ollama` incluyendo cierre confirmado de apps envio a papelera con confirmacion fallback si `Ollama` devuelve un plan invalido verificacion del estado real del proceso al cerrar y un estado resumido en una sola linea. | A combinar audio local `Speech to Text` planificacion segura con `Ollama` y automatizacion de escritorio con una politica de permisos minima. | [17-voice_desktop_assistant_lab](./17-voice_desktop_assistant_lab/README.md) |
+| 17 | Voice Desktop Assistant. | Escucha ordenes desde un micro con `push to talk` las transcribe en local con `Whisper` y ejecuta acciones seguras de escritorio con `Ollama` incluyendo cierre confirmado de apps envio a papelera con confirmacion verificacion del estado real del proceso al cerrar y un estado resumido en una sola linea. | A combinar audio local `Speech to Text` planificacion segura con `Ollama` y automatizacion de escritorio con una politica de permisos minima. | [17-voice_desktop_assistant_lab](./17-voice_desktop_assistant_lab/README.md) |
 | 18 | LangChain Tool Calling Math Assistant. | Construye un asistente matematico con tools de `LangChain` definidas con `@tool` y `ChatOllama` como modelo principal junto con un catalogo factual local y un bucle controlado de tool calling. | A entender el contrato real de `tool calling` probar herramientas por separado y componer calculos multi paso con un modelo real compatible con el stack del repo. | [18-langchain_tool_calling_math_assistant_lab](./18-langchain_tool_calling_math_assistant_lab/README.md) |
 | 19 | DataWizard AI Powered Data Analysis. | Construye un asistente de analisis de datos con `LangChain` y `ChatOllama` que descubre CSV locales mantiene una cache de `DataFrame` resume datasets ejecuta metodos seguros de `pandas` y evalua modelos de clasificacion o regresion con `scikit-learn`. | A conectar lenguaje natural con analisis tabular real y a comparar un baseline conversacional sin tools frente a un executor agent con modelo real y workflows multi paso. | [19-datawizard_ai_powered_data_analysis_lab](./19-datawizard_ai_powered_data_analysis_lab/README.md) |
 
@@ -63,48 +63,56 @@ Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_s
 
 ### Practica 06
 
+Prerequisito: arrancar `ollama serve` y descargar `nomic-embed-text`.
 Compilacion: `python -m compileall spikes\06-vector_databases_chromadb_cheat_sheet_lab`.
 Ejecucion: `python .\spikes\06-vector_databases_chromadb_cheat_sheet_lab\main.py`.
 Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_06_chromadb_cheat_sheet.py`.
 
 ### Practica 07
 
+Prerequisito: arrancar `ollama serve` y descargar `nomic-embed-text`.
 Compilacion: `python -m compileall spikes\07-employee_similarity_search_chromadb_lab`.
 Ejecucion: `python .\spikes\07-employee_similarity_search_chromadb_lab\main.py`.
 Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_07_employee_similarity.py`.
 
 ### Practica 08
 
+Prerequisito: arrancar `ollama serve` y descargar `nomic-embed-text` y `llama3.2:3b`.
 Compilacion: `python -m compileall spikes\08-food_recommendation_systems_chromadb_rag_lab`.
 Ejecucion: `python .\spikes\08-food_recommendation_systems_chromadb_rag_lab\main.py`.
 Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_08_food_recommendation.py`.
 
 ### Practica 09
 
+Prerequisito: arrancar `ollama serve` y descargar `nomic-embed-text` y `qwen2.5:7b`.
 Compilacion: `python -m compileall spikes\09-langchain_context_retrieval_lab`.
 Ejecucion: `python .\spikes\09-langchain_context_retrieval_lab\main.py`.
 Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_09_context_retrieval.py`.
 
 ### Practica 10
 
+Prerequisito: arrancar `ollama serve` y descargar `nomic-embed-text` y `qwen2.5:7b`.
 Compilacion: `python -m compileall spikes\10-advanced_retrievers_llamaindex_lab`.
 Ejecucion: `python .\spikes\10-advanced_retrievers_llamaindex_lab\main.py`.
 Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_10_advanced_retrievers_llamaindex.py`.
 
 ### Practica 11
 
+Prerequisito: arrancar `ollama serve` y descargar `nomic-embed-text`.
 Compilacion: `python -m compileall spikes\11-semantic_similarity_faiss_lab`.
 Ejecucion: `python .\spikes\11-semantic_similarity_faiss_lab\main.py`.
 Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_11_semantic_similarity_faiss.py`.
 
 ### Practica 12
 
+Prerequisito: arrancar `ollama serve` y descargar `nomic-embed-text` y `qwen2.5:7b`.
 Compilacion: `python -m compileall spikes\12-youtube_summarizer_rag_faiss_lab`.
 Ejecucion: `python .\spikes\12-youtube_summarizer_rag_faiss_lab\main.py`.
 Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_12_youtube_summarizer_rag_faiss.py`.
 
 ### Practica 13
 
+Prerequisito: arrancar `ollama serve` y descargar `qwen2.5:7b`.
 Compilacion: `python -m compileall spikes\13-story_generator_text_to_speech_lab`.
 Ejecucion base: `python .\spikes\13-story_generator_text_to_speech_lab\main.py`.
 Variantes: `python .\spikes\13-story_generator_text_to_speech_lab\ollama_mistral_story_tts\main.py` `python .\spikes\13-story_generator_text_to_speech_lab\mistral_api_story_tts\main.py` `python .\spikes\13-story_generator_text_to_speech_lab\ollama_mistral_edge_tts_story_tts\main.py`.
@@ -112,6 +120,7 @@ Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_s
 
 ### Practica 14
 
+Prerequisito: arrancar `ollama serve` y descargar `qwen2.5vl:3b`.
 Compilacion: `python -m compileall spikes\14-basic_vision_multimodal_lab`.
 Ejecucion base: `python .\spikes\14-basic_vision_multimodal_lab\main.py`.
 Variantes principales: `python .\spikes\14-basic_vision_multimodal_lab\llava_vision_querying\main.py` `python .\spikes\14-basic_vision_multimodal_lab\llama3_2_vision_querying\main.py` `python .\spikes\14-basic_vision_multimodal_lab\qwen2_5vl_vision_querying\main.py`.
@@ -120,6 +129,7 @@ Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_s
 
 ### Practica 15
 
+Prerequisito: arrancar `ollama serve` y descargar `llama3.2:3b`.
 Compilacion: `python -m compileall spikes\15-ai_meeting_assistant_lab`.
 Ejecucion: `python .\spikes\15-ai_meeting_assistant_lab\main.py`.
 Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_15_ai_meeting_assistant.py`.
@@ -165,6 +175,6 @@ Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_s
 
 ## Nota
 
-La mayoria de practicas estan adaptadas para ejecutarse de forma local y reproducible. Cuando un laboratorio original dependia de servicios externos el repositorio prioriza modelos reales locales como `Ollama` si encajan tecnicamente con el caso de uso. Los datos locales los embeddings deterministas y los modelos de demostracion se reservan sobre todo para tests o para respaldos justificados cuando la practica no puede depender de red o credenciales.
+La mayoria de practicas estan adaptadas para ejecutarse de forma local y reproducible. Cuando un laboratorio original dependia de servicios externos el repositorio prioriza modelos reales locales como `Ollama` si encajan tecnicamente con el caso de uso. Los datos locales y los mocks de test pueden simplificar el aislamiento de pruebas pero no sustituyen el camino ejecutable principal de cada practica.
 
 Cuando una practica de `spikes` puede resolverse bien con `Ollama` se prioriza esa via. Si la practica es multimodal o el caso de uso no encaja con `Ollama` se debe usar el modelo recomendado en el `README` de la propia practica. Si para ese mismo caso existe una alternativa gratuita y accesible en internet se debe priorizar esa opcion gratuita.

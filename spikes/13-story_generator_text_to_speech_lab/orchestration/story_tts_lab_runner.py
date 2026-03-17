@@ -2,9 +2,11 @@
 from config.story_tts_config import DEFAULT_AUDIO_FILE_NAME
 from config.story_tts_config import DEFAULT_TOPIC
 from config.story_tts_config import EXERCISE_TOPIC
-from orchestration.story_audio_orchestration import build_story_audio_context
 from orchestration.story_generation_orchestration import build_story_generation_context
 from orchestration.story_generation_orchestration import generate_story
+from orchestration.story_real_variants_orchestration import (
+    run_ollama_mistral_edge_tts_story_variant,
+)
 
 
 def print_separator(title: str) -> None:
@@ -21,8 +23,8 @@ def run_story_generator_text_to_speech_lab() -> None:
         print("Please provide a valid topic.")
         return
 
-    audio_context = build_story_audio_context(DEFAULT_TOPIC)
-    if not audio_context:
+    audio_run = run_ollama_mistral_edge_tts_story_variant(DEFAULT_TOPIC)
+    if not audio_run:
         print("Audio context could not be created.")
         return
 
@@ -32,10 +34,10 @@ def run_story_generator_text_to_speech_lab() -> None:
     print("\nGenerated Story:\n")
     print(story_context.story)
     print("\nAudio Artifact:\n")
-    print(f"Provider: {audio_context.artifact.provider}")
-    print(f"MIME Type: {audio_context.artifact.mime_type}")
-    print(f"File Extension: {audio_context.artifact.file_extension}")
-    print(f"Audio Bytes: {len(audio_context.artifact.audio_bytes)}")
+    print(f"Provider: {audio_run.tts_provider}")
+    print(f"LLM Provider: {audio_run.llm_provider}")
+    print(f"LLM Model: {audio_run.llm_model}")
+    print(f"Output Path: {audio_run.output_path}")
     print(f"Suggested File Name: {DEFAULT_AUDIO_FILE_NAME}")
 
     print_separator("EXERCISE TOPIC")

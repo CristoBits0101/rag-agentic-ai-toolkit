@@ -11,7 +11,7 @@ from llama_index.retrievers.bm25 import BM25Retriever
 from config.advanced_retrievers_config import HYBRID_TOP_K
 from config.advanced_retrievers_config import QUERY_FUSION_NUM_QUERIES
 from config.advanced_retrievers_config import QUERY_FUSION_TOP_K
-from models.advanced_retrievers_demo_llm import build_advanced_retrievers_demo_llm
+from models.advanced_retrievers_ollama_gateway import build_advanced_retrievers_llm
 from orchestration.advanced_retrievers_index_orchestration import (
     build_advanced_retrievers_lab_context,
 )
@@ -110,7 +110,7 @@ def retrieve_query_fusion_nodes(query: str, mode_name: str):
     lab = build_advanced_retrievers_lab_context()
     retriever = QueryFusionRetriever(
         [lab.vector_index.as_retriever(similarity_top_k=QUERY_FUSION_TOP_K + 2)],
-        llm=build_advanced_retrievers_demo_llm(),
+        llm=build_advanced_retrievers_llm(),
         similarity_top_k=QUERY_FUSION_TOP_K,
         num_queries=QUERY_FUSION_NUM_QUERIES,
         mode=resolve_fusion_mode(mode_name),
@@ -129,7 +129,7 @@ def run_production_rag_pipeline(query: str) -> str:
     # Ejecuta un query engine sencillo sobre el recuperador hibrido.
     query_engine = RetrieverQueryEngine.from_args(
         retriever=build_hybrid_retriever(),
-        llm=build_advanced_retrievers_demo_llm(),
+        llm=build_advanced_retrievers_llm(),
         use_async=False,
     )
     response = query_engine.query(query)

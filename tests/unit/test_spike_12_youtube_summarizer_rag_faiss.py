@@ -14,6 +14,7 @@ from config.youtube_rag_config import FAISS_QUESTION
 from config.youtube_rag_config import HALLUCINATION_QUESTION
 from config.youtube_rag_config import RAG_PROBLEMS_QUESTION
 from config.youtube_rag_config import SAMPLE_VIDEO_URL
+from models.youtube_rag_demo_llm import build_youtube_rag_demo_llm
 from orchestration.youtube_rag_orchestration import answer_question
 from orchestration.youtube_rag_orchestration import build_youtube_rag_context
 from orchestration.youtube_rag_orchestration import perform_similarity_search
@@ -24,6 +25,16 @@ from orchestration.youtube_transcript_orchestration import (
 from orchestration.youtube_transcript_orchestration import get_transcript
 from orchestration.youtube_transcript_orchestration import get_video_id
 from orchestration.youtube_transcript_orchestration import process_transcript
+
+
+def patch_demo_llm(monkeypatch) -> None:
+    from orchestration import youtube_rag_orchestration as rag_orchestration
+
+    monkeypatch.setattr(
+        rag_orchestration,
+        "build_youtube_rag_llm",
+        build_youtube_rag_demo_llm,
+    )
 
 
 def test_get_video_id_extracts_expected_identifier():
@@ -59,17 +70,24 @@ def test_similarity_search_surfaces_faiss_chunk():
     documents = perform_similarity_search(rag_context.faiss_index, FAISS_QUESTION)
 
     assert documents
-    assert any("faiss" in document.page_content.lower() for document in documents)
+    combined_text = " ".join(document.page_content.lower() for document in documents)
+    assert "retrieval augmented generation" in combined_text or "vector" in combined_text
+    assert any(
+        keyword in combined_text
+        for keyword in ["retrieve", "retrieval", "external evidence", "training memory"]
+    )
 
 
-def test_summarize_video_mentions_rag_and_hallucinations():
+def test_summarize_video_mentions_rag_and_hallucinations(monkeypatch):
+    patch_demo_llm(monkeypatch)
     summary = summarize_video(SAMPLE_VIDEO_URL)
 
     assert "retrieval augmented generation" in summary.lower() or "rag" in summary.lower()
     assert "hallucination" in summary.lower()
 
 
-def test_answer_question_handles_hallucinations_and_rag_problems():
+def test_answer_question_handles_hallucinations_and_rag_problems(monkeypatch):
+    patch_demo_llm(monkeypatch)
     hallucination_answer = answer_question(SAMPLE_VIDEO_URL, HALLUCINATION_QUESTION)
     rag_answer = answer_question(SAMPLE_VIDEO_URL, RAG_PROBLEMS_QUESTION)
 

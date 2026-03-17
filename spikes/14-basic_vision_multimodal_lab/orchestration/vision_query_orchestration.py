@@ -1,6 +1,7 @@
 # --- DEPENDENCIAS ---
 from config.vision_multimodal_config import DEFAULT_ASSISTANT_PROMPT
-from models.vision_demo_model import build_vision_demo_model
+from config.vision_real_provider_config import QWEN25_VL_MODEL_NAME
+from models.vision_ollama_gateway import generate_ollama_vision_response_from_base64
 from orchestration.vision_image_orchestration import create_vision_message
 
 # --- QUERY ---
@@ -8,11 +9,13 @@ def generate_model_response(
     encoded_image: str,
     user_query: str,
     assistant_prompt: str = DEFAULT_ASSISTANT_PROMPT,
+    model_name: str = QWEN25_VL_MODEL_NAME,
+    response_generator=generate_ollama_vision_response_from_base64,
 ) -> str:
     prompt = assistant_prompt + user_query
     messages = create_vision_message(prompt, encoded_image)
-    response = build_vision_demo_model().chat(messages=messages)
-    return response["choices"][0]["message"]["content"]
+    encoded_payload = messages[0]["content"][1]["image_url"]["url"].split(",", maxsplit=1)[1]
+    return response_generator(model_name, prompt, encoded_payload)
 
 
 def generate_image_captions(

@@ -4,15 +4,15 @@
 
 1. Metricas vectoriales: Resumen de L2 producto punto y coseno para retrieval.
 2. RAG y recommendation systems: Resumen operativo de responsabilidades riesgos y casos de uso.
-3. ChromaDB: Demo local con colecciones filtros consultas por similitud y operaciones CRUD.
-4. Embeddings demo: Vectores deterministas para ejecutar la practica sin modelos externos.
+3. ChromaDB: Flujo local con colecciones filtros consultas por similitud y operaciones CRUD.
+4. Embeddings reales locales: Vectores servidos por `Ollama` con `nomic-embed-text`.
 
 ## Roles de Archivos
 
 - `main.py`: Punto de entrada de la practica.
 - `config/chromadb_cheat_sheet_config.py`: Constantes del spike y textos del resumen.
 - `data/chromadb_demo_dataset.py`: Documentos metadatos consultas y filtros de ejemplo.
-- `models/chromadb_keyword_embedding_gateway.py`: Embeddings locales basados en palabras clave.
+- `models/chromadb_keyword_embedding_gateway.py`: Embeddings reales locales servidos por `Ollama`.
 - `orchestration/chromadb_collection_orchestration.py`: Cliente coleccion y operaciones CRUD de la demo.
 - `orchestration/chromadb_query_orchestration.py`: Filtros consultas lecturas por id y formateo de resultados.
 - `orchestration/chromadb_cheat_sheet_runner.py`: Ejecucion guiada del resumen y la demo.
@@ -31,6 +31,9 @@
 1. Activar entorno: `.\venv\Scripts\Activate.ps1`.
 2. ChromaDB: `pip install -U chromadb`.
 3. Numpy: `pip install -U numpy`.
+4. LangChain Ollama: `pip install -U langchain-ollama`.
+5. Arrancar `Ollama`: `ollama serve`.
+6. Descargar embedding local: `ollama pull nomic-embed-text`.
 
 ## Verificacion
 

@@ -125,6 +125,15 @@ irm https://ollama.com/install.ps1 | iex
 # Descargar un modelo local de ejemplo.
 ollama pull llama3.2:3b
 
+# Descargar embeddings locales para practicas vectoriales.
+ollama pull nomic-embed-text
+
+# Descargar un modelo de texto recomendado para retrievers y tool calling.
+ollama pull qwen2.5:7b
+
+# Descargar un modelo de vision recomendado para practica 14.
+ollama pull qwen2.5vl:3b
+
 # Verificar.
 ollama --version
 ollama list
@@ -132,7 +141,7 @@ ollama list
 
 ## Politica de Modelos para Practicas
 
-Para las practicas de `spikes` se prioriza `Ollama` cuando la tarea puede resolverse bien con modelos locales de texto o embeddings compatibles con el repositorio. Si una practica multimodal o cualquier ejercicio de IA no encaja correctamente con `Ollama` se debe usar el modelo recomendado por la propia practica. Si existe una variante gratuita y accesible en internet que cubra ese mismo caso de uso de forma razonable esa opcion gratuita debe priorizarse frente a alternativas privativas o de pago.
+Para las practicas de `spikes` se prioriza `Ollama` cuando la tarea puede resolverse bien con modelos locales de texto o embeddings compatibles con el repositorio. Si una practica multimodal o cualquier ejercicio de IA no encaja correctamente con `Ollama` se debe usar el modelo recomendado por la propia practica. Si existe una variante gratuita y accesible en internet que cubra ese mismo caso de uso de forma razonable esa opcion gratuita debe priorizarse frente a alternativas privativas o de pago. Los mocks y fakes solo se permiten en tests. El camino ejecutable principal de cada practica debe usar modelos reales locales o gratuitos.
 
 ## Ejecutar Gradio
 
@@ -179,6 +188,10 @@ python .\spikes\05-similarity_search_by_hand_lab\main.py
 # Activar el entorno virtual.
 .\venv\Scripts\Activate.ps1
 
+# Arrancar Ollama y descargar embeddings locales.
+ollama serve
+ollama pull nomic-embed-text
+
 # Ejecutar la practica de introduccion a ChromaDB.
 python .\spikes\06-vector_databases_chromadb_cheat_sheet_lab\main.py
 ```
@@ -188,6 +201,10 @@ python .\spikes\06-vector_databases_chromadb_cheat_sheet_lab\main.py
 ```powershell
 # Activar el entorno virtual.
 .\venv\Scripts\Activate.ps1
+
+# Arrancar Ollama y descargar embeddings locales.
+ollama serve
+ollama pull nomic-embed-text
 
 # Ejecutar la practica de similitud sobre empleados y libros con ChromaDB.
 python .\spikes\07-employee_similarity_search_chromadb_lab\main.py
@@ -199,6 +216,11 @@ python .\spikes\07-employee_similarity_search_chromadb_lab\main.py
 # Activar el entorno virtual.
 .\venv\Scripts\Activate.ps1
 
+# Arrancar Ollama y descargar modelos necesarios.
+ollama serve
+ollama pull nomic-embed-text
+ollama pull llama3.2:3b
+
 # Ejecutar la practica de recomendaciones de comida con ChromaDB y RAG.
 python .\spikes\08-food_recommendation_systems_chromadb_rag_lab\main.py
 ```
@@ -208,6 +230,11 @@ python .\spikes\08-food_recommendation_systems_chromadb_rag_lab\main.py
 ```powershell
 # Activar el entorno virtual.
 .\venv\Scripts\Activate.ps1
+
+# Arrancar Ollama y descargar modelos necesarios.
+ollama serve
+ollama pull nomic-embed-text
+ollama pull qwen2.5:7b
 
 # Ejecutar la practica de context retrieval con LangChain.
 python .\spikes\09-langchain_context_retrieval_lab\main.py
@@ -219,6 +246,11 @@ python .\spikes\09-langchain_context_retrieval_lab\main.py
 # Activar el entorno virtual.
 .\venv\Scripts\Activate.ps1
 
+# Arrancar Ollama y descargar modelos necesarios.
+ollama serve
+ollama pull nomic-embed-text
+ollama pull qwen2.5:7b
+
 # Ejecutar la practica de retrievers avanzados con LlamaIndex.
 python .\spikes\10-advanced_retrievers_llamaindex_lab\main.py
 ```
@@ -228,6 +260,10 @@ python .\spikes\10-advanced_retrievers_llamaindex_lab\main.py
 ```powershell
 # Activar el entorno virtual.
 .\venv\Scripts\Activate.ps1
+
+# Arrancar Ollama y descargar embeddings locales.
+ollama serve
+ollama pull nomic-embed-text
 
 # Ejecutar la practica de semantic similarity con FAISS.
 python .\spikes\11-semantic_similarity_faiss_lab\main.py
@@ -239,6 +275,11 @@ python .\spikes\11-semantic_similarity_faiss_lab\main.py
 # Activar el entorno virtual.
 .\venv\Scripts\Activate.ps1
 
+# Arrancar Ollama y descargar modelos necesarios.
+ollama serve
+ollama pull nomic-embed-text
+ollama pull qwen2.5:7b
+
 # Ejecutar la practica de resumen y QA sobre YouTube con RAG y FAISS.
 python .\spikes\12-youtube_summarizer_rag_faiss_lab\main.py
 ```
@@ -249,10 +290,17 @@ python .\spikes\12-youtube_summarizer_rag_faiss_lab\main.py
 # Activar el entorno virtual.
 .\venv\Scripts\Activate.ps1
 
+# Arrancar Ollama y descargar un modelo de texto.
+ollama serve
+ollama pull qwen2.5:7b
+
+# Instalar sintetizador de voz gratuito.
+pip install -U edge-tts
+
 # Ejecutar la practica de generacion de historias y texto a voz.
 python .\spikes\13-story_generator_text_to_speech_lab\main.py
 
-# Variante real con Ollama y mistral.
+# Variante adicional con Ollama y gTTS.
 python .\spikes\13-story_generator_text_to_speech_lab\ollama_mistral_story_tts\main.py
 
 # Variante real con Mistral API.
@@ -267,6 +315,10 @@ python .\spikes\13-story_generator_text_to_speech_lab\ollama_mistral_edge_tts_st
 ```powershell
 # Activar el entorno virtual.
 .\venv\Scripts\Activate.ps1
+
+# Arrancar Ollama y descargar un modelo de vision.
+ollama serve
+ollama pull qwen2.5vl:3b
 
 # Ejecutar la practica de vision multimodal basica.
 python .\spikes\14-basic_vision_multimodal_lab\main.py
@@ -313,6 +365,10 @@ python .\spikes\14-basic_vision_multimodal_lab\nutrition_coach_flask_app\app.py
 ```powershell
 # Activar el entorno virtual.
 .\venv\Scripts\Activate.ps1
+
+# Arrancar Ollama y descargar un modelo de texto.
+ollama serve
+ollama pull llama3.2:3b
 
 # Ejecutar la practica del asistente de reuniones.
 python .\spikes\15-ai_meeting_assistant_lab\main.py
@@ -609,6 +665,7 @@ spikes/
       langchain_retrieval_notes.txt
     models/
       context_retrieval_demo_llm.py
+      context_retrieval_ollama_gateway.py
       context_retrieval_embedding_gateway.py
     orchestration/
       context_retrieval_collection_orchestration.py
@@ -624,6 +681,7 @@ spikes/
     data/
       advanced_retrievers_documents.py
     models/
+      advanced_retrievers_ollama_gateway.py
       advanced_retrievers_demo_llm.py
       llamaindex_demo_embedding_gateway.py
     orchestration/
@@ -655,6 +713,7 @@ spikes/
       youtube_transcript_catalog.py
     models/
       youtube_rag_demo_llm.py
+      youtube_rag_ollama_gateway.py
       youtube_rag_embedding_gateway.py
     orchestration/
       youtube_rag_lab_runner.py

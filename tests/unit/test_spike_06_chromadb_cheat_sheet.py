@@ -32,11 +32,17 @@ from orchestration.chromadb_query_orchestration import query_by_text
 
 
 def test_build_keyword_embedding_detects_animal_signal():
-    embedding = build_keyword_embedding("polar bears and pandas in the arctic")
+    animal_embedding = build_keyword_embedding("polar bears and pandas in the arctic")
+    animal_reference = build_keyword_embedding("arctic wildlife and polar bear habitat")
+    tech_reference = build_keyword_embedding("python programming dataframes and backend services")
 
-    assert isinstance(embedding, np.ndarray)
-    assert embedding[0] > embedding[1]
-    assert embedding[0] > embedding[2]
+    assert isinstance(animal_embedding, np.ndarray)
+    assert animal_embedding.ndim == 1
+    assert animal_embedding.size > 0
+    assert np.isfinite(animal_embedding).all()
+    assert float(np.dot(animal_embedding, animal_reference)) > float(
+        np.dot(animal_embedding, tech_reference)
+    )
 
 
 def test_metadata_filter_returns_only_animal_documents():

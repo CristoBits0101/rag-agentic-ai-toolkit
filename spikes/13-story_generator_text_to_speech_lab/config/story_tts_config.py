@@ -1,8 +1,8 @@
 # --- DEPENDENCIAS ---
 DEFAULT_TOPIC = "the life cycle of butterflies"
 EXERCISE_TOPIC = "the life cycle of a human"
-DEFAULT_AUDIO_FILE_NAME = "generated_story.wav"
-ONLINE_TTS_ENABLED = False
+DEFAULT_AUDIO_FILE_NAME = "generated_story.mp3"
+ONLINE_TTS_ENABLED = True
 AUDIO_SAMPLE_RATE = 16000
 AUDIO_AMPLITUDE = 10000
 AUDIO_TONE_SECONDS = 0.12

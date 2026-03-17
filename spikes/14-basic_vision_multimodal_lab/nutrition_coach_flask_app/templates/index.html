@@ -86,7 +86,7 @@
             <section class="panel result-panel">
                 <div class="section-heading">
                     <h2>Nutrition analysis</h2>
-                    <p>The response is formatted from model output or a deterministic fallback when the model is unavailable.</p>
+                    <p>The response is generated from the active Ollama vision model and enriched with retrieved nutrition context.</p>
                 </div>
                 {% with messages = get_flashed_messages(with_categories=true) %}
                     {% if messages %}

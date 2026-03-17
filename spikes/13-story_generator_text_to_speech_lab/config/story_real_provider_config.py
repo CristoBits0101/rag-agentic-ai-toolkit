@@ -1,5 +1,5 @@
 # --- DEPENDENCIAS ---
-OLLAMA_STORY_MODEL_NAME = "mistral"
+OLLAMA_STORY_MODEL_NAME = "qwen2.5:7b"
 MISTRAL_API_MODEL_NAME = "mistral-small-latest"
 MISTRAL_API_URL = "https://api.mistral.ai/v1/chat/completions"
 EDGE_TTS_VOICE = "en-US-AriaNeural"

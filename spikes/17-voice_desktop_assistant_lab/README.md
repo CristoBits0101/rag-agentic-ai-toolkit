@@ -4,7 +4,7 @@
 
 1. Push to talk: Captura audio desde el micro mientras mantienes un boton o la barra espaciadora con foco local.
 2. Speech to text local: Transcribe la orden con `Whisper` en local.
-3. Command planner: Interpreta la intencion con `Ollama` y cae a una logica demo si `Ollama` falla o devuelve un plan invalido.
+3. Command planner: Interpreta la intencion con `Ollama` usando un plan JSON validado.
 4. Desktop actions: Ejecuta una allowlist de acciones de escritorio incluyendo apertura y cierre controlado de apps.
 5. Confirmation gate: Pide confirmacion antes de enviar rutas a la papelera.
 
@@ -20,10 +20,9 @@ Esta practica no es una extension menor de la practica 15. La practica 15 trabaj
 - `models/voice_desktop_entities.py`: Dataclasses para planes y resultados.
 - `models/voice_microphone_gateway.py`: Captura de audio con push to talk manual y guardado a WAV.
 - `models/voice_transcription_gateway.py`: Transcripcion local con `Whisper`.
-- `models/voice_agent_demo_planner.py`: Planner de respaldo basado en reglas.
 - `models/voice_agent_ollama_gateway.py`: Planner principal con `Ollama` y seleccion automatica del mejor modelo local disponible.
 - `models/voice_local_tts_gateway.py`: Respuesta hablada local con `System.Speech` de Windows.
-- `orchestration/voice_desktop_planning_orchestration.py`: Fallback entre `Ollama` y planner demo.
+- `orchestration/voice_desktop_planning_orchestration.py`: Validacion y normalizacion del plan generado por `Ollama`.
 - `orchestration/voice_desktop_execution_orchestration.py`: Ejecutor seguro de acciones locales.
 - `orchestration/voice_desktop_session_orchestration.py`: Flujo de turnos y confirmaciones por voz.
 - `orchestration/voice_desktop_lab_runner.py`: Loop principal del asistente.
@@ -47,7 +46,7 @@ Esta practica no es una extension menor de la practica 15. La practica 15 trabaj
 2. Mantienes pulsado el boton principal o la barra espaciadora con la ventana enfocada para hablar.
 3. `Whisper` transcribe la orden.
 4. `Ollama` intenta planificar una accion segura.
-5. Si `Ollama` no responde o devuelve una accion no valida el flujo cae a un planner demo por reglas.
+5. Si `Ollama` no responde o devuelve una accion no valida el flujo se detiene con un error explicito.
 6. Las acciones permitidas son abrir apps cerrar apps permitidas abrir urls escribir texto pulsar atajos y enviar rutas a la papelera.
 7. `close_application` y `trash_path` siempre piden confirmacion.
 8. `trash_path` bloquea rutas del repo y rutas sensibles del sistema.
@@ -66,8 +65,7 @@ Esta practica no es una extension menor de la practica 15. La practica 15 trabaj
 ## Cobertura
 
 1. `select_best_available_ollama_model`: Elige el mejor modelo de texto ya instalado en `Ollama`.
-2. `build_demo_action_plan`: Resuelve comandos basicos sin depender del modelo.
-3. `process_voice_transcript`: Maneja confirmaciones por voz.
+2. `process_voice_transcript`: Maneja confirmaciones por voz.
 4. `trash_path`: Mueve rutas a la papelera y rechaza rutas protegidas.
 5. `write_pcm_frames_to_wav`: Genera el artefacto WAV desde frames PCM.
 6. `LocalVoiceSpeaker`: Reproduce voz local y corta la respuesta previa antes de iniciar una nueva.

@@ -1,15 +1,22 @@
 # --- DEPENDENCIAS ---
-from models.meeting_assistant_demo_llm import build_cleanup_response
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.prompts import PromptTemplate
+from langchain_core.runnables import RunnablePassthrough
+
+from models.meeting_assistant_llm_gateway import build_meeting_assistant_llm
 
 
 def product_assistant(ascii_transcript: str) -> str:
-    system_prompt = (
+    prompt = PromptTemplate.from_template(
         "You are an intelligent assistant specializing in financial products. "
-        "Your task is to process transcripts of earnings calls ensuring that all references to financial products and common financial terms are in the correct format. "
-        "Once you've done that, produce the adjusted transcript and a list of the words you've changed\n"
+        "Process the transcript and normalize common financial terms into their correct expanded format. "
+        "Return the result using exactly these sections.\n"
+        "Adjusted Transcript:\n"
+        "Changed Terms:\n\n"
+        "{transcript}"
     )
-    prompt_input = system_prompt + ascii_transcript
-    return build_cleanup_response(prompt_input.split(system_prompt, maxsplit=1)[1])
+    chain = {"transcript": RunnablePassthrough()} | prompt | build_meeting_assistant_llm() | StrOutputParser()
+    return chain.invoke(ascii_transcript)
 
 
 def extract_adjusted_transcript(cleanup_response: str) -> str:

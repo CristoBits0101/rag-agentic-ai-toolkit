@@ -93,7 +93,14 @@ def test_run_mistral_api_story_variant_uses_real_wrapper_shape(monkeypatch, tmp_
 def test_synthesize_story_with_edge_tts_requires_cli(monkeypatch, tmp_path):
     import models.story_edge_tts_gateway as edge_tts_gateway
 
-    monkeypatch.setattr(edge_tts_gateway.shutil, "which", lambda name: None)
+    class FailedRun:
+        returncode = 1
+
+    monkeypatch.setattr(
+        edge_tts_gateway.subprocess,
+        "run",
+        lambda *args, **kwargs: FailedRun(),
+    )
 
     try:
         synthesize_story_with_edge_tts("A story.", tmp_path / "story.mp3")

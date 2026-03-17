@@ -6,8 +6,8 @@ from langchain_core.prompts import PromptTemplate
 from langchain_community.vectorstores import FAISS
 
 from config.youtube_rag_config import RETRIEVAL_TOP_K
-from models.youtube_rag_demo_llm import build_youtube_rag_demo_llm
 from models.youtube_rag_embedding_gateway import build_youtube_rag_embeddings
+from models.youtube_rag_ollama_gateway import build_youtube_rag_llm
 from orchestration.youtube_transcript_orchestration import (
     build_youtube_transcript_context,
 )
@@ -76,12 +76,12 @@ Question: {question}
 
 def create_summary_chain():
     # Construye una cadena moderna de resumen con prompt y LLM.
-    return create_summary_prompt() | build_youtube_rag_demo_llm()
+    return create_summary_prompt() | build_youtube_rag_llm()
 
 
 def create_qa_chain():
     # Construye una cadena moderna de QA con prompt y LLM.
-    return create_qa_prompt_template() | build_youtube_rag_demo_llm()
+    return create_qa_prompt_template() | build_youtube_rag_llm()
 
 
 @lru_cache(maxsize=8)

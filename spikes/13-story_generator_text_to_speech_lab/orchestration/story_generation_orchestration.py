@@ -2,7 +2,7 @@
 from dataclasses import dataclass
 from functools import lru_cache
 
-from models.story_demo_model import build_story_demo_model
+from models.story_ollama_mistral_gateway import generate_story_with_ollama_mistral
 
 # --- STORY ---
 @dataclass(frozen=True)
@@ -31,7 +31,7 @@ def build_story_generation_context(topic: str) -> StoryGenerationContext | None:
         return None
 
     prompt = create_story_prompt(normalized_topic)
-    story = build_story_demo_model().generate_text(prompt)
+    story = generate_story_with_ollama_mistral(prompt)
 
     return StoryGenerationContext(
         topic=normalized_topic,

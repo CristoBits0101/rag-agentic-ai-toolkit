@@ -4,7 +4,7 @@
 
 1. Dataset local: Coleccion de platos con descripcion ingredientes calorias y beneficios.
 2. ChromaDB: Busqueda semantica y filtros por cocina y calorias con una coleccion en memoria.
-3. RAG con Ollama: Recomendaciones conversacionales usando contexto recuperado y fallback seguro.
+3. RAG con Ollama: Recomendaciones conversacionales usando contexto recuperado y un modelo local real.
 
 ## Roles de Archivos
 
@@ -12,7 +12,7 @@
 - `config/food_recommendation_config.py`: Constantes del spike y consultas de demostracion.
 - `data/food_dataset.json`: Dataset local de alimentos para el laboratorio.
 - `pipeline/food_data_pipeline.py`: Carga normalizacion y construccion de documentos y metadatos.
-- `models/food_embedding_gateway.py`: Embeddings deterministas para mantener la practica estable.
+- `models/food_embedding_gateway.py`: Embeddings reales locales con `nomic-embed-text`.
 - `models/food_ollama_gateway.py`: Acceso perezoso al modelo local de Ollama.
 - `orchestration/food_collection_orchestration.py`: Creacion y carga de la coleccion de recomendaciones.
 - `orchestration/food_search_orchestration.py`: Similarity search y filtered search.
@@ -25,8 +25,10 @@
 1. Activar entorno: `.\venv\Scripts\Activate.ps1`.
 2. ChromaDB: `pip install -U chromadb`.
 3. Numpy: `pip install -U numpy`.
-4. Ollama opcional: `pip install -U langchain-ollama`.
-5. Modelo opcional: `ollama pull llama3.2:3b`.
+4. LangChain Ollama: `pip install -U langchain-ollama`.
+5. Arrancar `Ollama`: `ollama serve`.
+6. Embedding local: `ollama pull nomic-embed-text`.
+7. Modelo de texto: `ollama pull llama3.2:3b`.
 
 ## Verificacion
 
@@ -36,4 +38,4 @@
 
 ## Nota
 
-La practica no depende de embeddings remotos ni de `SentenceTransformers`. La parte de busqueda usa embeddings deterministas para que los tests sean reproducibles. La parte RAG intenta usar `Ollama` si esta disponible y si no genera una respuesta de respaldo basada en el contexto recuperado.
+La practica no depende de embeddings remotos ni de `SentenceTransformers`. La busqueda usa embeddings reales locales de `Ollama` y la generacion `RAG` exige un modelo local real para mantener el objetivo del laboratorio sin demos falsas.

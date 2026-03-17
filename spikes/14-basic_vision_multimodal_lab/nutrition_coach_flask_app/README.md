@@ -15,7 +15,7 @@ Combina una imagen de comida subida por el usuario con retrieval local sobre un 
 2. La imagen subida se codifica a `Base64` y embedding visual.
 3. Se recupera la comida mas cercana en un dataset estructurado.
 4. El contexto nutricional recuperado se pasa a un modelo de vision en `Ollama`.
-5. Si el modelo no responde la app usa un fallback determinista con el catalogo local.
+5. Si el modelo falla la app devuelve un error explicito sin inventar una respuesta visual.
 
 ## Ejecucion
 
