@@ -992,6 +992,27 @@ Una arquitectura de agente eficaz suele separar memoria uso de herramientas plan
 
 En un flujo normal de `tool calling` la aplicacion registra primero las herramientas disponibles junto con su esquema de entrada. Despues el modelo recibe la consulta del usuario y decide si necesita llamar una herramienta. Si la necesita devuelve una solicitud estructurada con nombre y argumentos. La aplicacion valida esa solicitud ejecuta la herramienta si procede y devuelve el resultado al modelo para que redacte la respuesta final con ese dato ya incorporado al contexto.
 
+## Manual Tool Calling y Control de Ejecucion
+
+En `tool calling` el modelo no ejecuta herramientas por si solo. El modelo devuelve una propuesta de llamada con nombre y argumentos y la aplicacion decide si esa llamada se ejecuta o no. Este enfoque permite aplicar validaciones reglas de negocio listas de herramientas permitidas y control de errores antes de tocar sistemas externos.
+
+El ciclo habitual es simple: el modelo devuelve un `AIMessage` con `tool_calls` la aplicacion ejecuta la herramienta valida el resultado y responde con un `ToolMessage` asociado al mismo `tool_call_id`. Solo despues el modelo genera la respuesta final usando ese resultado como contexto. Este patron es especialmente util cuando importan seguridad auditabilidad y control de costes.
+
+## Structured Outputs
+
+Cuando una salida va a terminar en una base de datos una API o un flujo automatizado conviene pedir una respuesta estructurada en lugar de texto libre. En `LangChain` esto puede resolverse con esquemas `Pydantic` `TypedDict` `dataclasses` o `JSON Schema` para asegurar consistencia y validacion.
+
+En la API moderna `LangChain` puede usar salida estructurada nativa del proveedor cuando el modelo la soporta o caer a una estrategia basada en `tool calling` cuando no existe soporte nativo. Esto reduce parsing fragil y hace mas fiables los flujos donde la salida debe cumplir un contrato fijo.
+
+## Criterio de Orquestacion
+
+No todas las tareas necesitan un agente. Si solo hace falta una respuesta de texto basta una llamada directa al modelo. Si el flujo es lineal y predecible conviene usar `LCEL`. Si el sistema necesita decidir herramientas encadenar acciones o iterar hasta llegar a una respuesta entonces tiene sentido usar un agente.
+
+Como regla practica:
+- Llamada directa: Para una sola generacion.
+- `LCEL`: Para pipelines lineales con prompts modelos parsers retrieval o transformaciones.
+- Agente: Para decisiones dinamicas uso de herramientas y bucles de razonamiento controlados.
+
 ## LCEL y Runnables
 
 `LCEL` ofrece una forma simple de encadenar pasos con el operador `|` cuando el flujo es claro y determinista. Su base comun son los `Runnables` que permiten componer prompts modelos parsers y transformaciones bajo una interfaz consistente. Eso facilita reutilizar operaciones como `invoke` `batch` `ainvoke` o `stream` sin redisenar cada pipeline desde cero.
