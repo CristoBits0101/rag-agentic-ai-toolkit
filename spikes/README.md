@@ -29,6 +29,8 @@ Este archivo resume de forma rapida de que va cada practica del directorio `spik
 | 21 | YouTube Tool Calling Agent. | Construye un agente con `LangChain` y `ChatOllama` que usa tools reales de YouTube para extraer `video_id` buscar videos recuperar transcriptos leer metadatos y thumbnails y automatizar tanto un flujo fijo como una cadena recursiva. | A llevar el `tool calling` a un caso multi paso contra servicios externos reales y a comparar orquestacion manual automatizada y recursiva. | [21-youtube_tool_calling_agent_lab](./21-youtube_tool_calling_agent_lab/README.md) |
 | 22 | Natural Language Data Visualization Agent. | Construye un agente de `LangChain` con `create_pandas_dataframe_agent` y `ChatOllama` para consultar un CSV en lenguaje natural generar charts y extraer el Python usado para cada respuesta o visualizacion. | A unir analisis tabular conversacional con graficos reproducibles en disco y a inspeccionar el codigo que el agente ejecuta sobre `pandas` y `matplotlib`. | [22-natural_language_data_visualization_agent_lab](./22-natural_language_data_visualization_agent_lab/README.md) |
 | 23 | Natural Language SQL Agent. | Construye un agente SQL de `LangChain` con `ChatOllama` y una base Chinook local en `SQLite` para traducir preguntas en lenguaje natural a consultas SQL inspeccionables. | A levantar una base relacional reproducible conectar `SQLDatabase Toolkit` y revisar las sentencias SQL que el agente ejecuta sobre un esquema real. | [23-natural_language_sql_agent_lab](./23-natural_language_sql_agent_lab/README.md) |
+| 24 | LangGraph 101 Stateful AI Workflows. | Construye tres workflows con `LangGraph`: autenticacion con reintentos QA contextual sobre el propio lab y un contador ciclico basado en nodos y aristas condicionales. | A modelar estado compartido nodos aristas condicionales y ciclos reproducibles con `StateGraph` y `ChatOllama`. | [24-langgraph_101_building_stateful_ai_workflows_lab](./24-langgraph_101_building_stateful_ai_workflows_lab/README.md) |
+| 25 | Reflection Agent with LangGraph. | Construye un agente reflexivo con `MessageGraph` que genera un post de LinkedIn critica su propio borrador y lo refina en varias iteraciones. | A modelar historiales de mensajes routers condicionales y bucles de auto mejora con `LangGraph` y `ChatOllama`. | [25-building_reflection_agent_with_langgraph_lab](./25-building_reflection_agent_with_langgraph_lab/README.md) |
 
 ## Guia de Prueba
 
@@ -200,13 +202,30 @@ Compilacion: `python -m compileall spikes\23-natural_language_sql_agent_lab`.
 Ejecucion: `python .\spikes\23-natural_language_sql_agent_lab\main.py`.
 Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_23_natural_language_sql_agent.py`.
 
+### Practica 24
+
+Dependencias extra: `pip install -U langgraph==0.2.57`.
+Prerequisito: arrancar `ollama serve` y descargar `qwen2.5:7b` o `llama3.2:3b`.
+Compilacion: `python -m compileall spikes\24-langgraph_101_building_stateful_ai_workflows_lab`.
+Ejecucion: `python .\spikes\24-langgraph_101_building_stateful_ai_workflows_lab\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_24_langgraph_101_building_stateful_ai_workflows.py`.
+
+### Practica 25
+
+Dependencias extra: `pip install -U langgraph==0.2.57`.
+Dependencia opcional para PNG: `pip install -U pygraphviz==1.14`.
+Prerequisito: arrancar `ollama serve` y descargar `qwen2.5:7b` o `llama3.2:3b`.
+Compilacion: `python -m compileall spikes\25-building_reflection_agent_with_langgraph_lab`.
+Ejecucion: `python .\spikes\25-building_reflection_agent_with_langgraph_lab\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_25_building_reflection_agent_with_langgraph.py`.
+
 ## Ruta de Aprendizaje Sugerida
 
 1. Empieza por `01` y `02` si quieres dominar prompts `LCEL` y una interfaz minima.
 2. Sigue con `03` `05` y `06` para entender `RAG` embeddings similitud y bases vectoriales.
 3. Continua con `07` y `08` para ver casos de uso concretos de retrieval y recomendacion.
 4. Pasa a `09` y `10` cuando quieras profundizar en retrievers avanzados.
-5. Cierra con `11` `12` `13` `14` `15` `16` `17` `18` `19` `20` `21` `22` y `23` para trabajar `FAISS` contenido multimedia `Text to Speech` vision multimodal captioning visual apps `Gradio` y `Flask` asistentes de reunion generacion de imagenes control local por voz con permisos `tool calling` moderno en `LangChain` analisis tabular con `pandas` y `scikit-learn` el ciclo manual completo de agentes interactivos con tools la integracion multi paso con YouTube real la visualizacion conversacional de datos con `pandas` y consultas SQL en lenguaje natural sobre un esquema relacional.
+5. Cierra con `11` `12` `13` `14` `15` `16` `17` `18` `19` `20` `21` `22` `23` `24` y `25` para trabajar `FAISS` contenido multimedia `Text to Speech` vision multimodal captioning visual apps `Gradio` y `Flask` asistentes de reunion generacion de imagenes control local por voz con permisos `tool calling` moderno en `LangChain` analisis tabular con `pandas` y `scikit-learn` el ciclo manual completo de agentes interactivos con tools la integracion multi paso con YouTube real la visualizacion conversacional de datos con `pandas` consultas SQL en lenguaje natural sobre un esquema relacional workflows con estado en `LangGraph` y agentes de reflexion auto mejorables.
 
 ## Nota
 

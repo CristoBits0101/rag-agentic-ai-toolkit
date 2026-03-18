@@ -24,6 +24,7 @@ dependencies = [
   "langchain-community>=0.3.27",
   "langchain-core>=0.3.0",
   "langchain-ollama>=0.3.0",
+  "langgraph>=0.2.57,<0.3.0",
   "llama-index-core>=0.12.49",
   "llama-index-retrievers-bm25>=0.5.2",
   "chromadb>=1.5.5",
