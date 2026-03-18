@@ -759,6 +759,54 @@ pip install -U crewai crewai-tools
 python .\spikes\32-structured_meal_grocery_planner_with_crewai\main.py
 ```
 
+## Ejecutar Practica 33
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# Arrancar Ollama.
+ollama serve
+
+# Descargar un modelo recomendado para la comparativa tipo CrewAI.
+ollama pull qwen2.5:7b
+
+# Alternativa de menor consumo.
+ollama pull llama3.2:3b
+
+# Opcional si quieres usar CrewAI real en lugar del modo compatible local.
+pip install -U crewai crewai-tools
+
+# Ejecutar la practica de chatbot con tools por agente y por tarea.
+python .\spikes\33-agents_with_tools_versus_tasks_with_tools_in_crewai\main.py
+```
+
+## Ejecutar Practica 34
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# Arrancar Ollama.
+ollama serve
+
+# Descargar un modelo de texto recomendado.
+ollama pull qwen2.5:7b
+
+# Descargar un modelo de vision recomendado.
+ollama pull qwen2.5vl:3b
+
+# Alternativas de vision.
+ollama pull llava
+ollama pull llama3.2-vision
+
+# Ejecutar la demo CLI de NourishBot.
+python .\spikes\34-building_your_own_ai_nutrition_coach_using_a_multi_agent_system_and_multimodal_ai\main.py
+
+# Lanzar la interfaz Gradio.
+python .\spikes\34-building_your_own_ai_nutrition_coach_using_a_multi_agent_system_and_multimodal_ai\app.py
+```
+
 ## Parar Gradio
 
 ```powershell
@@ -1488,15 +1536,15 @@ Un sistema multiagente reparte el trabajo entre roles especializados en lugar de
 
 `Agentic RAG` anade una capa de decision sobre el `RAG` clasico. En vez de recuperar siempre desde una sola fuente un agente puede decidir que base consultar cuando reformular una consulta cuando pedir verificacion adicional y cuando escalar a otro agente o a un humano. Esto suele mejorar robustez en dominios con varias fuentes o con consultas ambiguas.
 
-En este repositorio la base tecnica de `Agentic RAG` ya aparece repartida entre la [practica 03](C:/Workspace/rag-agentic-ai-toolkit/spikes/03-rag_pdf_qa_bot_lab/README.md) la [09](C:/Workspace/rag-agentic-ai-toolkit/spikes/09-langchain_context_retrieval_lab/README.md) la [10](C:/Workspace/rag-agentic-ai-toolkit/spikes/10-advanced_retrievers_llamaindex_lab/README.md) la [12](C:/Workspace/rag-agentic-ai-toolkit/spikes/12-youtube_summarizer_rag_faiss_lab/README.md) la [21](C:/Workspace/rag-agentic-ai-toolkit/spikes/21-youtube_tool_calling_agent_lab/README.md) la [23](C:/Workspace/rag-agentic-ai-toolkit/spikes/23-natural_language_sql_agent_lab/README.md) la [24](C:/Workspace/rag-agentic-ai-toolkit/spikes/24-langgraph_101_building_stateful_ai_workflows_lab/README.md) la [25](C:/Workspace/rag-agentic-ai-toolkit/spikes/25-building_reflection_agent_with_langgraph_lab/README.md) la [26](C:/Workspace/rag-agentic-ai-toolkit/spikes/26-building_reflection_agent_with_external_knowledge_integration/README.md) la [27](C:/Workspace/rag-agentic-ai-toolkit/spikes/27-react_build_reasoning_and_acting_ai_agents_with_langgraph/README.md) la [28](C:/Workspace/rag-agentic-ai-toolkit/spikes/28-docchat_multi_agent_rag_system/README.md) la [29](C:/Workspace/rag-agentic-ai-toolkit/spikes/29-implement_workflow_patterns_with_langgraph/README.md) la [30](C:/Workspace/rag-agentic-ai-toolkit/spikes/30-build_langgraph_design_patterns_orchestration_evaluation/README.md) la [31](C:/Workspace/rag-agentic-ai-toolkit/spikes/31-crewai_101_building_multi_agent_ai_systems/README.md) y la [32](C:/Workspace/rag-agentic-ai-toolkit/spikes/32-structured_meal_grocery_planner_with_crewai/README.md). Estas practicas amplian la base hacia patrones de workflow con `LangGraph`, orquestacion con evaluacion y pipelines multiagente tipo `CrewAI` para contenido y grocery planning.
+En este repositorio la base tecnica de `Agentic RAG` ya aparece repartida entre la [practica 03](C:/Workspace/rag-agentic-ai-toolkit/spikes/03-rag_pdf_qa_bot_lab/README.md) la [09](C:/Workspace/rag-agentic-ai-toolkit/spikes/09-langchain_context_retrieval_lab/README.md) la [10](C:/Workspace/rag-agentic-ai-toolkit/spikes/10-advanced_retrievers_llamaindex_lab/README.md) la [12](C:/Workspace/rag-agentic-ai-toolkit/spikes/12-youtube_summarizer_rag_faiss_lab/README.md) la [21](C:/Workspace/rag-agentic-ai-toolkit/spikes/21-youtube_tool_calling_agent_lab/README.md) la [23](C:/Workspace/rag-agentic-ai-toolkit/spikes/23-natural_language_sql_agent_lab/README.md) la [24](C:/Workspace/rag-agentic-ai-toolkit/spikes/24-langgraph_101_building_stateful_ai_workflows_lab/README.md) la [25](C:/Workspace/rag-agentic-ai-toolkit/spikes/25-building_reflection_agent_with_langgraph_lab/README.md) la [26](C:/Workspace/rag-agentic-ai-toolkit/spikes/26-building_reflection_agent_with_external_knowledge_integration/README.md) la [27](C:/Workspace/rag-agentic-ai-toolkit/spikes/27-react_build_reasoning_and_acting_ai_agents_with_langgraph/README.md) la [28](C:/Workspace/rag-agentic-ai-toolkit/spikes/28-docchat_multi_agent_rag_system/README.md) la [29](C:/Workspace/rag-agentic-ai-toolkit/spikes/29-implement_workflow_patterns_with_langgraph/README.md) la [30](C:/Workspace/rag-agentic-ai-toolkit/spikes/30-build_langgraph_design_patterns_orchestration_evaluation/README.md) la [31](C:/Workspace/rag-agentic-ai-toolkit/spikes/31-crewai_101_building_multi_agent_ai_systems/README.md) la [32](C:/Workspace/rag-agentic-ai-toolkit/spikes/32-structured_meal_grocery_planner_with_crewai/README.md) la [33](C:/Workspace/rag-agentic-ai-toolkit/spikes/33-agents_with_tools_versus_tasks_with_tools_in_crewai/README.md) y la [34](C:/Workspace/rag-agentic-ai-toolkit/spikes/34-building_your_own_ai_nutrition_coach_using_a_multi_agent_system_and_multimodal_ai/README.md). Estas practicas amplian la base hacia patrones de workflow con `LangGraph`, orquestacion con evaluacion, comparativas finas de asignacion de tools en `CrewAI` y una aplicacion multimodal multiagente de nutricion.
 
 ## Ruta de Aprendizaje Agentica en este Repo
 
 1. Empieza por [01](C:/Workspace/rag-agentic-ai-toolkit/spikes/01-prompting_lcel_lab/README.md) para fijar prompts plantillas y `LCEL`.
 2. Continua con [18](C:/Workspace/rag-agentic-ai-toolkit/spikes/18-langchain_tool_calling_math_assistant_lab/README.md) y [20](C:/Workspace/rag-agentic-ai-toolkit/spikes/20-interactive_llm_agents_with_tools_lab/README.md) para dominar `tool calling` contratos y control de ejecucion.
 3. Pasa por [03](C:/Workspace/rag-agentic-ai-toolkit/spikes/03-rag_pdf_qa_bot_lab/README.md) [09](C:/Workspace/rag-agentic-ai-toolkit/spikes/09-langchain_context_retrieval_lab/README.md) [10](C:/Workspace/rag-agentic-ai-toolkit/spikes/10-advanced_retrievers_llamaindex_lab/README.md) y [12](C:/Workspace/rag-agentic-ai-toolkit/spikes/12-youtube_summarizer_rag_faiss_lab/README.md) para construir la base de `RAG` y retrieval avanzado.
-4. Cierra con [21](C:/Workspace/rag-agentic-ai-toolkit/spikes/21-youtube_tool_calling_agent_lab/README.md) [22](C:/Workspace/rag-agentic-ai-toolkit/spikes/22-natural_language_data_visualization_agent_lab/README.md) [23](C:/Workspace/rag-agentic-ai-toolkit/spikes/23-natural_language_sql_agent_lab/README.md) [24](C:/Workspace/rag-agentic-ai-toolkit/spikes/24-langgraph_101_building_stateful_ai_workflows_lab/README.md) [25](C:/Workspace/rag-agentic-ai-toolkit/spikes/25-building_reflection_agent_with_langgraph_lab/README.md) [26](C:/Workspace/rag-agentic-ai-toolkit/spikes/26-building_reflection_agent_with_external_knowledge_integration/README.md) [27](C:/Workspace/rag-agentic-ai-toolkit/spikes/27-react_build_reasoning_and_acting_ai_agents_with_langgraph/README.md) [28](C:/Workspace/rag-agentic-ai-toolkit/spikes/28-docchat_multi_agent_rag_system/README.md) [29](C:/Workspace/rag-agentic-ai-toolkit/spikes/29-implement_workflow_patterns_with_langgraph/README.md) [30](C:/Workspace/rag-agentic-ai-toolkit/spikes/30-build_langgraph_design_patterns_orchestration_evaluation/README.md) [31](C:/Workspace/rag-agentic-ai-toolkit/spikes/31-crewai_101_building_multi_agent_ai_systems/README.md) y [32](C:/Workspace/rag-agentic-ai-toolkit/spikes/32-structured_meal_grocery_planner_with_crewai/README.md) para ver agentes contra herramientas datos relacionales workflows con estado reflexion iterativa revision con evidencia externa ReAct patrones de workflow orquestacion con evaluacion y crews especializados.
-5. El siguiente salto natural sobre el material actual es combinar las practicas 29 a 32 con memoria persistente observabilidad y ejecucion durable para escenarios de produccion.
+4. Cierra con [21](C:/Workspace/rag-agentic-ai-toolkit/spikes/21-youtube_tool_calling_agent_lab/README.md) [22](C:/Workspace/rag-agentic-ai-toolkit/spikes/22-natural_language_data_visualization_agent_lab/README.md) [23](C:/Workspace/rag-agentic-ai-toolkit/spikes/23-natural_language_sql_agent_lab/README.md) [24](C:/Workspace/rag-agentic-ai-toolkit/spikes/24-langgraph_101_building_stateful_ai_workflows_lab/README.md) [25](C:/Workspace/rag-agentic-ai-toolkit/spikes/25-building_reflection_agent_with_langgraph_lab/README.md) [26](C:/Workspace/rag-agentic-ai-toolkit/spikes/26-building_reflection_agent_with_external_knowledge_integration/README.md) [27](C:/Workspace/rag-agentic-ai-toolkit/spikes/27-react_build_reasoning_and_acting_ai_agents_with_langgraph/README.md) [28](C:/Workspace/rag-agentic-ai-toolkit/spikes/28-docchat_multi_agent_rag_system/README.md) [29](C:/Workspace/rag-agentic-ai-toolkit/spikes/29-implement_workflow_patterns_with_langgraph/README.md) [30](C:/Workspace/rag-agentic-ai-toolkit/spikes/30-build_langgraph_design_patterns_orchestration_evaluation/README.md) [31](C:/Workspace/rag-agentic-ai-toolkit/spikes/31-crewai_101_building_multi_agent_ai_systems/README.md) [32](C:/Workspace/rag-agentic-ai-toolkit/spikes/32-structured_meal_grocery_planner_with_crewai/README.md) [33](C:/Workspace/rag-agentic-ai-toolkit/spikes/33-agents_with_tools_versus_tasks_with_tools_in_crewai/README.md) y [34](C:/Workspace/rag-agentic-ai-toolkit/spikes/34-building_your_own_ai_nutrition_coach_using_a_multi_agent_system_and_multimodal_ai/README.md) para ver agentes contra herramientas datos relacionales workflows con estado reflexion iterativa revision con evidencia externa ReAct patrones de workflow orquestacion con evaluacion crews especializados comparacion de tools por agente contra tools por tarea y una aplicacion multimodal multiagente de nutricion.
+5. El siguiente salto natural sobre el material actual es combinar las practicas 29 a 34 con memoria persistente observabilidad y ejecucion durable para escenarios de produccion.
 
 ## Resumen de ChromaDB
 

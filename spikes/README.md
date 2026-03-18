@@ -38,6 +38,8 @@ Este archivo resume de forma rapida de que va cada practica del directorio `spik
 | 30 | LangGraph Orchestration and Evaluation. | Construye un patron orchestrator worker para planificacion de comidas y un patron de reflection para planes de inversion. | A coordinar workers en paralelo con `Send` y a cerrar bucles de generacion evaluacion y refinamiento. | [30-build_langgraph_design_patterns_orchestration_evaluation](./30-build_langgraph_design_patterns_orchestration_evaluation/README.md) |
 | 31 | CrewAI 101 Multi Agent Systems. | Construye un pipeline de investigacion redaccion y social media siguiendo el modelo conceptual de `CrewAI`. | A separar agentes tareas y crews secuenciales para transformar research en contenido publicable. | [31-crewai_101_building_multi_agent_ai_systems](./31-crewai_101_building_multi_agent_ai_systems/README.md) |
 | 32 | Structured Meal Grocery Planner with CrewAI. | Construye un sistema de meal planning y grocery planning con modelos `Pydantic` YAML y un flujo multiagente estilo `CrewAI`. | A combinar agentes especializados modelos estructurados configuracion YAML y reporte final en un pipeline reproducible. | [32-structured_meal_grocery_planner_with_crewai](./32-structured_meal_grocery_planner_with_crewai/README.md) |
+| 33 | Agents with Tools versus Tasks with Tools in CrewAI. | Construye un chatbot para The Daily Dish y compara tools dadas al agente contra tools dadas a cada tarea en un flujo tipo `CrewAI`. | A medir por que la asignacion de tools por tarea hace el workflow mas predecible depurable y mantenible. | [33-agents_with_tools_versus_tasks_with_tools_in_crewai](./33-agents_with_tools_versus_tasks_with_tools_in_crewai/README.md) |
+| 34 | AI Nutrition Coach with Multi Agent and Multimodal AI. | Construye NourishBot con analisis nutricional recipe remix y una UI `Gradio` sobre imagenes de comidas y agentes especializados. | A combinar vision ligera o multimodal real con agentes de nutricion dieta recetas y una interfaz lista para uso local. | [34-building_your_own_ai_nutrition_coach_using_a_multi_agent_system_and_multimodal_ai](./34-building_your_own_ai_nutrition_coach_using_a_multi_agent_system_and_multimodal_ai/README.md) |
 
 ## Guia de Prueba
 
@@ -283,13 +285,30 @@ Compilacion: `python -m compileall spikes\32-structured_meal_grocery_planner_wit
 Ejecucion: `python .\spikes\32-structured_meal_grocery_planner_with_crewai\main.py`.
 Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_32_structured_meal_grocery_planner_with_crewai.py`.
 
+### Practica 33
+
+Prerequisito: arrancar `ollama serve` y descargar `qwen2.5:7b` o `llama3.2:3b`.
+Dependencias opcionales para CrewAI real: `pip install -U crewai crewai-tools`.
+Compilacion: `python -m compileall spikes\33-agents_with_tools_versus_tasks_with_tools_in_crewai`.
+Ejecucion: `python .\spikes\33-agents_with_tools_versus_tasks_with_tools_in_crewai\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_33_agents_with_tools_versus_tasks_with_tools_in_crewai.py`.
+
+### Practica 34
+
+Prerequisito: arrancar `ollama serve` y descargar `qwen2.5:7b` y `qwen2.5vl:3b`.
+Modelos alternativos de vision: `llava` o `llama3.2-vision`.
+Compilacion: `python -m compileall spikes\34-building_your_own_ai_nutrition_coach_using_a_multi_agent_system_and_multimodal_ai`.
+Demo CLI: `python .\spikes\34-building_your_own_ai_nutrition_coach_using_a_multi_agent_system_and_multimodal_ai\main.py`.
+UI `Gradio`: `python .\spikes\34-building_your_own_ai_nutrition_coach_using_a_multi_agent_system_and_multimodal_ai\app.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_34_building_your_own_ai_nutrition_coach_using_a_multi_agent_system_and_multimodal_ai.py`.
+
 ## Ruta de Aprendizaje Sugerida
 
 1. Empieza por `01` y `02` si quieres dominar prompts `LCEL` y una interfaz minima.
 2. Sigue con `03` `05` y `06` para entender `RAG` embeddings similitud y bases vectoriales.
 3. Continua con `07` y `08` para ver casos de uso concretos de retrieval y recomendacion.
 4. Pasa a `09` y `10` cuando quieras profundizar en retrievers avanzados.
-5. Cierra con `11` `12` `13` `14` `15` `16` `17` `18` `19` `20` `21` `22` `23` `24` `25` `26` `27` `28` `29` `30` `31` y `32` para trabajar `FAISS` contenido multimedia `Text to Speech` vision multimodal captioning visual apps `Gradio` y `Flask` asistentes de reunion generacion de imagenes control local por voz con permisos `tool calling` moderno en `LangChain` analisis tabular con `pandas` y `scikit-learn` el ciclo manual completo de agentes interactivos con tools la integracion multi paso con YouTube real la visualizacion conversacional de datos con `pandas` consultas SQL en lenguaje natural sobre un esquema relacional workflows con estado en `LangGraph` agentes de reflexion auto mejorables revision guiada por conocimiento externo el patron ReAct completo un DocChat multiagente con retrieval hibrido y verificacion patrones de workflow con `LangGraph` patrones de orquestacion y reflexion y dos pipelines estilo `CrewAI` para contenido y grocery planning.
+5. Cierra con `11` `12` `13` `14` `15` `16` `17` `18` `19` `20` `21` `22` `23` `24` `25` `26` `27` `28` `29` `30` `31` `32` `33` y `34` para trabajar `FAISS` contenido multimedia `Text to Speech` vision multimodal captioning visual apps `Gradio` y `Flask` asistentes de reunion generacion de imagenes control local por voz con permisos `tool calling` moderno en `LangChain` analisis tabular con `pandas` y `scikit-learn` el ciclo manual completo de agentes interactivos con tools la integracion multi paso con YouTube real la visualizacion conversacional de datos con `pandas` consultas SQL en lenguaje natural sobre un esquema relacional workflows con estado en `LangGraph` agentes de reflexion auto mejorables revision guiada por conocimiento externo el patron ReAct completo un DocChat multiagente con retrieval hibrido y verificacion patrones de workflow con `LangGraph` patrones de orquestacion y reflexion pipelines estilo `CrewAI` para contenido y grocery planning una comparativa formal entre tools por agente contra tools por tarea y una app multimodal multiagente de coaching nutricional.
 
 ## Nota
 
