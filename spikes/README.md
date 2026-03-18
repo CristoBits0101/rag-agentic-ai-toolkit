@@ -33,6 +33,7 @@ Este archivo resume de forma rapida de que va cada practica del directorio `spik
 | 25 | Reflection Agent with LangGraph. | Construye un agente reflexivo con `MessageGraph` que genera un post de LinkedIn critica su propio borrador y lo refina en varias iteraciones. | A modelar historiales de mensajes routers condicionales y bucles de auto mejora con `LangGraph` y `ChatOllama`. | [25-building_reflection_agent_with_langgraph_lab](./25-building_reflection_agent_with_langgraph_lab/README.md) |
 | 26 | Reflection Agent with External Knowledge. | Construye un agente reflexivo que responde se critica usa conocimiento externo y revisa su respuesta con evidencia adicional. | A combinar `MessageGraph` `ToolMessage` salida estructurada y busqueda externa real dentro de un bucle reflexivo. | [26-building_reflection_agent_with_external_knowledge_integration](./26-building_reflection_agent_with_external_knowledge_integration/README.md) |
 | 27 | ReAct Agents with LangGraph. | Construye un agente ReAct con `StateGraph` que razona usa herramientas de busqueda clima calculo y resumen de noticias y decide cuando detenerse. | A implementar el ciclo razonar actuar observar con `add_messages` `ToolMessage` y tool calling moderno sobre `ChatOllama`. | [27-react_build_reasoning_and_acting_ai_agents_with_langgraph](./27-react_build_reasoning_and_acting_ai_agents_with_langgraph/README.md) |
+| 28 | DocChat Multi Agent RAG. | Construye un sistema DocChat con parser cacheado retrieval hibrido y tres agentes para relevancia investigacion y verificacion sobre documentos largos. | A combinar procesamiento documental `Chroma` BM25 `LangGraph` y una UI `Gradio` en un flujo multiagente grounded. | [28-docchat_multi_agent_rag_system](./28-docchat_multi_agent_rag_system/README.md) |
 
 ## Guia de Prueba
 
@@ -239,13 +240,22 @@ Compilacion: `python -m compileall spikes\27-react_build_reasoning_and_acting_ai
 Ejecucion: `python .\spikes\27-react_build_reasoning_and_acting_ai_agents_with_langgraph\main.py`.
 Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_27_react_build_reasoning_and_acting_ai_agents_with_langgraph.py`.
 
+### Practica 28
+
+Dependencias opcionales: `pip install -U docling python-docx`.
+Prerequisito: arrancar `ollama serve` y descargar `qwen2.5:7b` o `llama3.2:3b`.
+Compilacion: `python -m compileall spikes\28-docchat_multi_agent_rag_system`.
+CLI demo: `python .\spikes\28-docchat_multi_agent_rag_system\main.py`.
+UI: `python .\spikes\28-docchat_multi_agent_rag_system\app.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_28_docchat_multi_agent_rag_system.py`.
+
 ## Ruta de Aprendizaje Sugerida
 
 1. Empieza por `01` y `02` si quieres dominar prompts `LCEL` y una interfaz minima.
 2. Sigue con `03` `05` y `06` para entender `RAG` embeddings similitud y bases vectoriales.
 3. Continua con `07` y `08` para ver casos de uso concretos de retrieval y recomendacion.
 4. Pasa a `09` y `10` cuando quieras profundizar en retrievers avanzados.
-5. Cierra con `11` `12` `13` `14` `15` `16` `17` `18` `19` `20` `21` `22` `23` `24` `25` `26` y `27` para trabajar `FAISS` contenido multimedia `Text to Speech` vision multimodal captioning visual apps `Gradio` y `Flask` asistentes de reunion generacion de imagenes control local por voz con permisos `tool calling` moderno en `LangChain` analisis tabular con `pandas` y `scikit-learn` el ciclo manual completo de agentes interactivos con tools la integracion multi paso con YouTube real la visualizacion conversacional de datos con `pandas` consultas SQL en lenguaje natural sobre un esquema relacional workflows con estado en `LangGraph` agentes de reflexion auto mejorables revision guiada por conocimiento externo y el patron ReAct completo.
+5. Cierra con `11` `12` `13` `14` `15` `16` `17` `18` `19` `20` `21` `22` `23` `24` `25` `26` `27` y `28` para trabajar `FAISS` contenido multimedia `Text to Speech` vision multimodal captioning visual apps `Gradio` y `Flask` asistentes de reunion generacion de imagenes control local por voz con permisos `tool calling` moderno en `LangChain` analisis tabular con `pandas` y `scikit-learn` el ciclo manual completo de agentes interactivos con tools la integracion multi paso con YouTube real la visualizacion conversacional de datos con `pandas` consultas SQL en lenguaje natural sobre un esquema relacional workflows con estado en `LangGraph` agentes de reflexion auto mejorables revision guiada por conocimiento externo el patron ReAct completo y un DocChat multiagente con retrieval hibrido y verificacion.
 
 ## Nota
 
