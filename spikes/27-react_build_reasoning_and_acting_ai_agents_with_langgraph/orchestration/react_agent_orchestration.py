@@ -46,13 +46,29 @@ def call_model(state: AgentState, model_react) -> dict[str, list[BaseMessage]]:
     return {"messages": [response]}
 
 
+def coerce_tool_input(tool, arguments: dict):
+    if len(tool.args) != 1:
+        return arguments
+
+    argument_name = next(iter(tool.args))
+    argument_value = arguments.get(argument_name)
+    argument_schema = tool.args.get(argument_name, {})
+    if argument_schema.get("type") == "string" and not isinstance(argument_value, str):
+        return {
+            argument_name: json.dumps(argument_value),
+        }
+
+    return arguments
+
+
 def tool_node(state: AgentState, tools_by_name) -> dict[str, list[BaseMessage]]:
     last_message = state["messages"][-1]
     outputs: list[BaseMessage] = []
 
     for tool_call in getattr(last_message, "tool_calls", []) or []:
         tool = tools_by_name[tool_call["name"]]
-        tool_result = tool.invoke(tool_call["args"])
+        coerced_arguments = coerce_tool_input(tool, tool_call["args"])
+        tool_result = tool.invoke(coerced_arguments)
         outputs.append(
             ToolMessage(
                 content=json.dumps(tool_result),

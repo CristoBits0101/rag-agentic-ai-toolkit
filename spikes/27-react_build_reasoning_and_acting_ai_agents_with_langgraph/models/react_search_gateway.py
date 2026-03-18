@@ -34,23 +34,60 @@ def infer_city_from_query(query: str) -> str:
 
 def search_weather_fallback(query: str):
     city = infer_city_from_query(query)
-    url = f"https://wttr.in/{quote_plus(city)}?format=j1"
-    with urlopen(url, timeout=30) as response:
-        payload = json.loads(response.read().decode("utf-8"))
+    geocoding_url = (
+        "https://geocoding-api.open-meteo.com/v1/search"
+        f"?name={quote_plus(city)}&count=1&language=en&format=json"
+    )
+    with urlopen(geocoding_url, timeout=30) as response:
+        geocoding_payload = json.loads(response.read().decode("utf-8"))
 
-    current = payload.get("current_condition", [{}])[0]
-    description = current.get("weatherDesc", [{}])[0].get("value", "Unknown")
+    result = geocoding_payload.get("results", [{}])[0]
+    latitude = result.get("latitude")
+    longitude = result.get("longitude")
+    if latitude is None or longitude is None:
+        raise ValueError("Could not geocode city.")
+
+    forecast_url = (
+        "https://api.open-meteo.com/v1/forecast"
+        f"?latitude={latitude}&longitude={longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code"
+    )
+    with urlopen(forecast_url, timeout=30) as response:
+        forecast_payload = json.loads(response.read().decode("utf-8"))
+
+    current = forecast_payload.get("current", {})
     return [
         {
             "title": f"Current weather in {city}",
-            "url": f"https://wttr.in/{quote_plus(city)}",
+            "url": "https://open-meteo.com/",
             "content": (
-                f"Weather: {description}. Temperature C: {current.get('temp_C', 'NA')}. "
-                f"Feels like C: {current.get('FeelsLikeC', 'NA')}. Humidity: {current.get('humidity', 'NA')}."
+                f"Weather code: {current.get('weather_code', 'NA')}. Temperature C: {current.get('temperature_2m', 'NA')}. "
+                f"Feels like C: {current.get('apparent_temperature', 'NA')}. Humidity: {current.get('relative_humidity_2m', 'NA')}."
             ),
-            "source": "wttr.in",
+            "source": "open_meteo",
         }
     ]
+
+
+def search_hacker_news_fallback(query: str, max_results: int = SEARCH_MAX_RESULTS):
+    url = f"https://hn.algolia.com/api/v1/search?tags=story&hitsPerPage={max_results}&query={quote_plus(query)}"
+    with urlopen(url, timeout=30) as response:
+        payload = json.loads(response.read().decode("utf-8"))
+
+    results = []
+    for hit in payload.get("hits", [])[:max_results]:
+        title = str(hit.get("title") or hit.get("story_title") or query).strip()
+        story_url = str(hit.get("url") or hit.get("story_url") or "https://news.ycombinator.com/").strip()
+        story_text = str(hit.get("story_text") or hit.get("comment_text") or "No summary available.").strip()
+        results.append(
+            {
+                "title": title,
+                "url": story_url,
+                "content": story_text,
+                "source": "hn_algolia",
+            }
+        )
+
+    return results
 
 
 def search_duckduckgo_fallback(query: str, max_results: int = SEARCH_MAX_RESULTS):

@@ -13,6 +13,7 @@ from models.react_search_gateway import SAFE_MATH_FUNCS
 from models.react_search_gateway import SAFE_UNARY_OPS
 from models.react_search_gateway import build_tavily_tool
 from models.react_search_gateway import search_duckduckgo_fallback
+from models.react_search_gateway import search_hacker_news_fallback
 from models.react_search_gateway import search_weather_fallback
 
 
@@ -25,7 +26,7 @@ def search_tool(query: str) -> list[dict[str, str]]:
     """
     Search for current information using Tavily when available.
 
-    Falls back to wttr.in for weather queries and DuckDuckGo Instant Answer for general queries.
+    Falls back to Open Meteo for weather queries, HN Algolia for news queries, and DuckDuckGo Instant Answer for general queries.
     """
     normalized_query = query.strip()
     if not normalized_query:
@@ -43,6 +44,12 @@ def search_tool(query: str) -> list[dict[str, str]]:
             return search_weather_fallback(normalized_query)
         except Exception:
             return []
+
+    if "news" in normalized_query.lower() or "recent ai" in normalized_query.lower() or "latest ai" in normalized_query.lower():
+        try:
+            return search_hacker_news_fallback(normalized_query)
+        except Exception:
+            pass
 
     try:
         return search_duckduckgo_fallback(normalized_query)
