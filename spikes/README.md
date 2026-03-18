@@ -34,6 +34,10 @@ Este archivo resume de forma rapida de que va cada practica del directorio `spik
 | 26 | Reflection Agent with External Knowledge. | Construye un agente reflexivo que responde se critica usa conocimiento externo y revisa su respuesta con evidencia adicional. | A combinar `MessageGraph` `ToolMessage` salida estructurada y busqueda externa real dentro de un bucle reflexivo. | [26-building_reflection_agent_with_external_knowledge_integration](./26-building_reflection_agent_with_external_knowledge_integration/README.md) |
 | 27 | ReAct Agents with LangGraph. | Construye un agente ReAct con `StateGraph` que razona usa herramientas de busqueda clima calculo y resumen de noticias y decide cuando detenerse. | A implementar el ciclo razonar actuar observar con `add_messages` `ToolMessage` y tool calling moderno sobre `ChatOllama`. | [27-react_build_reasoning_and_acting_ai_agents_with_langgraph](./27-react_build_reasoning_and_acting_ai_agents_with_langgraph/README.md) |
 | 28 | DocChat Multi Agent RAG. | Construye un sistema DocChat con parser cacheado retrieval hibrido y tres agentes para relevancia investigacion y verificacion sobre documentos largos. | A combinar procesamiento documental `Chroma` BM25 `LangGraph` y una UI `Gradio` en un flujo multiagente grounded. | [28-docchat_multi_agent_rag_system](./28-docchat_multi_agent_rag_system/README.md) |
+| 29 | Workflow Patterns with LangGraph. | Construye ejemplos ejecutables de prompt chaining routing parallelization y un router multiagente de servicios. | A reconocer los tres patrones base de workflows con `LangGraph` y a implementarlos sobre `ChatOllama`. | [29-implement_workflow_patterns_with_langgraph](./29-implement_workflow_patterns_with_langgraph/README.md) |
+| 30 | LangGraph Orchestration and Evaluation. | Construye un patron orchestrator worker para planificacion de comidas y un patron de reflection para planes de inversion. | A coordinar workers en paralelo con `Send` y a cerrar bucles de generacion evaluacion y refinamiento. | [30-build_langgraph_design_patterns_orchestration_evaluation](./30-build_langgraph_design_patterns_orchestration_evaluation/README.md) |
+| 31 | CrewAI 101 Multi Agent Systems. | Construye un pipeline de investigacion redaccion y social media siguiendo el modelo conceptual de `CrewAI`. | A separar agentes tareas y crews secuenciales para transformar research en contenido publicable. | [31-crewai_101_building_multi_agent_ai_systems](./31-crewai_101_building_multi_agent_ai_systems/README.md) |
+| 32 | Structured Meal Grocery Planner with CrewAI. | Construye un sistema de meal planning y grocery planning con modelos `Pydantic` YAML y un flujo multiagente estilo `CrewAI`. | A combinar agentes especializados modelos estructurados configuracion YAML y reporte final en un pipeline reproducible. | [32-structured_meal_grocery_planner_with_crewai](./32-structured_meal_grocery_planner_with_crewai/README.md) |
 
 ## Guia de Prueba
 
@@ -249,13 +253,43 @@ CLI demo: `python .\spikes\28-docchat_multi_agent_rag_system\main.py`.
 UI: `python .\spikes\28-docchat_multi_agent_rag_system\app.py`.
 Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_28_docchat_multi_agent_rag_system.py`.
 
+### Practica 29
+
+Prerequisito: arrancar `ollama serve` y descargar `qwen2.5:7b` o `llama3.2:3b`.
+Compilacion: `python -m compileall spikes\29-implement_workflow_patterns_with_langgraph`.
+Ejecucion: `python .\spikes\29-implement_workflow_patterns_with_langgraph\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_29_implement_workflow_patterns_with_langgraph.py`.
+
+### Practica 30
+
+Prerequisito: arrancar `ollama serve` y descargar `qwen2.5:7b` o `llama3.2:3b`.
+Compilacion: `python -m compileall spikes\30-build_langgraph_design_patterns_orchestration_evaluation`.
+Ejecucion: `python .\spikes\30-build_langgraph_design_patterns_orchestration_evaluation\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_30_build_langgraph_design_patterns_orchestration_evaluation.py`.
+
+### Practica 31
+
+Prerequisito: arrancar `ollama serve` y descargar `qwen2.5:7b` o `llama3.2:3b`.
+Dependencias opcionales para CrewAI real: `pip install -U crewai crewai-tools`.
+Compilacion: `python -m compileall spikes\31-crewai_101_building_multi_agent_ai_systems`.
+Ejecucion: `python .\spikes\31-crewai_101_building_multi_agent_ai_systems\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_31_crewai_101_building_multi_agent_ai_systems.py`.
+
+### Practica 32
+
+Prerequisito: arrancar `ollama serve` y descargar `qwen2.5:7b` o `llama3.2:3b`.
+Dependencias opcionales para CrewAI real: `pip install -U crewai crewai-tools`.
+Compilacion: `python -m compileall spikes\32-structured_meal_grocery_planner_with_crewai`.
+Ejecucion: `python .\spikes\32-structured_meal_grocery_planner_with_crewai\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_32_structured_meal_grocery_planner_with_crewai.py`.
+
 ## Ruta de Aprendizaje Sugerida
 
 1. Empieza por `01` y `02` si quieres dominar prompts `LCEL` y una interfaz minima.
 2. Sigue con `03` `05` y `06` para entender `RAG` embeddings similitud y bases vectoriales.
 3. Continua con `07` y `08` para ver casos de uso concretos de retrieval y recomendacion.
 4. Pasa a `09` y `10` cuando quieras profundizar en retrievers avanzados.
-5. Cierra con `11` `12` `13` `14` `15` `16` `17` `18` `19` `20` `21` `22` `23` `24` `25` `26` `27` y `28` para trabajar `FAISS` contenido multimedia `Text to Speech` vision multimodal captioning visual apps `Gradio` y `Flask` asistentes de reunion generacion de imagenes control local por voz con permisos `tool calling` moderno en `LangChain` analisis tabular con `pandas` y `scikit-learn` el ciclo manual completo de agentes interactivos con tools la integracion multi paso con YouTube real la visualizacion conversacional de datos con `pandas` consultas SQL en lenguaje natural sobre un esquema relacional workflows con estado en `LangGraph` agentes de reflexion auto mejorables revision guiada por conocimiento externo el patron ReAct completo y un DocChat multiagente con retrieval hibrido y verificacion.
+5. Cierra con `11` `12` `13` `14` `15` `16` `17` `18` `19` `20` `21` `22` `23` `24` `25` `26` `27` `28` `29` `30` `31` y `32` para trabajar `FAISS` contenido multimedia `Text to Speech` vision multimodal captioning visual apps `Gradio` y `Flask` asistentes de reunion generacion de imagenes control local por voz con permisos `tool calling` moderno en `LangChain` analisis tabular con `pandas` y `scikit-learn` el ciclo manual completo de agentes interactivos con tools la integracion multi paso con YouTube real la visualizacion conversacional de datos con `pandas` consultas SQL en lenguaje natural sobre un esquema relacional workflows con estado en `LangGraph` agentes de reflexion auto mejorables revision guiada por conocimiento externo el patron ReAct completo un DocChat multiagente con retrieval hibrido y verificacion patrones de workflow con `LangGraph` patrones de orquestacion y reflexion y dos pipelines estilo `CrewAI` para contenido y grocery planning.
 
 ## Nota
 

@@ -1,0 +1,3 @@
+leftover_task:
+  description: Suggest creative and realistic leftover strategies for {meal_name} while respecting {dietary_restrictions}.
+  expected_output: A concise leftover management guide with at least two reuse ideas.
