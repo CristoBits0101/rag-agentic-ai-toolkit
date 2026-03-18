@@ -1131,6 +1131,21 @@ spikes/
 | MM-RAG | Combina retrieval y generacion sobre varias modalidades para fundamentar respuestas con contexto mixto. |
 | RAG | Combina recuperacion de informacion y generacion para fundamentar respuestas con contexto externo. |
 
+## IA Generativa vs IA Agentica
+
+`IA Generativa` se centra en producir una salida como texto imagen audio o video a partir de una instruccion. Normalmente responde en uno o pocos pasos y su exito depende sobre todo de la calidad del prompt del contexto recuperado y del modelo elegido.
+
+`IA Agentica` va un paso mas alla. No solo genera contenido sino que persigue un objetivo usando planificacion memoria herramientas iteracion y toma de decisiones sobre el siguiente paso. Puede dividir una tarea grande en subtareas revisar resultados pedir mas contexto y coordinar uno o varios agentes especializados.
+
+| Aspecto | IA Generativa | IA Agentica |
+| --- | --- | --- |
+| Objetivo principal | Generar una salida util a partir de una instruccion. | Alcanzar un objetivo mediante decisiones y acciones encadenadas. |
+| Autonomia | Baja o media segun el flujo. | Media o alta con supervision y limites claros. |
+| Memoria | Suele depender del contexto inmediato o de un historial simple. | Puede usar memoria compartida persistente y estado entre pasos. |
+| Herramientas | Puede vivir sin tools en casos simples. | Suele apoyarse en tools APIs retrieval y validaciones externas. |
+| Flujo | Normalmente lineal o de una sola vuelta. | Iterativo con ramas reintentos y posibles pausas humanas. |
+| Ejemplos tipicos | Resumir traducir redactar clasificar generar imagenes. | Resolver tareas multi paso investigar enrutar consultas orquestar `RAG` y coordinar agentes. |
+
 ## Flujos Multimodales
 
 La IA multimodal combina varias modalidades dentro del mismo flujo de aplicacion. En la practica esto aparece en tareas como `Speech to Text` `Text to Speech` `Image Captioning` `Text to Image` `Text to Video` y `MM-RAG`. Frameworks como `Flask` `Gradio` `LangChain` y `Hugging Face` ayudan a prototipar interfaces orquestar pipelines y conectar modelos especializados de voz imagen y video.
