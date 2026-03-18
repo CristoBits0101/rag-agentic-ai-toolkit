@@ -52,6 +52,9 @@ pip install -U langchain-ollama
 # LangGraph: Workflows con estado nodos y aristas condicionales para las practicas 24 y 25.
 pip install -U langgraph==0.2.57
 
+# Tavily Python: Cliente opcional para busqueda web externa en la practica 26.
+pip install -U tavily-python
+
 # ChromaDB: Base de datos vectorial para retrieval local.
 pip install -U chromadb
 
@@ -599,6 +602,30 @@ pip install -U pygraphviz==1.14
 # Ejecutar la practica de reflexion con MessageGraph y LinkedIn post generation.
 # El laboratorio genera un borrador lo critica y vuelve a generarlo hasta el limite de mensajes.
 python .\spikes\25-building_reflection_agent_with_langgraph_lab\main.py
+```
+
+## Ejecutar Practica 26
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# Arrancar Ollama.
+ollama serve
+
+# Descargar un modelo recomendado para el agente reflexivo con evidencia externa.
+ollama pull qwen2.5:7b
+
+# Alternativa de menor consumo.
+ollama pull llama3.2:3b
+
+# Opcional si quieres usar Tavily en lugar del fallback gratuito de Europe PMC.
+pip install -U tavily-python
+$env:TAVILY_API_KEY = "tu_api_key"
+
+# Ejecutar la practica de reflexion con herramientas externas y revision guiada por evidencia.
+# El laboratorio puede usar Tavily o hacer fallback a Europe PMC si no hay API key.
+python .\spikes\26-building_reflection_agent_with_external_knowledge_integration\main.py
 ```
 
 ## Parar Gradio
@@ -1310,7 +1337,7 @@ En este repositorio `LCEL` encaja mejor en escenarios donde la secuencia de paso
 
 En terminos practicos `LangChain` resuelve bien prompts pipelines `RAG` clasico y `tool calling` lineal. `LangGraph` se vuelve util cuando quieres bucles aristas condicionales memoria persistente `human-in-the-loop` o ejecucion durable. Tambien facilita visualizar el flujo con Mermaid para depurar rutas antes de desplegar.
 
-Dentro de este repositorio las practicas [01](C:/Workspace/rag-agentic-ai-toolkit/spikes/01-prompting_lcel_lab/README.md) [18](C:/Workspace/rag-agentic-ai-toolkit/spikes/18-langchain_tool_calling_math_assistant_lab/README.md) [20](C:/Workspace/rag-agentic-ai-toolkit/spikes/20-interactive_llm_agents_with_tools_lab/README.md) [21](C:/Workspace/rag-agentic-ai-toolkit/spikes/21-youtube_tool_calling_agent_lab/README.md) [22](C:/Workspace/rag-agentic-ai-toolkit/spikes/22-natural_language_data_visualization_agent_lab/README.md) [23](C:/Workspace/rag-agentic-ai-toolkit/spikes/23-natural_language_sql_agent_lab/README.md) [24](C:/Workspace/rag-agentic-ai-toolkit/spikes/24-langgraph_101_building_stateful_ai_workflows_lab/README.md) y [25](C:/Workspace/rag-agentic-ai-toolkit/spikes/25-building_reflection_agent_with_langgraph_lab/README.md) cubren el puente entre `LCEL` `tool calling` workflows con estado y agentes reflexivos.
+Dentro de este repositorio las practicas [01](C:/Workspace/rag-agentic-ai-toolkit/spikes/01-prompting_lcel_lab/README.md) [18](C:/Workspace/rag-agentic-ai-toolkit/spikes/18-langchain_tool_calling_math_assistant_lab/README.md) [20](C:/Workspace/rag-agentic-ai-toolkit/spikes/20-interactive_llm_agents_with_tools_lab/README.md) [21](C:/Workspace/rag-agentic-ai-toolkit/spikes/21-youtube_tool_calling_agent_lab/README.md) [22](C:/Workspace/rag-agentic-ai-toolkit/spikes/22-natural_language_data_visualization_agent_lab/README.md) [23](C:/Workspace/rag-agentic-ai-toolkit/spikes/23-natural_language_sql_agent_lab/README.md) [24](C:/Workspace/rag-agentic-ai-toolkit/spikes/24-langgraph_101_building_stateful_ai_workflows_lab/README.md) [25](C:/Workspace/rag-agentic-ai-toolkit/spikes/25-building_reflection_agent_with_langgraph_lab/README.md) y [26](C:/Workspace/rag-agentic-ai-toolkit/spikes/26-building_reflection_agent_with_external_knowledge_integration/README.md) cubren el puente entre `LCEL` `tool calling` workflows con estado agentes reflexivos y revision con conocimiento externo.
 
 ## Patrones de Agentes Auto-Mejorables
 
@@ -1330,15 +1357,15 @@ Un sistema multiagente reparte el trabajo entre roles especializados en lugar de
 
 `Agentic RAG` anade una capa de decision sobre el `RAG` clasico. En vez de recuperar siempre desde una sola fuente un agente puede decidir que base consultar cuando reformular una consulta cuando pedir verificacion adicional y cuando escalar a otro agente o a un humano. Esto suele mejorar robustez en dominios con varias fuentes o con consultas ambiguas.
 
-En este repositorio la base tecnica de `Agentic RAG` ya aparece repartida entre la [practica 03](C:/Workspace/rag-agentic-ai-toolkit/spikes/03-rag_pdf_qa_bot_lab/README.md) la [09](C:/Workspace/rag-agentic-ai-toolkit/spikes/09-langchain_context_retrieval_lab/README.md) la [10](C:/Workspace/rag-agentic-ai-toolkit/spikes/10-advanced_retrievers_llamaindex_lab/README.md) la [12](C:/Workspace/rag-agentic-ai-toolkit/spikes/12-youtube_summarizer_rag_faiss_lab/README.md) la [21](C:/Workspace/rag-agentic-ai-toolkit/spikes/21-youtube_tool_calling_agent_lab/README.md) la [23](C:/Workspace/rag-agentic-ai-toolkit/spikes/23-natural_language_sql_agent_lab/README.md) la [24](C:/Workspace/rag-agentic-ai-toolkit/spikes/24-langgraph_101_building_stateful_ai_workflows_lab/README.md) y la [25](C:/Workspace/rag-agentic-ai-toolkit/spikes/25-building_reflection_agent_with_langgraph_lab/README.md). La practica 24 introduce el flujo con estado y la 25 extiende ese camino con reflexion iterativa sobre mensajes.
+En este repositorio la base tecnica de `Agentic RAG` ya aparece repartida entre la [practica 03](C:/Workspace/rag-agentic-ai-toolkit/spikes/03-rag_pdf_qa_bot_lab/README.md) la [09](C:/Workspace/rag-agentic-ai-toolkit/spikes/09-langchain_context_retrieval_lab/README.md) la [10](C:/Workspace/rag-agentic-ai-toolkit/spikes/10-advanced_retrievers_llamaindex_lab/README.md) la [12](C:/Workspace/rag-agentic-ai-toolkit/spikes/12-youtube_summarizer_rag_faiss_lab/README.md) la [21](C:/Workspace/rag-agentic-ai-toolkit/spikes/21-youtube_tool_calling_agent_lab/README.md) la [23](C:/Workspace/rag-agentic-ai-toolkit/spikes/23-natural_language_sql_agent_lab/README.md) la [24](C:/Workspace/rag-agentic-ai-toolkit/spikes/24-langgraph_101_building_stateful_ai_workflows_lab/README.md) la [25](C:/Workspace/rag-agentic-ai-toolkit/spikes/25-building_reflection_agent_with_langgraph_lab/README.md) y la [26](C:/Workspace/rag-agentic-ai-toolkit/spikes/26-building_reflection_agent_with_external_knowledge_integration/README.md). La practica 24 introduce el flujo con estado la 25 la reflexion iterativa y la 26 suma conocimiento externo con herramientas reales.
 
 ## Ruta de Aprendizaje Agentica en este Repo
 
 1. Empieza por [01](C:/Workspace/rag-agentic-ai-toolkit/spikes/01-prompting_lcel_lab/README.md) para fijar prompts plantillas y `LCEL`.
 2. Continua con [18](C:/Workspace/rag-agentic-ai-toolkit/spikes/18-langchain_tool_calling_math_assistant_lab/README.md) y [20](C:/Workspace/rag-agentic-ai-toolkit/spikes/20-interactive_llm_agents_with_tools_lab/README.md) para dominar `tool calling` contratos y control de ejecucion.
 3. Pasa por [03](C:/Workspace/rag-agentic-ai-toolkit/spikes/03-rag_pdf_qa_bot_lab/README.md) [09](C:/Workspace/rag-agentic-ai-toolkit/spikes/09-langchain_context_retrieval_lab/README.md) [10](C:/Workspace/rag-agentic-ai-toolkit/spikes/10-advanced_retrievers_llamaindex_lab/README.md) y [12](C:/Workspace/rag-agentic-ai-toolkit/spikes/12-youtube_summarizer_rag_faiss_lab/README.md) para construir la base de `RAG` y retrieval avanzado.
-4. Cierra con [21](C:/Workspace/rag-agentic-ai-toolkit/spikes/21-youtube_tool_calling_agent_lab/README.md) [22](C:/Workspace/rag-agentic-ai-toolkit/spikes/22-natural_language_data_visualization_agent_lab/README.md) [23](C:/Workspace/rag-agentic-ai-toolkit/spikes/23-natural_language_sql_agent_lab/README.md) [24](C:/Workspace/rag-agentic-ai-toolkit/spikes/24-langgraph_101_building_stateful_ai_workflows_lab/README.md) y [25](C:/Workspace/rag-agentic-ai-toolkit/spikes/25-building_reflection_agent_with_langgraph_lab/README.md) para ver agentes contra herramientas datos relacionales workflows con estado y reflexion iterativa.
-5. El siguiente salto natural sobre el material actual es extender la practica 25 hacia `ReAct` o un caso sencillo de `agentic RAG` con recuperacion y verificacion.
+4. Cierra con [21](C:/Workspace/rag-agentic-ai-toolkit/spikes/21-youtube_tool_calling_agent_lab/README.md) [22](C:/Workspace/rag-agentic-ai-toolkit/spikes/22-natural_language_data_visualization_agent_lab/README.md) [23](C:/Workspace/rag-agentic-ai-toolkit/spikes/23-natural_language_sql_agent_lab/README.md) [24](C:/Workspace/rag-agentic-ai-toolkit/spikes/24-langgraph_101_building_stateful_ai_workflows_lab/README.md) [25](C:/Workspace/rag-agentic-ai-toolkit/spikes/25-building_reflection_agent_with_langgraph_lab/README.md) y [26](C:/Workspace/rag-agentic-ai-toolkit/spikes/26-building_reflection_agent_with_external_knowledge_integration/README.md) para ver agentes contra herramientas datos relacionales workflows con estado reflexion iterativa y revision con evidencia externa.
+5. El siguiente salto natural sobre el material actual es extender la practica 26 hacia `ReAct` o un caso sencillo de `agentic RAG` con recuperacion y verificacion.
 
 ## Resumen de ChromaDB
 
