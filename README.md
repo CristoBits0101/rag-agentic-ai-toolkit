@@ -807,6 +807,48 @@ python .\spikes\34-building_your_own_ai_nutrition_coach_using_a_multi_agent_syst
 python .\spikes\34-building_your_own_ai_nutrition_coach_using_a_multi_agent_system_and_multimodal_ai\app.py
 ```
 
+## Ejecutar Practica 35
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# La practica usa una capa BeeAI compatible local.
+# Dependencias opcionales solo si quieres contrastar con BeeAI real fuera del camino principal.
+pip install openai==1.99.9 beeai-framework[wikipedia]==0.1.35 pydantic==2.11.7 pydantic-core==2.33.2
+
+# Ejecutar la practica de sistemas agenticos inspirados en BeeAI.
+python .\spikes\35-building_agentic_ai_systems_with_the_beeai_framework\main.py
+```
+
+## Ejecutar Practica 36
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# La practica usa una capa AG2 compatible local.
+# Dependencias opcionales solo si quieres contrastar con AG2 real fuera del camino principal.
+pip install ag2[openai] python-dotenv
+
+# Ejecutar la practica tutorial de AG2.
+python .\spikes\36-ag2_101_complete_tutorial\main.py
+```
+
+## Ejecutar Practica 37
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# La practica usa una capa AutoGen compatible local.
+# Dependencias opcionales solo si quieres contrastar con AutoGen real fuera del camino principal.
+pip install autogen==0.7 openai==1.64.0 python-dotenv==1.1.0
+
+# Ejecutar la practica multiagente de salud.
+python .\spikes\37-build_a_multi_agent_chatbot_with_ag2_for_healthcare\main.py
+```
+
 ## Parar Gradio
 
 ```powershell

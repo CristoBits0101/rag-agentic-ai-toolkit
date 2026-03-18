@@ -40,6 +40,9 @@ Este archivo resume de forma rapida de que va cada practica del directorio `spik
 | 32 | Structured Meal Grocery Planner with CrewAI. | Construye un sistema de meal planning y grocery planning con modelos `Pydantic` YAML y un flujo multiagente estilo `CrewAI`. | A combinar agentes especializados modelos estructurados configuracion YAML y reporte final en un pipeline reproducible. | [32-structured_meal_grocery_planner_with_crewai](./32-structured_meal_grocery_planner_with_crewai/README.md) |
 | 33 | Agents with Tools versus Tasks with Tools in CrewAI. | Construye un chatbot para The Daily Dish y compara tools dadas al agente contra tools dadas a cada tarea en un flujo tipo `CrewAI`. | A medir por que la asignacion de tools por tarea hace el workflow mas predecible depurable y mantenible. | [33-agents_with_tools_versus_tasks_with_tools_in_crewai](./33-agents_with_tools_versus_tasks_with_tools_in_crewai/README.md) |
 | 34 | AI Nutrition Coach with Multi Agent and Multimodal AI. | Construye NourishBot con analisis nutricional recipe remix y una UI `Gradio` sobre imagenes de comidas y agentes especializados. | A combinar vision ligera o multimodal real con agentes de nutricion dieta recetas y una interfaz lista para uso local. | [34-building_your_own_ai_nutrition_coach_using_a_multi_agent_system_and_multimodal_ai](./34-building_your_own_ai_nutrition_coach_using_a_multi_agent_system_and_multimodal_ai/README.md) |
+| 35 | Building Agentic AI Systems with the BeeAI Framework. | Construye un tutorial BeeAI compatible con chat plantillas salida estructurada tools requirements aprobaciones y handoffs multiagente. | A entender los conceptos centrales de BeeAI sin depender del runtime real ni de credenciales externas. | [35-building_agentic_ai_systems_with_the_beeai_framework](./35-building_agentic_ai_systems_with_the_beeai_framework/README.md) |
+| 36 | AG2 101 Complete Tutorial. | Construye una practica AG2 compatible con agentes conversacionales HITL group chat tools ejecucion local de codigo y salida estructurada. | A aprender los patrones base de AG2 y AutoGen con un flujo local determinista y testeable. | [36-ag2_101_complete_tutorial](./36-ag2_101_complete_tutorial/README.md) |
+| 37 | Build a Multi Agent Chatbot with AG2 for Healthcare. | Construye un chatbot sanitario multiagente con roles clinicos y un ejercicio adicional de salud mental usando una capa AG2 compatible. | A modelar colaboracion entre agentes especializados y a coordinar decisiones multiagente en un dominio regulado. | [37-build_a_multi_agent_chatbot_with_ag2_for_healthcare](./37-build_a_multi_agent_chatbot_with_ag2_for_healthcare/README.md) |
 
 ## Guia de Prueba
 
@@ -302,13 +305,34 @@ Demo CLI: `python .\spikes\34-building_your_own_ai_nutrition_coach_using_a_multi
 UI `Gradio`: `python .\spikes\34-building_your_own_ai_nutrition_coach_using_a_multi_agent_system_and_multimodal_ai\app.py`.
 Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_34_building_your_own_ai_nutrition_coach_using_a_multi_agent_system_and_multimodal_ai.py`.
 
+### Practica 35
+
+Dependencias opcionales para BeeAI real: `pip install openai==1.99.9 beeai-framework[wikipedia]==0.1.35 pydantic==2.11.7 pydantic-core==2.33.2`.
+Compilacion: `python -m compileall spikes\35-building_agentic_ai_systems_with_the_beeai_framework`.
+Ejecucion: `python .\spikes\35-building_agentic_ai_systems_with_the_beeai_framework\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_35_building_agentic_ai_systems_with_the_beeai_framework.py`.
+
+### Practica 36
+
+Dependencias opcionales para AG2 real: `pip install ag2[openai] python-dotenv`.
+Compilacion: `python -m compileall spikes\36-ag2_101_complete_tutorial`.
+Ejecucion: `python .\spikes\36-ag2_101_complete_tutorial\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_36_ag2_101_complete_tutorial.py`.
+
+### Practica 37
+
+Dependencias opcionales para AutoGen real: `pip install autogen==0.7 openai==1.64.0 python-dotenv==1.1.0`.
+Compilacion: `python -m compileall spikes\37-build_a_multi_agent_chatbot_with_ag2_for_healthcare`.
+Ejecucion: `python .\spikes\37-build_a_multi_agent_chatbot_with_ag2_for_healthcare\main.py`.
+Tests: `.\venv\Scripts\python.exe -m pytest -c NUL --rootdir . tests\unit\test_spike_37_build_a_multi_agent_chatbot_with_ag2_for_healthcare.py`.
+
 ## Ruta de Aprendizaje Sugerida
 
 1. Empieza por `01` y `02` si quieres dominar prompts `LCEL` y una interfaz minima.
 2. Sigue con `03` `05` y `06` para entender `RAG` embeddings similitud y bases vectoriales.
 3. Continua con `07` y `08` para ver casos de uso concretos de retrieval y recomendacion.
 4. Pasa a `09` y `10` cuando quieras profundizar en retrievers avanzados.
-5. Cierra con `11` `12` `13` `14` `15` `16` `17` `18` `19` `20` `21` `22` `23` `24` `25` `26` `27` `28` `29` `30` `31` `32` `33` y `34` para trabajar `FAISS` contenido multimedia `Text to Speech` vision multimodal captioning visual apps `Gradio` y `Flask` asistentes de reunion generacion de imagenes control local por voz con permisos `tool calling` moderno en `LangChain` analisis tabular con `pandas` y `scikit-learn` el ciclo manual completo de agentes interactivos con tools la integracion multi paso con YouTube real la visualizacion conversacional de datos con `pandas` consultas SQL en lenguaje natural sobre un esquema relacional workflows con estado en `LangGraph` agentes de reflexion auto mejorables revision guiada por conocimiento externo el patron ReAct completo un DocChat multiagente con retrieval hibrido y verificacion patrones de workflow con `LangGraph` patrones de orquestacion y reflexion pipelines estilo `CrewAI` para contenido y grocery planning una comparativa formal entre tools por agente contra tools por tarea y una app multimodal multiagente de coaching nutricional.
+5. Cierra con `11` `12` `13` `14` `15` `16` `17` `18` `19` `20` `21` `22` `23` `24` `25` `26` `27` `28` `29` `30` `31` `32` `33` `34` `35` `36` y `37` para trabajar `FAISS` contenido multimedia `Text to Speech` vision multimodal captioning visual apps `Gradio` y `Flask` asistentes de reunion generacion de imagenes control local por voz con permisos `tool calling` moderno en `LangChain` analisis tabular con `pandas` y `scikit-learn` el ciclo manual completo de agentes interactivos con tools la integracion multi paso con YouTube real la visualizacion conversacional de datos con `pandas` consultas SQL en lenguaje natural sobre un esquema relacional workflows con estado en `LangGraph` agentes de reflexion auto mejorables revision guiada por conocimiento externo el patron ReAct completo un DocChat multiagente con retrieval hibrido y verificacion patrones de workflow con `LangGraph` patrones de orquestacion y reflexion pipelines estilo `CrewAI` para contenido y grocery planning una comparativa formal entre tools por agente contra tools por tarea una app multimodal multiagente de coaching nutricional y nuevas practicas sobre patrones BeeAI y AG2 con agents tools approvals handoffs group chat y colaboracion multiagente en salud.
 
 ## Nota
 
