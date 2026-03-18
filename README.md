@@ -1019,6 +1019,8 @@ spikes/
 
 | Termino | Descripcion |
 | --- | --- |
+| ACP | Agent Communication Protocol para intercambio estructurado de mensajes entre agentes autonomos. |
+| Agentic AI | Enfoque donde varios agentes especializados colaboran con memoria coordinacion y reparto dinamico de tareas para alcanzar un objetivo mayor. |
 | Agentes de IA | Sistemas basados en inteligencia artificial que planifican acciones y ejecutan tareas con cierto grado de autonomia. |
 | ANN | Busqueda aproximada de vecinos mas cercanos para escalar retrieval vectorial con baja latencia. |
 | Advanced Retriever | Recuperador con estrategias mas sofisticadas que un top k simple como fusion filtros o reranking. |
@@ -1037,6 +1039,7 @@ spikes/
 | DALL-E Variations | Capacidad de generar variantes visuales de una imagen base manteniendo rasgos de estilo o composicion. |
 | Deepfake | Contenido sintetico de imagen audio o video que imita personas o eventos con alto realismo. |
 | Diffusion Model | Familia de modelos generativos que crea contenido refinando ruido paso a paso hasta obtener una salida coherente. |
+| Durable Execution | Capacidad de un workflow para pausar reanudar o recuperarse de fallos sin perder el estado compartido. |
 | Edge Computing | Ejecucion de modelos cerca de la fuente de datos para reducir latencia dependencia de red y coste de transferencia. |
 | edge-tts | Proveedor de sintesis de voz accesible desde Python que permite generar audio de forma gratuita mediante internet. |
 | Embeddings | Vectores numericos que representan el significado semantico de palabras frases o documentos. |
@@ -1048,6 +1051,7 @@ spikes/
 | Hallucination Mitigation | Estrategias para reducir respuestas inventadas o inexactas en modelos de lenguaje. |
 | HNSW | Indice ANN basado en grafos jerarquicos de tipo small world. Usa capas superiores dispersas para hacer saltos largos y capas inferiores densas para refinar la busqueda con alta velocidad y buena precision sobre colecciones grandes. |
 | Hugging Face | Ecosistema de modelos datasets y librerias para entrenamiento inferencia y despliegue de sistemas de IA. |
+| Human-in-the-Loop | Patron donde una persona revisa aprueba o corrige pasos concretos del workflow antes de continuar. |
 | IA Multimodal | Capacidad de un sistema para comprender combinar o generar informacion en texto imagen audio y video. |
 | Image Captioning | Tarea de vision y lenguaje que genera descripciones textuales a partir de imagenes. |
 | Image Validation and Encoding | Paso previo que verifica formato tamano y consistencia de una imagen y la convierte a una representacion apta para el modelo como Base64. |
@@ -1055,6 +1059,7 @@ spikes/
 | Inpainting | Tecnica de edicion generativa donde se rellenan o sustituyen regiones de una imagen segun una mascara y un prompt. |
 | Input Processing | Etapa donde se preparan entradas como texto imagen audio o video antes de invocar el modelo. |
 | LangChain | Framework de codigo abierto para crear aplicaciones con LLMs y componentes como prompts cadenas agentes y herramientas. |
+| LangGraph | Framework orientado a workflows agenticos con estado nodos aristas memoria compartida y control de flujo explicito. |
 | LCEL | Lenguaje declarativo de LangChain para componer cadenas de ejecucion centradas en LLM de forma modular. |
 | Lematizacion | Proceso de reducir palabras a su forma canonica para normalizar texto y mejorar analisis. |
 | Llama 4 | Familia de modelos multimodales de Meta orientada a razonamiento y generacion sobre varias modalidades. |
@@ -1062,9 +1067,11 @@ spikes/
 | LlamaIndex | Framework para construir aplicaciones con LLMs orientadas a documentos indices y retrieval en flujos RAG. |
 | LLM | Modelo de lenguaje de gran escala entrenado para comprender y generar texto. |
 | LSH | Tecnica de hashing sensible a la localidad usada para aproximar similitud en espacios de alta dimension. |
+| MessageGraph | Tipo de grafo de LangGraph centrado en un historial de mensajes que se va ampliando durante la ejecucion. |
 | Milvus | Base de datos vectorial orientada a escalado y despliegues de produccion sobre grandes colecciones. |
 | MM-RAG | Variante multimodal de RAG que recupera y combina contexto desde texto imagen audio o video antes de generar una respuesta. |
 | Mistral | Familia de modelos de lenguaje y proveedor de inferencia usados para generacion de texto y tareas instruct. |
+| Model Context Protocol | Protocolo abierto para conectar modelos con herramientas y fuentes de contexto mediante interfaces estructuradas. |
 | Multi-Agent System | Arquitectura donde varios agentes cooperan para resolver objetivos comunes. |
 | Multimodal Fusion | Integracion de varias modalidades dentro del modelo o pipeline para producir una interpretacion o salida unificada. |
 | Multimodal Message | Estructura de solicitud que combina texto e imagen en un mismo payload para modelos de vision y lenguaje. |
@@ -1080,11 +1087,15 @@ spikes/
 | Query Fusion | Estrategia que combina resultados de varias consultas o recuperadores para mejorar cobertura y relevancia. |
 | Qwen2.5VL | Modelo multimodal de vision y lenguaje de la familia Qwen orientado a descripcion visual y OCR ligero. |
 | RAG | Enfoque que combina recuperacion de informacion y generacion para producir respuestas mas precisas y trazables. |
+| ReAct | Patron donde el modelo alterna razonamiento y uso de herramientas dentro de un mismo ciclo de decision. |
+| Reflection Agent | Agente que genera una respuesta y despues la critica para mejorar claridad cobertura o calidad sin buscar datos externos. |
+| Reflexion Agent | Variante de auto mejora que combina critica interna con herramientas o busqueda externa para revisar la respuesta con evidencia. |
 | Reranking | Reordenacion posterior de resultados recuperados para mejorar la relevancia final. |
 | Retriever | Componente encargado de recuperar contexto relevante desde una base de conocimiento indexada. |
 | Retrieval | Proceso de recuperar contexto relevante desde una base de conocimiento antes de generar una respuesta. |
 | Self-Supervised Learning | Aprendizaje que usa patrones internos de los datos para entrenar modelos sin depender por completo de etiquetas manuales. |
 | Semantic Search | Busqueda que compara significado y contexto en lugar de depender solo de coincidencias exactas de palabras. |
+| StateGraph | Estructura principal de LangGraph donde el estado compartido fluye entre nodos conectados por aristas normales o condicionales. |
 | Storyboard | Secuencia visual planificada de escenas o tomas usada para dirigir la generacion o edicion de video. |
 | Speech Recognition | Reconocimiento automatico del habla para convertir audio en texto o en unidades linguisticamente utiles. |
 | Speech Processing | Conjunto de tecnicas para reconocer entender analizar o generar voz humana en sistemas de IA. |
@@ -1113,6 +1124,7 @@ spikes/
 
 | Termino | Descripcion |
 | --- | --- |
+| Agentic AI | Coordina varios agentes especializados para resolver objetivos complejos con memoria y orquestacion. |
 | Agentes de IA | Integran LLMs con planificacion herramientas y memoria para ejecutar acciones autonomas. |
 | IA Generativa | Predice la siguiente secuencia probable y genera texto imagen audio o video segun el modelo. |
 | IA Generativa Multimodal | Procesa y genera varios tipos de datos en una misma interaccion. |
@@ -1227,6 +1239,42 @@ Como regla practica:
 `LCEL` ofrece una forma simple de encadenar pasos con el operador `|` cuando el flujo es claro y determinista. Su base comun son los `Runnables` que permiten componer prompts modelos parsers y transformaciones bajo una interfaz consistente. Eso facilita reutilizar operaciones como `invoke` `batch` `ainvoke` o `stream` sin redisenar cada pipeline desde cero.
 
 En este repositorio `LCEL` encaja mejor en escenarios donde la secuencia de pasos ya esta decidida y conviene priorizar legibilidad trazabilidad y coste estable. Esa idea aparece de forma temprana en la [practica 01](C:/Workspace/rag-agentic-ai-toolkit/spikes/01-prompting_lcel_lab/README.md) y sirve como contrapunto a los casos donde un agente con herramientas necesita mas autonomia.
+
+## LangChain vs LangGraph
+
+`LangChain` encaja mejor cuando el flujo es secuencial y predecible. `LangGraph` entra cuando hace falta mantener estado compartido ramificar por condiciones iterar con reintentos o pausar para una revision humana. Su modelo mental se apoya en `StateGraph` para definir la estructura fija del workflow y en un estado explicito que viaja por nodos y aristas hasta completar la tarea.
+
+En terminos practicos `LangChain` resuelve bien prompts pipelines `RAG` clasico y `tool calling` lineal. `LangGraph` se vuelve util cuando quieres bucles aristas condicionales memoria persistente `human-in-the-loop` o ejecucion durable. Tambien facilita visualizar el flujo con Mermaid para depurar rutas antes de desplegar.
+
+Dentro de este repositorio las practicas [01](C:/Workspace/rag-agentic-ai-toolkit/spikes/01-prompting_lcel_lab/README.md) [18](C:/Workspace/rag-agentic-ai-toolkit/spikes/18-langchain_tool_calling_math_assistant_lab/README.md) [20](C:/Workspace/rag-agentic-ai-toolkit/spikes/20-interactive_llm_agents_with_tools_lab/README.md) [21](C:/Workspace/rag-agentic-ai-toolkit/spikes/21-youtube_tool_calling_agent_lab/README.md) [22](C:/Workspace/rag-agentic-ai-toolkit/spikes/22-natural_language_data_visualization_agent_lab/README.md) y [23](C:/Workspace/rag-agentic-ai-toolkit/spikes/23-natural_language_sql_agent_lab/README.md) ya cubren gran parte de los prerrequisitos conceptuales para dar el salto a `LangGraph`.
+
+## Patrones de Agentes Auto-Mejorables
+
+Tres patrones merecen atencion porque aparecen una y otra vez en sistemas agenticos modernos:
+
+| Patron | Idea central | Cuando aporta mas |
+| --- | --- | --- |
+| `Reflection` | El modelo genera una respuesta y luego la critica para revisarla. | Cuando buscas mas claridad cobertura o calidad de redaccion sin depender de datos externos. |
+| `Reflexion` | La revision se apoya en herramientas o busqueda externa para corregir con evidencia. | Cuando la precision factual importa y conviene fundamentar o citar. |
+| `ReAct` | El modelo alterna razonamiento y accion en un bucle de herramientas y observaciones. | Cuando la tarea exige planificacion ligera y llamadas reales a tools o APIs. |
+
+Estos patrones se entienden mejor si los conectas con dos ideas ya presentes en el repo. La primera es `tool calling` con control manual de ejecucion. La segunda es la salida estructurada con `Pydantic` `TypedDict` o `JSON Schema` para que el agente distinga con claridad respuesta critica consulta y resultado de herramienta.
+
+## Multiagente y Agentic RAG
+
+Un sistema multiagente reparte el trabajo entre roles especializados en lugar de pedirle todo a un solo modelo. Los patrones mas comunes son `pipeline` secuencial `hub-and-spoke` con un coordinador central y ejecucion en paralelo con agregacion posterior. El beneficio real no es tener mas agentes sino separar responsabilidades para reducir sobrecarga de contexto mejorar depuracion y facilitar validaciones.
+
+`Agentic RAG` anade una capa de decision sobre el `RAG` clasico. En vez de recuperar siempre desde una sola fuente un agente puede decidir que base consultar cuando reformular una consulta cuando pedir verificacion adicional y cuando escalar a otro agente o a un humano. Esto suele mejorar robustez en dominios con varias fuentes o con consultas ambiguas.
+
+En este repositorio la base tecnica de `Agentic RAG` ya aparece repartida entre la [practica 03](C:/Workspace/rag-agentic-ai-toolkit/spikes/03-rag_pdf_qa_bot_lab/README.md) la [09](C:/Workspace/rag-agentic-ai-toolkit/spikes/09-langchain_context_retrieval_lab/README.md) la [10](C:/Workspace/rag-agentic-ai-toolkit/spikes/10-advanced_retrievers_llamaindex_lab/README.md) la [12](C:/Workspace/rag-agentic-ai-toolkit/spikes/12-youtube_summarizer_rag_faiss_lab/README.md) la [21](C:/Workspace/rag-agentic-ai-toolkit/spikes/21-youtube_tool_calling_agent_lab/README.md) y la [23](C:/Workspace/rag-agentic-ai-toolkit/spikes/23-natural_language_sql_agent_lab/README.md). Lo que falta para cerrar el circulo es un workflow con estado que enrute de forma explicita entre recuperacion razonamiento verificacion y respuesta final.
+
+## Ruta de Aprendizaje Agentica en este Repo
+
+1. Empieza por [01](C:/Workspace/rag-agentic-ai-toolkit/spikes/01-prompting_lcel_lab/README.md) para fijar prompts plantillas y `LCEL`.
+2. Continua con [18](C:/Workspace/rag-agentic-ai-toolkit/spikes/18-langchain_tool_calling_math_assistant_lab/README.md) y [20](C:/Workspace/rag-agentic-ai-toolkit/spikes/20-interactive_llm_agents_with_tools_lab/README.md) para dominar `tool calling` contratos y control de ejecucion.
+3. Pasa por [03](C:/Workspace/rag-agentic-ai-toolkit/spikes/03-rag_pdf_qa_bot_lab/README.md) [09](C:/Workspace/rag-agentic-ai-toolkit/spikes/09-langchain_context_retrieval_lab/README.md) [10](C:/Workspace/rag-agentic-ai-toolkit/spikes/10-advanced_retrievers_llamaindex_lab/README.md) y [12](C:/Workspace/rag-agentic-ai-toolkit/spikes/12-youtube_summarizer_rag_faiss_lab/README.md) para construir la base de `RAG` y retrieval avanzado.
+4. Cierra con [21](C:/Workspace/rag-agentic-ai-toolkit/spikes/21-youtube_tool_calling_agent_lab/README.md) [22](C:/Workspace/rag-agentic-ai-toolkit/spikes/22-natural_language_data_visualization_agent_lab/README.md) y [23](C:/Workspace/rag-agentic-ai-toolkit/spikes/23-natural_language_sql_agent_lab/README.md) para ver agentes contra herramientas y datos reales.
+5. El siguiente salto natural fuera del material actual es crear un spike de `LangGraph` con enrutamiento condicional `Reflection` o `ReAct` y un caso sencillo de `agentic RAG`.
 
 ## Resumen de ChromaDB
 
