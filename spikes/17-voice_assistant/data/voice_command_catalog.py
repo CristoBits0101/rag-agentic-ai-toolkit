@@ -103,12 +103,19 @@ ALLOWED_CLICK_TARGETS = {
             "de reproducir en Riot Client."
         ),
     },
+    "league_play_any_button": {
+        "display_name": "Boton Jugar de League of Legends o Riot Client",
+        "target_sequence": (
+            "riot_play_button",
+            "league_play_button",
+        ),
+    },
     "league_play_button": {
         "display_name": "Boton Jugar de League of Legends",
         "template_paths": (
             "spikes/17-voice_assistant/assets/league_play_button.png",
         ),
-        "vision_prompt": "El boton JUGAR azul con borde dorado del cliente de League of Legends o Riot Client.",
+        "vision_prompt": "El boton JUGAR azul con borde dorado del cliente de League of Legends.",
     },
     "league_ranked_solo_duo_option": {
         "display_name": "Opcion Clasificatoria Solo/Duo de League of Legends",
@@ -140,6 +147,7 @@ CLICK_TARGET_ALIASES = {
     "dale a jugar en league of legends": "league_play_button",
     "dale a jugar en leaguea of legends": "league_play_button",
     "dale a jugar en lol": "league_play_button",
+    "dale a jugar al lol": "league_play_any_button",
     "buscar partida": "league_find_match_button",
     "busca partida": "league_find_match_button",
     "boton jugar league": "league_play_button",
@@ -156,6 +164,7 @@ CLICK_TARGET_ALIASES = {
     "darle a jugar en league of legends": "league_play_button",
     "darle a jugar en leaguea of legends": "league_play_button",
     "darle a jugar en lol": "league_play_button",
+    "darle a jugar al lol": "league_play_any_button",
     "dale a confirmar": "league_confirm_button",
     "encontrar partida": "league_find_match_button",
     "icono lol": "riot_lol_icon",
@@ -163,6 +172,7 @@ CLICK_TARGET_ALIASES = {
     "jugar en league of legends": "league_play_button",
     "jugar en leaguea of legends": "league_play_button",
     "jugar en lol": "league_play_button",
+    "jugar al lol": "league_play_any_button",
     "modo clasificatoria duo": "league_ranked_solo_duo_option",
     "modo clasificatoria solo duo": "league_ranked_solo_duo_option",
     "pon clasificatoria duo": "league_ranked_solo_duo_option",

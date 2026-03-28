@@ -65,11 +65,12 @@ Esta practica no es una extension menor de la practica 15. La practica 15 trabaj
 16. El bloque de estado muestra solo un resumen en una linea de la ultima accion mientras que el historial conserva el detalle completo.
 17. Si dices `abre league of legends` el asistente abre `Riot Client` y primero intenta pulsar `riot_play_button` si ya esta en la pagina de LoL y si no prueba `riot_lol_icon` y despues `riot_play_button`.
 18. Si dices `cierra el lol` el asistente acepta tanto procesos del cliente de League como procesos activos de `Riot Client` cuando League esta abierto desde ese lanzador.
-19. Si dices `dale a jugar en league of legends` o una variante cercana como `dale a jugar a leaguea of legends` el asistente intentara pulsar `league_play_button`.
-20. Si dices `clasificatoria solo duo` el asistente intentara pulsar `league_ranked_solo_duo_option`.
-21. Si dices `pulsa confirmar` el asistente intentara pulsar `league_confirm_button`.
-22. Si dices `encontrar partida` el asistente intentara pulsar `league_find_match_button`.
-23. El parser local tolera algunas transcripciones defectuosas frecuentes de `League of Legends` como `log` o `diage of legends`.
+19. Si dices `dale a jugar al lol` el asistente intenta primero el boton amarillo `riot_play_button` y si no esta visible cae al boton azul `league_play_button`.
+20. Si dices `dale a jugar en league of legends` o una variante cercana como `dale a jugar a leaguea of legends` el asistente intentara pulsar `league_play_button`.
+21. Si dices `clasificatoria solo duo` el asistente intentara pulsar `league_ranked_solo_duo_option`.
+22. Si dices `pulsa confirmar` el asistente intentara pulsar `league_confirm_button`.
+23. Si dices `encontrar partida` el asistente intentara pulsar `league_find_match_button`.
+24. El parser local tolera algunas transcripciones defectuosas frecuentes de `League of Legends` como `log` o `diage of legends`.
 
 ## Acciones Permitidas
 
@@ -80,7 +81,7 @@ Esta practica no es una extension menor de la practica 15. La practica 15 trabaj
 5. `move_mouse`: Mueve el raton a coordenadas explicitas.
 6. `click_mouse`: Hace click izquierdo derecho o medio en la posicion actual o en coordenadas explicitas.
 7. `press_hotkey`: Ejecuta atajos compatibles con `alt` `ctrl` `delete` `enter` `esc` `shift` `tab` `win` y teclas alfanumericas simples.
-8. `click_target`: `riot_lol_icon` `riot_play_button` `league_play_button` `league_ranked_solo_duo_option` `league_confirm_button` `league_find_match_button`.
+8. `click_target`: `riot_lol_icon` `riot_play_button` `league_play_any_button` `league_play_button` `league_ranked_solo_duo_option` `league_confirm_button` `league_find_match_button`.
 9. `trash_path`: Solo envia a la papelera rutas existentes no protegidas.
 
 ## Limitaciones

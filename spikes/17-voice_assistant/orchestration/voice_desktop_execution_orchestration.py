@@ -349,6 +349,27 @@ def click_target(
             action="click_target",
         )
 
+    target_sequence = tuple(target_config.get("target_sequence", ()))
+    if target_sequence:
+        last_result = VoiceExecutionResult(
+            success=False,
+            message=f"No he encontrado {target_config.get('display_name', target_name)} en pantalla.",
+            action="click_target",
+        )
+        for nested_target_name in target_sequence:
+            last_result = click_target(
+                nested_target_name,
+                click_targets=click_targets,
+                pyautogui_module=pyautogui_module,
+                project_root=project_root,
+                confidence=confidence,
+                encoded_screen_provider=encoded_screen_provider,
+                vision_locator=vision_locator,
+            )
+            if last_result.success:
+                return last_result
+        return last_result
+
     pyautogui_module = pyautogui_module or load_pyautogui()
     template_paths = target_config.get("template_paths", ())
     found_template_file = False

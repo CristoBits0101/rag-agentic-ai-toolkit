@@ -447,11 +447,12 @@ python .\spikes\17-voice_assistant\main.py
 Acciones permitidas en la practica 17: `open_application` `open_url` `type_text` `move_mouse` `click_mouse` `press_hotkey` `click_target` `close_application` `trash_path`.
 Aplicaciones permitidas para abrir: `calculator` `chrome` `explorer` `league_of_legends` `notepad` `paint` `riot_client`.
 Aplicaciones permitidas para cerrar: `calculator` `chrome` `league_of_legends` `notepad` `paint` `riot_client`.
-Objetivos de click permitidos: `riot_lol_icon` `riot_play_button` `league_play_button` `league_ranked_solo_duo_option` `league_confirm_button` `league_find_match_button`.
+Objetivos de click permitidos: `riot_lol_icon` `riot_play_button` `league_play_any_button` `league_play_button` `league_ranked_solo_duo_option` `league_confirm_button` `league_find_match_button`.
 Limitaciones de ordenes: no se aceptan clicks arbitrarios ni coordenadas libres y el click visual depende de que el objetivo este visible en pantalla o de que exista una plantilla opcional compatible.
 Modelo por defecto para la planificacion de la practica 17: `qwen3-vl:30b`.
 Ejemplo de orden directa soportada por voz: `dale a jugar en league of legends`.
 Al decir `abre league of legends` la practica abre `Riot Client` e intenta primero el boton amarillo `Jugar` si ya esta visible y si no cae al flujo de pulsar el icono de `LoL` y despues `Jugar`.
+Al decir `dale a jugar al lol` la practica intenta primero el boton amarillo `Jugar` de `Riot Client` y si no esta visible cae al boton azul `JUGAR` del cliente de League.
 Al decir `cierra el lol` la practica acepta tanto procesos propios del cliente de League como procesos activos de `Riot Client` cuando el juego esta abierto desde ese lanzador.
 La interfaz del spike 17 usa un canal de voz abierto o cerrado con una bombilla circular verde cuando escucha y roja cuando esta cerrado y procesa ordenes de forma continua mientras el canal permanece abierto.
 La interfaz del spike 17 tambien permite enviar ordenes escritas desde un campo de texto debajo de `Estado`.

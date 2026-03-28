@@ -2,7 +2,7 @@
 
 ## Plantillas Visuales
 
-1. `league_play_button.png`: Captura recortada del boton `Jugar` visible en Riot Client o League of Legends.
+1. `league_play_button.png`: Captura recortada del boton azul `JUGAR` visible dentro del cliente de League of Legends.
 2. `riot_lol_icon.png`: Captura recortada del icono de `League of Legends` en `Riot Client`.
 3. `riot_play_button.png`: Captura recortada del boton amarillo `Jugar` en `Riot Client`.
 4. `league_ranked_solo_duo_option.png`: Captura recortada de la opcion `CLASIFICATORIA SOLO/DUO`.

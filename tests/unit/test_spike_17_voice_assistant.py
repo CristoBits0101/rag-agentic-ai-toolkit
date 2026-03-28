@@ -86,6 +86,14 @@ def test_build_rule_based_action_plan_detects_league_play_click_with_common_stt_
     assert plan.parameters["target"] == "league_play_button"
 
 
+def test_build_rule_based_action_plan_routes_jugar_al_lol_to_combined_play_target():
+    plan = build_rule_based_action_plan("dale a jugar al lol")
+
+    assert plan is not None
+    assert plan.action == "click_target"
+    assert plan.parameters["target"] == "league_play_any_button"
+
+
 def test_build_rule_based_action_plan_detects_ranked_solo_duo_click():
     plan = build_rule_based_action_plan("pon clasificatoria solo duo")
 
@@ -175,6 +183,23 @@ def test_normalize_plan_payload_infers_click_target_from_transcript():
 
     assert plan.action == "click_target"
     assert plan.parameters["target"] == "league_play_button"
+
+
+def test_normalize_plan_payload_routes_jugar_al_lol_to_combined_play_target():
+    plan = normalize_plan_payload(
+        {
+            "action": "click_target",
+            "parameters": {},
+            "response": "Pulso jugar.",
+            "requires_confirmation": False,
+            "confirmation_prompt": "",
+        },
+        planner_model="qwen2.5:7b",
+        transcript="dale a jugar al lol",
+    )
+
+    assert plan.action == "click_target"
+    assert plan.parameters["target"] == "league_play_any_button"
 
 
 def test_build_voice_action_plan_falls_back_to_demo_on_invalid_ollama_plan(monkeypatch):
@@ -443,6 +468,60 @@ def test_click_target_uses_visual_match_and_clicks(tmp_path):
 
     assert result.success is True
     assert events == [("locate", "league_play_button.png"), ("click", (320, 240))]
+
+
+def test_click_target_supports_combined_play_target():
+    clicked_targets: list[str] = []
+
+    def fake_vision_locator(target_name, target_description, encoded_image):
+        if target_name == "riot_play_button":
+            return {
+                "found": True,
+                "x": 640,
+                "y": 320,
+                "confidence": 0.98,
+                "reason": "Boton amarillo visible.",
+                "model_name": "qwen3-vl:30b",
+            }
+        return {
+            "found": False,
+            "x": 0,
+            "y": 0,
+            "confidence": 0.0,
+            "reason": "No visible.",
+            "model_name": "qwen3-vl:30b",
+        }
+
+    class FakePyAutoGUI:
+        def click(self, x: int, y: int) -> None:
+            clicked_targets.append(f"{x},{y}")
+
+    result = click_target(
+        "league_play_any_button",
+        click_targets={
+            "league_play_any_button": {
+                "display_name": "Boton Jugar de League of Legends o Riot Client",
+                "target_sequence": ("riot_play_button", "league_play_button"),
+            },
+            "riot_play_button": {
+                "display_name": "Boton Jugar de Riot Client",
+                "template_paths": (),
+                "vision_prompt": "Boton Jugar de Riot Client.",
+            },
+            "league_play_button": {
+                "display_name": "Boton Jugar de League of Legends",
+                "template_paths": (),
+                "vision_prompt": "Boton JUGAR azul de League of Legends.",
+            },
+        },
+        pyautogui_module=FakePyAutoGUI(),
+        encoded_screen_provider=lambda: "encoded-screen",
+        vision_locator=fake_vision_locator,
+    )
+
+    assert result.success is True
+    assert clicked_targets == ["640,320"]
+    assert "Riot Client" in result.message
 
 
 def test_click_target_reports_missing_template_or_hidden_target(tmp_path):
