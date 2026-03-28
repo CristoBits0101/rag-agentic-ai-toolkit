@@ -79,6 +79,15 @@ pip install -U lark==1.1.9
 # Python Dotenv: Carga variables de entorno desde archivos .env.
 pip install -U python-dotenv
 
+# FastMCP: Servidores y clientes MCP para las practicas 38 a 42.
+pip install -U fastmcp==2.12.5
+
+# MCP SDK: Sesiones y transportes de bajo nivel para las practicas 40 a 42.
+pip install -U mcp==1.16.0
+
+# LangChain MCP Adapters: Adaptadores multi servidor para las practicas 39 y 40.
+pip install -U langchain-mcp-adapters==0.1.9
+
 # PyYAML: Lectura y escritura de archivos YAML.
 pip install -U PyYAML
 
@@ -168,7 +177,7 @@ Para las practicas de `spikes` se prioriza `Ollama` cuando la tarea puede resolv
 .\venv\Scripts\Activate.ps1
 
 # Ejecutar la practica de Gradio.
-python .\spikes\02-gradio_llama_lab\main.py
+python .\spikes\02-gradio_llama\main.py
 
 # Abrir la interfaz en el navegador.
 http://127.0.0.1:7860
@@ -181,7 +190,7 @@ http://127.0.0.1:7860
 .\venv\Scripts\Activate.ps1
 
 # Ejecutar la practica de LinkedIn Icebreaker con Ollama.
-python .\spikes\04-linkedin_icebreaker_bot_lab\main.py
+python .\spikes\04-linkedin_icebreaker\main.py
 
 # Abrir la interfaz en el navegador.
 http://127.0.0.1:7861
@@ -197,7 +206,7 @@ http://127.0.0.1:7861
 pip install -U sentence-transformers==4.1.0 scipy torch
 
 # Ejecutar la practica de similitud vectorial.
-python .\spikes\05-similarity_search_by_hand_lab\main.py
+python .\spikes\05-similarity_search\main.py
 ```
 
 ## Ejecutar Practica 06
@@ -211,7 +220,7 @@ ollama serve
 ollama pull nomic-embed-text
 
 # Ejecutar la practica de introduccion a ChromaDB.
-python .\spikes\06-vector_databases_chromadb_cheat_sheet_lab\main.py
+python .\spikes\06-chromadb_cheat_sheet\main.py
 ```
 
 ## Ejecutar Practica 07
@@ -225,7 +234,7 @@ ollama serve
 ollama pull nomic-embed-text
 
 # Ejecutar la practica de similitud sobre empleados y libros con ChromaDB.
-python .\spikes\07-employee_similarity_search_chromadb_lab\main.py
+python .\spikes\07-employee_similarity\main.py
 ```
 
 ## Ejecutar Practica 08
@@ -240,7 +249,7 @@ ollama pull nomic-embed-text
 ollama pull llama3.2:3b
 
 # Ejecutar la practica de recomendaciones de comida con ChromaDB y RAG.
-python .\spikes\08-food_recommendation_systems_chromadb_rag_lab\main.py
+python .\spikes\08-food_recommendation_rag\main.py
 ```
 
 ## Ejecutar Practica 09
@@ -255,7 +264,7 @@ ollama pull nomic-embed-text
 ollama pull qwen2.5:7b
 
 # Ejecutar la practica de context retrieval con LangChain.
-python .\spikes\09-langchain_context_retrieval_lab\main.py
+python .\spikes\09-context_retrieval\main.py
 ```
 
 ## Ejecutar Practica 10
@@ -270,7 +279,7 @@ ollama pull nomic-embed-text
 ollama pull qwen2.5:7b
 
 # Ejecutar la practica de retrievers avanzados con LlamaIndex.
-python .\spikes\10-advanced_retrievers_llamaindex_lab\main.py
+python .\spikes\10-advanced_retrievers\main.py
 ```
 
 ## Ejecutar Practica 11
@@ -284,7 +293,7 @@ ollama serve
 ollama pull nomic-embed-text
 
 # Ejecutar la practica de semantic similarity con FAISS.
-python .\spikes\11-semantic_similarity_faiss_lab\main.py
+python .\spikes\11-semantic_similarity\main.py
 ```
 
 ## Ejecutar Practica 12
@@ -299,7 +308,7 @@ ollama pull nomic-embed-text
 ollama pull qwen2.5:7b
 
 # Ejecutar la practica de resumen y QA sobre YouTube con RAG y FAISS.
-python .\spikes\12-youtube_summarizer_rag_faiss_lab\main.py
+python .\spikes\12-youtube_rag_faiss\main.py
 ```
 
 ## Ejecutar Practica 13
@@ -316,16 +325,16 @@ ollama pull qwen2.5:7b
 pip install -U edge-tts
 
 # Ejecutar la practica de generacion de historias y texto a voz.
-python .\spikes\13-story_generator_text_to_speech_lab\main.py
+python .\spikes\13-story_tts\main.py
 
 # Variante adicional con Ollama y gTTS.
-python .\spikes\13-story_generator_text_to_speech_lab\ollama_mistral_story_tts\main.py
+python .\spikes\13-story_tts\ollama_mistral_story_tts\main.py
 
 # Variante real con Mistral API.
-python .\spikes\13-story_generator_text_to_speech_lab\mistral_api_story_tts\main.py
+python .\spikes\13-story_tts\mistral_api_story_tts\main.py
 
 # Variante real con Ollama y edge-tts.
-python .\spikes\13-story_generator_text_to_speech_lab\ollama_mistral_edge_tts_story_tts\main.py
+python .\spikes\13-story_tts\ollama_mistral_edge_tts_story_tts\main.py
 ```
 
 ## Ejecutar Practica 14
@@ -339,43 +348,43 @@ ollama serve
 ollama pull qwen2.5vl:3b
 
 # Ejecutar la practica de vision multimodal basica.
-python .\spikes\14-basic_vision_multimodal_lab\main.py
+python .\spikes\14-vision_multimodal\main.py
 
 # Variante real con llava.
-python .\spikes\14-basic_vision_multimodal_lab\llava_vision_querying\main.py
+python .\spikes\14-vision_multimodal\llava_vision_querying\main.py
 
 # Variante real con llama3.2-vision.
-python .\spikes\14-basic_vision_multimodal_lab\llama3_2_vision_querying\main.py
+python .\spikes\14-vision_multimodal\llama3_2_vision_querying\main.py
 
 # Variante real con qwen2.5vl.
-python .\spikes\14-basic_vision_multimodal_lab\qwen2_5vl_vision_querying\main.py
+python .\spikes\14-vision_multimodal\qwen2_5vl_vision_querying\main.py
 
 # Extension avanzada Style Finder.
-python .\spikes\14-basic_vision_multimodal_lab\style_finder_fashion_rag_app\main.py
+python .\spikes\14-vision_multimodal\style_finder_fashion_rag_app\main.py
 
 # Variante Style Finder con llama3.2-vision.
-python .\spikes\14-basic_vision_multimodal_lab\style_finder_llama3_2_vision_app\main.py
+python .\spikes\14-vision_multimodal\style_finder_llama3_2_vision_app\main.py
 
 # Variante Style Finder con llava.
-python .\spikes\14-basic_vision_multimodal_lab\style_finder_llava_app\main.py
+python .\spikes\14-vision_multimodal\style_finder_llava_app\main.py
 
 # Variante Style Finder con qwen2.5vl.
-python .\spikes\14-basic_vision_multimodal_lab\style_finder_qwen2_5vl_app\main.py
+python .\spikes\14-vision_multimodal\style_finder_qwen2_5vl_app\main.py
 
 # Extension avanzada Nutrition Coach.
-python .\spikes\14-basic_vision_multimodal_lab\nutrition_coach_flask_app\main.py
+python .\spikes\14-vision_multimodal\nutrition_coach_flask_app\main.py
 
 # Variante Nutrition Coach con llama3.2-vision.
-python .\spikes\14-basic_vision_multimodal_lab\nutrition_coach_llama3_2_vision_app\main.py
+python .\spikes\14-vision_multimodal\nutrition_coach_llama3_2_vision_app\main.py
 
 # Variante Nutrition Coach con llava.
-python .\spikes\14-basic_vision_multimodal_lab\nutrition_coach_llava_app\main.py
+python .\spikes\14-vision_multimodal\nutrition_coach_llava_app\main.py
 
 # Variante Nutrition Coach con qwen2.5vl.
-python .\spikes\14-basic_vision_multimodal_lab\nutrition_coach_qwen2_5vl_app\main.py
+python .\spikes\14-vision_multimodal\nutrition_coach_qwen2_5vl_app\main.py
 
 # Tras validar compilacion y tests puedes lanzar la interfaz Flask.
-python .\spikes\14-basic_vision_multimodal_lab\nutrition_coach_flask_app\app.py
+python .\spikes\14-vision_multimodal\nutrition_coach_flask_app\app.py
 ```
 
 ## Ejecutar Practica 15
@@ -389,7 +398,7 @@ ollama serve
 ollama pull llama3.2:3b
 
 # Ejecutar la practica del asistente de reuniones.
-python .\spikes\15-ai_meeting_assistant_lab\main.py
+python .\spikes\15-meeting_assistant\main.py
 ```
 
 ## Ejecutar Practica 16
@@ -399,13 +408,13 @@ python .\spikes\15-ai_meeting_assistant_lab\main.py
 .\venv\Scripts\Activate.ps1
 
 # Ejecutar la practica de generacion de imagenes con DALL-E.
-python .\spikes\16-dalle_image_generation_lab\main.py
+python .\spikes\16-dalle_generation\main.py
 
 # Variante real con DALL-E 2.
-python .\spikes\16-dalle_image_generation_lab\dall_e_2_generation\main.py
+python .\spikes\16-dalle_generation\dall_e_2_generation\main.py
 
 # Variante real con DALL-E 3.
-python .\spikes\16-dalle_image_generation_lab\dall_e_3_generation\main.py
+python .\spikes\16-dalle_generation\dall_e_3_generation\main.py
 ```
 
 ## Ejecutar Practica 17
@@ -429,7 +438,7 @@ ollama pull qwen2.5:7b
 # Ejecutar la practica de asistente de escritorio por voz con ventana nativa.
 # La respuesta hablada usa la voz local de Windows si esta disponible.
 # La app puede abrir y cerrar aplicaciones permitidas con confirmacion verifica si el proceso sigue vivo antes de reportar un fallo de cierre y resume el ultimo estado en una sola linea.
-python .\spikes\17-voice_desktop_assistant_lab\main.py
+python .\spikes\17-voice_assistant\main.py
 ```
 
 ## Ejecutar Practica 18
@@ -446,7 +455,7 @@ ollama pull qwen2.5:7b
 
 # Ejecutar la practica de tool calling con LangChain.
 # El laboratorio usa tools con @tool y ChatOllama como modelo principal.
-python .\spikes\18-langchain_tool_calling_math_assistant_lab\main.py
+python .\spikes\18-tool_calling_math\main.py
 ```
 
 ## Ejecutar Practica 19
@@ -466,7 +475,7 @@ ollama pull qwen2.5:7b
 
 # Ejecutar la practica de analisis de datos con tool calling local.
 # El laboratorio compara un baseline sin tools con un executor agent.
-python .\spikes\19-datawizard_ai_powered_data_analysis_lab\main.py
+python .\spikes\19-datawizard_analysis\main.py
 ```
 
 ## Ejecutar Practica 20
@@ -486,7 +495,7 @@ ollama pull llama3.2:3b
 
 # Ejecutar la practica de agentes interactivos con tools de LangChain.
 # El laboratorio demuestra bind_tools tool_calls ToolMessage y clases de agente.
-python .\spikes\20-interactive_llm_agents_with_tools_lab\main.py
+python .\spikes\20-interactive_agents\main.py
 ```
 
 ## Ejecutar Practica 21
@@ -509,7 +518,7 @@ ollama pull llama3.2:3b
 
 # Ejecutar la practica de agente con tools reales de YouTube.
 # El laboratorio demuestra tool calling manual cadena fija y cadena recursiva.
-python .\spikes\21-youtube_tool_calling_agent_lab\main.py
+python .\spikes\21-youtube_tool_agent\main.py
 ```
 
 ## Ejecutar Practica 22
@@ -532,7 +541,7 @@ ollama pull llama3.2:3b
 
 # Ejecutar la practica de visualizacion conversacional con pandas.
 # El laboratorio guarda los charts en artifacts y muestra el codigo generado por el agente.
-python .\spikes\22-natural_language_data_visualization_agent_lab\main.py
+python .\spikes\22-nl_data_viz\main.py
 ```
 
 ## Ejecutar Practica 23
@@ -555,7 +564,7 @@ ollama pull llama3.2:3b
 
 # Ejecutar la practica de consultas SQL en lenguaje natural.
 # El laboratorio genera una base Chinook local en SQLite y muestra el SQL usado por el agente.
-python .\spikes\23-natural_language_sql_agent_lab\main.py
+python .\spikes\23-nl_sql\main.py
 ```
 
 ## Ejecutar Practica 24
@@ -578,7 +587,7 @@ ollama pull llama3.2:3b
 
 # Ejecutar la practica de workflows con estado y aristas condicionales.
 # El laboratorio incluye autenticacion con reintentos QA contextual y un contador ciclico.
-python .\spikes\24-langgraph_101_building_stateful_ai_workflows_lab\main.py
+python .\spikes\24-langgraph_stateful_workflows\main.py
 ```
 
 ## Ejecutar Practica 25
@@ -601,7 +610,7 @@ pip install -U pygraphviz==1.14
 
 # Ejecutar la practica de reflexion con MessageGraph y LinkedIn post generation.
 # El laboratorio genera un borrador lo critica y vuelve a generarlo hasta el limite de mensajes.
-python .\spikes\25-building_reflection_agent_with_langgraph_lab\main.py
+python .\spikes\25-reflection_agent\main.py
 ```
 
 ## Ejecutar Practica 26
@@ -625,7 +634,7 @@ $env:TAVILY_API_KEY = "tu_api_key"
 
 # Ejecutar la practica de reflexion con herramientas externas y revision guiada por evidencia.
 # El laboratorio puede usar Tavily o hacer fallback a Europe PMC si no hay API key.
-python .\spikes\26-building_reflection_agent_with_external_knowledge_integration\main.py
+python .\spikes\26-reflection_external_knowledge\main.py
 ```
 
 ## Ejecutar Practica 27
@@ -649,7 +658,7 @@ $env:TAVILY_API_KEY = "tu_api_key"
 
 # Ejecutar la practica de ReAct con herramientas y LangGraph.
 # El laboratorio incluye busqueda clima ropa calculadora y resumen de noticias.
-python .\spikes\27-react_build_reasoning_and_acting_ai_agents_with_langgraph\main.py
+python .\spikes\27-react_langgraph_agents\main.py
 ```
 
 ## Ejecutar Practica 28
@@ -671,10 +680,10 @@ ollama pull llama3.2:3b
 pip install -U docling python-docx
 
 # Ejecutar la demo CLI del sistema multiagente.
-python .\spikes\28-docchat_multi_agent_rag_system\main.py
+python .\spikes\28-docchat_multi_agent_rag\main.py
 
 # Ejecutar la UI web por Gradio en el puerto 5000.
-python .\spikes\28-docchat_multi_agent_rag_system\app.py
+python .\spikes\28-docchat_multi_agent_rag\app.py
 ```
 
 ## Ejecutar Practica 29
@@ -693,7 +702,7 @@ ollama pull qwen2.5:7b
 ollama pull llama3.2:3b
 
 # Ejecutar la practica de prompt chaining routing y parallelization.
-python .\spikes\29-implement_workflow_patterns_with_langgraph\main.py
+python .\spikes\29-langgraph_workflow_patterns\main.py
 ```
 
 ## Ejecutar Practica 30
@@ -712,7 +721,7 @@ ollama pull qwen2.5:7b
 ollama pull llama3.2:3b
 
 # Ejecutar la practica de orchestrator worker y reflection.
-python .\spikes\30-build_langgraph_design_patterns_orchestration_evaluation\main.py
+python .\spikes\30-langgraph_design_patterns\main.py
 ```
 
 ## Ejecutar Practica 31
@@ -734,7 +743,7 @@ ollama pull llama3.2:3b
 pip install -U crewai crewai-tools
 
 # Ejecutar la practica de investigacion redaccion y social media.
-python .\spikes\31-crewai_101_building_multi_agent_ai_systems\main.py
+python .\spikes\31-crewai_multi_agent\main.py
 ```
 
 ## Ejecutar Practica 32
@@ -756,7 +765,7 @@ ollama pull llama3.2:3b
 pip install -U crewai crewai-tools
 
 # Ejecutar la practica de meal planning y grocery planning estructurado.
-python .\spikes\32-structured_meal_grocery_planner_with_crewai\main.py
+python .\spikes\32-meal_grocery_planner\main.py
 ```
 
 ## Ejecutar Practica 33
@@ -778,7 +787,7 @@ ollama pull llama3.2:3b
 pip install -U crewai crewai-tools
 
 # Ejecutar la practica de chatbot con tools por agente y por tarea.
-python .\spikes\33-agents_with_tools_versus_tasks_with_tools_in_crewai\main.py
+python .\spikes\33-crewai_tools_vs_tasks\main.py
 ```
 
 ## Ejecutar Practica 34
@@ -801,10 +810,10 @@ ollama pull llava
 ollama pull llama3.2-vision
 
 # Ejecutar la demo CLI de NourishBot.
-python .\spikes\34-building_your_own_ai_nutrition_coach_using_a_multi_agent_system_and_multimodal_ai\main.py
+python .\spikes\34-nutrition_coach_multi_agent\main.py
 
 # Lanzar la interfaz Gradio.
-python .\spikes\34-building_your_own_ai_nutrition_coach_using_a_multi_agent_system_and_multimodal_ai\app.py
+python .\spikes\34-nutrition_coach_multi_agent\app.py
 ```
 
 ## Ejecutar Practica 35
@@ -818,7 +827,7 @@ python .\spikes\34-building_your_own_ai_nutrition_coach_using_a_multi_agent_syst
 pip install openai==1.99.9 beeai-framework[wikipedia]==0.1.35 pydantic==2.11.7 pydantic-core==2.33.2
 
 # Ejecutar la practica de sistemas agenticos inspirados en BeeAI.
-python .\spikes\35-building_agentic_ai_systems_with_the_beeai_framework\main.py
+python .\spikes\35-beeai_agentic_systems\main.py
 ```
 
 ## Ejecutar Practica 36
@@ -832,7 +841,7 @@ python .\spikes\35-building_agentic_ai_systems_with_the_beeai_framework\main.py
 pip install ag2[openai] python-dotenv
 
 # Ejecutar la practica tutorial de AG2.
-python .\spikes\36-ag2_101_complete_tutorial\main.py
+python .\spikes\36-ag2_tutorial\main.py
 ```
 
 ## Ejecutar Practica 37
@@ -846,7 +855,116 @@ python .\spikes\36-ag2_101_complete_tutorial\main.py
 pip install autogen==0.7 openai==1.64.0 python-dotenv==1.1.0
 
 # Ejecutar la practica multiagente de salud.
-python .\spikes\37-build_a_multi_agent_chatbot_with_ag2_for_healthcare\main.py
+python .\spikes\37-ag2_healthcare_chatbot\main.py
+```
+
+## Ejecutar Practica 38
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# Instalar dependencias MCP.
+pip install -U fastmcp==2.12.5 mcp==1.16.0
+
+# Opcional para contrastar con el Context7 real via STDIO.
+npx -y @upstash/context7-mcp
+
+# Ejecutar la practica de transportes MCP con servidor Context7 compatible local.
+python .\spikes\38-mcp_existing_servers\main.py
+```
+
+## Ejecutar Practica 39
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# Instalar dependencias MCP y adaptadores multi servidor.
+pip install -U fastmcp==2.12.5 mcp==1.16.0 langchain-mcp-adapters==0.1.9
+
+# Ejecutar la aplicacion MCP con Context7 compatible por HTTP y Met Museum por STDIO.
+python .\spikes\39-mcp_application\main.py
+```
+
+## Ejecutar Practica 40
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# Instalar dependencias MCP.
+pip install -U fastmcp==2.12.5 mcp==1.16.0 langchain-mcp-adapters==0.1.9
+
+# Ejecutar la practica Hello World de servidores MCP.
+python .\spikes\40-mcp_hello_world\main.py
+```
+
+## Ejecutar Practica 41
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# Instalar FastMCP.
+pip install -U fastmcp==2.12.5
+
+# Ejecutar la practica del servidor MCP enriquecido.
+python .\spikes\41-enhanced_mcp_server\main.py
+```
+
+## Ejecutar Practica 42
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# Instalar dependencias MCP.
+pip install -U fastmcp==2.12.5 mcp==1.16.0
+
+# Ejecutar la demo programatica del cliente MCP custom.
+python .\spikes\42-custom_mcp_client\main.py
+
+# Ejecutar la CLI interactiva del cliente MCP.
+python .\spikes\42-custom_mcp_client\mcp_client.py .\spikes\42-custom_mcp_client\mcp_server.py
+```
+
+## Ejecutar Practica 43
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# Instalar dependencias opcionales para GUI y host enriquecido.
+pip install -U httpx==0.28.1 gradio==5.49.1 openai==2.6.1
+
+# Ejecutar la demo programatica de Streamable HTTP con roots y sampling.
+python .\spikes\43-mcp_http_roots_sampling\main.py
+
+# Opcional si quieres lanzar la GUI manual.
+python .\spikes\43-mcp_http_roots_sampling\models\advanced_http_client_app.py http://127.0.0.1:8000 .\spikes\43-mcp_http_roots_sampling\workspace
+
+# Opcional si quieres lanzar el host conversacional.
+python .\spikes\43-mcp_http_roots_sampling\models\advanced_http_host_app.py http://127.0.0.1:8000 .\spikes\43-mcp_http_roots_sampling\workspace
+```
+
+## Ejecutar Practica 44
+
+```powershell
+# Activar el entorno virtual.
+.\venv\Scripts\Activate.ps1
+
+# Instalar dependencias opcionales para GUI y host enriquecido.
+pip install -U gradio==5.49.1 openai==2.6.1
+
+# Ejecutar la demo programatica de permisos y elicitation.
+python .\spikes\44-mcp_security_permissions\main.py
+
+# Opcional si quieres lanzar la GUI de permisos.
+python .\spikes\44-mcp_security_permissions\models\permission_client_app.py .\spikes\44-mcp_security_permissions\models\permission_mcp_server.py
+
+# Opcional si quieres lanzar el host conversacional con aprobaciones.
+python .\spikes\44-mcp_security_permissions\models\permission_host_app.py .\spikes\44-mcp_security_permissions\models\permission_mcp_server.py
 ```
 
 ## Parar Gradio
@@ -923,7 +1041,7 @@ src/
           schemas.py
           service.py
 spikes/
-  01-prompting_lcel_lab/
+  01-prompting_lcel/
     README.md
     main.py
     config/
@@ -934,7 +1052,7 @@ spikes/
       prompting_orchestration_basic.py
       prompting_orchestration_lcel.py
       prompting_orchestration_reasoning.py
-  02-gradio_llama_lab/
+  02-gradio_llama/
     README.md
     main.py
     config/
@@ -947,7 +1065,7 @@ spikes/
       gradio_llama_runtime_state.py
     ui/
       gradio_llama_ui_builder.py
-  03-rag_pdf_qa_bot_lab/
+  03-rag_pdf_qa/
     README.md
     main.py
     bootstrap/
@@ -965,7 +1083,7 @@ spikes/
       rag_state.py
     ui/
       rag_ui.py
-  04-linkedin_icebreaker_bot_lab/
+  04-linkedin_icebreaker/
     README.md
     main.py
     config/
@@ -985,7 +1103,7 @@ spikes/
       icebreaker_state.py
     ui/
       icebreaker_ui.py
-  05-similarity_search_by_hand_lab/
+  05-similarity_search/
     README.md
     main.py
     config/
@@ -1000,7 +1118,7 @@ spikes/
       similarity_search_orchestration.py
     state/
       similarity_runtime_state.py
-  06-vector_databases_chromadb_cheat_sheet_lab/
+  06-chromadb_cheat_sheet/
     README.md
     main.py
     config/
@@ -1015,7 +1133,7 @@ spikes/
       chromadb_query_orchestration.py
     state/
       chromadb_runtime_state.py
-  07-employee_similarity_search_chromadb_lab/
+  07-employee_similarity/
     README.md
     main.py
     config/
@@ -1033,7 +1151,7 @@ spikes/
       employee_similarity_lab_runner.py
     state/
       employee_similarity_state.py
-  08-food_recommendation_systems_chromadb_rag_lab/
+  08-food_recommendation_rag/
     README.md
     main.py
     config/
@@ -1052,7 +1170,7 @@ spikes/
       food_data_pipeline.py
     state/
       food_recommendation_state.py
-  09-langchain_context_retrieval_lab/
+  09-context_retrieval/
     README.md
     main.py
     config/
@@ -1071,7 +1189,7 @@ spikes/
       context_retrieval_parent_orchestration.py
       context_retrieval_search_orchestration.py
       context_retrieval_self_query_orchestration.py
-  10-advanced_retrievers_llamaindex_lab/
+  10-advanced_retrievers/
     README.md
     main.py
     config/
@@ -1088,7 +1206,7 @@ spikes/
       advanced_retrievers_fusion_orchestration.py
       advanced_retrievers_index_orchestration.py
       advanced_retrievers_lab_runner.py
-  11-semantic_similarity_faiss_lab/
+  11-semantic_similarity/
     README.md
     main.py
     config/
@@ -1102,7 +1220,7 @@ spikes/
       faiss_preprocessing_orchestration.py
       faiss_search_orchestration.py
       faiss_similarity_lab_runner.py
-  12-youtube_summarizer_rag_faiss_lab/
+  12-youtube_rag_faiss/
     README.md
     main.py
     config/
@@ -1117,7 +1235,7 @@ spikes/
       youtube_rag_lab_runner.py
       youtube_rag_orchestration.py
       youtube_transcript_orchestration.py
-  13-story_generator_text_to_speech_lab/
+  13-story_tts/
     README.md
     main.py
     config/
@@ -1143,7 +1261,7 @@ spikes/
       story_generation_orchestration.py
       story_real_variants_orchestration.py
       story_tts_lab_runner.py
-  14-basic_vision_multimodal_lab/
+  14-vision_multimodal/
     README.md
     main.py
     assets/
@@ -1221,7 +1339,7 @@ spikes/
       main.py
     ui/
       style_finder_ui.py
-  15-ai_meeting_assistant_lab/
+  15-meeting_assistant/
     README.md
     main.py
     config/
@@ -1239,7 +1357,7 @@ spikes/
       meeting_transcription_orchestration.py
     ui/
       meeting_assistant_ui.py
-  16-dalle_image_generation_lab/
+  16-dalle_generation/
     README.md
     main.py
     config/
@@ -1257,7 +1375,7 @@ spikes/
     orchestration/
       dalle_generation_orchestration.py
       dalle_lab_runner.py
-  17-voice_desktop_assistant_lab/
+  17-voice_assistant/
     README.md
     main.py
     config/
@@ -1278,7 +1396,7 @@ spikes/
       voice_desktop_session_orchestration.py
     ui/
       voice_desktop_ui.py
-  18-langchain_tool_calling_math_assistant_lab/
+  18-tool_calling_math/
     README.md
     main.py
     config/
@@ -1293,7 +1411,7 @@ spikes/
       tool_calling_agent_orchestration.py
       tool_calling_lab_runner.py
       tool_calling_tools_orchestration.py
-  19-datawizard_ai_powered_data_analysis_lab/
+  19-datawizard_analysis/
     README.md
     main.py
     config/
@@ -1550,7 +1668,7 @@ Como regla practica:
 
 `LCEL` ofrece una forma simple de encadenar pasos con el operador `|` cuando el flujo es claro y determinista. Su base comun son los `Runnables` que permiten componer prompts modelos parsers y transformaciones bajo una interfaz consistente. Eso facilita reutilizar operaciones como `invoke` `batch` `ainvoke` o `stream` sin redisenar cada pipeline desde cero.
 
-En este repositorio `LCEL` encaja mejor en escenarios donde la secuencia de pasos ya esta decidida y conviene priorizar legibilidad trazabilidad y coste estable. Esa idea aparece de forma temprana en la [practica 01](C:/Workspace/rag-agentic-ai-toolkit/spikes/01-prompting_lcel_lab/README.md) y sirve como contrapunto a los casos donde un agente con herramientas necesita mas autonomia.
+En este repositorio `LCEL` encaja mejor en escenarios donde la secuencia de pasos ya esta decidida y conviene priorizar legibilidad trazabilidad y coste estable. Esa idea aparece de forma temprana en la [practica 01](C:/Workspace/rag-agentic-ai-toolkit/spikes/01-prompting_lcel/README.md) y sirve como contrapunto a los casos donde un agente con herramientas necesita mas autonomia.
 
 ## LangChain vs LangGraph
 
@@ -1558,7 +1676,7 @@ En este repositorio `LCEL` encaja mejor en escenarios donde la secuencia de paso
 
 En terminos practicos `LangChain` resuelve bien prompts pipelines `RAG` clasico y `tool calling` lineal. `LangGraph` se vuelve util cuando quieres bucles aristas condicionales memoria persistente `human-in-the-loop` o ejecucion durable. Tambien facilita visualizar el flujo con Mermaid para depurar rutas antes de desplegar.
 
-Dentro de este repositorio las practicas [01](C:/Workspace/rag-agentic-ai-toolkit/spikes/01-prompting_lcel_lab/README.md) [18](C:/Workspace/rag-agentic-ai-toolkit/spikes/18-langchain_tool_calling_math_assistant_lab/README.md) [20](C:/Workspace/rag-agentic-ai-toolkit/spikes/20-interactive_llm_agents_with_tools_lab/README.md) [21](C:/Workspace/rag-agentic-ai-toolkit/spikes/21-youtube_tool_calling_agent_lab/README.md) [22](C:/Workspace/rag-agentic-ai-toolkit/spikes/22-natural_language_data_visualization_agent_lab/README.md) [23](C:/Workspace/rag-agentic-ai-toolkit/spikes/23-natural_language_sql_agent_lab/README.md) [24](C:/Workspace/rag-agentic-ai-toolkit/spikes/24-langgraph_101_building_stateful_ai_workflows_lab/README.md) [25](C:/Workspace/rag-agentic-ai-toolkit/spikes/25-building_reflection_agent_with_langgraph_lab/README.md) [26](C:/Workspace/rag-agentic-ai-toolkit/spikes/26-building_reflection_agent_with_external_knowledge_integration/README.md) [27](C:/Workspace/rag-agentic-ai-toolkit/spikes/27-react_build_reasoning_and_acting_ai_agents_with_langgraph/README.md) [28](C:/Workspace/rag-agentic-ai-toolkit/spikes/28-docchat_multi_agent_rag_system/README.md) [29](C:/Workspace/rag-agentic-ai-toolkit/spikes/29-implement_workflow_patterns_with_langgraph/README.md) [30](C:/Workspace/rag-agentic-ai-toolkit/spikes/30-build_langgraph_design_patterns_orchestration_evaluation/README.md) [31](C:/Workspace/rag-agentic-ai-toolkit/spikes/31-crewai_101_building_multi_agent_ai_systems/README.md) y [32](C:/Workspace/rag-agentic-ai-toolkit/spikes/32-structured_meal_grocery_planner_with_crewai/README.md) cubren el puente entre `LCEL` `tool calling` workflows con estado agentes reflexivos revision con conocimiento externo ReAct patrones de workflow y pipelines multiagente estilo `CrewAI`.
+Dentro de este repositorio las practicas [01](C:/Workspace/rag-agentic-ai-toolkit/spikes/01-prompting_lcel/README.md) [18](C:/Workspace/rag-agentic-ai-toolkit/spikes/18-tool_calling_math/README.md) [20](C:/Workspace/rag-agentic-ai-toolkit/spikes/20-interactive_agents/README.md) [21](C:/Workspace/rag-agentic-ai-toolkit/spikes/21-youtube_tool_agent/README.md) [22](C:/Workspace/rag-agentic-ai-toolkit/spikes/22-nl_data_viz/README.md) [23](C:/Workspace/rag-agentic-ai-toolkit/spikes/23-nl_sql/README.md) [24](C:/Workspace/rag-agentic-ai-toolkit/spikes/24-langgraph_stateful_workflows/README.md) [25](C:/Workspace/rag-agentic-ai-toolkit/spikes/25-reflection_agent/README.md) [26](C:/Workspace/rag-agentic-ai-toolkit/spikes/26-reflection_external_knowledge/README.md) [27](C:/Workspace/rag-agentic-ai-toolkit/spikes/27-react_langgraph_agents/README.md) [28](C:/Workspace/rag-agentic-ai-toolkit/spikes/28-docchat_multi_agent_rag/README.md) [29](C:/Workspace/rag-agentic-ai-toolkit/spikes/29-langgraph_workflow_patterns/README.md) [30](C:/Workspace/rag-agentic-ai-toolkit/spikes/30-langgraph_design_patterns/README.md) [31](C:/Workspace/rag-agentic-ai-toolkit/spikes/31-crewai_multi_agent/README.md) y [32](C:/Workspace/rag-agentic-ai-toolkit/spikes/32-meal_grocery_planner/README.md) cubren el puente entre `LCEL` `tool calling` workflows con estado agentes reflexivos revision con conocimiento externo ReAct patrones de workflow y pipelines multiagente estilo `CrewAI`.
 
 ## Patrones de Agentes Auto-Mejorables
 
@@ -1578,14 +1696,14 @@ Un sistema multiagente reparte el trabajo entre roles especializados en lugar de
 
 `Agentic RAG` anade una capa de decision sobre el `RAG` clasico. En vez de recuperar siempre desde una sola fuente un agente puede decidir que base consultar cuando reformular una consulta cuando pedir verificacion adicional y cuando escalar a otro agente o a un humano. Esto suele mejorar robustez en dominios con varias fuentes o con consultas ambiguas.
 
-En este repositorio la base tecnica de `Agentic RAG` ya aparece repartida entre la [practica 03](C:/Workspace/rag-agentic-ai-toolkit/spikes/03-rag_pdf_qa_bot_lab/README.md) la [09](C:/Workspace/rag-agentic-ai-toolkit/spikes/09-langchain_context_retrieval_lab/README.md) la [10](C:/Workspace/rag-agentic-ai-toolkit/spikes/10-advanced_retrievers_llamaindex_lab/README.md) la [12](C:/Workspace/rag-agentic-ai-toolkit/spikes/12-youtube_summarizer_rag_faiss_lab/README.md) la [21](C:/Workspace/rag-agentic-ai-toolkit/spikes/21-youtube_tool_calling_agent_lab/README.md) la [23](C:/Workspace/rag-agentic-ai-toolkit/spikes/23-natural_language_sql_agent_lab/README.md) la [24](C:/Workspace/rag-agentic-ai-toolkit/spikes/24-langgraph_101_building_stateful_ai_workflows_lab/README.md) la [25](C:/Workspace/rag-agentic-ai-toolkit/spikes/25-building_reflection_agent_with_langgraph_lab/README.md) la [26](C:/Workspace/rag-agentic-ai-toolkit/spikes/26-building_reflection_agent_with_external_knowledge_integration/README.md) la [27](C:/Workspace/rag-agentic-ai-toolkit/spikes/27-react_build_reasoning_and_acting_ai_agents_with_langgraph/README.md) la [28](C:/Workspace/rag-agentic-ai-toolkit/spikes/28-docchat_multi_agent_rag_system/README.md) la [29](C:/Workspace/rag-agentic-ai-toolkit/spikes/29-implement_workflow_patterns_with_langgraph/README.md) la [30](C:/Workspace/rag-agentic-ai-toolkit/spikes/30-build_langgraph_design_patterns_orchestration_evaluation/README.md) la [31](C:/Workspace/rag-agentic-ai-toolkit/spikes/31-crewai_101_building_multi_agent_ai_systems/README.md) la [32](C:/Workspace/rag-agentic-ai-toolkit/spikes/32-structured_meal_grocery_planner_with_crewai/README.md) la [33](C:/Workspace/rag-agentic-ai-toolkit/spikes/33-agents_with_tools_versus_tasks_with_tools_in_crewai/README.md) y la [34](C:/Workspace/rag-agentic-ai-toolkit/spikes/34-building_your_own_ai_nutrition_coach_using_a_multi_agent_system_and_multimodal_ai/README.md). Estas practicas amplian la base hacia patrones de workflow con `LangGraph`, orquestacion con evaluacion, comparativas finas de asignacion de tools en `CrewAI` y una aplicacion multimodal multiagente de nutricion.
+En este repositorio la base tecnica de `Agentic RAG` ya aparece repartida entre la [practica 03](C:/Workspace/rag-agentic-ai-toolkit/spikes/03-rag_pdf_qa/README.md) la [09](C:/Workspace/rag-agentic-ai-toolkit/spikes/09-context_retrieval/README.md) la [10](C:/Workspace/rag-agentic-ai-toolkit/spikes/10-advanced_retrievers/README.md) la [12](C:/Workspace/rag-agentic-ai-toolkit/spikes/12-youtube_rag_faiss/README.md) la [21](C:/Workspace/rag-agentic-ai-toolkit/spikes/21-youtube_tool_agent/README.md) la [23](C:/Workspace/rag-agentic-ai-toolkit/spikes/23-nl_sql/README.md) la [24](C:/Workspace/rag-agentic-ai-toolkit/spikes/24-langgraph_stateful_workflows/README.md) la [25](C:/Workspace/rag-agentic-ai-toolkit/spikes/25-reflection_agent/README.md) la [26](C:/Workspace/rag-agentic-ai-toolkit/spikes/26-reflection_external_knowledge/README.md) la [27](C:/Workspace/rag-agentic-ai-toolkit/spikes/27-react_langgraph_agents/README.md) la [28](C:/Workspace/rag-agentic-ai-toolkit/spikes/28-docchat_multi_agent_rag/README.md) la [29](C:/Workspace/rag-agentic-ai-toolkit/spikes/29-langgraph_workflow_patterns/README.md) la [30](C:/Workspace/rag-agentic-ai-toolkit/spikes/30-langgraph_design_patterns/README.md) la [31](C:/Workspace/rag-agentic-ai-toolkit/spikes/31-crewai_multi_agent/README.md) la [32](C:/Workspace/rag-agentic-ai-toolkit/spikes/32-meal_grocery_planner/README.md) la [33](C:/Workspace/rag-agentic-ai-toolkit/spikes/33-crewai_tools_vs_tasks/README.md) y la [34](C:/Workspace/rag-agentic-ai-toolkit/spikes/34-nutrition_coach_multi_agent/README.md). Estas practicas amplian la base hacia patrones de workflow con `LangGraph`, orquestacion con evaluacion, comparativas finas de asignacion de tools en `CrewAI` y una aplicacion multimodal multiagente de nutricion.
 
 ## Ruta de Aprendizaje Agentica en este Repo
 
-1. Empieza por [01](C:/Workspace/rag-agentic-ai-toolkit/spikes/01-prompting_lcel_lab/README.md) para fijar prompts plantillas y `LCEL`.
-2. Continua con [18](C:/Workspace/rag-agentic-ai-toolkit/spikes/18-langchain_tool_calling_math_assistant_lab/README.md) y [20](C:/Workspace/rag-agentic-ai-toolkit/spikes/20-interactive_llm_agents_with_tools_lab/README.md) para dominar `tool calling` contratos y control de ejecucion.
-3. Pasa por [03](C:/Workspace/rag-agentic-ai-toolkit/spikes/03-rag_pdf_qa_bot_lab/README.md) [09](C:/Workspace/rag-agentic-ai-toolkit/spikes/09-langchain_context_retrieval_lab/README.md) [10](C:/Workspace/rag-agentic-ai-toolkit/spikes/10-advanced_retrievers_llamaindex_lab/README.md) y [12](C:/Workspace/rag-agentic-ai-toolkit/spikes/12-youtube_summarizer_rag_faiss_lab/README.md) para construir la base de `RAG` y retrieval avanzado.
-4. Cierra con [21](C:/Workspace/rag-agentic-ai-toolkit/spikes/21-youtube_tool_calling_agent_lab/README.md) [22](C:/Workspace/rag-agentic-ai-toolkit/spikes/22-natural_language_data_visualization_agent_lab/README.md) [23](C:/Workspace/rag-agentic-ai-toolkit/spikes/23-natural_language_sql_agent_lab/README.md) [24](C:/Workspace/rag-agentic-ai-toolkit/spikes/24-langgraph_101_building_stateful_ai_workflows_lab/README.md) [25](C:/Workspace/rag-agentic-ai-toolkit/spikes/25-building_reflection_agent_with_langgraph_lab/README.md) [26](C:/Workspace/rag-agentic-ai-toolkit/spikes/26-building_reflection_agent_with_external_knowledge_integration/README.md) [27](C:/Workspace/rag-agentic-ai-toolkit/spikes/27-react_build_reasoning_and_acting_ai_agents_with_langgraph/README.md) [28](C:/Workspace/rag-agentic-ai-toolkit/spikes/28-docchat_multi_agent_rag_system/README.md) [29](C:/Workspace/rag-agentic-ai-toolkit/spikes/29-implement_workflow_patterns_with_langgraph/README.md) [30](C:/Workspace/rag-agentic-ai-toolkit/spikes/30-build_langgraph_design_patterns_orchestration_evaluation/README.md) [31](C:/Workspace/rag-agentic-ai-toolkit/spikes/31-crewai_101_building_multi_agent_ai_systems/README.md) [32](C:/Workspace/rag-agentic-ai-toolkit/spikes/32-structured_meal_grocery_planner_with_crewai/README.md) [33](C:/Workspace/rag-agentic-ai-toolkit/spikes/33-agents_with_tools_versus_tasks_with_tools_in_crewai/README.md) y [34](C:/Workspace/rag-agentic-ai-toolkit/spikes/34-building_your_own_ai_nutrition_coach_using_a_multi_agent_system_and_multimodal_ai/README.md) para ver agentes contra herramientas datos relacionales workflows con estado reflexion iterativa revision con evidencia externa ReAct patrones de workflow orquestacion con evaluacion crews especializados comparacion de tools por agente contra tools por tarea y una aplicacion multimodal multiagente de nutricion.
+1. Empieza por [01](C:/Workspace/rag-agentic-ai-toolkit/spikes/01-prompting_lcel/README.md) para fijar prompts plantillas y `LCEL`.
+2. Continua con [18](C:/Workspace/rag-agentic-ai-toolkit/spikes/18-tool_calling_math/README.md) y [20](C:/Workspace/rag-agentic-ai-toolkit/spikes/20-interactive_agents/README.md) para dominar `tool calling` contratos y control de ejecucion.
+3. Pasa por [03](C:/Workspace/rag-agentic-ai-toolkit/spikes/03-rag_pdf_qa/README.md) [09](C:/Workspace/rag-agentic-ai-toolkit/spikes/09-context_retrieval/README.md) [10](C:/Workspace/rag-agentic-ai-toolkit/spikes/10-advanced_retrievers/README.md) y [12](C:/Workspace/rag-agentic-ai-toolkit/spikes/12-youtube_rag_faiss/README.md) para construir la base de `RAG` y retrieval avanzado.
+4. Cierra con [21](C:/Workspace/rag-agentic-ai-toolkit/spikes/21-youtube_tool_agent/README.md) [22](C:/Workspace/rag-agentic-ai-toolkit/spikes/22-nl_data_viz/README.md) [23](C:/Workspace/rag-agentic-ai-toolkit/spikes/23-nl_sql/README.md) [24](C:/Workspace/rag-agentic-ai-toolkit/spikes/24-langgraph_stateful_workflows/README.md) [25](C:/Workspace/rag-agentic-ai-toolkit/spikes/25-reflection_agent/README.md) [26](C:/Workspace/rag-agentic-ai-toolkit/spikes/26-reflection_external_knowledge/README.md) [27](C:/Workspace/rag-agentic-ai-toolkit/spikes/27-react_langgraph_agents/README.md) [28](C:/Workspace/rag-agentic-ai-toolkit/spikes/28-docchat_multi_agent_rag/README.md) [29](C:/Workspace/rag-agentic-ai-toolkit/spikes/29-langgraph_workflow_patterns/README.md) [30](C:/Workspace/rag-agentic-ai-toolkit/spikes/30-langgraph_design_patterns/README.md) [31](C:/Workspace/rag-agentic-ai-toolkit/spikes/31-crewai_multi_agent/README.md) [32](C:/Workspace/rag-agentic-ai-toolkit/spikes/32-meal_grocery_planner/README.md) [33](C:/Workspace/rag-agentic-ai-toolkit/spikes/33-crewai_tools_vs_tasks/README.md) y [34](C:/Workspace/rag-agentic-ai-toolkit/spikes/34-nutrition_coach_multi_agent/README.md) para ver agentes contra herramientas datos relacionales workflows con estado reflexion iterativa revision con evidencia externa ReAct patrones de workflow orquestacion con evaluacion crews especializados comparacion de tools por agente contra tools por tarea y una aplicacion multimodal multiagente de nutricion.
 5. El siguiente salto natural sobre el material actual es combinar las practicas 29 a 34 con memoria persistente observabilidad y ejecucion durable para escenarios de produccion.
 
 ## Resumen de ChromaDB
@@ -1600,11 +1718,11 @@ Existen varias familias de bases de datos vectoriales como las bases en memoria 
 
 `ChromaDB` es una base de datos vectorial centrada en tareas de recuperacion para aplicaciones de IA. Soporta busqueda vectorial busqueda de texto completo filtrado por metadatos y escenarios multimodales. Puede ejecutarse en modo autonomo o en arquitectura cliente servidor y se integra bien con frameworks populares del ecosistema de LLMs. Su enfoque de vecinos mas cercanos aproximados permite encontrar rapidamente los fragmentos mas cercanos a una consulta dentro de una coleccion.
 
-En este repositorio `ChromaDB` se usa como una opcion simple para flujos RAG locales. Encaja bien en practicas como la [03](C:/Workspace/rag-agentic-ai-toolkit/spikes/03-rag_pdf_qa_bot_lab/README.md) cuando hay que indexar trozos de documentos y recuperar contexto antes de responder con un modelo.
+En este repositorio `ChromaDB` se usa como una opcion simple para flujos RAG locales. Encaja bien en practicas como la [03](C:/Workspace/rag-agentic-ai-toolkit/spikes/03-rag_pdf_qa/README.md) cuando hay que indexar trozos de documentos y recuperar contexto antes de responder con un modelo.
 
 ## Busqueda de Similitud
 
-La forma manual de hacer busqueda por similitud consiste en generar embeddings normalizar vectores y comparar una consulta contra una coleccion usando distancia euclidiana producto punto o similitud coseno. Esa idea esta resumida en la [practica 05](C:/Workspace/rag-agentic-ai-toolkit/spikes/05-similarity_search_by_hand_lab/README.md) donde se implementan los calculos a mano y se comparan contra operaciones matriciales y librerias externas.
+La forma manual de hacer busqueda por similitud consiste en generar embeddings normalizar vectores y comparar una consulta contra una coleccion usando distancia euclidiana producto punto o similitud coseno. Esa idea esta resumida en la [practica 05](C:/Workspace/rag-agentic-ai-toolkit/spikes/05-similarity_search/README.md) donde se implementan los calculos a mano y se comparan contra operaciones matriciales y librerias externas.
 
 Con `ChromaDB` el flujo se simplifica: primero se crean embeddings de los documentos luego se almacenan junto con sus metadatos y finalmente se ejecutan consultas por similitud para recuperar los fragmentos mas cercanos. Esto permite construir buscadores semanticos chatbots basados en IA recuperacion de documentos y sistemas de recomendacion con menos trabajo operativo sobre indices y almacenamiento.
 

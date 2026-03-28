@@ -32,5 +32,10 @@ PyYAML==6.0.3
 # Environment variables.
 python-dotenv==1.2.1
 
+# MCP and tool interoperability.
+fastmcp==2.12.5
+mcp==1.16.0
+langchain-mcp-adapters==0.1.9
+
 # ASGI server.
 uvicorn[standard]==0.41.0

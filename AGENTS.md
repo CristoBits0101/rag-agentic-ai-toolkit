@@ -48,6 +48,9 @@
 # =============================================================================================
 
 26. Toda practica nueva o modificada dentro de `spikes` debe revisarse contra el patron de estructura nombres comentarios y estilo usado por las practicas previas del repositorio.
+26.1. Convencion oficial para nombres de nuevos spikes: `NN-descriptive_project_slug` con prefijo numerico de dos digitos letras minusculas y palabras separadas por guion bajo.
+26.2. Todo spike activo del repositorio debe usar el mismo patron canonico sin sufijo `_lab` y cualquier renombre futuro debe mantener esa uniformidad en carpetas tests y documentacion.
+26.3. Toda nueva prueba unitaria dedicada a un spike debe seguir el mismo slug del directorio con el formato `test_spike_NN_descriptive_project_slug.py`.
 27. Si una practica nueva es en realidad una extension natural de una practica ya existente no se debe crear un spike nuevo sin justificar primero la separacion tecnica y pedagogica.
 28. Cada practica nueva o modificada debe quedar cubierta por tests ejecutables y esos tests deben correrse dentro del mismo turno.
 29. No se debe cerrar una practica con errores de ejecucion advertencias evitables imports no resueltos o alertas de configuracion que hayan sido introducidos por el cambio.

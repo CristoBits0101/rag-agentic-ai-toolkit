@@ -5,7 +5,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-SPIKE = ROOT / "spikes" / "09-langchain_context_retrieval_lab"
+SPIKE = ROOT / "spikes" / "09-context_retrieval"
 
 if str(SPIKE) not in sys.path:
     sys.path.insert(0, str(SPIKE))

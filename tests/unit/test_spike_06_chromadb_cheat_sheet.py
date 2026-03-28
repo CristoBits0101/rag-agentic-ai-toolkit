@@ -8,7 +8,7 @@ from pathlib import Path
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
-SPIKE = ROOT / "spikes" / "06-vector_databases_chromadb_cheat_sheet_lab"
+SPIKE = ROOT / "spikes" / "06-chromadb_cheat_sheet"
 
 if str(SPIKE) not in sys.path:
     sys.path.insert(0, str(SPIKE))

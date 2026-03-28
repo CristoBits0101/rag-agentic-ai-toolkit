@@ -5,7 +5,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-SPIKE = ROOT / "spikes" / "07-employee_similarity_search_chromadb_lab"
+SPIKE = ROOT / "spikes" / "07-employee_similarity"
 
 if str(SPIKE) not in sys.path:
     sys.path.insert(0, str(SPIKE))
