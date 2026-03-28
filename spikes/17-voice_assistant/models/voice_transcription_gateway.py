@@ -5,7 +5,9 @@ from pathlib import Path
 import numpy as np
 
 from config.voice_desktop_config import WHISPER_CHUNK_SECONDS
+from config.voice_desktop_config import WHISPER_LANGUAGE
 from config.voice_desktop_config import WHISPER_MODEL_NAME
+from config.voice_desktop_config import WHISPER_TASK
 
 try:
     from transformers import pipeline
@@ -15,6 +17,8 @@ except ImportError:
 
 def build_whisper_pipeline(
     model_name: str = WHISPER_MODEL_NAME,
+    language: str = WHISPER_LANGUAGE,
+    task: str = WHISPER_TASK,
     pipeline_factory=pipeline,
 ):
     if pipeline_factory is None:
@@ -24,6 +28,10 @@ def build_whisper_pipeline(
         "automatic-speech-recognition",
         model=model_name,
         chunk_length_s=WHISPER_CHUNK_SECONDS,
+        generate_kwargs={
+            "language": language,
+            "task": task,
+        },
     )
 
 

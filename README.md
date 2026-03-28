@@ -432,14 +432,30 @@ pip install -U keyboard
 # Arrancar Ollama.
 ollama serve
 
-# Descargar un modelo recomendado para planificacion.
-ollama pull qwen2.5:7b
+# Descargar el modelo recomendado para control de escritorio.
+ollama pull qwen3-vl:30b
+
+# Variante de menor consumo si el hardware es mas limitado.
+ollama pull qwen3-vl:8b
 
 # Ejecutar la practica de asistente de escritorio por voz con ventana nativa.
 # La respuesta hablada usa la voz local de Windows si esta disponible.
-# La app puede abrir y cerrar aplicaciones permitidas con confirmacion verifica si el proceso sigue vivo antes de reportar un fallo de cierre y resume el ultimo estado en una sola linea.
+# La app puede abrir aplicaciones permitidas mover el raton hacer click hacer click en objetivos visuales permitidos cerrar aplicaciones permitidas con confirmacion verificar si el proceso sigue vivo antes de reportar un fallo de cierre y usar qwen3-vl para localizar botones en la pantalla cuando no exista plantilla local.
 python .\spikes\17-voice_assistant\main.py
 ```
+
+Acciones permitidas en la practica 17: `open_application` `open_url` `type_text` `move_mouse` `click_mouse` `press_hotkey` `click_target` `close_application` `trash_path`.
+Aplicaciones permitidas para abrir: `calculator` `chrome` `explorer` `league_of_legends` `notepad` `paint` `riot_client`.
+Aplicaciones permitidas para cerrar: `calculator` `chrome` `league_of_legends` `notepad` `paint` `riot_client`.
+Objetivos de click permitidos: `riot_lol_icon` `riot_play_button` `league_play_button` `league_ranked_solo_duo_option` `league_confirm_button` `league_find_match_button`.
+Limitaciones de ordenes: no se aceptan clicks arbitrarios ni coordenadas libres y el click visual depende de que el objetivo este visible en pantalla o de que exista una plantilla opcional compatible.
+Modelo por defecto para la planificacion de la practica 17: `qwen3-vl:30b`.
+Ejemplo de orden directa soportada por voz: `dale a jugar en league of legends`.
+Al decir `abre league of legends` la practica abre `Riot Client` e intenta primero el boton amarillo `Jugar` si ya esta visible y si no cae al flujo de pulsar el icono de `LoL` y despues `Jugar`.
+Al decir `cierra el lol` la practica acepta tanto procesos propios del cliente de League como procesos activos de `Riot Client` cuando el juego esta abierto desde ese lanzador.
+La interfaz del spike 17 usa un canal de voz abierto o cerrado con una bombilla circular verde cuando escucha y roja cuando esta cerrado y procesa ordenes de forma continua mientras el canal permanece abierto.
+La interfaz del spike 17 tambien permite enviar ordenes escritas desde un campo de texto debajo de `Estado`.
+La transcripcion local del spike 17 usa `openai/whisper-small` forzado a espanol y tolera variantes defectuosas frecuentes de `League of Legends` en el parser local.
 
 ## Ejecutar Practica 18
 
@@ -1377,6 +1393,8 @@ spikes/
       dalle_lab_runner.py
   17-voice_assistant/
     README.md
+    assets/
+      README.md
     main.py
     config/
       voice_desktop_config.py
@@ -1388,6 +1406,7 @@ spikes/
       voice_desktop_entities.py
       voice_local_tts_gateway.py
       voice_microphone_gateway.py
+      voice_screen_vision_gateway.py
       voice_transcription_gateway.py
     orchestration/
       voice_desktop_execution_orchestration.py
@@ -1737,3 +1756,136 @@ En cursos y proyectos mas avanzados tambien aparecen estrategias como `Query Fus
 `FAISS` destaca cuando se necesita busqueda vectorial muy eficiente y control fino del indice en memoria. `ChromaDB` simplifica el desarrollo de aplicaciones `RAG` porque combina colecciones metadatos filtros y retrieval en una experiencia mas directa para prototipos y proyectos locales. `Milvus` entra mejor en escenarios de mayor escala y despliegue distribuido donde el volumen de vectores y los requisitos operativos son mas altos.
 
 En este repositorio `ChromaDB` es la opcion principal porque reduce complejidad para aprendizaje y pruebas. `FAISS` y `Milvus` conviene entenderlos como alternativas importantes para retrieval avanzado y escalado de produccion.
+
+# 🧠 AI Models by Use Case (Local & Cloud)
+
+Guía rápida de qué modelo usar según la utilidad real en flujos con `Ollama` y `Agentic AI`.
+
+---
+
+## 🖥️ Desktop Control (Apps, UI, Screen Interaction)
+
+**Best:**
+- `qwen3-vl:30b`
+
+**Alternative (cloud):**
+- `qwen3-vl:235b-cloud`
+
+**Why:**
+- Vision + reasoning.
+- Understands UI, buttons, layouts.
+- Ideal for agents that use the computer.
+
+---
+
+## 💻 Programming & Automation (Code, CLI, Dev Agents)
+
+**Best:**
+- `qwen3-coder:30b`
+
+**Alternative (cloud):**
+- `qwen3-coder:480b-cloud`
+
+**Why:**
+- Strong code generation and editing.
+- Multi-file reasoning.
+- Perfect for developer agents.
+
+---
+
+## 🧠 Reasoning & Planning (Logic, Decisions, Complex Tasks)
+
+**Best:**
+- `deepseek-r1`
+
+**Alternative:**
+- `gpt-oss:120b-cloud`
+
+**Why:**
+- Step-by-step reasoning.
+- High logical accuracy.
+- Ideal for planning agents.
+
+---
+
+## 🧩 General Purpose (Balanced Usage)
+
+**Best:**
+- `qwen3:30b`
+
+**Alternative:**
+- `gemma3:27b`
+
+**Why:**
+- Good balance across tasks.
+- Chat, automation, general workflows.
+
+---
+
+## 👁️ Lightweight Multimodal (Low Hardware)
+
+**Best:**
+- `qwen3-vl:8b`
+
+**Alternative:**
+- `gemma3:12b`
+
+**Why:**
+- Runs on smaller GPUs.
+- Basic vision + interaction.
+
+---
+
+## 🤖 Full Agent Setup (Recommended Architecture)
+
+**Best Combo:**
+- `qwen3-vl` → vision.
+- `qwen3-coder` → execution.
+
+**Why:**
+- Separation of concerns.
+- Closest to real autonomous system.
+
+---
+
+## 🔍 RAG / Embeddings (Search & Retrieval)
+
+**Best:**
+- `qwen3-embedding`
+
+**Alternative:**
+- `bge-m3`
+
+---
+
+## 🎨 Image Generation
+
+❌ Not supported by these models.
+
+**Use instead:**
+- Stable Diffusion / SDXL.
+- Flux (SOTA).
+- DALL·E / Midjourney (cloud).
+
+---
+
+## ⚡ TL;DR
+
+| Use Case | Model |
+| --- | --- |
+| Desktop Control | `qwen3-vl:30b` |
+| Coding | `qwen3-coder:30b` |
+| Reasoning | `deepseek-r1` |
+| General Use | `qwen3:30b` |
+
+---
+
+## 🚀 Pro Tip
+
+For real-world agent systems:
+
+```bash
+Vision (input)   -> qwen3-vl
+Reasoning        -> deepseek-r1
+Execution        -> qwen3-coder
+```

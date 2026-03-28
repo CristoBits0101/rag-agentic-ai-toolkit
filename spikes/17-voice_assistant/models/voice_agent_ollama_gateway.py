@@ -1,6 +1,5 @@
 # --- DEPENDENCIAS ---
 import json
-import unicodedata
 from urllib.error import HTTPError
 from urllib.error import URLError
 from urllib.request import Request
@@ -12,23 +11,23 @@ from config.voice_desktop_config import OLLAMA_MODEL_CANDIDATES
 from config.voice_desktop_config import OLLAMA_TAGS_URL
 from config.voice_desktop_config import SENSITIVE_ACTIONS
 from data.voice_command_catalog import ALLOWED_ACTIONS
+from data.voice_command_catalog import ALLOWED_CLICK_TARGETS
 from data.voice_command_catalog import ALLOWED_APPLICATIONS
 from data.voice_command_catalog import APPLICATION_ALIASES
+from data.voice_command_catalog import CLICK_TARGET_ALIASES
 from data.voice_command_catalog import CLOSEABLE_APPLICATION_PROCESSES
+from models.voice_command_matching import normalize_text
+from models.voice_command_matching import resolve_application_name_from_transcript
 from models.voice_desktop_entities import VoiceActionPlan
 
 
 ACTION_ALIASES = {
     "close_app": "close_application",
     "delete_path": "trash_path",
+    "mouse_click": "click_mouse",
+    "mouse_move": "move_mouse",
     "open_app": "open_application",
 }
-
-
-def normalize_text(text: str) -> str:
-    normalized = unicodedata.normalize("NFKD", text or "")
-    return normalized.encode("ascii", "ignore").decode("ascii").lower().strip()
-
 
 def normalize_model_name(model_name: str) -> str:
     return model_name.strip().lower()
@@ -59,6 +58,14 @@ def normalize_application_name(
         if alias in normalized and resolved_name in allowed_applications:
             return resolved_name
 
+    resolved_from_matcher = resolve_application_name_from_transcript(
+        transcript=str(application_name),
+        allowed_applications=allowed_applications,
+        application_aliases=APPLICATION_ALIASES,
+    )
+    if resolved_from_matcher is not None:
+        return resolved_from_matcher
+
     raise RuntimeError(f"Ollama returned an unsupported application name: {application_name}.")
 
 
@@ -66,17 +73,63 @@ def infer_application_name_from_transcript(
     transcript: str,
     allowed_applications: dict[str, list[str]],
 ) -> str | None:
+    return resolve_application_name_from_transcript(
+        transcript=transcript,
+        allowed_applications=allowed_applications,
+        application_aliases=APPLICATION_ALIASES,
+    )
+
+
+def normalize_click_target_name(target_name: object) -> str:
+    normalized = normalize_text(str(target_name))
+    if not normalized:
+        raise RuntimeError("Ollama returned an empty click target.")
+
+    if normalized in ALLOWED_CLICK_TARGETS:
+        return normalized
+
+    if normalized in CLICK_TARGET_ALIASES:
+        resolved_name = CLICK_TARGET_ALIASES[normalized]
+        if resolved_name in ALLOWED_CLICK_TARGETS:
+            return resolved_name
+
+    for alias, resolved_name in CLICK_TARGET_ALIASES.items():
+        if alias in normalized and resolved_name in ALLOWED_CLICK_TARGETS:
+            return resolved_name
+
+    raise RuntimeError(f"Ollama returned an unsupported click target: {target_name}.")
+
+
+def infer_click_target_from_transcript(transcript: str) -> str | None:
     normalized_transcript = normalize_text(transcript)
     if not normalized_transcript:
         return None
 
-    for alias, resolved_name in APPLICATION_ALIASES.items():
-        if alias in normalized_transcript and resolved_name in allowed_applications:
+    for alias, resolved_name in CLICK_TARGET_ALIASES.items():
+        if alias in normalized_transcript and resolved_name in ALLOWED_CLICK_TARGETS:
             return resolved_name
 
-    for application_name in allowed_applications:
-        if application_name in normalized_transcript:
-            return application_name
+    for target_name in ALLOWED_CLICK_TARGETS:
+        if target_name in normalized_transcript:
+            return target_name
+
+    if "jugar" in normalized_transcript and any(
+        keyword in normalized_transcript for keyword in ("league", "leaguea", "lol")
+    ):
+        return "league_play_button"
+
+    if "clasificatoria" in normalized_transcript and any(
+        keyword in normalized_transcript for keyword in ("duo", "solo duo", "solo/duo")
+    ):
+        return "league_ranked_solo_duo_option"
+
+    if "confirm" in normalized_transcript and any(
+        keyword in normalized_transcript for keyword in ("league", "cola", "partida")
+    ):
+        return "league_confirm_button"
+
+    if "encontrar partida" in normalized_transcript or "buscar partida" in normalized_transcript:
+        return "league_find_match_button"
 
     return None
 
@@ -123,17 +176,20 @@ def build_ollama_command_payload(model_name: str, transcript: str) -> dict:
     allowed_apps = ", ".join(sorted(ALLOWED_APPLICATIONS))
     closeable_apps = ", ".join(sorted(CLOSEABLE_APPLICATION_PROCESSES))
     allowed_actions = ", ".join(ALLOWED_ACTIONS)
+    click_targets = ", ".join(sorted(ALLOWED_CLICK_TARGETS))
 
     system_message = (
         "Eres un planificador de comandos de escritorio seguro. "
         "Devuelve solo JSON valido sin markdown. "
         "Las acciones permitidas son: "
         f"{allowed_actions}. "
+        "Usa click_target solo para objetivos permitidos visibles en pantalla. "
         "Usa close_application solo para aplicaciones permitidas y requiere confirmacion. "
         "Usa trash_path solo para enviar a la papelera. "
         "Pon requires_confirmation en true para acciones destructivas. "
         f"Las aplicaciones permitidas son: {allowed_apps}. "
-        f"Las aplicaciones permitidas para cerrar son: {closeable_apps}."
+        f"Las aplicaciones permitidas para cerrar son: {closeable_apps}. "
+        f"Los objetivos permitidos de click son: {click_targets}."
     )
 
     user_message = (
@@ -141,7 +197,7 @@ def build_ollama_command_payload(model_name: str, transcript: str) -> dict:
         f"{transcript}\n\n"
         "Responde con este esquema JSON exacto:\n"
         '{'
-        '"action":"answer|close_application|no_op|open_application|open_url|press_hotkey|trash_path|type_text",'
+        '"action":"answer|click_mouse|click_target|close_application|move_mouse|no_op|open_application|open_url|press_hotkey|trash_path|type_text",'
         '"parameters":{},'
         '"response":"mensaje breve en espanol",'
         '"requires_confirmation":false,'
@@ -240,6 +296,33 @@ def normalize_plan_payload(
                 CLOSEABLE_APPLICATION_PROCESSES,
             ),
         }
+
+    if action == "click_target":
+        inferred_target = parameters.get("target") or infer_click_target_from_transcript(transcript)
+        parameters = {
+            **parameters,
+            "target": normalize_click_target_name(inferred_target),
+        }
+
+    if action == "move_mouse":
+        parameters = {
+            **parameters,
+            "x": int(parameters.get("x", 0)),
+            "y": int(parameters.get("y", 0)),
+        }
+
+    if action == "click_mouse":
+        normalized_button = normalize_text(str(parameters.get("button", "left"))) or "left"
+        if normalized_button not in {"left", "right", "middle"}:
+            normalized_button = "left"
+        next_parameters = {
+            **parameters,
+            "button": normalized_button,
+        }
+        if "x" in parameters and "y" in parameters:
+            next_parameters["x"] = int(parameters.get("x", 0))
+            next_parameters["y"] = int(parameters.get("y", 0))
+        parameters = next_parameters
 
     if action in SENSITIVE_ACTIONS:
         requires_confirmation = True

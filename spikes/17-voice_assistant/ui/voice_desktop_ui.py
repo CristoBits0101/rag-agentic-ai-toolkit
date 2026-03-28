@@ -7,6 +7,7 @@ from tkinter import ttk
 from config.voice_desktop_config import VOICE_RESPONSE_ENABLED_BY_DEFAULT
 from config.voice_desktop_config import UI_WINDOW_SIZE
 from config.voice_desktop_config import UI_WINDOW_TITLE
+from models.voice_microphone_gateway import ContinuousAudioChannel
 from models.voice_local_tts_gateway import LocalVoiceSpeaker
 from models.voice_microphone_gateway import ManualAudioRecorder
 from models.voice_transcription_gateway import transcribe_audio_file
@@ -31,6 +32,22 @@ def build_status_message(message: str) -> str:
     return compact_message[: first_sentence_end + 1]
 
 
+def build_channel_button_label(channel_open: bool) -> str:
+    return "Apagar" if channel_open else "Hablar"
+
+
+def should_ignore_global_space_shortcut(widget) -> bool:
+    if widget is None:
+        return False
+
+    try:
+        widget_class = widget.winfo_class()
+    except Exception:
+        return False
+
+    return widget_class in {"Entry", "TEntry", "Text"}
+
+
 @dataclass(slots=True)
 class VoiceDesktopTurn:
     transcript: str
@@ -42,16 +59,19 @@ class VoiceDesktopController:
     def __init__(
         self,
         recorder_factory=ManualAudioRecorder,
+        channel_factory=ContinuousAudioChannel,
         transcriber=transcribe_audio_file,
         transcript_processor=process_voice_transcript,
         exit_checker=should_exit_session,
     ) -> None:
         self.recorder_factory = recorder_factory
+        self.channel_factory = channel_factory
         self.transcriber = transcriber
         self.transcript_processor = transcript_processor
         self.exit_checker = exit_checker
         self.pending_plan = None
         self.recorder = None
+        self.channel = None
         self.is_recording = False
 
     def start_recording(self) -> str:
@@ -71,6 +91,43 @@ class VoiceDesktopController:
         self.recorder = None
         self.is_recording = False
         audio_path = recorder.stop()
+        transcript = self.transcriber(audio_path)
+        return self.submit_transcript(transcript)
+
+    def cancel_recording(self) -> None:
+        if not self.is_recording or self.recorder is None:
+            return
+
+        recorder = self.recorder
+        self.recorder = None
+        self.is_recording = False
+        recorder.stop()
+
+    def open_channel(self) -> str:
+        if self.channel is not None:
+            return "El canal ya esta abierto."
+
+        self.channel = self.channel_factory()
+        self.channel.start()
+        return "Canal abierto. Escuchando."
+
+    def close_channel(self) -> str:
+        if self.channel is None:
+            return "El canal ya esta cerrado."
+
+        channel = self.channel
+        self.channel = None
+        channel.stop()
+        return "Canal cerrado."
+
+    def listen_once_and_process(self) -> VoiceDesktopTurn | None:
+        if self.channel is None:
+            raise RuntimeError("Voice channel has not started.")
+
+        audio_path = self.channel.capture_next_utterance()
+        if audio_path is None:
+            return None
+
         transcript = self.transcriber(audio_path)
         return self.submit_transcript(transcript)
 
@@ -105,14 +162,19 @@ class VoiceDesktopAssistantApp:
         self.root.title(UI_WINDOW_TITLE)
         self.root.geometry(UI_WINDOW_SIZE)
         self.root.minsize(840, 560)
-        self.status_var = tk.StringVar(value="Pulsa el boton o manten espacio para hablar.")
-        self.recording_var = tk.StringVar(value="Mantener para hablar")
+        self.status_var = tk.StringVar(value="Canal cerrado. Pulsa el boton o la barra espaciadora para abrirlo.")
+        self.recording_var = tk.StringVar(value=build_channel_button_label(channel_open=False))
+        self.manual_message_var = tk.StringVar(value="")
         self.voice_enabled_var = tk.BooleanVar(
             value=VOICE_RESPONSE_ENABLED_BY_DEFAULT and self.speaker.is_available()
         )
         self.processing = False
+        self.channel_visual_open = False
+        self.space_pressed = False
+        self.channel_thread = None
         self._build_layout()
         self._bind_shortcuts()
+        self._sync_channel_ui()
         self.root.protocol("WM_DELETE_WINDOW", self._close_app)
 
     def _build_layout(self) -> None:
@@ -135,27 +197,46 @@ class VoiceDesktopAssistantApp:
 
         controls = ttk.Frame(container)
         controls.pack(fill="x")
+        button_width = 12
+
+        channel_frame = ttk.Frame(controls)
+        channel_frame.pack(side="left")
+
+        self.channel_indicator = tk.Canvas(
+            channel_frame,
+            width=28,
+            height=28,
+            highlightthickness=0,
+            borderwidth=0,
+            background=self.root.cget("bg"),
+        )
+        self.channel_indicator.pack(side="left")
+        self.channel_indicator_item = self.channel_indicator.create_oval(4, 4, 24, 24, fill="#c93b3b", outline="#8a1f1f", width=2)
 
         self.record_button = ttk.Button(
             controls,
             textvariable=self.recording_var,
-            width=28,
+            width=button_width,
+            command=self._toggle_channel,
+            takefocus=False,
         )
-        self.record_button.pack(side="left")
-        self.record_button.bind("<ButtonPress-1>", self._handle_press_to_talk)
-        self.record_button.bind("<ButtonRelease-1>", self._handle_release_to_process)
+        self.record_button.pack(side="left", padx=(12, 0))
 
         self.confirm_button = ttk.Button(
             controls,
             text="Confirmar",
+            width=button_width,
             command=lambda: self._process_manual_transcript("confirmar"),
+            takefocus=False,
         )
         self.confirm_button.pack(side="left", padx=(12, 0))
 
         self.cancel_button = ttk.Button(
             controls,
             text="Cancelar",
+            width=button_width,
             command=lambda: self._process_manual_transcript("cancelar"),
+            takefocus=False,
         )
         self.cancel_button.pack(side="left", padx=(12, 0))
 
@@ -163,13 +244,16 @@ class VoiceDesktopAssistantApp:
             controls,
             text="Responder con voz",
             variable=self.voice_enabled_var,
+            takefocus=False,
         )
         self.voice_toggle.pack(side="left", padx=(12, 0))
 
         self.close_button = ttk.Button(
             controls,
             text="Salir",
+            width=button_width,
             command=self._close_app,
+            takefocus=False,
         )
         self.close_button.pack(side="right")
 
@@ -185,6 +269,31 @@ class VoiceDesktopAssistantApp:
             wraplength=840,
         )
         status_value.pack(anchor="w", pady=(6, 0))
+
+        message_frame = ttk.Frame(container)
+        message_frame.pack(fill="x", pady=(0, 12))
+
+        message_label = ttk.Label(message_frame, text="Mensaje", font=("Segoe UI", 10, "bold"))
+        message_label.pack(anchor="w")
+
+        message_controls = ttk.Frame(message_frame)
+        message_controls.pack(fill="x", pady=(6, 0))
+
+        self.manual_message_entry = ttk.Entry(
+            message_controls,
+            textvariable=self.manual_message_var,
+        )
+        self.manual_message_entry.pack(side="left", fill="x", expand=True)
+        self.manual_message_entry.bind("<Return>", self._submit_text_message)
+
+        self.send_button = ttk.Button(
+            message_controls,
+            text="Enviar",
+            width=button_width,
+            command=self._submit_text_message,
+            takefocus=False,
+        )
+        self.send_button.pack(side="left", padx=(12, 0))
 
         history_label = ttk.Label(container, text="Historial", font=("Segoe UI", 10, "bold"))
         history_label.pack(anchor="w")
@@ -221,7 +330,7 @@ class VoiceDesktopAssistantApp:
 
         self._append_history(
             "Asistente",
-            "Usa el boton o la barra espaciadora con esta ventana enfocada.",
+            "Usa el boton o la barra espaciadora para abrir o cerrar el canal de voz.",
         )
         self._append_history(
             "Asistente",
@@ -232,8 +341,9 @@ class VoiceDesktopAssistantApp:
             self.status_var.set("La respuesta por voz local no esta disponible. La app seguira en modo texto.")
 
     def _bind_shortcuts(self) -> None:
-        self.root.bind("<KeyPress-space>", self._handle_press_to_talk)
-        self.root.bind("<KeyRelease-space>", self._handle_release_to_process)
+        self.root.bind_all("<KeyPress-space>", self._handle_space_press)
+        self.root.bind_all("<KeyRelease-space>", self._handle_space_release)
+        self.root.after(100, self.root.focus_force)
 
     def _set_processing(self, enabled: bool) -> None:
         self.processing = enabled
@@ -241,6 +351,24 @@ class VoiceDesktopAssistantApp:
         self.record_button.configure(state=next_state)
         self.confirm_button.configure(state=next_state)
         self.cancel_button.configure(state=next_state)
+        self.send_button.configure(state=next_state)
+        self.manual_message_entry.configure(state=next_state)
+
+    def _sync_channel_ui(self) -> None:
+        self.recording_var.set(build_channel_button_label(self.channel_visual_open))
+        if self.channel_visual_open:
+            self.channel_indicator.itemconfig(
+                self.channel_indicator_item,
+                fill="#19c37d",
+                outline="#0e8f58",
+            )
+            return
+
+        self.channel_indicator.itemconfig(
+            self.channel_indicator_item,
+            fill="#c93b3b",
+            outline="#8a1f1f",
+        )
 
     def _scroll_history_to_end(self) -> None:
         self.history.see("end")
@@ -252,30 +380,66 @@ class VoiceDesktopAssistantApp:
         self.history.configure(state="disabled")
         self.root.after_idle(self._scroll_history_to_end)
 
-    def _handle_press_to_talk(self, _event=None) -> None:
+    def _open_channel(self) -> None:
         if self.processing:
             return
 
         self.speaker.stop()
         try:
-            message = self.controller.start_recording()
+            message = self.controller.open_channel()
         except Exception as exc:
             self.status_var.set(build_status_message(str(exc)))
             self._append_history("Asistente", str(exc))
             return
 
-        self.recording_var.set("Grabando")
+        self.channel_visual_open = True
+        self._sync_channel_ui()
         self.status_var.set(message)
+        self.channel_thread = threading.Thread(target=self._channel_worker, daemon=True)
+        self.channel_thread.start()
 
-    def _handle_release_to_process(self, _event=None) -> None:
-        if self.processing or not self.controller.is_recording:
+    def _close_channel(self) -> None:
+        if self.processing:
             return
 
-        self._set_processing(True)
-        self.recording_var.set("Procesando")
-        self.status_var.set("Transcribiendo y ejecutando la orden.")
-        worker = threading.Thread(target=self._recording_worker, daemon=True)
-        worker.start()
+        try:
+            message = self.controller.close_channel()
+        except Exception as exc:
+            self.status_var.set(build_status_message(str(exc)))
+            self._append_history("Asistente", str(exc))
+            return
+
+        self.channel_visual_open = False
+        self._sync_channel_ui()
+        self.status_var.set(message)
+
+    def _toggle_channel(self) -> None:
+        if self.processing:
+            return
+
+        if self.controller.channel is not None:
+            self._close_channel()
+            return
+
+        self._open_channel()
+
+    def _handle_space_press(self, _event=None):
+        if should_ignore_global_space_shortcut(self.root.focus_get()):
+            return None
+
+        if self.space_pressed:
+            return "break"
+
+        self.space_pressed = True
+        self._toggle_channel()
+        return "break"
+
+    def _handle_space_release(self, _event=None):
+        if should_ignore_global_space_shortcut(self.root.focus_get()):
+            return None
+
+        self.space_pressed = False
+        return "break"
 
     def _recording_worker(self) -> None:
         try:
@@ -287,13 +451,31 @@ class VoiceDesktopAssistantApp:
 
         self.root.after(0, lambda: self._finish_turn(turn))
 
-    def _process_manual_transcript(self, transcript: str) -> None:
-        if self.processing:
+    def _channel_worker(self) -> None:
+        while self.controller.channel is not None:
+            try:
+                turn = self.controller.listen_once_and_process()
+            except Exception as exc:
+                message = str(exc)
+                self.root.after(0, lambda message=message: self._finish_with_error(message))
+                return
+
+            if turn is None:
+                if self.controller.channel is None:
+                    return
+                continue
+
+            self.root.after(0, lambda turn=turn: self._finish_turn(turn, keep_channel_open=True))
+            if turn.exit_requested:
+                return
+
+    def _process_manual_transcript(self, transcript: str, status_message: str = "Procesando la accion manual.") -> None:
+        if self.processing or self.controller.is_recording:
             return
 
+        self.speaker.stop()
         self._set_processing(True)
-        self.recording_var.set("Mantener para hablar")
-        self.status_var.set("Procesando la accion manual.")
+        self.status_var.set(status_message)
 
         def worker() -> None:
             try:
@@ -307,28 +489,66 @@ class VoiceDesktopAssistantApp:
 
         threading.Thread(target=worker, daemon=True).start()
 
+    def _submit_text_message(self, _event=None):
+        if self.processing or self.controller.is_recording:
+            return "break"
+
+        transcript = self.manual_message_var.get().strip()
+        if not transcript:
+            return "break"
+
+        self.manual_message_var.set("")
+        self._process_manual_transcript(
+            transcript,
+            status_message="Procesando el mensaje escrito.",
+        )
+        return "break"
+
     def _finish_with_error(self, message: str) -> None:
         self._set_processing(False)
-        self.recording_var.set("Mantener para hablar")
+        if self.controller.channel is not None:
+            try:
+                self.controller.close_channel()
+            except Exception:
+                pass
+        self.channel_visual_open = False
+        self._sync_channel_ui()
         self.status_var.set(build_status_message(message))
         self._append_history("Asistente", message)
 
-    def _finish_turn(self, turn: VoiceDesktopTurn) -> None:
+    def _finish_turn(self, turn: VoiceDesktopTurn, keep_channel_open: bool = False) -> None:
         self._set_processing(False)
-        self.recording_var.set("Mantener para hablar")
-        self.status_var.set(build_status_message(turn.assistant_message))
+        self.channel_visual_open = keep_channel_open and self.controller.channel is not None
+        self._sync_channel_ui()
         self._append_history("Tu", turn.transcript)
         self._append_history("Asistente", turn.assistant_message)
+        if keep_channel_open and self.controller.channel is not None:
+            self.status_var.set("Canal abierto. Escuchando.")
+        else:
+            self.status_var.set(build_status_message(turn.assistant_message))
         if self.voice_enabled_var.get() and not turn.exit_requested:
             try:
                 self.speaker.speak_async(turn.assistant_message)
             except Exception:
                 pass
         if turn.exit_requested:
+            if self.controller.channel is not None:
+                try:
+                    self.controller.close_channel()
+                except Exception:
+                    pass
             self.root.after(300, self._close_app)
 
     def _close_app(self) -> None:
         self.speaker.stop()
+        try:
+            self.controller.cancel_recording()
+        except Exception:
+            pass
+        try:
+            self.controller.close_channel()
+        except Exception:
+            pass
         self.root.destroy()
 
     def run(self) -> None:
